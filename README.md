@@ -1,6 +1,6 @@
 # Project 1 - *Serve*
 
-**Serve** is a tip calculator application for iOS.
+**Serve** is a Community service application for iOS.
 
 Submitted by: **Bamlak, Michael, and Olga**
 
