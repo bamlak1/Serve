@@ -1,0 +1,6 @@
+framework module Pods_ServeUITests {
+  umbrella header "Pods-ServeUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
