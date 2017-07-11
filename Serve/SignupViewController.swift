@@ -9,7 +9,7 @@
 import UIKit
 import Parse
 
-class SignupViewController: UIViewController {
+class SignupViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 
     var emptyFieldAlert: UIAlertController!
     
@@ -19,11 +19,16 @@ class SignupViewController: UIViewController {
     
     @IBOutlet weak var passwordTextField: UITextField!
     
+    @IBOutlet weak var pickerView: UIPickerView!
+    
+    var userTypes = ["Individual", "Organization"]
+    var typeSelected = "Individual"
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        pickerView.delegate = self
+        pickerView.dataSource = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -42,6 +47,11 @@ class SignupViewController: UIViewController {
         newUser.username = usernameTextField.text
         newUser.email = emailTextField.text
         newUser.password = passwordTextField.text
+        if typeSelected == "Individual" {
+            newUser["isIndividual"] = true
+        } else {
+            newUser["isOrg"] = true
+        }
         
         newUser.signUpInBackground { (success: Bool, error: Error?) in
             if success {
@@ -51,7 +61,25 @@ class SignupViewController: UIViewController {
                 print(error?.localizedDescription as Any)
             }
         }
+        dismiss(animated: true, completion: nil)
     }
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return userTypes.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return userTypes[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        typeSelected = userTypes[row]
+    }
+    
     
 
     /*
