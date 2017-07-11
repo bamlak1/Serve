@@ -17,6 +17,9 @@
 		A07AD2331F13FAC500100D69 /* ServeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07AD2321F13FAC500100D69 /* ServeUITests.swift */; };
 		A07AD2411F144AF800100D69 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07AD2401F144AF800100D69 /* LoginViewController.swift */; };
 		A07AD2431F15408600100D69 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07AD2421F15408600100D69 /* SignupViewController.swift */; };
+		CCD755711F1577010033FF7A /* OrgEventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD755701F1577010033FF7A /* OrgEventsViewController.swift */; };
+		CCD755731F1577110033FF7A /* OrgPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD755721F1577110033FF7A /* OrgPageViewController.swift */; };
+		CCD755771F15774D0033FF7A /* OrgPendingApprovalsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD755761F15774D0033FF7A /* OrgPendingApprovalsViewController.swift */; };
 		D86F88D19748B24B3D1761BA /* Pods_ServeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14E9F438563D7547CA95F8E5 /* Pods_ServeUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -58,6 +61,9 @@
 		A07AD2341F13FAC500100D69 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A07AD2401F144AF800100D69 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A07AD2421F15408600100D69 /* SignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
+		CCD755701F1577010033FF7A /* OrgEventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrgEventsViewController.swift; sourceTree = "<group>"; };
+		CCD755721F1577110033FF7A /* OrgPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrgPageViewController.swift; sourceTree = "<group>"; };
+		CCD755761F15774D0033FF7A /* OrgPendingApprovalsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrgPendingApprovalsViewController.swift; sourceTree = "<group>"; };
 		E39F954998A0D2FA09FFAECF /* Pods_ServeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ServeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED1C2CCCD0B7F017A061DDCF /* Pods-Serve.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Serve.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Serve/Pods-Serve.debug.xcconfig"; sourceTree = "<group>"; };
 		FC9A68B5413DB7B0DBCC5898 /* Pods-ServeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ServeTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ServeTests/Pods-ServeTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -146,6 +152,9 @@
 				A07AD21E1F13FAC500100D69 /* Info.plist */,
 				A07AD2401F144AF800100D69 /* LoginViewController.swift */,
 				A07AD2421F15408600100D69 /* SignupViewController.swift */,
+				CCD755701F1577010033FF7A /* OrgEventsViewController.swift */,
+				CCD755721F1577110033FF7A /* OrgPageViewController.swift */,
+				CCD755761F15774D0033FF7A /* OrgPendingApprovalsViewController.swift */,
 			);
 			path = Serve;
 			sourceTree = "<group>";
@@ -449,8 +458,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CCD755731F1577110033FF7A /* OrgPageViewController.swift in Sources */,
+				CCD755711F1577010033FF7A /* OrgEventsViewController.swift in Sources */,
 				A07AD2431F15408600100D69 /* SignupViewController.swift in Sources */,
 				A07AD2411F144AF800100D69 /* LoginViewController.swift in Sources */,
+				CCD755771F15774D0033FF7A /* OrgPendingApprovalsViewController.swift in Sources */,
 				A07AD2131F13FAC500100D69 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
