@@ -4,12 +4,14 @@
 target 'Serve' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
+  
 
   # Pods for Serve
+  pod 'Parse'
 
   target 'ServeTests' do
     inherit! :search_paths
-    pod 'Parse'
+    
 
     # Pods for testing
   end
