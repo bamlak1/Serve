@@ -53,24 +53,27 @@ class LoginViewController: UIViewController {
                 print("User log in failed: \(error.localizedDescription)")
             } else {
                 print("User logged in successfully")
+                //let currentUser = user
                 // display view controller that needs to shown after successful login
-                self.performSegue(withIdentifier: "loginSegue", sender: nil)
+                if ((user?["isIndividual"]) != nil){
+                self.performSegue(withIdentifier: "userLogin", sender: nil)
+            } else {
+                self.performSegue(withIdentifier: "orgLogin", sender: nil)
             }
         }
     }
+}
 
     @IBAction func didPressSignUp(_ sender: Any) {
         self.performSegue(withIdentifier: "signupSegue", sender: nil)
     }
     
-    /*
-    // MARK: - Navigation
-
+  
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
-    */
+    
 
 }
