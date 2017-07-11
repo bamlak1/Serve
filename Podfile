@@ -9,6 +9,15 @@ target 'Serve' do
   # Pods for Serve
   pod 'Parse'
 
+pod 'Alamofire', '~> 4.4'
+  pod 'AlamofireImage', '~> 3.1'
+  pod 'OAuthSwift', '~> 1.1.0'
+  pod 'OAuthSwiftAlamofire'
+  pod 'Prephirences'
+  pod 'KeychainAccess'
+  pod 'RSKPlaceholderTextView'
+  pod 'TTTAttributedLabel'
+
   target 'ServeTests' do
     inherit! :search_paths
     
