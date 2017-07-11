@@ -188,7 +188,7 @@
                     <navigationItem key="navigationItem" title="Feed" id="mAd-pa-NF9">
                         <barButtonItem key="rightBarButtonItem" style="plain" id="TRU-tu-LQY">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="CDA-Ml-Dg9">
-                                <rect key="frame" x="276" y="7" width="30" height="27"/>
+                                <rect key="frame" x="329" y="8" width="30" height="27"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="edit-icon"/>
                             </button>

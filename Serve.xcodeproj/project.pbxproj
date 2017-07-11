@@ -145,9 +145,10 @@
 		A07AD2111F13FAC500100D69 /* Serve */ = {
 			isa = PBXGroup;
 			children = (
+				CCD7557C1F158DFE0033FF7A /* Models */,
+				CCD7557B1F158DF30033FF7A /* ViewControllers */,
+				CCD7557A1F158C7E0033FF7A /* Storyboards */,
 				A07AD2121F13FAC500100D69 /* AppDelegate.swift */,
-				A07AD2161F13FAC500100D69 /* Main.storyboard */,
-				CCD755781F157F7D0033FF7A /* OrgStoryboard.storyboard */,
 				A07AD2191F13FAC500100D69 /* Assets.xcassets */,
 				A07AD21B1F13FAC500100D69 /* LaunchScreen.storyboard */,
 				A07AD21E1F13FAC500100D69 /* Info.plist */,
@@ -175,6 +176,29 @@
 				A07AD2341F13FAC500100D69 /* Info.plist */,
 			);
 			path = ServeUITests;
+			sourceTree = "<group>";
+		};
+		CCD7557A1F158C7E0033FF7A /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				A07AD2161F13FAC500100D69 /* Main.storyboard */,
+				CCD755781F157F7D0033FF7A /* OrgStoryboard.storyboard */,
+			);
+			name = Storyboards;
+			sourceTree = "<group>";
+		};
+		CCD7557B1F158DF30033FF7A /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		CCD7557C1F158DFE0033FF7A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
