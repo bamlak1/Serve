@@ -9,6 +9,12 @@
 import UIKit
 import Parse
 
+
+enum userType {
+    case individual
+    case organization
+}
+
 class SignupViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 
     var emptyFieldAlert: UIAlertController!
@@ -22,7 +28,8 @@ class SignupViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     @IBOutlet weak var pickerView: UIPickerView!
     
     var userTypes = ["Individual", "Organization"]
-    var typeSelected = "Individual"
+    var typeSelectedString = "Individual"
+    var userType: userType = .individual
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,10 +54,13 @@ class SignupViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         newUser.username = usernameTextField.text
         newUser.email = emailTextField.text
         newUser.password = passwordTextField.text
-        if typeSelected == "Individual" {
+        
+        switch userType {
+        case .individual:
             newUser["isIndividual"] = true
-        } else {
-            newUser["isOrg"] = true
+        case .organization:
+            newUser["isOrganization"] = true
+            
         }
         
         newUser.signUpInBackground { (success: Bool, error: Error?) in
@@ -77,7 +87,13 @@ class SignupViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        typeSelected = userTypes[row]
+        typeSelectedString = userTypes[row]
+        if typeSelectedString == "Individual" {
+            userType = .individual
+        } else {
+            userType = .organization
+        }
+        
     }
     
     
