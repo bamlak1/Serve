@@ -37,7 +37,7 @@
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BIV-XL-eMp" id="NH4-es-e1q">
 
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="203.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="204"/>
 
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
