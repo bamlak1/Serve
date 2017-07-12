@@ -9,11 +9,12 @@
 import UIKit
 import Parse
 
-
-enum userType {
-    case individual
-    case organization
+enum UserType: String {
+    case Individual = "Individual"
+    case Organization = "Organization"
 }
+
+let userTypesDict : [String:UserType] = ["Individual": .Individual, "Organization": .Organization]
 
 class SignupViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 
@@ -28,7 +29,7 @@ class SignupViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     @IBOutlet weak var pickerView: UIPickerView!
     
     var userTypes = ["Individual", "Organization"]
-    var userType: userType = .individual
+    var selectedType = UserType.Individual
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,11 +55,13 @@ class SignupViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         newUser.email = emailTextField.text
         newUser.password = passwordTextField.text
         
-        switch userType {
-        case .individual:
-            newUser["type"] = "individual"
-        case .organization:
-            newUser["type"] = "organization"
+        switch selectedType {
+        case .Individual:
+            newUser["type"] = "Individual"
+            //Insert code to initialize individual properties
+        case .Organization:
+            newUser["type"] = "Organization"
+            //Insert code to initialize organization properties
         }
         
         newUser.signUpInBackground { (success: Bool, error: Error?) in
@@ -85,13 +88,8 @@ class SignupViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        let typeSelectedString = userTypes[row]
-        if typeSelectedString == "Individual" {
-            userType = .individual
-        } else {
-            userType = .organization
-        }
-        
+        let selectedTypeString = userTypes[row]
+        selectedType = userTypesDict[selectedTypeString]!
     }
 
     /*

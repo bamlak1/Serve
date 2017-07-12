@@ -22,6 +22,8 @@
 		A0B95E781F15A7A600EBD019 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B95E771F15A7A600EBD019 /* Post.swift */; };
 		CCD755791F157F7D0033FF7A /* OrgStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCD755781F157F7D0033FF7A /* OrgStoryboard.storyboard */; };
 		CCFB6C1C1F15A9F700E59D5C /* Individual.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCFB6C1B1F15A9F700E59D5C /* Individual.storyboard */; };
+		CCFB6C201F15DA1100E59D5C /* OrganizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFB6C1F1F15DA1100E59D5C /* OrganizationViewController.swift */; };
+		CCFB6C221F15DBAC00E59D5C /* EditOrganizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFB6C211F15DBAC00E59D5C /* EditOrganizationViewController.swift */; };
 		D86F88D19748B24B3D1761BA /* Pods_ServeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14E9F438563D7547CA95F8E5 /* Pods_ServeUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -68,6 +70,8 @@
 		A0B95E771F15A7A600EBD019 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		CCD755781F157F7D0033FF7A /* OrgStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = OrgStoryboard.storyboard; sourceTree = "<group>"; };
 		CCFB6C1B1F15A9F700E59D5C /* Individual.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Individual.storyboard; sourceTree = "<group>"; };
+		CCFB6C1F1F15DA1100E59D5C /* OrganizationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrganizationViewController.swift; sourceTree = "<group>"; };
+		CCFB6C211F15DBAC00E59D5C /* EditOrganizationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditOrganizationViewController.swift; sourceTree = "<group>"; };
 		E39F954998A0D2FA09FFAECF /* Pods_ServeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ServeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED1C2CCCD0B7F017A061DDCF /* Pods-Serve.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Serve.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Serve/Pods-Serve.debug.xcconfig"; sourceTree = "<group>"; };
 		FC9A68B5413DB7B0DBCC5898 /* Pods-ServeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ServeTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ServeTests/Pods-ServeTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -156,9 +160,6 @@
 				A07AD2191F13FAC500100D69 /* Assets.xcassets */,
 				A07AD21B1F13FAC500100D69 /* LaunchScreen.storyboard */,
 				A07AD21E1F13FAC500100D69 /* Info.plist */,
-				A07AD2401F144AF800100D69 /* LoginViewController.swift */,
-				A07AD2421F15408600100D69 /* SignupViewController.swift */,
-				A07AD2441F156DC000100D69 /* FeedViewController.swift */,
 				A07AD2461F1573BA00100D69 /* PostCell.swift */,
 			);
 			path = Serve;
@@ -195,6 +196,11 @@
 		CCD7557B1F158DF30033FF7A /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				A07AD2401F144AF800100D69 /* LoginViewController.swift */,
+				A07AD2421F15408600100D69 /* SignupViewController.swift */,
+				A07AD2441F156DC000100D69 /* FeedViewController.swift */,
+				CCFB6C1F1F15DA1100E59D5C /* OrganizationViewController.swift */,
+				CCFB6C211F15DBAC00E59D5C /* EditOrganizationViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -491,11 +497,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				A07AD2431F15408600100D69 /* SignupViewController.swift in Sources */,
+				CCFB6C221F15DBAC00E59D5C /* EditOrganizationViewController.swift in Sources */,
 				A07AD2411F144AF800100D69 /* LoginViewController.swift in Sources */,
 				A07AD2451F156DC000100D69 /* FeedViewController.swift in Sources */,
 				A0B95E781F15A7A600EBD019 /* Post.swift in Sources */,
 				A07AD2131F13FAC500100D69 /* AppDelegate.swift in Sources */,
 				A07AD2471F1573BA00100D69 /* PostCell.swift in Sources */,
+				CCFB6C201F15DA1100E59D5C /* OrganizationViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
