@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Parse
 
 class IndividualLoginViewController: UIViewController {
     
@@ -14,6 +15,8 @@ class IndividualLoginViewController: UIViewController {
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var phoneTextField: UITextField!
     @IBOutlet weak var addressTextField: UITextField!
+    @IBOutlet weak var ageTextField: UITextField!
+    
     
     @IBAction func didPressInfoAddress(_ sender: Any) {
         addressInfoView.isHidden = false
@@ -22,7 +25,6 @@ class IndividualLoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         addressInfoView.isHidden = true
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
@@ -34,7 +36,16 @@ class IndividualLoginViewController: UIViewController {
         addressInfoView.isHidden = true
         view.endEditing(true)
     }
-
+    
+    @IBAction func setProperties(_ sender: Any) {
+        let user = PFUser.current()!
+        user["name"] = nameTextField.text
+        user["phone"] = phoneTextField.text
+        user["address"] = addressTextField.text
+        user["age"] = ageTextField.text
+        user.saveInBackground()
+    }
+    
     /*
     // MARK: - Navigation
 
