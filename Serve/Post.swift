@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Parse
 
 
 class Post {
@@ -16,9 +17,9 @@ class Post {
     var text: String // Text content of post
     var fiveCount: Int // Update five count label
     var fived: Bool? // Configure five button
-    var user: User // Contains name, pic, interests, etc. of post author
+    //var user: PFUser // Contains name, pic, interests, etc. of post author
     var createdAtString: String // Display date
-    var repostedByUser: User?  // user who reposted if post is repost
+    //var repostedByUser: PFUser?  // user who reposted if post is repost
     var displayURL: URL?
     
     // MARK: - Create initializer with dictionary
@@ -29,7 +30,7 @@ class Post {
         // Is this a repost?
         if let originalPost = dictionary["reposted_status"] as? [String: Any] {
             let userDictionary = dictionary["user"] as! [String: Any]
-            self.repostedByUser = User(dictionary: userDictionary)
+            //self.repostedByUser = PFUser(dictionary: userDictionary)
             
             // Change post to original post
             dictionary = originalPost
@@ -51,7 +52,7 @@ class Post {
         
         // Initialize user
         let user = dictionary["user"] as! [String: Any]
-        self.user = User(dictionary: user)
+        //self.user = PFUser(dictionary: user)
         
         // Format and set createdAtString (aka timestamp)
         let createdAtOriginalString = dictionary["created_at"] as! String
