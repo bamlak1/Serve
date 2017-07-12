@@ -42,6 +42,9 @@ class SignupViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    @IBAction func didTapView(_ sender: Any) {
+        view.endEditing(true)
+    }
     
     @IBAction func didPressSignUp(_ sender: Any) {
         //check to display error message if one of the field is empty
@@ -55,24 +58,25 @@ class SignupViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         newUser.email = emailTextField.text
         newUser.password = passwordTextField.text
         
-        switch selectedType {
-        case .Individual:
-            newUser["type"] = "Individual"
-            //Insert code to initialize individual properties
-        case .Organization:
-            newUser["type"] = "Organization"
-            //Insert code to initialize organization properties
-        }
         
         newUser.signUpInBackground { (success: Bool, error: Error?) in
             if success {
                 print("Yay, created a user!")
-                self.performSegue(withIdentifier: "loginSegue", sender: nil)
+                
+                switch self.selectedType {
+                case .Individual:
+                    newUser["type"] = "Individual"
+                    self.performSegue(withIdentifier: "loginIndivSegue", sender: nil)
+                //Insert code to initialize individual properties
+                case .Organization:
+                    newUser["type"] = "Organization"
+                    self.performSegue(withIdentifier: "loginOrgSegue", sender: nil)
+                    //Insert code to initialize organization properties
+                }
             } else {
                 print(error?.localizedDescription as Any)
             }
         }
-        dismiss(animated: true, completion: nil)
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
