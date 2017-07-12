@@ -28,7 +28,7 @@ class Event: NSObject {
         event["goals"] = goals
         //TODO: event sponsors & other event properties
         
-        event.saveInBackground(block: completion)ß
+        event.saveInBackground(block: completion)
     }
     
     
