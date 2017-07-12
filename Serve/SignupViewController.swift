@@ -58,21 +58,20 @@ class SignupViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         newUser.email = emailTextField.text
         newUser.password = passwordTextField.text
         
+        switch self.selectedType {
+        case .Individual:
+            newUser["type"] = "Individual"
+            self.performSegue(withIdentifier: "loginIndivSegue", sender: nil)
+        //Insert code to initialize individual properties
+        case .Organization:
+            newUser["type"] = "Organization"
+            self.performSegue(withIdentifier: "loginOrgSegue", sender: nil)
+            //Insert code to initialize organization properties
+        }
         
         newUser.signUpInBackground { (success: Bool, error: Error?) in
             if success {
                 print("Yay, created a user!")
-                
-                switch self.selectedType {
-                case .Individual:
-                    newUser["type"] = "Individual"
-                    self.performSegue(withIdentifier: "loginIndivSegue", sender: nil)
-                //Insert code to initialize individual properties
-                case .Organization:
-                    newUser["type"] = "Organization"
-                    self.performSegue(withIdentifier: "loginOrgSegue", sender: nil)
-                    //Insert code to initialize organization properties
-                }
             } else {
                 print(error?.localizedDescription as Any)
             }
