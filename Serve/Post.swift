@@ -10,63 +10,49 @@ import Foundation
 import Parse
 
 
-class Post {
+class Post: NSObject {
     
-    // MARK: Properties
-    var id: Int64 // For fiving and reposting
-    var text: String // Text content of post
-    var fiveCount: Int // Update five count label
-    var fived: Bool? // Configure five button
-    //var user: PFUser // Contains name, pic, interests, etc. of post author
-    var createdAtString: String // Display date
-    //var repostedByUser: PFUser?  // user who reposted if post is repost
-    var displayURL: URL?
-    
-    // MARK: - Create initializer with dictionary
-    init(dictionary: [String: Any]) {
+    class func userPost(caption: String?, withImage image: UIImage?, withDate date: Date?, withCompletion completion: PFBooleanResultBlock?) {
         
-        var dictionary = dictionary
+        let post = PFObject(className: "Post")
         
-        // Is this a repost?
-        if let originalPost = dictionary["reposted_status"] as? [String: Any] {
-            let userDictionary = dictionary["user"] as! [String: Any]
-            //self.repostedByUser = PFUser(dictionary: userDictionary)
-            
-            // Change post to original post
-            dictionary = originalPost
-        }
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "DMMM d, yyyy"
+        let date = dateFormatter.string(from: date!)
         
-        id = dictionary["id"] as! Int64
-        text = dictionary["text"] as! String
-        fiveCount = dictionary["five_count"] as! Int
-        fived = dictionary["fived"] as? Bool
+        //Add relevant fields to the object
+        post["media"] = getPFFileFromImage(image: image) //PFFile column type
+        post["user"] = PFUser.current()
+        post["caption"] = caption
+        post["high-fives"] = 0
+        post["date"] = date
         
+        // Save object (following function will save the object in Parse asynchronously)
+        post.saveInBackground(block: completion)
         
-        //getting the photo out of the post body
-        let entities = dictionary["entities"] as! [String: Any]
-        if let media = entities["media"] as? [[String: Any]] {
-            let firstMediaItem = media[0]
-            let displayURLString = firstMediaItem["media_url_https"] as! String
-            displayURL = URL(string: displayURLString)
-        }
-        
-        // Initialize user
-        let user = dictionary["user"] as! [String: Any]
-        //self.user = PFUser(dictionary: user)
-        
-        // Format and set createdAtString (aka timestamp)
-        let createdAtOriginalString = dictionary["created_at"] as! String
-        let formatter = DateFormatter()
-        // Configure the input format to parse the date string
-        formatter.dateFormat = "E MMM d HH:mm:ss Z y"
-        // Convert String to Date
-        let date = formatter.date(from: createdAtOriginalString)!
-        // Configure output format
-        formatter.dateStyle = .short
-        formatter.timeStyle = .none
-        // Convert Date to String
-        createdAtString = formatter.string(from: date)
-        
-       
     }
+    class func getPFFileFromImage(image: UIImage?) -> PFFile? {
+        if var image = image {
+            image = resize(image: image, newSize: CGSize(width: 200, height: 125))
+            //get image data and check if that is not nil
+            if let imageData = UIImagePNGRepresentation(image) {
+                return PFFile(name: "image.png", data: imageData)
+            }
+        }
+        return nil
+    }
+    
+    class func resize(image: UIImage, newSize: CGSize) -> UIImage {
+        let resizeImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height))
+        resizeImageView.contentMode = UIViewContentMode.scaleAspectFill
+        resizeImageView.image = image
+        
+        UIGraphicsBeginImageContext(resizeImageView.frame.size)
+        resizeImageView.layer.render(in: UIGraphicsGetCurrentContext()!)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage!
+    }
+    
+    
 }

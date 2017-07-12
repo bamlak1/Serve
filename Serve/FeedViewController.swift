@@ -50,7 +50,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         let query = PFQuery(className: "Post")
         query.addDescendingOrder("createdAt")
         query.limit = 25
-        query.includeKey("author")
+        query.includeKey("user")
         
         // fetch data asynchronously
         query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
@@ -84,7 +84,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         let post = Posts![indexPath.row]
         let caption = post["caption"]
         let photo = post["media"] as! PFFile
-        let name = post["author"] as! PFUser
+        let name = post["user"] as! PFUser
         
         
         
@@ -92,7 +92,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.captionLabel.text = caption as? String //set the caption text
         cell.nameLabel.text = name as? String
         
-        if let date = post["timestamp"]{
+        if let date = post["date"]{
             cell.dateLabel.text = date as! String
         } else {
             cell.dateLabel.text = "No Date"
