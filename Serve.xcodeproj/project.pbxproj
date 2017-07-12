@@ -19,6 +19,7 @@
 		A07AD2431F15408600100D69 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07AD2421F15408600100D69 /* SignupViewController.swift */; };
 		A07AD2451F156DC000100D69 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07AD2441F156DC000100D69 /* FeedViewController.swift */; };
 		A07AD2471F1573BA00100D69 /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07AD2461F1573BA00100D69 /* PostCell.swift */; };
+		A0B95E781F15A7A600EBD019 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B95E771F15A7A600EBD019 /* Post.swift */; };
 		CCD755791F157F7D0033FF7A /* OrgStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCD755781F157F7D0033FF7A /* OrgStoryboard.storyboard */; };
 		CCD7557E1F158E9A0033FF7A /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCD7557D1F158E9A0033FF7A /* Storyboard.storyboard */; };
 		D86F88D19748B24B3D1761BA /* Pods_ServeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14E9F438563D7547CA95F8E5 /* Pods_ServeUITests.framework */; };
@@ -64,6 +65,7 @@
 		A07AD2421F15408600100D69 /* SignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		A07AD2441F156DC000100D69 /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		A07AD2461F1573BA00100D69 /* PostCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
+		A0B95E771F15A7A600EBD019 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		CCD755781F157F7D0033FF7A /* OrgStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = OrgStoryboard.storyboard; sourceTree = "<group>"; };
 		CCD7557D1F158E9A0033FF7A /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
 		E39F954998A0D2FA09FFAECF /* Pods_ServeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ServeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -200,6 +202,7 @@
 		CCD7557C1F158DFE0033FF7A /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				A0B95E771F15A7A600EBD019 /* Post.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -490,6 +493,7 @@
 				A07AD2431F15408600100D69 /* SignupViewController.swift in Sources */,
 				A07AD2411F144AF800100D69 /* LoginViewController.swift in Sources */,
 				A07AD2451F156DC000100D69 /* FeedViewController.swift in Sources */,
+				A0B95E781F15A7A600EBD019 /* Post.swift in Sources */,
 				A07AD2131F13FAC500100D69 /* AppDelegate.swift in Sources */,
 				A07AD2471F1573BA00100D69 /* PostCell.swift in Sources */,
 			);
