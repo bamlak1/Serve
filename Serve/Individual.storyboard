@@ -115,24 +115,6 @@
             </objects>
             <point key="canvasLocation" x="6300" y="167.76611694152925"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="f46-PC-Y9T">
-            <objects>
-                <viewController id="jzp-Bb-zGU" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="O9v-S3-CRU"/>
-                        <viewControllerLayoutGuide type="bottom" id="RH3-So-zuJ"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="U39-nZ-OeH">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="2er-j8-u7Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4644" y="-2082"/>
-        </scene>
         <!--FeedViewController-->
         <scene sceneID="MWh-pF-QKO">
             <objects>
@@ -197,6 +179,23 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DWb-sk-lwz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5360.8000000000002" y="167.76611694152925"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="I6A-Hf-lZO">
+            <objects>
+                <viewController id="gM5-N5-PLC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="veN-yp-P6D"/>
+                        <viewControllerLayoutGuide type="bottom" id="Vqp-IB-PyA"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="AED-9u-2Mu">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rF5-IS-O6a" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
         </scene>
     </scenes>
     <resources>
