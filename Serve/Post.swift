@@ -66,6 +66,6 @@ class Post {
         // Convert Date to String
         createdAtString = formatter.string(from: date)
         
-        
+       
     }
 }
