@@ -38,6 +38,10 @@ class LoginViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func didPressView(_ sender: Any) {
+        view.endEditing(true)
+    }
+    
     @IBAction func didPressSignIn(_ sender: Any) {
         //check to display error message if one of the field is empty
         if (usernameTextField.text?.isEmpty)! || (passwordTextField.text?.isEmpty)! {
