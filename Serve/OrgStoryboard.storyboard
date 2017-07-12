@@ -59,42 +59,42 @@
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Write a description of the event..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="R9C-Ye-5pT">
-                                <rect key="frame" x="67" y="164" width="240" height="128"/>
+                                <rect key="frame" x="16" y="164" width="343" height="57"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Location" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="FGG-je-ALA">
-                                <rect key="frame" x="67" y="385" width="240" height="32"/>
+                                <rect key="frame" x="16" y="283" width="343" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Date: MM/DD/YY" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="t6I-sD-9ox">
-                                <rect key="frame" x="67" y="425" width="240" height="28"/>
+                                <rect key="frame" x="16" y="320" width="343" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Time:  ##:## PM - ##:## PM" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="GnN-Aq-jEi">
-                                <rect key="frame" x="67" y="454" width="240" height="33"/>
+                                <rect key="frame" x="16" y="353" width="343" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Expected Tasks..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="5lz-Wa-0ho">
-                                <rect key="frame" x="67" y="289" width="240" height="88"/>
+                                <rect key="frame" x="16" y="229" width="343" height="46"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MoZ-1o-amA">
-                                <rect key="frame" x="162" y="545" width="51" height="30"/>
+                                <rect key="frame" x="156" y="391" width="51" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Publish"/>
                                 <connections>
