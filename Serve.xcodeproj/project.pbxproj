@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1DFA70C89E70D057A9C05957 /* Pods_ServeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E39F954998A0D2FA09FFAECF /* Pods_ServeTests.framework */; };
 		586A86B5A1D54401B9DBDC3B /* Pods_Serve.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82D9DBFBCCF5938FE5016D29 /* Pods_Serve.framework */; };
+		861483161F1691A300C18917 /* Feed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 861483151F1691A300C18917 /* Feed.storyboard */; };
 		A07AD2131F13FAC500100D69 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07AD2121F13FAC500100D69 /* AppDelegate.swift */; };
 		A07AD2181F13FAC500100D69 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A07AD2161F13FAC500100D69 /* Main.storyboard */; };
 		A07AD21A1F13FAC500100D69 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A07AD2191F13FAC500100D69 /* Assets.xcassets */; };
@@ -51,6 +52,7 @@
 		35742753080F7F1B6D25345A /* Pods-ServeUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ServeUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ServeUITests/Pods-ServeUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		3B5F90A3FC5007B9036E06F8 /* Pods-ServeUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ServeUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ServeUITests/Pods-ServeUITests.release.xcconfig"; sourceTree = "<group>"; };
 		82D9DBFBCCF5938FE5016D29 /* Pods_Serve.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Serve.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		861483151F1691A300C18917 /* Feed.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Feed.storyboard; sourceTree = "<group>"; };
 		A07AD20F1F13FAC500100D69 /* Serve.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Serve.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A07AD2121F13FAC500100D69 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A07AD2171F13FAC500100D69 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 				A07AD2161F13FAC500100D69 /* Main.storyboard */,
 				CCD755781F157F7D0033FF7A /* OrgStoryboard.storyboard */,
 				CCFB6C1B1F15A9F700E59D5C /* Individual.storyboard */,
+				861483151F1691A300C18917 /* Feed.storyboard */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -331,6 +334,7 @@
 			files = (
 				CCD755791F157F7D0033FF7A /* OrgStoryboard.storyboard in Resources */,
 				A07AD21D1F13FAC500100D69 /* LaunchScreen.storyboard in Resources */,
+				861483161F1691A300C18917 /* Feed.storyboard in Resources */,
 				A07AD21A1F13FAC500100D69 /* Assets.xcassets in Resources */,
 				CCFB6C1C1F15A9F700E59D5C /* Individual.storyboard in Resources */,
 				A07AD2181F13FAC500100D69 /* Main.storyboard in Resources */,
