@@ -56,7 +56,7 @@ class LoginViewController: UIViewController {
                 //let currentUser = user
                 // display appropriate view controller after successful login based on which type of user logged in
                 let typeOfUser = user?["type"] as! String
-                if (typeOfUser == "individual"){
+                if (typeOfUser == "Individual"){
                     self.performSegue(withIdentifier: "userLogin", sender: nil)
                 } else {
                     self.performSegue(withIdentifier: "orgLogin", sender: nil)
