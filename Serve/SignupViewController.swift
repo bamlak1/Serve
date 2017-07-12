@@ -19,6 +19,7 @@ let userTypesDict : [String:UserType] = ["Individual": .Individual, "Organizatio
 class SignupViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 
     var emptyFieldAlert: UIAlertController!
+    var newUser = PFUser()
     
     @IBOutlet weak var usernameTextField: UITextField!
     
@@ -53,7 +54,6 @@ class SignupViewController: UIViewController, UIPickerViewDelegate, UIPickerView
             return
         }
         
-        let newUser = PFUser()
         newUser.username = usernameTextField.text
         newUser.email = emailTextField.text
         newUser.password = passwordTextField.text
@@ -95,7 +95,6 @@ class SignupViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         selectedType = userTypesDict[selectedTypeString]!
     }
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -103,6 +102,4 @@ class SignupViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
-    */
-
 }
