@@ -5,6 +5,9 @@
 //  Created by Bamlak Gessessew on 7/11/17.
 //  Copyright © 2017 Bamlak Gessessew. All rights reserved.
 //
+
+
+
 import Foundation
 
 
@@ -66,5 +69,9 @@ class Post {
         createdAtString = formatter.string(from: date)
         
         
+<<<<<<< HEAD
     }
+=======
+}
+>>>>>>> e548ca1dd93ddbcd4163b8ece65f48af9cb71c95
 }

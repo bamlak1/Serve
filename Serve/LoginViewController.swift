@@ -54,15 +54,16 @@ class LoginViewController: UIViewController {
             } else {
                 print("User logged in successfully")
                 //let currentUser = user
-                // display view controller that needs to shown after successful login
-                if ((user?["isIndividual"]) != nil){
-                self.performSegue(withIdentifier: "userLogin", sender: nil)
-            } else {
-                self.performSegue(withIdentifier: "orgLogin", sender: nil)
+                // display appropriate view controller after successful login based on which type of user logged in
+                let typeOfUser = user?["type"] as! String
+                if (typeOfUser == "individual"){
+                    self.performSegue(withIdentifier: "userLogin", sender: nil)
+                } else {
+                    self.performSegue(withIdentifier: "orgLogin", sender: nil)
+                }
             }
         }
     }
-}
 
     @IBAction func didPressSignUp(_ sender: Any) {
         self.performSegue(withIdentifier: "signupSegue", sender: nil)
