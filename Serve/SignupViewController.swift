@@ -28,7 +28,6 @@ class SignupViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     @IBOutlet weak var pickerView: UIPickerView!
     
     var userTypes = ["Individual", "Organization"]
-    var typeSelectedString = "Individual"
     var userType: userType = .individual
     
     override func viewDidLoad() {
@@ -57,10 +56,9 @@ class SignupViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         
         switch userType {
         case .individual:
-            newUser["isIndividual"] = true
+            newUser["type"] = "individual"
         case .organization:
-            newUser["isOrganization"] = true
-            
+            newUser["type"] = "organization"
         }
         
         newUser.signUpInBackground { (success: Bool, error: Error?) in
@@ -87,7 +85,7 @@ class SignupViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        typeSelectedString = userTypes[row]
+        let typeSelectedString = userTypes[row]
         if typeSelectedString == "Individual" {
             userType = .individual
         } else {
@@ -95,8 +93,6 @@ class SignupViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         }
         
     }
-    
-    
 
     /*
     // MARK: - Navigation
