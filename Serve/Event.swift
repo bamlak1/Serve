@@ -13,20 +13,21 @@ import Parse
 
 class Event: NSObject {
     
-    class func postEvent(image: UIImage?, description: String?, location: String?, date: String?, jobs: [String], goals: [String], withCompletion completion: PFBooleanResultBlock?) {
+    class func postEvent(image: UIImage?, description: String?, location: String?, date: String?,time: String?, jobs: String, withCompletion completion: PFBooleanResultBlock?) {
         
         let event = PFObject(className: "Event")
         
         event["banner"] = getPFFileFromImage(image: image)
         event["description"] = description
-        event["author'"] = PFUser.current()
+        event["author"] = PFUser.current()
         event["location"] = location
         event["date"] = date
-        event["completed?"] = false
-        event["hiring?"] = true
+        event["time"] = time
+        event["completed"] = false
+        event["hiring"] = true
         event["volunteers"] = 0
         event["expected_tasks"] = jobs
-        event["goals"] = goals
+        //event["goals"] = goals
         //TODO: event sponsors & other event properties
         
         event.saveInBackground(block: completion)
