@@ -30,23 +30,27 @@ class EventDetailViewController: UIViewController {
     var event: PFObject?
     
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if user["type"] == "individual" {
-            profPicImageView.layer.cornerRadius = profPicImageView.frame.size.width / 2;
-            profPicImageView.clipsToBounds = true;
-        } else {
-            profPicImageView = self
-        }
+      
         
         if let event = event {
-            let user = event["user"] as! PFUser
-            nameLabel.text = event["author"] as! String
+            //let user = event["user"] as! PFUser
+            
+//            if let user["type"] = "Individual" {
+//                profPicImageView.layer.cornerRadius = profPicImageView.frame.size.width / 2;
+//                profPicImageView.clipsToBounds = true;
+//            } else {
+//                profPicImageView.clipsToBounds = false
+//            }
+            
+            nameLabel.text = event["author"] as? String
             eventDescriptionLabel.text = event["description"] as? String
-            eventDateLabel.text = event["date"] as! String
+            eventDateLabel.text = event["date"] as? String
             eventTimeLabel.text = event["time"] as? String
-            eventTasksLabel.text = event["expected_tasks"] as! String
+            eventTasksLabel.text = event["expected_tasks"] as? String
             let banner = event["banner"] as! PFFile
             banner.getDataInBackground { (imageData: Data!, error: Error?) in
                 self.eventBannerImageView.image = UIImage(data:imageData)

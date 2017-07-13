@@ -12,7 +12,7 @@ import Parse
 class FeedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
-    var Posts: [PFObject]?
+    var Updates: [PFObject]?
     var refreshControl: UIRefreshControl!
     
     
@@ -46,17 +46,16 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     
     func fetchData() {
-        // construct query
-        let query = PFQuery(className: "Post")
+        let query = PFQuery(className: "update")
         query.addDescendingOrder("createdAt")
-        query.limit = 25
+        query.limit = 40
         query.includeKey("user")
         
         // fetch data asynchronously
-        query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
-            if let posts = posts {
+        query.findObjectsInBackground { (updates: [PFObject]?, error: Error?) in
+            if let updates = updates {
                 // do something with the array of object returned by the call
-                self.Posts = posts
+                self.Updates = updates
                 self.tableView.reloadData()
                 // Tell the refreshControl to stop spinning
                 self.refreshControl.endRefreshing()
@@ -73,7 +72,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Posts?.count ?? 0
+        return Updates?.count ?? 0
     }
     
     
@@ -81,19 +80,17 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell") as! PostCell
         
-        let post = Posts![indexPath.row]
-        let caption = post["caption"]
-        let photo = post["media"] as! PFFile
-        let name = post["user"] as! PFUser
+        let update = Updates![indexPath.row]
+        let photo = update["media"] as! PFFile
+        let name = update["user"] as! PFUser
         
         
         
         
-        cell.captionLabel.text = caption as? String //set the caption text
         cell.nameLabel.text = name as? String
         
-        if let date = post["date"]{
-            cell.dateLabel.text = date as! String
+        if let date = update["date"]{
+            cell.dateLabel.text = date as? String
         } else {
             cell.dateLabel.text = "No Date"
         }
@@ -101,7 +98,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         //set the photo image
         photo.getDataInBackground { (imageData: Data!, error: Error?) in
-            cell.ImageViewer.image = UIImage(data:imageData)
+            cell.profilePicImageView.image = UIImage(data:imageData)
         }
         
 //        if let profPic = user["portrait"] as? PFFile {
@@ -112,6 +109,8 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         return cell
     }
+    
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

@@ -197,7 +197,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="123"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="AGN-XF-E80" id="Rx8-VQ-7ic">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="123"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="122.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="link" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hjT-96-Mb5" customClass="TTTAttributedLabel">
@@ -251,6 +251,7 @@
                                             <outlet property="nameLabel" destination="99V-Gi-Maa" id="le2-vF-yxR"/>
                                             <outlet property="profilePicImageView" destination="eLl-eD-nJL" id="Qcc-yn-gaR"/>
                                             <outlet property="tweetTextLabel" destination="hjT-96-Mb5" id="3ld-w4-jAq"/>
+                                            <segue destination="9v5-6Q-s9W" kind="show" id="dPN-US-lc3"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
