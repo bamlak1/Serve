@@ -17,6 +17,7 @@ class CreateEventViewController: UIViewController, UIImagePickerControllerDelega
     @IBOutlet weak var locationTextView: UITextView!
     @IBOutlet weak var dateTextView: UITextView!
     @IBOutlet weak var timeTextView: UITextView!
+    @IBOutlet weak var titletextField: UITextField!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,7 +49,7 @@ class CreateEventViewController: UIViewController, UIImagePickerControllerDelega
     
     @IBAction func publishPressed(_ sender: Any) {
         print("publishEvent pressed")
-        Event.postEvent(image: bannerImageView.image, description: descriptionTextView.text, location: locationTextView.text, date: dateTextView.text, time: timeTextView.text, jobs: expectedTasksTextView.text) { (success: Bool, error: Error?) in
+        Event.postEvent(image: bannerImageView.image, title: titletextField.text, description: descriptionTextView.text, location: locationTextView.text, date: dateTextView.text, time: timeTextView.text, jobs: expectedTasksTextView.text) { (success: Bool, error: Error?) in
             if success {
                 print("Event created")
             } else {
