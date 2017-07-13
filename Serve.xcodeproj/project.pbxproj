@@ -22,6 +22,7 @@
 		A07AD2451F156DC000100D69 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07AD2441F156DC000100D69 /* FeedViewController.swift */; };
 		A07AD2471F1573BA00100D69 /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07AD2461F1573BA00100D69 /* PostCell.swift */; };
 		A0B95E781F15A7A600EBD019 /* Update.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B95E771F15A7A600EBD019 /* Update.swift */; };
+		A0B95E7A1F16DB6C00EBD019 /* EventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B95E791F16DB6C00EBD019 /* EventDetailViewController.swift */; };
 		CC14168D1F16A06800BF2A81 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC14168C1F16A06800BF2A81 /* Event.swift */; };
 		CC14168F1F16A42600BF2A81 /* CreateEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC14168E1F16A42600BF2A81 /* CreateEventViewController.swift */; };
 		CCD755791F157F7D0033FF7A /* OrgStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCD755781F157F7D0033FF7A /* OrgStoryboard.storyboard */; };
@@ -74,6 +75,7 @@
 		A07AD2441F156DC000100D69 /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		A07AD2461F1573BA00100D69 /* PostCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
 		A0B95E771F15A7A600EBD019 /* Update.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Update.swift; sourceTree = "<group>"; };
+		A0B95E791F16DB6C00EBD019 /* EventDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailViewController.swift; sourceTree = "<group>"; };
 		CC14168C1F16A06800BF2A81 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		CC14168E1F16A42600BF2A81 /* CreateEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventViewController.swift; sourceTree = "<group>"; };
 		CCD755781F157F7D0033FF7A /* OrgStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = OrgStoryboard.storyboard; sourceTree = "<group>"; };
@@ -212,6 +214,7 @@
 				CCFB6C1F1F15DA1100E59D5C /* OrganizationViewController.swift */,
 				CCFB6C211F15DBAC00E59D5C /* EditOrganizationViewController.swift */,
 				861483191F16A44A00C18917 /* IndividualLoginViewController.swift */,
+				A0B95E791F16DB6C00EBD019 /* EventDetailViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -302,9 +305,7 @@
 				TargetAttributes = {
 					A07AD20E1F13FAC500100D69 = {
 						CreatedOnToolsVersion = 8.3.2;
-
 						DevelopmentTeam = 2RV3P7RPT3;
-
 						ProvisioningStyle = Automatic;
 					};
 					A07AD2221F13FAC500100D69 = {
@@ -518,6 +519,7 @@
 				A07AD2411F144AF800100D69 /* LoginViewController.swift in Sources */,
 				A07AD2451F156DC000100D69 /* FeedViewController.swift in Sources */,
 				A0B95E781F15A7A600EBD019 /* Update.swift in Sources */,
+				A0B95E7A1F16DB6C00EBD019 /* EventDetailViewController.swift in Sources */,
 				8614831A1F16A44A00C18917 /* IndividualLoginViewController.swift in Sources */,
 				A07AD2131F13FAC500100D69 /* AppDelegate.swift in Sources */,
 				CC14168F1F16A42600BF2A81 /* CreateEventViewController.swift in Sources */,
@@ -675,9 +677,7 @@
 			baseConfigurationReference = ED1C2CCCD0B7F017A061DDCF /* Pods-Serve.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-
 				DEVELOPMENT_TEAM = 2RV3P7RPT3;
-
 				INFOPLIST_FILE = Serve/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Hamlett.Serve;
@@ -691,9 +691,7 @@
 			baseConfigurationReference = 0C684013576F56B69AF242C7 /* Pods-Serve.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-
 				DEVELOPMENT_TEAM = 2RV3P7RPT3;
-
 				INFOPLIST_FILE = Serve/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Hamlett.Serve;
