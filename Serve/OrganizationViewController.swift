@@ -59,7 +59,6 @@ class OrganizationViewController: UIViewController {
             })
         }
         
-        
     }
 
     /*
