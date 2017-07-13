@@ -216,7 +216,6 @@
                                 <state key="normal" title="Button" image="iconmonstr-arrow-4-72"/>
                                 <connections>
                                     <action selector="setProperties:" destination="aOF-xR-UZm" eventType="touchUpInside" id="kYp-rZ-0Yn"/>
-                                    <segue destination="k45-58-nhf" kind="show" id="lo7-IH-ss1"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Age" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2vo-hv-lph">
@@ -247,6 +246,13 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="phonePad"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="opE-2T-1i9">
+                                <rect key="frame" x="315" y="617" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <segue destination="k45-58-nhf" kind="show" id="Z4o-BB-p7P"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
@@ -271,10 +277,10 @@
             </objects>
             <point key="canvasLocation" x="1216.8" y="1145.577211394303"/>
         </scene>
-        <!--Organization Login View Controller-->
+        <!--Org Login View Controller-->
         <scene sceneID="lKl-a0-LFC">
             <objects>
-                <viewController id="Oki-Qc-Htj" customClass="OrganizationLoginViewController" customModule="Serve" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Oki-Qc-Htj" customClass="OrgLoginViewController" customModule="Serve" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="3Cr-O7-wsi"/>
                         <viewControllerLayoutGuide type="bottom" id="ihs-IK-7XG"/>
@@ -311,60 +317,83 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                             </textField>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="HlU-4F-7Zm">
-                                <rect key="frame" x="212" y="389" width="51" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="onTintColor" red="0.48506813698498252" green="0.82564807361757697" blue="0.46601906918435737" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                            </switch>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="McC-uF-PK0">
-                                <rect key="frame" x="212" y="450" width="51" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="onTintColor" red="0.48506813700000001" green="0.82564807360000003" blue="0.46601906920000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                            </switch>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="1Y8-zJ-uwC">
-                                <rect key="frame" x="212" y="508" width="51" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="onTintColor" red="0.48506813700000001" green="0.82564807360000003" blue="0.46601906920000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                            </switch>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Animals" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xO0-Yu-0mi">
-                                <rect key="frame" x="131" y="394" width="73" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Homeless Outreach" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O54-3z-Dnd">
-                                <rect key="frame" x="38" y="455" width="178" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Veterans" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tu6-IS-1Od">
-                                <rect key="frame" x="120" y="513" width="73" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z6p-uX-cMi">
-                                <rect key="frame" x="319" y="623" width="40" height="36"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" red="0.46122420269999997" green="0.61935058929999998" blue="0.9924670458" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <state key="normal" title="Button" image="iconmonstr-arrow-4-72"/>
-                                <connections>
-                                    <action selector="setProperties:" destination="aOF-xR-UZm" eventType="touchUpInside" id="8w6-1K-uxJ"/>
-                                    <action selector="setProperties:" destination="Oki-Qc-Htj" eventType="touchUpInside" id="F4L-Ov-s8z"/>
-                                    <segue destination="GIk-Bp-18K" kind="show" id="g5f-t4-sSb"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Causes Your Organization Supports" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SFE-7l-o3U">
-                                <rect key="frame" x="22" y="309" width="330" height="48"/>
+                                <rect key="frame" x="45" y="309" width="301" height="48"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="DYc-Bk-KFr">
+                                <rect key="frame" x="16" y="377" width="336" height="224"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="izy-oq-IqV">
+                                    <size key="itemSize" width="151" height="127"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="CauseCell" reuseIdentifier="CauseCell" id="FIt-RN-ZBs" customClass="CauseCell" customModule="Serve" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="151" height="127"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="151" height="127"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uEl-9z-xKJ">
+                                                    <rect key="frame" x="46" y="41" width="60" height="60"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Cause name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="agu-mH-ztw">
+                                                    <rect key="frame" x="8" y="9" width="134" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </view>
+                                        <connections>
+                                            <outlet property="causeImageView" destination="uEl-9z-xKJ" id="zj9-q9-8SR"/>
+                                            <outlet property="causeName" destination="agu-mH-ztw" id="oSk-Gf-TXl"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cB2-DO-rcC">
+                                <rect key="frame" x="337" y="322" width="22" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="didPressInfoButton:" destination="Oki-Qc-Htj" eventType="touchUpInside" id="yo9-ec-beQ"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pbl-MZ-65Y">
+                                <rect key="frame" x="185" y="206" width="174" height="95"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Picking causes relevant to your organization will help volunteers find events that match their interests" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RwE-hG-6dZ">
+                                        <rect key="frame" x="12" y="7" width="151" height="79"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z6p-uX-cMi">
+                                <rect key="frame" x="319" y="611" width="40" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" red="0.46122420269999997" green="0.61935058929999998" blue="0.9924670458" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <state key="normal" title="Button" image="iconmonstr-arrow-4-72"/>
+                                <connections>
+                                    <action selector="pressedInfoButton:" destination="Oki-Qc-Htj" eventType="touchUpInside" id="icA-Dp-abe"/>
+                                    <action selector="setProperties:" destination="Oki-Qc-Htj" eventType="touchUpInside" id="F4L-Ov-s8z"/>
+                                    <segue destination="GIk-Bp-18K" kind="show" id="g5f-t4-sSb"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
@@ -373,6 +402,8 @@
                         </connections>
                     </view>
                     <connections>
+                        <outlet property="causeInfoView" destination="Pbl-MZ-65Y" id="OzX-8H-Kgn"/>
+                        <outlet property="collectionView" destination="DYc-Bk-KFr" id="S4R-VJ-5yO"/>
                         <outlet property="organizationAddress" destination="KCt-ol-3xh" id="pNF-ie-1Rq"/>
                         <outlet property="organizationName" destination="bs4-XE-I2z" id="Viw-oi-Ulh"/>
                         <outlet property="organizationPhone" destination="eE7-B2-viU" id="fLJ-bp-ufd"/>
@@ -408,7 +439,7 @@
         <image name="iconmonstr-arrow-4-72" width="36" height="36"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="lo7-IH-ss1"/>
+        <segue reference="Z4o-BB-p7P"/>
         <segue reference="g5f-t4-sSb"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -9,15 +9,17 @@
 import UIKit
 import Parse
 
-class OrganizationLoginViewController: UIViewController {
+class OrganizationLoginViewController: UIViewController, UICollectionViewDataSource {
 
     @IBOutlet weak var organizationName: UITextField!
     @IBOutlet weak var organizationPhone: UITextField!
     @IBOutlet weak var organizationAddress: UITextField!
+    @IBOutlet weak var collectionView: UICollectionView!
+    var causes: [String] = ["Youth", "Education", "Health", "Seniors", "Arts & Culture", "Human Rights", "LGBT", "Animals", "Environment", "Homeless Outreach"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        collectionView.dataSource = self
         // Do any additional setup after loading the view.
     }
 
@@ -36,6 +38,12 @@ class OrganizationLoginViewController: UIViewController {
     
     @IBAction func didPressView(_ sender: Any) {
         view.endEditing(true)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CauseCell", for: indexPath) as! CauseCell
+        cell.cause = causes[indexPath.item]
+        return cell
     }
 
     /*
