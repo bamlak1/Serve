@@ -1,3 +1,4 @@
+
 //
 //  OrgEventsViewController.swift
 //  Serve
@@ -12,15 +13,24 @@ import Parse
 class OrgEventsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var tableView: UITableView!
-    var events : [PFObject] = []
+    var upcomingEvents : [PFObject] = []
+    var pastEvents : [PFObject] = []
     
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
+    
+    
+    @IBAction func segmentChanged(_ sender: Any) {
+        tableView.reloadData()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.delegate = self
         tableView.dataSource = self
-        retrieveEvents()
+        
+        retrievePastEvents()
+        retrieveUpcomingEvents()
         
         // Do any additional setup after loading the view.
     }
@@ -34,41 +44,76 @@ class OrgEventsViewController: UIViewController, UITableViewDataSource, UITableV
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "EventCell") as! EventTableViewCell
         
-        let event = events[indexPath.row]
-        let image = event["banner"] as! PFFile
-        let description = event["description"] as! String
-        let date = event["date"] as! String
-        let time = event["time"] as! String
-        let title = event["title"] as? String
         
-        image.getDataInBackground { (data: Data?, error: Error?) in
-            if(error != nil) {
-                print(error?.localizedDescription ?? "error")
-            } else {
-                let finalImage = UIImage(data: data!)
-                cell.bannerImageView.image = finalImage
+        switch segmentedControl.selectedSegmentIndex {
+        case 0:
+            let event = upcomingEvents[indexPath.row]
+            let image = event["banner"] as! PFFile
+            let description = event["description"] as! String
+            let date = event["date"] as! String
+            let time = event["time"] as! String
+            let title = event["title"] as? String
+            
+            image.getDataInBackground { (data: Data?, error: Error?) in
+                if(error != nil) {
+                    print(error?.localizedDescription ?? "error")
+                } else {
+                    let finalImage = UIImage(data: data!)
+                    cell.bannerImageView.image = finalImage
+                }
             }
+            
+            cell.eventNameLabel.text = title
+            cell.dateLabel.text = date
+            cell.descriptionLabel.text = description
+            cell.timeLabel.text = time
+        case 1:
+            let event = pastEvents[indexPath.row]
+            let image = event["banner"] as! PFFile
+            let description = event["description"] as! String
+            let date = event["date"] as! String
+            let time = event["time"] as! String
+            let title = event["title"] as? String
+            
+            image.getDataInBackground { (data: Data?, error: Error?) in
+                if(error != nil) {
+                    print(error?.localizedDescription ?? "error")
+                } else {
+                    let finalImage = UIImage(data: data!)
+                    cell.bannerImageView.image = finalImage
+                }
+            }
+            
+            cell.eventNameLabel.text = title
+            cell.dateLabel.text = date
+            cell.descriptionLabel.text = description
+            cell.timeLabel.text = time
+        default:
+            break
         }
-        
-        cell.eventNameLabel.text = title
-        cell.dateLabel.text = date
-        cell.descriptionLabel.text = description
-        cell.timeLabel.text = time
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return events.count
+        switch segmentedControl.selectedSegmentIndex {
+        case 0:
+            return upcomingEvents.count
+        case 1:
+            return pastEvents.count
+        default:
+            return 0
+        }
     }
     
-    func retrieveEvents() {
+    func retrieveUpcomingEvents() {
         let org = PFUser.current()
         let id = org!.objectId!
         
         
         let query = PFQuery(className: "Event")
         query.whereKey("authorId", equalTo: id)
+        query.whereKey("completed", equalTo: false)
         //TODO: Sort by having closest event at the top
         query.order(byDescending: "createdAt")
         query.includeKey("author")
@@ -77,15 +122,40 @@ class OrgEventsViewController: UIViewController, UITableViewDataSource, UITableV
         
         query.findObjectsInBackground { (events: [PFObject]?, error: Error?) in
             if events != nil {
-                self.events = events!
+                self.upcomingEvents = events!
                 self.tableView.reloadData()
-                print("Loaded events")
+                print("Loaded upcoming events")
             } else {
                 print(error?.localizedDescription ?? "error loading data")
             }
         }
     }
     
+    func retrievePastEvents() {
+        let org = PFUser.current()
+        let id = org!.objectId!
+        
+        
+        let query = PFQuery(className: "Event")
+        query.whereKey("authorId", equalTo: id)
+        query.whereKey("completed", equalTo: true)
+        //TODO: Sort by having closest event at the top
+        query.order(byDescending: "createdAt")
+        query.includeKey("author")
+        
+        query.limit = 10
+        
+        query.findObjectsInBackground { (events: [PFObject]?, error: Error?) in
+            if events != nil {
+                self.pastEvents = events!
+                self.tableView.reloadData()
+                print("Loaded past events")
+            } else {
+                print(error?.localizedDescription ?? "error loading data")
+            }
+        }
+        
+    }
     
     /*
      // MARK: - Navigation
