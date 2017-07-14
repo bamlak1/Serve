@@ -12,7 +12,7 @@ import TTTAttributedLabel
 
 class PostCell: UITableViewCell {
 
-    @IBOutlet weak var linkLabel: TTTAttributedLabel!
+    @IBOutlet weak var captionLabel: TTTAttributedLabel!
     
     @IBOutlet weak var eventLabel: UILabel!
     

@@ -1,5 +1,5 @@
 //
-//  IndividualProfileViewController.swift
+//  ProfileViewController.swift
 //  Serve
 //
 //  Created by Bamlak Gessessew on 7/13/17.
@@ -7,8 +7,10 @@
 //
 
 import UIKit
+import Parse
 
-class IndividualProfileViewController: UIViewController {
+class ProfileViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+
 
     @IBOutlet weak var bannerImageView: UIImageView!
     @IBOutlet weak var profilePicImageView: UIImageView!
@@ -24,33 +26,37 @@ class IndividualProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         
         profileTableView.dataSource = self
         profileTableView.delegate = self
         
-        //let user = PFUser.current()
+        let user = PFUser.current()
         nameLabel.text = user["name"] as? String
         //interestsLabel.text = user["interests"]
         //find reference for banner image and profile pic
         followingCount.text = String(user["followingCounter"])
         friendsCount.text = String(user["friendsCounter"])
-        
+
         profilePicImageView.layer.cornerRadius = profilePicImageView.frame.size.width / 2;
         profilePicImageView.clipsToBounds = true;
         
         fetchUserUpdates()
-        // Do any additional setup after loading the view.
+        
     }
 
+    @IBAction func indexChanged(_ sender: UISegmentedControl) {
+        //learn how to seperate past and future events
+    }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func didAddFriend(_ sender: Any) {
+    @IBAction func didPressEditProfile(_ sender: Any) {
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return userUpdates.count
     }
@@ -74,7 +80,7 @@ class IndividualProfileViewController: UIViewController {
         }
         
     }
-
+    
     /*
     // MARK: - Navigation
 
