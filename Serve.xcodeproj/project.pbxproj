@@ -26,6 +26,8 @@
 		A0B95E7C1F17FD4500EBD019 /* IndividualProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B95E7B1F17FD4500EBD019 /* IndividualProfileViewController.swift */; };
 		CC14168D1F16A06800BF2A81 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC14168C1F16A06800BF2A81 /* Event.swift */; };
 		CC14168F1F16A42600BF2A81 /* CreateEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC14168E1F16A42600BF2A81 /* CreateEventViewController.swift */; };
+		CC6494341F17FEC1006DA00F /* OrgEventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6494331F17FEC1006DA00F /* OrgEventsViewController.swift */; };
+		CC6494361F17FED1006DA00F /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6494351F17FED1006DA00F /* EventTableViewCell.swift */; };
 		CCD755791F157F7D0033FF7A /* OrgStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCD755781F157F7D0033FF7A /* OrgStoryboard.storyboard */; };
 		CCFB6C1C1F15A9F700E59D5C /* Individual.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCFB6C1B1F15A9F700E59D5C /* Individual.storyboard */; };
 		CCFB6C201F15DA1100E59D5C /* OrganizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFB6C1F1F15DA1100E59D5C /* OrganizationViewController.swift */; };
@@ -80,6 +82,8 @@
 		A0B95E7B1F17FD4500EBD019 /* IndividualProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndividualProfileViewController.swift; sourceTree = "<group>"; };
 		CC14168C1F16A06800BF2A81 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		CC14168E1F16A42600BF2A81 /* CreateEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventViewController.swift; sourceTree = "<group>"; };
+		CC6494331F17FEC1006DA00F /* OrgEventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrgEventsViewController.swift; sourceTree = "<group>"; };
+		CC6494351F17FED1006DA00F /* EventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
 		CCD755781F157F7D0033FF7A /* OrgStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = OrgStoryboard.storyboard; sourceTree = "<group>"; };
 		CCFB6C1B1F15A9F700E59D5C /* Individual.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Individual.storyboard; sourceTree = "<group>"; };
 		CCFB6C1F1F15DA1100E59D5C /* OrganizationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrganizationViewController.swift; sourceTree = "<group>"; };
@@ -168,11 +172,8 @@
 				CCD7557C1F158DFE0033FF7A /* Models */,
 				CCD7557B1F158DF30033FF7A /* ViewControllers */,
 				CCD7557A1F158C7E0033FF7A /* Storyboards */,
-				A07AD2121F13FAC500100D69 /* AppDelegate.swift */,
-				A07AD2191F13FAC500100D69 /* Assets.xcassets */,
-				A07AD21B1F13FAC500100D69 /* LaunchScreen.storyboard */,
-				A07AD21E1F13FAC500100D69 /* Info.plist */,
-				A07AD2461F1573BA00100D69 /* PostCell.swift */,
+				CC6494391F17FF51006DA00F /* Views */,
+				CC64943A1F17FF72006DA00F /* Extra */,
 			);
 			path = Serve;
 			sourceTree = "<group>";
@@ -195,6 +196,47 @@
 			path = ServeUITests;
 			sourceTree = "<group>";
 		};
+		CC6494371F17FEEA006DA00F /* Org */ = {
+			isa = PBXGroup;
+			children = (
+				CCFB6C1F1F15DA1100E59D5C /* OrganizationViewController.swift */,
+				CC6494331F17FEC1006DA00F /* OrgEventsViewController.swift */,
+				CCFB6C211F15DBAC00E59D5C /* EditOrganizationViewController.swift */,
+				CC14168E1F16A42600BF2A81 /* CreateEventViewController.swift */,
+			);
+			name = Org;
+			sourceTree = "<group>";
+		};
+		CC6494381F17FEF2006DA00F /* Individual */ = {
+			isa = PBXGroup;
+			children = (
+				A0B95E791F16DB6C00EBD019 /* EventDetailViewController.swift */,
+				861483191F16A44A00C18917 /* IndividualLoginViewController.swift */,
+				A07AD2441F156DC000100D69 /* FeedViewController.swift */,
+			);
+			name = Individual;
+			sourceTree = "<group>";
+		};
+		CC6494391F17FF51006DA00F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A07AD2461F1573BA00100D69 /* PostCell.swift */,
+				CC6494351F17FED1006DA00F /* EventTableViewCell.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		CC64943A1F17FF72006DA00F /* Extra */ = {
+			isa = PBXGroup;
+			children = (
+				A07AD2191F13FAC500100D69 /* Assets.xcassets */,
+				A07AD21B1F13FAC500100D69 /* LaunchScreen.storyboard */,
+				A07AD21E1F13FAC500100D69 /* Info.plist */,
+				A07AD2121F13FAC500100D69 /* AppDelegate.swift */,
+			);
+			name = Extra;
+			sourceTree = "<group>";
+		};
 		CCD7557A1F158C7E0033FF7A /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
@@ -209,15 +251,12 @@
 		CCD7557B1F158DF30033FF7A /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				CC6494381F17FEF2006DA00F /* Individual */,
+				CC6494371F17FEEA006DA00F /* Org */,
 				A07AD2401F144AF800100D69 /* LoginViewController.swift */,
-				CC14168E1F16A42600BF2A81 /* CreateEventViewController.swift */,
 				A07AD2421F15408600100D69 /* SignupViewController.swift */,
-				A07AD2441F156DC000100D69 /* FeedViewController.swift */,
-				CCFB6C1F1F15DA1100E59D5C /* OrganizationViewController.swift */,
-				CCFB6C211F15DBAC00E59D5C /* EditOrganizationViewController.swift */,
-				861483191F16A44A00C18917 /* IndividualLoginViewController.swift */,
-				A0B95E791F16DB6C00EBD019 /* EventDetailViewController.swift */,
-				A0B95E7B1F17FD4500EBD019 /* IndividualProfileViewController.swift */,
+
+
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -520,12 +559,14 @@
 				CC14168D1F16A06800BF2A81 /* Event.swift in Sources */,
 				CCFB6C221F15DBAC00E59D5C /* EditOrganizationViewController.swift in Sources */,
 				A07AD2411F144AF800100D69 /* LoginViewController.swift in Sources */,
+				CC6494361F17FED1006DA00F /* EventTableViewCell.swift in Sources */,
 				A07AD2451F156DC000100D69 /* FeedViewController.swift in Sources */,
 				A0B95E781F15A7A600EBD019 /* Update.swift in Sources */,
 				A0B95E7C1F17FD4500EBD019 /* IndividualProfileViewController.swift in Sources */,
 				A0B95E7A1F16DB6C00EBD019 /* EventDetailViewController.swift in Sources */,
 				8614831A1F16A44A00C18917 /* IndividualLoginViewController.swift in Sources */,
 				A07AD2131F13FAC500100D69 /* AppDelegate.swift in Sources */,
+				CC6494341F17FEC1006DA00F /* OrgEventsViewController.swift in Sources */,
 				CC14168F1F16A42600BF2A81 /* CreateEventViewController.swift in Sources */,
 				A07AD2471F1573BA00100D69 /* PostCell.swift in Sources */,
 				CCFB6C201F15DA1100E59D5C /* OrganizationViewController.swift in Sources */,
