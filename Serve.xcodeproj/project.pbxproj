@@ -23,6 +23,9 @@
 		A07AD2471F1573BA00100D69 /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07AD2461F1573BA00100D69 /* PostCell.swift */; };
 		A0B95E781F15A7A600EBD019 /* Update.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B95E771F15A7A600EBD019 /* Update.swift */; };
 		A0B95E7A1F16DB6C00EBD019 /* EventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B95E791F16DB6C00EBD019 /* EventDetailViewController.swift */; };
+		A0B95E821F185D4900EBD019 /* IndividualProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B95E811F185D4900EBD019 /* IndividualProfileViewController.swift */; };
+		A0B95E841F185D6600EBD019 /* OrganizationProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B95E831F185D6600EBD019 /* OrganizationProfileViewController.swift */; };
+		A0B95E861F185D7900EBD019 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B95E851F185D7900EBD019 /* UserProfileViewController.swift */; };
 		CC14168D1F16A06800BF2A81 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC14168C1F16A06800BF2A81 /* Event.swift */; };
 		CC14168F1F16A42600BF2A81 /* CreateEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC14168E1F16A42600BF2A81 /* CreateEventViewController.swift */; };
 		CCAF14F61F1835980097C7A3 /* OrgEventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAF14F51F1835980097C7A3 /* OrgEventsViewController.swift */; };
@@ -78,6 +81,9 @@
 		A07AD2461F1573BA00100D69 /* PostCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
 		A0B95E771F15A7A600EBD019 /* Update.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Update.swift; sourceTree = "<group>"; };
 		A0B95E791F16DB6C00EBD019 /* EventDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailViewController.swift; sourceTree = "<group>"; };
+		A0B95E811F185D4900EBD019 /* IndividualProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndividualProfileViewController.swift; sourceTree = "<group>"; };
+		A0B95E831F185D6600EBD019 /* OrganizationProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrganizationProfileViewController.swift; sourceTree = "<group>"; };
+		A0B95E851F185D7900EBD019 /* UserProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		CC14168C1F16A06800BF2A81 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		CC14168E1F16A42600BF2A81 /* CreateEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventViewController.swift; sourceTree = "<group>"; };
 		CCAF14F51F1835980097C7A3 /* OrgEventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrgEventsViewController.swift; sourceTree = "<group>"; };
@@ -221,6 +227,9 @@
 				861483191F16A44A00C18917 /* IndividualLoginViewController.swift */,
 				A0B95E791F16DB6C00EBD019 /* EventDetailViewController.swift */,
 				CCAF14F51F1835980097C7A3 /* OrgEventsViewController.swift */,
+				A0B95E811F185D4900EBD019 /* IndividualProfileViewController.swift */,
+				A0B95E831F185D6600EBD019 /* OrganizationProfileViewController.swift */,
+				A0B95E851F185D7900EBD019 /* UserProfileViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -524,10 +533,13 @@
 				CCFB6C221F15DBAC00E59D5C /* EditOrganizationViewController.swift in Sources */,
 				A07AD2411F144AF800100D69 /* LoginViewController.swift in Sources */,
 				CCD8C2AF1F183A0E00B46AD7 /* EventTableViewCell.swift in Sources */,
+				A0B95E861F185D7900EBD019 /* UserProfileViewController.swift in Sources */,
 				A07AD2451F156DC000100D69 /* FeedViewController.swift in Sources */,
 				A0B95E781F15A7A600EBD019 /* Update.swift in Sources */,
+				A0B95E841F185D6600EBD019 /* OrganizationProfileViewController.swift in Sources */,
 				A0B95E7A1F16DB6C00EBD019 /* EventDetailViewController.swift in Sources */,
 				8614831A1F16A44A00C18917 /* IndividualLoginViewController.swift in Sources */,
+				A0B95E821F185D4900EBD019 /* IndividualProfileViewController.swift in Sources */,
 				A07AD2131F13FAC500100D69 /* AppDelegate.swift in Sources */,
 				CCAF14F61F1835980097C7A3 /* OrgEventsViewController.swift in Sources */,
 				CC14168F1F16A42600BF2A81 /* CreateEventViewController.swift in Sources */,
