@@ -26,8 +26,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             })
         )
         
+
         GMSServices.provideAPIKey("AIzaSyBCmydPROEO4zxGSnoB02DjRwIpejPgZjA")
         GMSPlacesClient.provideAPIKey("AIzaSyBCmydPROEO4zxGSnoB02DjRwIpejPgZjA")
+
+        
+        if let user = PFUser.current() {
+            if user["type"] as! String == "Individual" {
+                let mainStoryboard: UIStoryboard = UIStoryboard(name: "Individual", bundle: nil)
+                let vc = mainStoryboard.instantiateViewController(withIdentifier: "IndividualInitialViewController") as! UITabBarController
+                window?.rootViewController = vc
+            } else {
+                let mainStoryboard: UIStoryboard = UIStoryboard(name: "OrgStoryboard", bundle: nil)
+                let vc = mainStoryboard.instantiateViewController(withIdentifier: "OrgInitialViewController") as! UITabBarController
+                window?.rootViewController = vc
+            }
+        }
+        
+
         
         return true
     }

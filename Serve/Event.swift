@@ -13,10 +13,12 @@ import Parse
 
 class Event: NSObject {
     
-    class func postEvent(image: UIImage?, description: String?, location: String?, date: String?,time: String?, jobs: String, withCompletion completion: PFBooleanResultBlock?) {
+    class func postEvent(image: UIImage?, title: String?, description: String?, location: String?, date: String?,time: String?, jobs: String, withCompletion completion: PFBooleanResultBlock?) {
         
         let event = PFObject(className: "Event")
         
+        event["authorId"] = PFUser.current()?.objectId!
+        event["title"] = title
         event["banner"] = getPFFileFromImage(image: image)
         event["description"] = description
         event["author"] = PFUser.current()
@@ -27,6 +29,8 @@ class Event: NSObject {
         event["hiring"] = true
         event["volunteers"] = 0
         event["expected_tasks"] = jobs
+        event["pending_users"] = ["RICztLBvgj","y2WgepPj1i"]
+        event["accepted_users"] = []
         //event["goals"] = goals
         //TODO: event sponsors & other event properties
         

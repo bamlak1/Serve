@@ -1,17 +1,16 @@
 //
-//  OrganizationViewController.swift
+//  OrganizationProfileViewController.swift
 //  Serve
 //
-//  Created by Michael Hamlett on 7/11/17.
+//  Created by Bamlak Gessessew on 7/13/17.
 //  Copyright © 2017 Bamlak Gessessew. All rights reserved.
 //
 
 import UIKit
-import Parse
 
-class OrganizationViewController: UIViewController {
-    
-    let user = PFUser.current()!
+class OrganizationProfileViewController: UIViewController {
+
+    //let user = find out!!!
     
     
     @IBOutlet weak var bannerImageView: UIImageView!
@@ -20,14 +19,14 @@ class OrganizationViewController: UIViewController {
     @IBOutlet weak var numHelpedLabel: UILabel!
     @IBOutlet weak var numVolLabel: UILabel!
     @IBOutlet weak var contactLabel: UILabel!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         retrieveOrgData()
-
+        
         // Do any additional setup after loading the view.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

@@ -1,0 +1,169 @@
+
+//
+//  OrgEventsViewController.swift
+//  Serve
+//
+//  Created by Michael Hamlett on 7/12/17.
+//  Copyright © 2017 Bamlak Gessessew. All rights reserved.
+//
+import UIKit
+import Parse
+
+
+class OrgEventsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    
+    @IBOutlet weak var tableView: UITableView!
+    var upcomingEvents : [PFObject] = []
+    var pastEvents : [PFObject] = []
+    
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
+    
+    
+    @IBAction func segmentChanged(_ sender: Any) {
+        tableView.reloadData()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        retrievePastEvents()
+        retrieveUpcomingEvents()
+        
+        // Do any additional setup after loading the view.
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "EventCell") as! EventTableViewCell
+        
+        
+        switch segmentedControl.selectedSegmentIndex {
+        case 0:
+            let event = upcomingEvents[indexPath.row]
+            let image = event["banner"] as! PFFile
+            let description = event["description"] as! String
+            let date = event["date"] as! String
+            let time = event["time"] as! String
+            let title = event["title"] as? String
+            
+            image.getDataInBackground { (data: Data?, error: Error?) in
+                if(error != nil) {
+                    print(error?.localizedDescription ?? "error")
+                } else {
+                    let finalImage = UIImage(data: data!)
+                    cell.bannerImageView.image = finalImage
+                }
+            }
+            
+            cell.eventNameLabel.text = title
+            cell.dateLabel.text = date
+            cell.descriptionLabel.text = description
+            cell.timeLabel.text = time
+        case 1:
+            let event = pastEvents[indexPath.row]
+            let image = event["banner"] as! PFFile
+            let description = event["description"] as! String
+            let date = event["date"] as! String
+            let time = event["time"] as! String
+            let title = event["title"] as? String
+            
+            image.getDataInBackground { (data: Data?, error: Error?) in
+                if(error != nil) {
+                    print(error?.localizedDescription ?? "error")
+                } else {
+                    let finalImage = UIImage(data: data!)
+                    cell.bannerImageView.image = finalImage
+                }
+            }
+            
+            cell.eventNameLabel.text = title
+            cell.dateLabel.text = date
+            cell.descriptionLabel.text = description
+            cell.timeLabel.text = time
+        default:
+            break
+        }
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        switch segmentedControl.selectedSegmentIndex {
+        case 0:
+            return upcomingEvents.count
+        case 1:
+            return pastEvents.count
+        default:
+            return 0
+        }
+    }
+    
+    func retrieveUpcomingEvents() {
+        let org = PFUser.current()
+        let id = org!.objectId!
+        
+        
+        let query = PFQuery(className: "Event")
+        query.whereKey("authorId", equalTo: id)
+        query.whereKey("completed", equalTo: false)
+        //TODO: Sort by having closest event at the top
+        query.order(byDescending: "createdAt")
+        query.includeKey("author")
+        
+        query.limit = 10
+        
+        query.findObjectsInBackground { (events: [PFObject]?, error: Error?) in
+            if events != nil {
+                self.upcomingEvents = events!
+                self.tableView.reloadData()
+                print("Loaded upcoming events")
+            } else {
+                print(error?.localizedDescription ?? "error loading data")
+            }
+        }
+    }
+    
+    func retrievePastEvents() {
+        let org = PFUser.current()
+        let id = org!.objectId!
+        
+        
+        let query = PFQuery(className: "Event")
+        query.whereKey("authorId", equalTo: id)
+        query.whereKey("completed", equalTo: true)
+        //TODO: Sort by having closest event at the top
+        query.order(byDescending: "createdAt")
+        query.includeKey("author")
+        
+        query.limit = 10
+        
+        query.findObjectsInBackground { (events: [PFObject]?, error: Error?) in
+            if events != nil {
+                self.pastEvents = events!
+                self.tableView.reloadData()
+                print("Loaded past events")
+            } else {
+                print(error?.localizedDescription ?? "error loading data")
+            }
+        }
+        
+    }
+    
+    /*
+     // MARK: - Navigation
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
+}
