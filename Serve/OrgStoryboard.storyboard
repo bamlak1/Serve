@@ -395,11 +395,17 @@
                                             <rect key="frame" x="253" y="18" width="50" height="50"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <state key="normal" title="Yes"/>
+                                            <connections>
+                                                <action selector="yesPressed:" destination="KmU-WT-hCg" eventType="touchUpInside" id="HDg-Pq-NcO"/>
+                                            </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1zx-UR-3MC">
                                             <rect key="frame" x="311" y="20" width="50" height="50"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <state key="normal" title="No"/>
+                                            <connections>
+                                                <action selector="noPressed:" destination="KmU-WT-hCg" eventType="touchUpInside" id="NWb-Gb-gJV"/>
+                                            </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Event Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Vm-Tp-mw6">
                                             <rect key="frame" x="84" y="29" width="93" height="21"/>
@@ -412,6 +418,8 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="nameLabel" destination="r6L-Md-HxV" id="GiC-4n-a57"/>
+                                    <outlet property="noPressed" destination="1zx-UR-3MC" id="pHS-A0-R7Z"/>
+                                    <outlet property="profileImageView" destination="bMI-8t-kIT" id="hfF-AH-mNU"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
