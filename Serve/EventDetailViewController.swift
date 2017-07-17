@@ -58,6 +58,17 @@ class EventDetailViewController: UIViewController {
         }
     }
 
+    @IBAction func signUpPressed(_ sender: Any) {
+        Pending.postPending(user: PFUser.current()!, event: event!, auto: false) { (success: Bool, error: Error?) in
+            if success {
+                print("Pending request made")
+            } else {
+                print(error?.localizedDescription ?? "error")
+            }
+        }
+    }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
