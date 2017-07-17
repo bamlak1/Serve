@@ -31,6 +31,23 @@ class Post: NSObject {
         post.saveInBackground(block: completion)
         
     }
+    
+    class func orgCreatePost(eventCreated: PFObject, title: String?, thumbnail: UIImage?,completion: PFBooleanResultBlock?) {
+        
+        let post = PFObject(className: "Post")
+        
+        post["org"] = PFUser.current()
+        post["action"] = "created event"
+        post["event"] = eventCreated
+        
+
+        post.saveInBackground(block: completion)
+    }
+    
+    
+    
+    
+    
     class func getPFFileFromImage(image: UIImage?) -> PFFile? {
         if var image = image {
             image = resize(image: image, newSize: CGSize(width: 200, height: 125))

@@ -119,7 +119,7 @@
                                             <outlet property="eventNameLabel" destination="902-i9-Pty" id="5ay-ed-fFR"/>
                                             <outlet property="numVolLabel" destination="2FX-Gs-3UN" id="G5q-2D-sE3"/>
                                             <outlet property="timeLabel" destination="0od-j8-ckP" id="KZF-nn-4vH"/>
-                                            <segue destination="tZa-Zn-N20" kind="show" id="Fhb-U7-V8A"/>
+                                            <segue destination="tZa-Zn-N20" kind="show" identifier="cellTouch" id="Fhb-U7-V8A"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -478,7 +478,7 @@
                 <navigationController storyboardIdentifier="OrgNavControl" automaticallyAdjustsScrollViewInsets="NO" id="cRY-vI-r1X" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Organization" id="yOY-bq-n3u"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Jvn-KA-MQN">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Jvn-KA-MQN">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -517,7 +517,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4gG-p4-mau" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Pending Approvals" id="BGW-vo-OwY"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="V3o-4U-cAV">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="V3o-4U-cAV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -536,7 +536,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="g9u-XE-Wz5" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Events" id="b9c-Tq-N48"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="GEn-5V-RWa">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="GEn-5V-RWa">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

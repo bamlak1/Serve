@@ -161,13 +161,17 @@ class OrgEventsViewController: UIViewController, UITableViewDataSource, UITableV
      // MARK: - Navigation
      // In a storyboard-based application, you will often want to do a little preparation before navigation
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let cell = sender as! UITableViewCell
         
-        if let indexPath = tableView.indexPath(for: cell){
-            let event = upcomingEvents[indexPath.row]
-            let vc = segue.destination as! OrgEventDetailViewController
-            vc.event = event
+        if segue.identifier == "cellTouch" {
+            let cell = sender as! UITableViewCell
+            
+            if let indexPath = tableView.indexPath(for: cell){
+                let event = upcomingEvents[indexPath.row]
+                let vc = segue.destination as! OrgEventDetailViewController
+                vc.event = event
+            }
         }
+       
         
      }
      
