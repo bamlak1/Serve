@@ -11,6 +11,18 @@ import UIKit
 class PendingCell: UITableViewCell {
 
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var profileImageView: UIImageView!
+    
+    
+    @IBAction func yesPressed(_ sender: Any) {
+        
+    }
+    
+  
+    @IBAction func noPressed(_ sender: Any) {
+        
+    }
+
     
     override func awakeFromNib() {
         super.awakeFromNib()
