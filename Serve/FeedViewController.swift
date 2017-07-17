@@ -76,6 +76,9 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     
+    @IBAction func didPressProfPic(_ sender: Any) {
+    }
+    
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell") as! PostCell
