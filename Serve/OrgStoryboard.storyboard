@@ -9,6 +9,44 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Org Event Detail View Controller-->
+        <scene sceneID="HGC-XK-hid">
+            <objects>
+                <viewController id="tZa-Zn-N20" customClass="OrgEventDetailViewController" customModule="Serve" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="f8W-CZ-VxM"/>
+                        <viewControllerLayoutGuide type="bottom" id="ncs-ju-l1b"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="aPQ-JM-5dZ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n33-KP-Qg3">
+                                <rect key="frame" x="157" y="141" width="90" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="temp sign up"/>
+                                <connections>
+                                    <action selector="signUpPressed:" destination="tZa-Zn-N20" eventType="touchUpInside" id="4x4-Zd-eNx"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Event Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qre-mL-Ryp">
+                                <rect key="frame" x="157" y="105" width="176" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="titleLabel" destination="qre-mL-Ryp" id="VsT-8b-xk7"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gH9-Vb-mwe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4093.5999999999999" y="-898.2008995502249"/>
+        </scene>
         <!--Events-->
         <scene sceneID="no2-NZ-Z6K">
             <objects>
@@ -30,7 +68,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="293"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="n3L-lL-0Qk" id="pHH-n9-C3q">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="293"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="292.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZaT-La-RYm">
@@ -81,6 +119,7 @@
                                             <outlet property="eventNameLabel" destination="902-i9-Pty" id="5ay-ed-fFR"/>
                                             <outlet property="numVolLabel" destination="2FX-Gs-3UN" id="G5q-2D-sE3"/>
                                             <outlet property="timeLabel" destination="0od-j8-ckP" id="KZF-nn-4vH"/>
+                                            <segue destination="tZa-Zn-N20" kind="show" id="Fhb-U7-V8A"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -418,7 +457,6 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="nameLabel" destination="r6L-Md-HxV" id="GiC-4n-a57"/>
-                                    <outlet property="noPressed" destination="1zx-UR-3MC" id="pHS-A0-R7Z"/>
                                     <outlet property="profileImageView" destination="bMI-8t-kIT" id="hfF-AH-mNU"/>
                                 </connections>
                             </tableViewCell>
@@ -439,7 +477,7 @@
                 <navigationController storyboardIdentifier="OrgNavControl" automaticallyAdjustsScrollViewInsets="NO" id="cRY-vI-r1X" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Organization" id="yOY-bq-n3u"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Jvn-KA-MQN">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Jvn-KA-MQN">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -478,7 +516,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4gG-p4-mau" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Pending Approvals" id="BGW-vo-OwY"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="V3o-4U-cAV">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="V3o-4U-cAV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -497,7 +535,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="g9u-XE-Wz5" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Events" id="b9c-Tq-N48"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="GEn-5V-RWa">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="GEn-5V-RWa">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
