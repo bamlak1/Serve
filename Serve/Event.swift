@@ -29,12 +29,20 @@ class Event: NSObject {
         event["hiring"] = true
         event["volunteers"] = 0
         event["expected_tasks"] = jobs
-        event["pending_users"] = ["RICztLBvgj","y2WgepPj1i"]
+        event["pending_users"] = []
         event["accepted_users"] = []
         //event["goals"] = goals
         //TODO: event sponsors & other event properties
         
         event.saveInBackground(block: completion)
+        
+        Post.orgCreatePost(eventCreated: event, title: title, thumbnail: image) { (success: Bool, error: Error?) in
+            if success {
+                print("createPost created")
+            } else {
+                print(error?.localizedDescription ?? "error")
+            }
+        }
     }
     
     
