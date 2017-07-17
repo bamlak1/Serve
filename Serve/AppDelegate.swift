@@ -8,6 +8,8 @@
 
 import UIKit
 import Parse
+import GoogleMaps
+import GooglePlaces
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -24,6 +26,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             })
         )
         
+
+        GMSServices.provideAPIKey("AIzaSyBCmydPROEO4zxGSnoB02DjRwIpejPgZjA")
+        GMSPlacesClient.provideAPIKey("AIzaSyBCmydPROEO4zxGSnoB02DjRwIpejPgZjA")
+
         
         if let user = PFUser.current() {
             if user["type"] as! String == "Individual" {
@@ -37,6 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         
+
         
         return true
     }
@@ -62,7 +69,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
 
 }
 
