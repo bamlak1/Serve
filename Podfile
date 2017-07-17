@@ -9,7 +9,7 @@ target 'Serve' do
   # Pods for Serve
   pod 'Parse'
 
-pod 'Alamofire', '~> 4.4'
+  pod 'Alamofire', '~> 4.4'
   pod 'AlamofireImage', '~> 3.1'
   pod 'OAuthSwift', '~> 1.1.0'
   pod 'OAuthSwiftAlamofire'
@@ -17,6 +17,9 @@ pod 'Alamofire', '~> 4.4'
   pod 'KeychainAccess'
   pod 'RSKPlaceholderTextView'
   pod 'TTTAttributedLabel'
+  pod 'GoogleMaps'
+  pod 'GooglePlaces'
+  pod 'SwiftyJSON'
 
   target 'ServeTests' do
     inherit! :search_paths

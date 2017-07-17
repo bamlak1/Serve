@@ -11,6 +11,11 @@
 		586A86B5A1D54401B9DBDC3B /* Pods_Serve.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82D9DBFBCCF5938FE5016D29 /* Pods_Serve.framework */; };
 		861483161F1691A300C18917 /* Feed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 861483151F1691A300C18917 /* Feed.storyboard */; };
 		8614831A1F16A44A00C18917 /* IndividualLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 861483191F16A44A00C18917 /* IndividualLoginViewController.swift */; };
+		861483281F17E93200C18917 /* Cause.swift in Sources */ = {isa = PBXBuildFile; fileRef = 861483271F17E93200C18917 /* Cause.swift */; };
+		8614832A1F17EC2D00C18917 /* OrgLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 861483291F17EC2D00C18917 /* OrgLoginViewController.swift */; };
+		8614832C1F17F2AE00C18917 /* CauseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8614832B1F17F2AE00C18917 /* CauseCell.swift */; };
+		8614832E1F18305000C18917 /* Map.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8614832D1F18305000C18917 /* Map.storyboard */; };
+		861483321F18425D00C18917 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 861483311F18425D00C18917 /* MapViewController.swift */; };
 		A07AD2131F13FAC500100D69 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07AD2121F13FAC500100D69 /* AppDelegate.swift */; };
 		A07AD2181F13FAC500100D69 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A07AD2161F13FAC500100D69 /* Main.storyboard */; };
 		A07AD21A1F13FAC500100D69 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A07AD2191F13FAC500100D69 /* Assets.xcassets */; };
@@ -57,6 +62,11 @@
 		82D9DBFBCCF5938FE5016D29 /* Pods_Serve.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Serve.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		861483151F1691A300C18917 /* Feed.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Feed.storyboard; sourceTree = "<group>"; };
 		861483191F16A44A00C18917 /* IndividualLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndividualLoginViewController.swift; sourceTree = "<group>"; };
+		861483271F17E93200C18917 /* Cause.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cause.swift; sourceTree = "<group>"; };
+		861483291F17EC2D00C18917 /* OrgLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrgLoginViewController.swift; sourceTree = "<group>"; };
+		8614832B1F17F2AE00C18917 /* CauseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CauseCell.swift; sourceTree = "<group>"; };
+		8614832D1F18305000C18917 /* Map.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Map.storyboard; sourceTree = "<group>"; };
+		861483311F18425D00C18917 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		A07AD20F1F13FAC500100D69 /* Serve.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Serve.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A07AD2121F13FAC500100D69 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A07AD2171F13FAC500100D69 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -169,6 +179,7 @@
 				A07AD21B1F13FAC500100D69 /* LaunchScreen.storyboard */,
 				A07AD21E1F13FAC500100D69 /* Info.plist */,
 				A07AD2461F1573BA00100D69 /* PostCell.swift */,
+				8614832B1F17F2AE00C18917 /* CauseCell.swift */,
 			);
 			path = Serve;
 			sourceTree = "<group>";
@@ -195,6 +206,7 @@
 			isa = PBXGroup;
 			children = (
 				A07AD2161F13FAC500100D69 /* Main.storyboard */,
+				8614832D1F18305000C18917 /* Map.storyboard */,
 				CCD755781F157F7D0033FF7A /* OrgStoryboard.storyboard */,
 				CCFB6C1B1F15A9F700E59D5C /* Individual.storyboard */,
 				861483151F1691A300C18917 /* Feed.storyboard */,
@@ -211,7 +223,9 @@
 				A07AD2441F156DC000100D69 /* FeedViewController.swift */,
 				CCFB6C1F1F15DA1100E59D5C /* OrganizationViewController.swift */,
 				CCFB6C211F15DBAC00E59D5C /* EditOrganizationViewController.swift */,
+				861483291F17EC2D00C18917 /* OrgLoginViewController.swift */,
 				861483191F16A44A00C18917 /* IndividualLoginViewController.swift */,
+				861483311F18425D00C18917 /* MapViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -221,6 +235,7 @@
 			children = (
 				A0B95E771F15A7A600EBD019 /* Update.swift */,
 				CC14168C1F16A06800BF2A81 /* Event.swift */,
+				861483271F17E93200C18917 /* Cause.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -302,9 +317,7 @@
 				TargetAttributes = {
 					A07AD20E1F13FAC500100D69 = {
 						CreatedOnToolsVersion = 8.3.2;
-
 						DevelopmentTeam = 2RV3P7RPT3;
-
 						ProvisioningStyle = Automatic;
 					};
 					A07AD2221F13FAC500100D69 = {
@@ -345,6 +358,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CCD755791F157F7D0033FF7A /* OrgStoryboard.storyboard in Resources */,
+				8614832E1F18305000C18917 /* Map.storyboard in Resources */,
 				A07AD21D1F13FAC500100D69 /* LaunchScreen.storyboard in Resources */,
 				861483161F1691A300C18917 /* Feed.storyboard in Resources */,
 				A07AD21A1F13FAC500100D69 /* Assets.xcassets in Resources */,
@@ -518,11 +532,15 @@
 				A07AD2411F144AF800100D69 /* LoginViewController.swift in Sources */,
 				A07AD2451F156DC000100D69 /* FeedViewController.swift in Sources */,
 				A0B95E781F15A7A600EBD019 /* Update.swift in Sources */,
+				861483281F17E93200C18917 /* Cause.swift in Sources */,
 				8614831A1F16A44A00C18917 /* IndividualLoginViewController.swift in Sources */,
 				A07AD2131F13FAC500100D69 /* AppDelegate.swift in Sources */,
+				8614832C1F17F2AE00C18917 /* CauseCell.swift in Sources */,
 				CC14168F1F16A42600BF2A81 /* CreateEventViewController.swift in Sources */,
 				A07AD2471F1573BA00100D69 /* PostCell.swift in Sources */,
 				CCFB6C201F15DA1100E59D5C /* OrganizationViewController.swift in Sources */,
+				861483321F18425D00C18917 /* MapViewController.swift in Sources */,
+				8614832A1F17EC2D00C18917 /* OrgLoginViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -675,12 +693,10 @@
 			baseConfigurationReference = ED1C2CCCD0B7F017A061DDCF /* Pods-Serve.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-
 				DEVELOPMENT_TEAM = 2RV3P7RPT3;
-
 				INFOPLIST_FILE = Serve/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Hamlett.Serve;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Olga.Serve;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -691,12 +707,10 @@
 			baseConfigurationReference = 0C684013576F56B69AF242C7 /* Pods-Serve.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-
 				DEVELOPMENT_TEAM = 2RV3P7RPT3;
-
 				INFOPLIST_FILE = Serve/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Hamlett.Serve;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Olga.Serve;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
