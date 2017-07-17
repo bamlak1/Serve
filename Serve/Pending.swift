@@ -20,6 +20,7 @@ class Pending: NSObject {
         pendingRequest["accepted"] = false
         pendingRequest["event_name"] = event["title"]
         pendingRequest["user_name"] = user["username"]
+        pendingRequest["completed"] = false
         
         
         pendingRequest.saveInBackground(block: completion)
