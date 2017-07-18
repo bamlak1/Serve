@@ -11,14 +11,31 @@ import GoogleMaps
 import Parse
 import SwiftyJSON
 
-class MapViewController: UIViewController {
+class MapViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     var key = "AIzaSyBCmydPROEO4zxGSnoB02DjRwIpejPgZjA"
-    var results: NSArray!
-    
+    var returnedEvents: [PFObject] = []
+    @IBOutlet weak var mapView: UIView!
+    @IBOutlet weak var collectionView: UICollectionView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchUserLocation()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return returnedEvents.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MapEventCell", for: indexPath) as! MapEventCell
+        let eventData = returnedEvents[indexPath.item]
+        
+        cell.eventImage.image = eventData["banner"] as? UIImage
+        cell.eventName.text = eventData["title"] as? String
+        cell.eventTime.text = (eventData["date"] as! String) + " " + (eventData["time"] as! String)
+        cell.orgName.text = eventData["author"] as? String
+        fetchEventLocations()
+        return cell
     }
     
     // Using the user's manually inputed address, geocodes it, centers the map feed to that location, and then creates a pin for it
@@ -32,54 +49,100 @@ class MapViewController: UIViewController {
             (task: BFTask!) -> AnyObject! in
             if task.error != nil {
                 // There was an error.
-                print("user retrieval failed")
+                print("User retrieval failed")
             } else {
                 let user = task.result as! PFUser
-                print(task.result)
-                
-                if (user["address"] != nil) {
-                    let baseUrlString = "https://maps.googleapis.com/maps/api/geocode/json?"
-                    let queryString = "address=\(user["address"])&key=\(self.key)"
-                    
-                    let url = URL(string: baseUrlString + queryString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!)!
-                    let request = URLRequest(url: url)
-                    
-                    let session = URLSession(
-                        configuration: URLSessionConfiguration.default,
-                        delegate:nil,
-                        delegateQueue:OperationQueue.main
-                    )
-                    
-                    let dataRetrieval : URLSessionDataTask = session.dataTask(with: request, completionHandler: { (dataOrNil, response, error) in
-                        if let data = dataOrNil {
-                            let jsonResult = JSON(data: data)
-                            print(jsonResult)
-                            let latitude = Double(jsonResult["results"][0]["geometry"]["location"]["lat"].stringValue)
-                            let longitude = Double(jsonResult["results"][0]["geometry"]["location"]["lng"].stringValue)
-                            self.showMap(lat: latitude!, long: longitude!)
-                        }
-                    });
-                    dataRetrieval.resume()
-                } else {
-                    print("User address not added. Please add address to view map")
+                self.addressToCoordinates(location: user.value(forKey: "address") as! String, type: "home")
+            }
+            return task
+        })
+    }
+    
+    func fetchEventLocations() {
+        let query = PFQuery(className: "Event")
+        query.findObjectsInBackground().continue ({
+            (task: BFTask!) -> AnyObject! in
+            if task.error != nil {
+                // There was an error.
+                print("User retrieval failed")
+            } else {
+                let events = task.result
+                for eventObject in events! {
+                    if let event = eventObject as? Event {
+                        self.addressToCoordinates(location: event.value(forKey: "location") as! String, type: "event")
+                    }
                 }
             }
             return task
         })
     }
     
+    // Given an address, converts it into a latitude/longitude, and then maps it
+    func addressToCoordinates(location: String, type: String) {
+        if (!location.isEmpty) {
+            let baseUrlString = "https://maps.googleapis.com/maps/api/geocode/json?"
+            let queryString = "address=\(location)&key=\(self.key)"
+            
+            let url = URL(string: baseUrlString + queryString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!)!
+            let request = URLRequest(url: url)
+            
+            let session = URLSession(
+                configuration: URLSessionConfiguration.default,
+                delegate:nil,
+                delegateQueue:OperationQueue.main
+            )
+            
+            let dataRetrieval : URLSessionDataTask = session.dataTask(with: request, completionHandler: { (dataOrNil, response, error) in
+                if let data = dataOrNil {
+                    let jsonResult = JSON(data: data)
+                    print(jsonResult)
+                    let latitude = Double(jsonResult["results"][0]["geometry"]["location"]["lat"].stringValue)
+                    let longitude = Double(jsonResult["results"][0]["geometry"]["location"]["lng"].stringValue)
+                    if (type == "home") {
+                        self.placeMarker(lat: latitude!, long: longitude!, type: "home")
+                    } else {
+                        self.placeMarker(lat: latitude!, long: longitude!, type: "event")
+                    }
+                }
+            });
+            dataRetrieval.resume()
+        } else {
+            print("User/organization address not added. Please add address to view map")
+        }
+    }
+    
+    // Queries all Event objects and reloads the Collection View with events that are ordered by time (sooner events show up first)
+    func fetchEvents() {
+        let query = PFQuery(className: "Events")
+        query.order(byAscending: "date")
+        query.addAscendingOrder("time")
+        query.findObjectsInBackground { (events: [PFObject]?, error: Error?) in
+            if let events = events {
+                self.returnedEvents = events
+                self.collectionView.reloadData()
+            } else {
+                print(error?.localizedDescription as Any)
+            }
+        }
+    }
+    
     // Given the user's latitude and longitude, centers the map at that location and creates a pin for it
-    func showMap(lat: Double, long: Double) {
+    func placeMarker(lat: Double, long: Double, type: String) {
         let camera = GMSCameraPosition.camera(withLatitude: lat, longitude: long, zoom: 13.0)
         let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
-        self.view = mapView
+        self.mapView = mapView
         
-        // Creates a marker in the center of the map.
         let marker = GMSMarker()
         marker.position = CLLocationCoordinate2D(latitude: lat, longitude: long)
-        marker.title = "Home base!"
-        marker.snippet = "(You can change this in user settings)"
         marker.map = mapView
+        if (type == "home") {
+            // Creates a marker in the center of the map.
+            marker.title = "Home base!"
+            marker.snippet = "(You can change this in user settings)"
+            marker.icon = GMSMarker.markerImage(with: .white)
+        } else {
+            marker.icon = GMSMarker.markerImage(with: .green)
+        }
     }
 
     override func didReceiveMemoryWarning() {
