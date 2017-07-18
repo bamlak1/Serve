@@ -10,6 +10,7 @@ import UIKit
 import Parse
 
 
+
 class OrgEventsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var tableView: UITableView!
@@ -59,9 +60,9 @@ class OrgEventsViewController: UIViewController, UITableViewDataSource, UITableV
             let event = upcomingEvents[indexPath.row]
             let image = event["banner"] as! PFFile
             let description = event["description"] as! String
-            let date = event["date"] as! String
-            let time = event["time"] as! String
-            let title = event["title"] as? String
+            let start = event["start"] as! String
+            let end = event["end"] as! String
+            let title = event["title"] as! String
             
             image.getDataInBackground { (data: Data?, error: Error?) in
                 if(error != nil) {
@@ -73,16 +74,15 @@ class OrgEventsViewController: UIViewController, UITableViewDataSource, UITableV
             }
             
             cell.eventNameLabel.text = title
-            cell.dateLabel.text = date
+            cell.dateTimeLabel.text = "\(start) - \(end)"
             cell.descriptionLabel.text = description
-            cell.timeLabel.text = time
         case 1:
             let event = pastEvents[indexPath.row]
             let image = event["banner"] as! PFFile
             let description = event["description"] as! String
-            let date = event["date"] as! String
-            let time = event["time"] as! String
-            let title = event["title"] as? String
+            let start = event["start"] as! String
+            let end = event["end"] as! String
+            let title = event["title"] as! String
             
             image.getDataInBackground { (data: Data?, error: Error?) in
                 if(error != nil) {
@@ -94,9 +94,8 @@ class OrgEventsViewController: UIViewController, UITableViewDataSource, UITableV
             }
             
             cell.eventNameLabel.text = title
-            cell.dateLabel.text = date
             cell.descriptionLabel.text = description
-            cell.timeLabel.text = time
+            cell.dateTimeLabel.text = "\(start) - \(end)"
         default:
             break
         }

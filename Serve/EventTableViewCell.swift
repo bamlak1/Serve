@@ -13,8 +13,8 @@ class EventTableViewCell: UITableViewCell {
     @IBOutlet weak var bannerImageView: UIImageView!
     @IBOutlet weak var numVolLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var dateTimeLabel: UILabel!
+
     
     
     
