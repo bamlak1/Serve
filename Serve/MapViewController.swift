@@ -64,7 +64,7 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
             (task: BFTask!) -> AnyObject! in
             if task.error != nil {
                 // There was an error.
-                print("User retrieval failed")
+                print("Event retrieval failed")
             } else {
                 let events = task.result
                 for eventObject in events! {

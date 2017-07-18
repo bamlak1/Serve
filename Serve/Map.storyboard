@@ -88,10 +88,10 @@
                                             </subviews>
                                         </view>
                                         <connections>
-                                            <outlet property="eventImage" destination="IZR-Pz-P9A" id="uwu-ZC-mq9"/>
-                                            <outlet property="eventName" destination="JVe-uD-Rvt" id="5Dz-80-z4o"/>
-                                            <outlet property="eventTime" destination="otl-FL-eQN" id="7kP-0e-oGD"/>
-                                            <outlet property="orgName" destination="NCh-Ts-RDR" id="Gvd-qm-Llr"/>
+                                            <outlet property="eventImage" destination="IZR-Pz-P9A" id="V6R-M5-jTT"/>
+                                            <outlet property="eventName" destination="JVe-uD-Rvt" id="4LZ-nI-ad6"/>
+                                            <outlet property="eventTime" destination="otl-FL-eQN" id="6ia-Q7-sns"/>
+                                            <outlet property="orgName" destination="NCh-Ts-RDR" id="1PX-fo-e6O"/>
                                             <outlet property="spotsLeft" destination="n0l-Eo-jqF" id="zg6-zN-iyN"/>
                                         </connections>
                                     </collectionViewCell>
