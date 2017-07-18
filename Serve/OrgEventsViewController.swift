@@ -15,6 +15,7 @@ class OrgEventsViewController: UIViewController, UITableViewDataSource, UITableV
     @IBOutlet weak var tableView: UITableView!
     var upcomingEvents : [PFObject] = []
     var pastEvents : [PFObject] = []
+    var refreshControl = UIRefreshControl()
     
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     
@@ -25,6 +26,10 @@ class OrgEventsViewController: UIViewController, UITableViewDataSource, UITableV
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(OrganizationViewController.didPullToRefresh(_:)), for: .valueChanged)
+        tableView.insertSubview(refreshControl, at: 0)
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -40,6 +45,10 @@ class OrgEventsViewController: UIViewController, UITableViewDataSource, UITableV
         // Dispose of any resources that can be recreated.
     }
     
+    func didPullToRefresh(_ refreshControl: UIRefreshControl) {
+        retrieveUpcomingEvents()
+        retrievePastEvents()
+    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "EventCell") as! EventTableViewCell
@@ -129,6 +138,7 @@ class OrgEventsViewController: UIViewController, UITableViewDataSource, UITableV
                 print(error?.localizedDescription ?? "error loading data")
             }
         }
+        
     }
     
     func retrievePastEvents() {
@@ -149,6 +159,7 @@ class OrgEventsViewController: UIViewController, UITableViewDataSource, UITableV
             if events != nil {
                 self.pastEvents = events!
                 self.tableView.reloadData()
+                self.refreshControl.endRefreshing()
                 print("Loaded past events")
             } else {
                 print(error?.localizedDescription ?? "error loading data")
