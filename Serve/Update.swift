@@ -27,6 +27,7 @@ class Post: NSObject {
         post["high-fives"] = 0
         post["date"] = date
         
+        
         // Save object (following function will save the object in Parse asynchronously)
         post.saveInBackground(block: completion)
         
