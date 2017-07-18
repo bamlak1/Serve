@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import Parse
 
 class OrganizationProfileViewController: UIViewController {
 
-    //let user = find out!!!
+    var user: PFUser?
     
     
     @IBOutlet weak var bannerImageView: UIImageView!
@@ -37,17 +38,17 @@ class OrganizationProfileViewController: UIViewController {
     
     
     func retrieveOrgData() {
-        orgNameLabel.text = (user["username"] as! String)
+        orgNameLabel.text = (user?["username"] as! String)
         
-        if let mission = user["mission"] {
+        if let mission = user?["mission"] {
             missionLabel.text = (mission as! String)
         }
         
-        if let contact = user["contact"] {
+        if let contact = user?["contact"] {
             contactLabel.text = (contact as! String)
         }
         
-        if let banner = user["banner"] as? PFFile {
+        if let banner = user?["banner"] as? PFFile {
             banner.getDataInBackground(block: { (data: Data?, error: Error?) in
                 if (error != nil) {
                     print(error?.localizedDescription ?? "error")

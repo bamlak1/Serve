@@ -175,7 +175,7 @@
                                                 <rect key="frame" x="0.0" y="28" width="375" height="87"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lsD-eY-iaj" id="wRF-Bm-OeH">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="86.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="87"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xxo-lY-nta">
@@ -257,6 +257,7 @@
                         <outlet property="nameLabel" destination="Eqg-S1-MGd" id="5Kf-hJ-Vw9"/>
                         <outlet property="profilePicImageView" destination="5O6-B4-NZI" id="nEd-eY-08W"/>
                         <outlet property="profileTableView" destination="5w0-UV-eYc" id="snb-ly-bfD"/>
+                        <outlet property="segmentedControl" destination="M8g-qy-QLb" id="Ibp-id-4jb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oDk-wN-tdW" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -395,7 +396,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="87"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3dn-TD-nSD" id="JD1-Jq-4nz">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="86.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="87"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5De-qF-acA">
@@ -473,6 +474,7 @@
                         <outlet property="nameLabel" destination="eiN-PE-yg9" id="p01-0f-vQo"/>
                         <outlet property="profilePicImageView" destination="of6-tD-Kbc" id="ACQ-wx-279"/>
                         <outlet property="profileTableView" destination="cs1-m7-5Eb" id="C1D-QH-ZEU"/>
+                        <outlet property="segmentedControl" destination="eM6-gM-JqM" id="Ht7-gK-Zy6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tSU-co-8WB" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -550,7 +552,7 @@
                                                 <rect key="frame" x="0.0" y="382" width="375" height="127"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ISP-rZ-9vF" id="aav-d8-u7L" customClass="PostCell" customModule="Serve" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="126.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="127"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </tableViewCellContentView>
                                             </tableViewCell>
@@ -600,7 +602,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="84"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="AGN-XF-E80" id="Rx8-VQ-7ic">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="83.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="84"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="caption" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hjT-96-Mb5" customClass="TTTAttributedLabel">
@@ -685,8 +687,8 @@
                     <connections>
                         <outlet property="activityIndicator" destination="rcw-NJ-0CO" id="jXy-Mv-wMP"/>
                         <outlet property="tableView" destination="XSP-kX-DOi" id="k2b-Ks-4TV"/>
-                        <segue destination="BIt-ob-K6E" kind="show" id="1gl-Vn-0Pf"/>
-                        <segue destination="sMy-mL-qES" kind="show" id="fqY-au-NcY"/>
+                        <segue destination="BIt-ob-K6E" kind="show" identifier="individualProfile" id="1gl-Vn-0Pf"/>
+                        <segue destination="sMy-mL-qES" kind="show" identifier="organizationProfile" id="fqY-au-NcY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jo4-3N-d9g" userLabel="First Responder" sceneMemberID="firstResponder"/>

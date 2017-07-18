@@ -21,33 +21,43 @@ class IndividualProfileViewController: UIViewController, UITableViewDelegate, UI
     @IBOutlet weak var friendsCountLabel: UILabel!
     @IBOutlet weak var profileTableView: UITableView!
     
-    var user: User!
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
+    
+    var user: PFUser?
     var followingCount: Int = 0
     var friendsCount: Int = 0
-    var userUpdates: [Update] = []
+    var userPosts: [PFObject] = []
+    var userPastPosts: [PFObject] = []
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         profileTableView.dataSource = self
         profileTableView.delegate = self
         
         
-        //user = find out how to reference
-        nameLabel.text = user["author"]
-        interestsLabel.text = user["interests"]
-        followingCount = user["friendsCount"]
-        followersCount = user["followersCount"]
-        followingCountLabel.text = String(followingCount)
-        friendsCountLabel.text = String(friendsCount)
+        //user =
+        if let username = user?["username"] {
+            nameLabel.text = (username as! String)
+        }
+        
+        if let interests = user?["interests"] {
+            interestsLabel.text = (interests as! String)
+        }
+        if let friendsCount = user?["friendsCount"] {
+            friendsCountLabel.text = (friendsCount as! String)
+        }
+        if let followingCount = user?["followingCount"] {
+            followingCountLabel.text = (followingCount as! String)
+        }
         //let profpicURL = user[] find out how to reference
         //profilePicImageView.af_setImage(withURL: profpicURL!)
         
         profilePicImageView.layer.cornerRadius = profilePicImageView.frame.size.width / 2;
         profilePicImageView.clipsToBounds = true;
         
-        fetchUserUpdates()
+        loadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -56,7 +66,20 @@ class IndividualProfileViewController: UIViewController, UITableViewDelegate, UI
     }
     
     
+    func loadData() {
+        switch segmentedControl.selectedSegmentIndex {
+        case 0:
+            fetchUserUpdates()
+        case 1:
+            fetchPastUserUpdates()
+        default:
+            profileTableView.reloadData()
+        }
+    }
+    
     @IBAction func indexChanged(_ sender: Any) {
+        loadData()
+        
     }
     
 
@@ -64,27 +87,125 @@ class IndividualProfileViewController: UIViewController, UITableViewDelegate, UI
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return userUpdates.count
+        switch segmentedControl.selectedSegmentIndex {
+        case 0:
+            return userPosts.count
+        case 1:
+            return userPastPosts.count
+        default:
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = profileTableView.dequeueReusableCell(withIdentifier: "UserPostCell", for: indexPath) as! PostCell
         
-        cell.update = userUpdates[indexPath.row]
+        
+        
+        switch segmentedControl.selectedSegmentIndex {
+        case 0:
+            let post = userPosts[indexPath.row]
+            let username = user?["username"] as! String
+            let image = post["media"] as! PFFile
+            let caption = post["caption"] as! String
+            let date = post["date"] as! String
+            let fives = post["high-fives"] as! String
+            //let event = create event stuff
+ 
+            
+            image.getDataInBackground { (data: Data?, error: Error?) in
+                if(error != nil) {
+                    print(error?.localizedDescription ?? "error")
+                } else {
+                    let finalImage = UIImage(data: data!)
+                    cell.profilePicImageView.image = finalImage
+                }
+            }
+            
+            cell.nameLabel.text = username
+            cell.dateLabel.text = date
+            cell.linkLabel.text = caption
+            //cell.eventLabel.text = event
+        case 1:
+            let post = userPastPosts[indexPath.row]
+            let username = user?["username"] as! String
+            let image = post["media"] as! PFFile
+            let caption = post["caption"] as! String
+            let date = post["date"] as! String
+            let fives = post["high-fives"] as! String
+            //let event = create event stuff
+            
+            
+            image.getDataInBackground { (data: Data?, error: Error?) in
+                if(error != nil) {
+                    print(error?.localizedDescription ?? "error")
+                } else {
+                    let finalImage = UIImage(data: data!)
+                    cell.profilePicImageView.image = finalImage
+                }
+            }
+            
+            cell.nameLabel.text = username
+            cell.dateLabel.text = date
+            cell.linkLabel.text = caption
+        //cell.eventLabel.text = event
+        default:
+            break
+        }
         
         return cell
     }
     
     func fetchUserUpdates() {
-        APIManager.shared.getUserUpdates { (updates, error) in
-            if let updates = updates {
-                self.userUpdates = updates
+        let user = PFUser.current()
+        let id = user!.objectId!
+        
+        
+        let query = PFQuery(className: "Post")
+        query.whereKey("authorId", equalTo: id)
+        query.whereKey("completed", equalTo: false)
+        //TODO: Sort by having closest event at the top
+        query.order(byDescending: "createdAt")
+        query.includeKey("author")
+        
+        query.limit = 10
+        
+        query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
+            if posts != nil {
+                self.userPosts = posts!
                 self.profileTableView.reloadData()
-            } else if let error = error {
-                print("Error getting user's updates: " + error.localizedDescription)
+                //print("posts for upcoming events")
+            } else {
+                print(error?.localizedDescription ?? "error loading data")
             }
         }
+        profileTableView.reloadData()
+    }
+    
+    func fetchPastUserUpdates() {
+        let user = PFUser.current()
+        let id = user!.objectId!
         
+        
+        let query = PFQuery(className: "Post")
+        query.whereKey("authorId", equalTo: id)
+        query.whereKey("completed", equalTo: true)
+        //TODO: Sort by having closest event at the top
+        query.order(byDescending: "createdAt")
+        query.includeKey("author")
+        
+        query.limit = 10
+        
+        query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
+            if posts != nil {
+                self.userPosts = posts!
+                self.profileTableView.reloadData()
+                //print("posts for past events")
+            } else {
+                print(error?.localizedDescription ?? "error loading data")
+            }
+        }
+        profileTableView.reloadData()
     }
     /*
     // MARK: - Navigation

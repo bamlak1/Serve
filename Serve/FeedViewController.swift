@@ -9,8 +9,11 @@
 import UIKit
 import Parse
 
-class FeedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class FeedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
 
+    
+    var isMoreDataLoading = false
+    var user: PFUser?
     @IBOutlet weak var tableView: UITableView!
     var Updates: [PFObject]?
     var refreshControl: UIRefreshControl!
@@ -40,6 +43,21 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         
     }
     
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if (!isMoreDataLoading) {
+            let scrollViewContentHeight = tableView.contentSize.height
+            let scrollOffsetThreshold = scrollViewContentHeight - tableView.bounds.size.height
+            
+            // When the user has scrolled past the threshold, start requesting
+            if(scrollView.contentOffset.y > scrollOffsetThreshold && tableView.isDragging) {
+                isMoreDataLoading = true
+                
+              //  loadMoreData()
+            
+            }
+        }
+    }
+    
     func refreshControlAction(_ refreshControl: UIRefreshControl) {
         fetchData()
     }
@@ -65,6 +83,30 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
 
+//    func loadMoreData() {
+//        
+//        // ... Create the NSURLRequest (myRequest) ...
+//        
+//        // Configure session so that completion handler is executed on main UI thread
+//        let session = URLSession(configuration: URLSessionConfiguration.default,
+//                                 delegate:nil,
+//                                 delegateQueue:OperationQueue.main
+//        )
+//        let task : URLSessionDataTask = session.dataTask(with: myRequest, completionHandler: { (data, response, error) in
+//            
+//            // Update flag
+//            self.isMoreDataLoading = false
+//            
+//            // ... Use the new data to update the data source ...
+//            
+//            // Reload the tableView now that there is new data
+//            self.myTableView.reloadData()
+//        })
+//        task.resume()
+//    }
+
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         fetchData()
         tableView.contentOffset = CGPoint(x: 0, y: 0) //jumps tableView back up to the top
@@ -77,6 +119,13 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     
     @IBAction func didPressProfPic(_ sender: Any) {
+        let userType = user?["type"] as! String
+        if (userType == "Individual"){
+            self.performSegue(withIdentifier: "individualProfile", sender: nil)
+        } else {
+            self.performSegue(withIdentifier: "organizationProfile", sender: nil)
+        }
+        
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
