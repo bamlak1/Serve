@@ -44,7 +44,7 @@ class IndividualLoginViewController: UIViewController {
         user["address"] = addressTextField.text
         user["age"] = ageTextField.text
         user.saveInBackground()
-        self.performSegue(withIdentifier: "feedIndivSegue", sender: nil)
+       // self.performSegue(withIdentifier: "feedIndivSegue", sender: nil)
     }
     
     /*

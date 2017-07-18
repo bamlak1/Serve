@@ -35,6 +35,14 @@ class Event: NSObject {
         //TODO: event sponsors & other event properties
         
         event.saveInBackground(block: completion)
+        
+        Post.orgCreatePost(eventCreated: event, title: title, thumbnail: image) { (success: Bool, error: Error?) in
+            if success {
+                print("createPost created")
+            } else {
+                print(error?.localizedDescription ?? "error")
+            }
+        }
     }
     
     
