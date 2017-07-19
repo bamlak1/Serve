@@ -30,6 +30,7 @@ class Event: NSObject {
         event["completed"] = false
         event["hiring"] = true
         event["volunteers"] = 0
+        event["pending_count"] = 0
         event["expected_tasks"] = jobs
         event["pending_users"] = []
         event["accepted_users"] = []
