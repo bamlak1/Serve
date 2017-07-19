@@ -17,12 +17,14 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var collectionView: UICollectionView!
     var markerNum = 1
-
+    var selectedIndexPath: IndexPath!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchUserLocation()
         fetchEventLocations()
         mapView.delegate = self
+        collectionView.allowsMultipleSelection = false
         collectionView.backgroundColor = UIColor.clear
     }
     
@@ -47,12 +49,15 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
         cell.eventName.text = eventData["title"] as? String
         cell.eventDate.text = (eventData["start"] as? String)! + " - " + (eventData["end"] as? String)!
         cell.orgName.text = eventData["author"] as? String
-        cell.backgroundColor = UIColor(red:1.00, green:1.00, blue:1.00, alpha:0.75)
-        cell.selectionColor = UIColor(red:0.34, green:0.71, blue:1.00, alpha:0.75)
+        cell.backgroundColor = UIColor(red:1.00, green:1.00, blue:1.00, alpha:0.9)
         cell.layer.borderWidth = 3.0
+        if cell.isSelected {
+            cell.layer.borderColor = UIColor(red:0.34, green:0.71, blue:1.00, alpha:1.0).cgColor
+        } else {
+            cell.layer.borderColor = UIColor.black.cgColor
+        }
         cell.layer.cornerRadius = 15
         cell.layer.masksToBounds = true
-        cell.layer.borderColor = UIColor.black.cgColor
         return cell
     }
     
@@ -61,11 +66,25 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
         let index: Int = (marker.userData as! Dictionary)["number"]!
         print(index)
         if (index != 0) {
-            self.collectionView.scrollToItem(at: IndexPath(row: index - 1, section: 0), at: .right, animated: true)
+            selectedIndexPath = IndexPath(row: index - 1, section: 0)
+            self.collectionView.scrollToItem(at: selectedIndexPath, at: .right, animated: true)
+            self.collectionView.selectItem(at: selectedIndexPath, animated: true, scrollPosition: .right)
         }
         return true
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: selectedIndexPath, animated: true)
+        if let cell = collectionView.cellForItem(at: indexPath) {
+            cell.layer.borderColor = UIColor(red:0.34, green:0.71, blue:1.00, alpha:1.0).cgColor
+        }
+        if selectedIndexPath != indexPath {
+            if let cell = collectionView.cellForItem(at: selectedIndexPath) {
+                cell.layer.borderColor = UIColor.black.cgColor
+            }
+        }
+        selectedIndexPath = indexPath
+    }
     
     // Using the user's manually inputed address, geocodes it, centers the map feed to that location, and then creates a marker for it
     func fetchUserLocation() {
