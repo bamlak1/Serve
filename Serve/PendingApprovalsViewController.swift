@@ -16,9 +16,14 @@ class PendingApprovalsViewController: UIViewController, UITableViewDelegate, UIT
     var pending : [PFObject] = []
     @IBOutlet weak var profileImageView: UIImageView!
     var importedArray : [String] = []
+    var refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(OrganizationViewController.didPullToRefresh(_:)), for: .valueChanged)
+        tableView.insertSubview(refreshControl, at: 0)
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -32,18 +37,36 @@ class PendingApprovalsViewController: UIViewController, UITableViewDelegate, UIT
         // Dispose of any resources that can be recreated.
     }
     
+    func didPullToRefresh(_ refreshControl: UIRefreshControl) {
+        retrievePendingRequests()
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Pending") as! PendingCell
         
         let request = pending[indexPath.row]
         let user = request["user"] as! PFUser
         let event = request["event"] as! PFObject
-        let name = request["user_name"] as! String
-        let eventName = request["event_name"] as! String
-        
         cell.request = request
         cell.event = event
         cell.user = user
+        
+        
+        let name = request["user_name"] as! String
+        let eventName = request["event_name"] as! String
+        
+        if user["profile_image"] != nil {
+            let profileImage = user["profile_image"] as! PFFile
+            profileImage.getDataInBackground(block: { (data: Data?, error: Error?) in
+                if error != nil {
+                    print(error?.localizedDescription ?? "error")
+                } else {
+                    let finalImage = UIImage(data: data!)
+                    cell.profileImageView.image = finalImage
+                }
+            })
+        }
+    
         cell.nameLabel.text = name
         cell.eventTitle.text = eventName
         
@@ -60,12 +83,15 @@ class PendingApprovalsViewController: UIViewController, UITableViewDelegate, UIT
         
         let query = PFQuery(className: "Pending")
         query.whereKey("completed", equalTo: false)
+        query.includeKey("user")
+        query.includeKey("event")
         
         query.findObjectsInBackground { (pendingList: [PFObject]?, error: Error?) in
             if let pendingList = pendingList {
                 self.pending = pendingList
-                print(self.pending)
+                //print(self.pending)
                 self.tableView.reloadData()
+                self.refreshControl.endRefreshing()
             }
         }
         

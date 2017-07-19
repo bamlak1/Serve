@@ -14,6 +14,10 @@ class EditOrganizationViewController: UIViewController, UINavigationControllerDe
     @IBOutlet weak var orgBannerView: UIImageView!
     @IBOutlet weak var contactTextView: UITextView!
     @IBOutlet weak var missionTextView: UITextView!
+    @IBOutlet weak var profileImageView: UIImageView!
+   
+    //Variable that is used to determine which imageview to fill when an image is selected
+    var bannerPressed = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +32,8 @@ class EditOrganizationViewController: UIViewController, UINavigationControllerDe
     }
     
 
-    @IBAction func updateImagePressed(_ sender: Any) {
+    @IBAction func updateBannerImagePressed(_ sender: Any) {
+        bannerPressed = true
         let vc = UIImagePickerController()
         vc.delegate = self
         vc.allowsEditing = true
@@ -39,10 +44,27 @@ class EditOrganizationViewController: UIViewController, UINavigationControllerDe
         self.present(vc, animated: true, completion: nil)
     }
     
+    @IBAction func updateProfileImagePressed(_ sender: Any) {
+        bannerPressed = false
+        let vc2 = UIImagePickerController()
+        vc2.delegate = self
+        vc2.allowsEditing = true
+        
+        vc2.sourceType = UIImagePickerControllerSourceType.photoLibrary
+        vc2.sourceType = .photoLibrary
+        
+        self.present(vc2, animated: true, completion: nil)
+    }
+    
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let editedImage = info[UIImagePickerControllerEditedImage] as! UIImage
         
-        orgBannerView.image = editedImage
+        if bannerPressed == true {
+            orgBannerView.image = editedImage
+        } else {
+            profileImageView.image = editedImage
+        }
         dismiss(animated: true, completion: nil)
     }
 
@@ -50,6 +72,9 @@ class EditOrganizationViewController: UIViewController, UINavigationControllerDe
         if let user = PFUser.current(){
             if let image = orgBannerView.image {
                 user["banner"] = Event.getPFFileFromImage(image: image)
+            }
+            if let image2 = profileImageView.image {
+                user["profile_image"] = Event.getPFFileFromImage(image: image2)
             }
             
             if missionTextView.text != "" {

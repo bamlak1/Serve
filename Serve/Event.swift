@@ -10,10 +10,11 @@
 import Foundation
 import UIKit
 import Parse
+import SwiftDate
 
 class Event: NSObject {
     
-    class func postEvent(image: UIImage?, title: String?, description: String?, location: String?, date: String?,time: String?, jobs: String, withCompletion completion: PFBooleanResultBlock?) {
+    class func postEvent(image: UIImage?, title: String?, description: String?, location: String?, startDate: NSDate?, start: String?,end: String?, jobs: String, withCompletion completion: PFBooleanResultBlock?) {
         
         let event = PFObject(className: "Event")
         
@@ -23,8 +24,9 @@ class Event: NSObject {
         event["description"] = description
         event["author"] = PFUser.current()
         event["location"] = location
-        event["date"] = date
-        event["time"] = time
+        event["start"] = start
+        event["start_date"] = startDate
+        event["end"] = end
         event["completed"] = false
         event["hiring"] = true
         event["volunteers"] = 0

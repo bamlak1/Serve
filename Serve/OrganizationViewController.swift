@@ -9,10 +9,11 @@
 import UIKit
 import Parse
 
-class OrganizationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
+class OrganizationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate{
     
     let user = PFUser.current()!
     var updates : [PFObject] = []
+    var refreshControl = UIRefreshControl()
     
     
     @IBOutlet weak var tableView: UITableView!
@@ -22,9 +23,16 @@ class OrganizationViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var numHelpedLabel: UILabel!
     @IBOutlet weak var numVolLabel: UILabel!
     @IBOutlet weak var contactLabel: UILabel!
+    @IBOutlet weak var profileImageView: UIImageView!
+    
+   
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(OrganizationViewController.didPullToRefresh(_:)), for: .valueChanged)
+        tableView.insertSubview(refreshControl, at: 0)
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -40,9 +48,10 @@ class OrganizationViewController: UIViewController, UITableViewDelegate, UITable
         // Dispose of any resources that can be recreated.
     }
     
-    
-    
-    
+    func didPullToRefresh(_ refreshControl: UIRefreshControl) {
+        retrieveOrgUpdates()
+        retrieveOrgData()
+    }
     
     func retrieveOrgData() {
         orgNameLabel.text = (user["username"] as! String)
@@ -66,6 +75,18 @@ class OrganizationViewController: UIViewController, UITableViewDelegate, UITable
             })
         }
         
+        if let profileImage = user["profile_image"] as? PFFile {
+            profileImage.getDataInBackground(block: { (data: Data?, error: Error?) in
+                if (error != nil) {
+                    print(error?.localizedDescription ?? "error")
+                } else {
+                    let finalImage = UIImage(data: data!)
+                    self.profileImageView.image = finalImage
+                }
+            })
+        }
+        self.refreshControl.endRefreshing()
+        
     }
 
     
@@ -74,12 +95,14 @@ class OrganizationViewController: UIViewController, UITableViewDelegate, UITable
         query.whereKey("org", equalTo: user)
         query.includeKey("org")
         query.includeKey("event")
+        query.order(byDescending: "createdAt")
         
         
         query.findObjectsInBackground { (updates: [PFObject]?, error: Error?) in
             if let updates = updates {
                 self.updates = updates
                 self.tableView.reloadData()
+                self.refreshControl.endRefreshing()
                 
             }
         }
@@ -93,11 +116,22 @@ class OrganizationViewController: UIViewController, UITableViewDelegate, UITable
         
         let update = updates[indexPath.row]
         let org = update["org"] as! PFObject
-        print(org)
+        //print(org)
         let event = update["event"] as! PFObject
         let orgName = org["username"] as! String
         let eventTitle = event["title"] as! String
         let action = update["action"] as! String
+        
+        if let profileImage = org["profile_image"] as? PFFile{
+            profileImage.getDataInBackground { (data: Data?, error: Error?) in
+                if error != nil {
+                    print(error?.localizedDescription ?? "error")
+                } else {
+                    let finalImage = UIImage(data: data!)
+                    cell.profilePicImageView.image = finalImage
+                }
+            }
+        }
         
         cell.nameLabel.text = orgName
         cell.actionLabel.text = action

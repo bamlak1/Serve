@@ -3,11 +3,15 @@ PODS:
   - AlamofireImage (3.2.0):
     - Alamofire (~> 4.1)
   - Bolts/Tasks (1.8.4)
+  - DateTimePicker (1.1.2)
   - GoogleMaps (2.3.1):
     - GoogleMaps/Maps (= 2.3.1)
   - GoogleMaps/Base (2.3.1)
   - GoogleMaps/Maps (2.3.1):
     - GoogleMaps/Base
+  - GooglePlacePicker (2.3.1):
+    - GoogleMaps (= 2.3.1)
+    - GooglePlaces (= 2.3.1)
   - GooglePlaces (2.3.1):
     - GoogleMaps/Base (= 2.3.1)
   - KeychainAccess (3.0.2)
@@ -24,13 +28,16 @@ PODS:
   - Prephirences/Keys (3.0.1):
     - Prephirences/Core
   - RSKPlaceholderTextView (2.0.0)
+  - SwiftDate (4.1.2)
   - SwiftyJSON (3.1.4)
   - TTTAttributedLabel (2.0.0)
 
 DEPENDENCIES:
   - Alamofire (~> 4.4)
   - AlamofireImage (~> 3.1)
+  - DateTimePicker
   - GoogleMaps
+  - GooglePlacePicker
   - GooglePlaces
   - KeychainAccess
   - OAuthSwift (~> 1.1.0)
@@ -38,6 +45,7 @@ DEPENDENCIES:
   - Parse
   - Prephirences
   - RSKPlaceholderTextView
+  - SwiftDate (~> 4.0)
   - SwiftyJSON
   - TTTAttributedLabel
 
@@ -45,7 +53,9 @@ SPEC CHECKSUMS:
   Alamofire: f28cdffd29de33a7bfa022cbd63ae95a27fae140
   AlamofireImage: 157ed682cc81d3b9db4fb90c1f12180ac552d93b
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
+  DateTimePicker: 518bffa5438ef83a7a687cc4d5e187e5c12012b8
   GoogleMaps: c66a71058b9b1294bcdd5463a68e357fa50c079f
+  GooglePlacePicker: fc3564ac7a2ce314e78e42bfc1e16822ad1e5488
   GooglePlaces: 4a7b22debfa1af65017b82943431822607e45201
   KeychainAccess: a986406022dfc7c634c691ad3bec670cc6a32002
   OAuthSwift: 5aa5659984d3ca3206ba636a9e7a9c6626b2e8bd
@@ -53,9 +63,10 @@ SPEC CHECKSUMS:
   Parse: b0aa91d2c435e53d4a9af26e741e014c9b35c42e
   Prephirences: d0ec0bd6047edb3370364345857a769aaf3db312
   RSKPlaceholderTextView: 301f0f30e70e7c42fe4e941e3a08365ab0d890d5
+  SwiftDate: 2dfdebd4f67ae71c9c3e2413ee3c56947f302858
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
 
-PODFILE CHECKSUM: eba22ab7d559307dff80642e66fe2efb5706dc6e
+PODFILE CHECKSUM: 1b3c4a3277f0fff5abd8a77c1cd032f05929e762
 
 COCOAPODS: 1.2.1

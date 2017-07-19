@@ -19,7 +19,10 @@ target 'Serve' do
   pod 'TTTAttributedLabel'
   pod 'GoogleMaps'
   pod 'GooglePlaces'
+  pod 'GooglePlacePicker'
   pod 'SwiftyJSON'
+  pod 'SwiftDate', '~> 4.0'
+  pod 'DateTimePicker'
 
   target 'ServeTests' do
     inherit! :search_paths

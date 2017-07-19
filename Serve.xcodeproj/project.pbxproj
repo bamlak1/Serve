@@ -43,6 +43,10 @@
 		CCAF14F61F1835980097C7A3 /* OrgEventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAF14F51F1835980097C7A3 /* OrgEventsViewController.swift */; };
 		CCD755791F157F7D0033FF7A /* OrgStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCD755781F157F7D0033FF7A /* OrgStoryboard.storyboard */; };
 		CCD8C2AF1F183A0E00B46AD7 /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD8C2AE1F183A0E00B46AD7 /* EventTableViewCell.swift */; };
+		CCED38851F1D926500A3DD2E /* OrgEventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCED38811F1D926500A3DD2E /* OrgEventDetailViewController.swift */; };
+		CCED38861F1D926500A3DD2E /* Pending.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCED38821F1D926500A3DD2E /* Pending.swift */; };
+		CCED38871F1D926500A3DD2E /* PendingApprovalsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCED38831F1D926500A3DD2E /* PendingApprovalsViewController.swift */; };
+		CCED38881F1D926500A3DD2E /* PendingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCED38841F1D926500A3DD2E /* PendingCell.swift */; };
 		CCFB6C1C1F15A9F700E59D5C /* Individual.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCFB6C1B1F15A9F700E59D5C /* Individual.storyboard */; };
 		CCFB6C201F15DA1100E59D5C /* OrganizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFB6C1F1F15DA1100E59D5C /* OrganizationViewController.swift */; };
 		CCFB6C221F15DBAC00E59D5C /* EditOrganizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFB6C211F15DBAC00E59D5C /* EditOrganizationViewController.swift */; };
@@ -113,6 +117,10 @@
 		CCAF14F51F1835980097C7A3 /* OrgEventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrgEventsViewController.swift; sourceTree = "<group>"; };
 		CCD755781F157F7D0033FF7A /* OrgStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = OrgStoryboard.storyboard; sourceTree = "<group>"; };
 		CCD8C2AE1F183A0E00B46AD7 /* EventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
+		CCED38811F1D926500A3DD2E /* OrgEventDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrgEventDetailViewController.swift; sourceTree = "<group>"; };
+		CCED38821F1D926500A3DD2E /* Pending.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pending.swift; sourceTree = "<group>"; };
+		CCED38831F1D926500A3DD2E /* PendingApprovalsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendingApprovalsViewController.swift; sourceTree = "<group>"; };
+		CCED38841F1D926500A3DD2E /* PendingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendingCell.swift; sourceTree = "<group>"; };
 		CCFB6C1B1F15A9F700E59D5C /* Individual.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Individual.storyboard; sourceTree = "<group>"; };
 		CCFB6C1F1F15DA1100E59D5C /* OrganizationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrganizationViewController.swift; sourceTree = "<group>"; };
 		CCFB6C211F15DBAC00E59D5C /* EditOrganizationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditOrganizationViewController.swift; sourceTree = "<group>"; };
@@ -210,6 +218,9 @@
 				A00FB5951F1ED45A0036340D /* OrgCollectionViewCell.swift */,
 				A00FB5971F1ED46C0036340D /* EventCollectionViewCell.swift */,
 				A00FB5991F1ED47B0036340D /* IndCollectionViewCell.swift */,
+				CCED38841F1D926500A3DD2E /* PendingCell.swift */,
+				8614832B1F17F2AE00C18917 /* CauseCell.swift */,
+				CCD8C2AE1F183A0E00B46AD7 /* EventTableViewCell.swift */,
 			);
 			path = Serve;
 			sourceTree = "<group>";
@@ -260,6 +271,9 @@
 				A0B95E871F1D8CA800EBD019 /* Pending.swift */,
 				A0B95E791F16DB6C00EBD019 /* EventDetailViewController.swift */,
 				CCAF14F51F1835980097C7A3 /* OrgEventsViewController.swift */,
+				CCED38811F1D926500A3DD2E /* OrgEventDetailViewController.swift */,
+				CCED38821F1D926500A3DD2E /* Pending.swift */,
+				CCED38831F1D926500A3DD2E /* PendingApprovalsViewController.swift */,
 				A0B95E811F185D4900EBD019 /* IndividualProfileViewController.swift */,
 				A0B95E831F185D6600EBD019 /* OrganizationProfileViewController.swift */,
 				A0B95E851F185D7900EBD019 /* UserProfileViewController.swift */,
@@ -573,6 +587,7 @@
 				CCD8C2AF1F183A0E00B46AD7 /* EventTableViewCell.swift in Sources */,
 				A00FB59C1F1ED7380036340D /* BrowseViewController.swift in Sources */,
 				A0B95E8C1F1E782500EBD019 /* OrgEventDetailViewController.swift in Sources */,
+				CCED38881F1D926500A3DD2E /* PendingCell.swift in Sources */,
 				A0B95E861F185D7900EBD019 /* UserProfileViewController.swift in Sources */,
 				A00FB59A1F1ED47B0036340D /* IndCollectionViewCell.swift in Sources */,
 				A07AD2451F156DC000100D69 /* FeedViewController.swift in Sources */,
@@ -581,8 +596,13 @@
 				861483281F17E93200C18917 /* Cause.swift in Sources */,
 				A0B95E881F1D8CA800EBD019 /* Pending.swift in Sources */,
 				A0B95E8A1F1D94A200EBD019 /* EditProfileViewController.swift in Sources */,
+				CCED38851F1D926500A3DD2E /* OrgEventDetailViewController.swift in Sources */,
+				A0B95E781F15A7A600EBD019 /* Update.swift in Sources */,
+				861483281F17E93200C18917 /* Cause.swift in Sources */,
 				A0B95E841F185D6600EBD019 /* OrganizationProfileViewController.swift in Sources */,
+				CCED38871F1D926500A3DD2E /* PendingApprovalsViewController.swift in Sources */,
 				A0B95E7A1F16DB6C00EBD019 /* EventDetailViewController.swift in Sources */,
+				CCED38861F1D926500A3DD2E /* Pending.swift in Sources */,
 				8614831A1F16A44A00C18917 /* IndividualLoginViewController.swift in Sources */,
 				A0B95E821F185D4900EBD019 /* IndividualProfileViewController.swift in Sources */,
 				A07AD2131F13FAC500100D69 /* AppDelegate.swift in Sources */,
@@ -748,7 +768,7 @@
 				DEVELOPMENT_TEAM = DY98KN5R7D;
 				INFOPLIST_FILE = Serve/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Olga.Serve;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Hamlett.Serve;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -762,7 +782,7 @@
 				DEVELOPMENT_TEAM = DY98KN5R7D;
 				INFOPLIST_FILE = Serve/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Olga.Serve;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Hamlett.Serve;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
