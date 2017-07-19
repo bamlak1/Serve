@@ -12,7 +12,17 @@ class MapEventCell: UICollectionViewCell {
     @IBOutlet weak var eventImage: UIImageView!
     @IBOutlet weak var orgName: UILabel!
     @IBOutlet weak var eventName: UILabel!
-    @IBOutlet weak var eventTime: UILabel!
-    @IBOutlet weak var spotsLeft: UILabel!
+    @IBOutlet weak var eventDate: UILabel!
     
+    @IBInspectable var selectionColor: UIColor = .gray {
+        didSet {
+            configureSelectedBackgroundView()
+        }
+    }
+    
+    func configureSelectedBackgroundView() {
+        let view = UIView()
+        view.backgroundColor = selectionColor
+        selectedBackgroundView = view
+    }
 }
