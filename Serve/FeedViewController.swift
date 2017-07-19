@@ -18,21 +18,21 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     var refreshControl: UIRefreshControl!
     
     
-    @IBOutlet weak var tableView: UITableView!
 
+    @IBOutlet var feedTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.dataSource = self
-        tableView.delegate = self
+        feedTableView.dataSource = self
+        feedTableView.delegate = self
         
         
         // Initialize a UIRefreshControl
         refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refreshControlAction(_:)), for: UIControlEvents.valueChanged)
         // add refresh control to table view
-        tableView.insertSubview(refreshControl, at: 0)
+        feedTableView.insertSubview(refreshControl, at: 0)
         
         fetchUpdates()
         
@@ -69,7 +69,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             if let updates = updates {
                 self.updates = updates
                 print("Loaded updates")
-                self.tableView.reloadData()
+                self.feedTableView.reloadData()
                 self.refreshControl.endRefreshing()
                 
             }
@@ -127,8 +127,9 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         let update = updates[indexPath.row]
         let org = update["user"] as? PFUser
-        //print(org)
+        cell.user = org
         let event = update["event"] as! PFObject
+        cell.event = event
         let orgName = org?["username"] as! String
         let eventTitle = event["title"] as! String
         let action = update["action"] as! String
@@ -144,6 +145,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
         }
         
+        cell.eventButtonOutlet.tag = indexPath.row
         cell.nameLabel.text = orgName
         cell.actionLabel.text = action
         cell.eventLabel.text = eventTitle
@@ -159,14 +161,17 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
 
-    /*
-    // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "event"{
+            let button = sender as! UIButton
+            let indexPath = button.tag
+            let update = updates[indexPath]
+            let event = update["event"] as! PFObject
+            
+            let vc = segue.destination as! EventDetailViewController
+            vc.event = event
+        }
     }
-    */
-
 }

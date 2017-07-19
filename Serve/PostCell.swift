@@ -28,7 +28,9 @@ class PostCell: UITableViewCell {
     var event : PFObject?
     var user: PFUser?
 
+    @IBOutlet weak var eventButtonOutlet: UIButton!
     @IBAction func eventLabelPressed(_ sender: Any) {
+        
         
     }
  

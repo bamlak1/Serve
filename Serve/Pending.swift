@@ -18,10 +18,18 @@ class Pending: NSObject {
         pendingRequest["user"] = user
         pendingRequest["event"] = event
         pendingRequest["accepted"] = false
-        pendingRequest["event_name"] = event["title"]
+        let eventTitle = event["title"] as! String
+        pendingRequest["event_name"] = eventTitle
         pendingRequest["user_name"] = user["username"]
         pendingRequest["completed"] = false
         
+        Post.userInterestedPost(eventInterest: event, title: eventTitle) { (success: Bool, error: Error?) in
+            if success {
+                print("interestPost created")
+            } else {
+                print(error?.localizedDescription ?? "error")
+            }
+        }
         
         pendingRequest.saveInBackground(block: completion)
     }

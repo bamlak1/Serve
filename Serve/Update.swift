@@ -33,7 +33,18 @@ class Post: NSObject {
         
     }
     
-    class func orgCreatePost(eventCreated: PFObject, title: String?, thumbnail: UIImage?,completion: PFBooleanResultBlock?) {
+    class func userInterestedPost(eventInterest: PFObject, title: String?,completion: PFBooleanResultBlock?) {
+        let post = PFObject(className: "Post")
+        
+        post["user"] = PFUser.current()
+        post["action"] = "is interested in"
+        post["event"] = eventInterest
+        
+        
+        post.saveInBackground(block: completion)
+    }
+    
+    class func orgCreatePost(eventCreated: PFObject, title: String?,completion: PFBooleanResultBlock?) {
         
         let post = PFObject(className: "Post")
         
