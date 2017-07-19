@@ -14,6 +14,7 @@ import SwiftyJSON
 class MapViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, GMSMapViewDelegate {
     var key = "AIzaSyBCmydPROEO4zxGSnoB02DjRwIpejPgZjA"
     var returnedEvents: [PFObject] = []
+    var markers: [GMSMarker] = []
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var collectionView: UICollectionView!
     var markerNum = 1
@@ -74,14 +75,21 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        collectionView.deselectItem(at: selectedIndexPath, animated: true)
+        let currentMarker = markers[indexPath.row + 1]
         if let cell = collectionView.cellForItem(at: indexPath) {
             cell.layer.borderColor = UIColor(red:0.34, green:0.71, blue:1.00, alpha:1.0).cgColor
+            currentMarker.icon = GMSMarker.markerImage(with: UIColor.yellow)
+            mapView.animate(toLocation: CLLocationCoordinate2D(latitude: currentMarker.position.latitude, longitude: currentMarker.position.longitude))
         }
-        if selectedIndexPath != indexPath {
-            if let cell = collectionView.cellForItem(at: selectedIndexPath) {
-                cell.layer.borderColor = UIColor.black.cgColor
+        
+        if selectedIndexPath != nil {
+            collectionView.deselectItem(at: selectedIndexPath, animated: true)
+            if selectedIndexPath != indexPath {
+                if let cell = collectionView.cellForItem(at: selectedIndexPath) {
+                    cell.layer.borderColor = UIColor.black.cgColor
+                }
             }
+            markers[selectedIndexPath.row + 1].icon = GMSMarker.markerImage(with: UIColor(red:0.34, green:0.71, blue:1.00, alpha:1.0))
         }
         selectedIndexPath = indexPath
     }
@@ -167,11 +175,11 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
     
         if (type == "home") {
             extraMarkerInfo["number"] = 0
-            self.mapView.camera = GMSCameraPosition.camera(withLatitude: lat, longitude: long, zoom: 13.0)
+            self.mapView.camera = GMSCameraPosition.camera(withLatitude: lat, longitude: long, zoom: 14.0)
             // Creates a marker in the center of the map.
             marker.title = "Home base!"
             marker.snippet = "(You can change this in user settings)"
-            marker.icon = GMSMarker.markerImage(with:UIColor(red:0.16, green:0.35, blue:0.50, alpha:1.0))
+            marker.icon = UIImage(data: UIImagePNGRepresentation(UIImage(named: "home")!)!, scale: 3)!
         } else {
             extraMarkerInfo["number"] = markerNum
             markerNum += 1
@@ -179,8 +187,9 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
             marker.icon = GMSMarker.markerImage(with: UIColor(red:0.34, green:0.71, blue:1.00, alpha:1.0))
         }
         marker.userData = extraMarkerInfo
-        marker.appearAnimation = GMSMarkerAnimation.pop
+        //marker.appearAnimation = GMSMarkerAnimation.pop
         marker.map = self.mapView
+        markers.append(marker)
     }
 
     override func didReceiveMemoryWarning() {
