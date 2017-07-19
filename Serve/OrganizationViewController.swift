@@ -92,8 +92,8 @@ class OrganizationViewController: UIViewController, UITableViewDelegate, UITable
     
     func retrieveOrgUpdates() {
         let query = PFQuery(className: "Post")
-        query.whereKey("org", equalTo: user)
-        query.includeKey("org")
+        query.whereKey("user", equalTo: user)
+        query.includeKey("user")
         query.includeKey("event")
         query.order(byDescending: "createdAt")
         
@@ -115,7 +115,7 @@ class OrganizationViewController: UIViewController, UITableViewDelegate, UITable
         let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell") as! PostCell
         
         let update = updates[indexPath.row]
-        let org = update["org"] as! PFObject
+        let org = update["user"] as! PFObject
         //print(org)
         let event = update["event"] as! PFObject
         let orgName = org["username"] as! String

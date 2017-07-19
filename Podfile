@@ -23,7 +23,8 @@ target 'Serve' do
   pod 'SwiftyJSON'
   pod 'SwiftDate', '~> 4.0'
   pod 'DateTimePicker'
-
+  pod 'AFNetworking', '0.9'
+  
   target 'ServeTests' do
     inherit! :search_paths
     
