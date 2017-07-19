@@ -14,12 +14,12 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     var isMoreDataLoading = false
     var user: PFUser?
-    @IBOutlet weak var tableView: UITableView!
-    var Updates: [PFObject]?
+    var updates: [PFObject] = []
     var refreshControl: UIRefreshControl!
     
     
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var tableView: UITableView!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +27,6 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.dataSource = self
         tableView.delegate = self
         
-        activityIndicator.startAnimating()
         
         // Initialize a UIRefreshControl
         refreshControl = UIRefreshControl()
@@ -35,50 +34,44 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         // add refresh control to table view
         tableView.insertSubview(refreshControl, at: 0)
         
-        
-        
-        self.tableView.reloadData()
-        self.refreshControl.endRefreshing()
-        self.activityIndicator.stopAnimating()
+        fetchUpdates()
         
     }
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if (!isMoreDataLoading) {
-            let scrollViewContentHeight = tableView.contentSize.height
-            let scrollOffsetThreshold = scrollViewContentHeight - tableView.bounds.size.height
-            
-            // When the user has scrolled past the threshold, start requesting
-            if(scrollView.contentOffset.y > scrollOffsetThreshold && tableView.isDragging) {
-                isMoreDataLoading = true
-                
-              //  loadMoreData()
-            
-            }
-        }
-    }
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        if (!isMoreDataLoading) {
+//            let scrollViewContentHeight = tableView.contentSize.height
+//            let scrollOffsetThreshold = scrollViewContentHeight - tableView.bounds.size.height
+//            
+//            // When the user has scrolled past the threshold, start requesting
+//            if(scrollView.contentOffset.y > scrollOffsetThreshold && tableView.isDragging) {
+//                isMoreDataLoading = true
+//                
+//              //  loadMoreData()
+//            
+//            }
+//        }
+//    }
     
     func refreshControlAction(_ refreshControl: UIRefreshControl) {
-        fetchData()
+        fetchUpdates()
     }
 
     
-    func fetchData() {
-        let query = PFQuery(className: "update")
-        query.addDescendingOrder("createdAt")
-        query.limit = 40
-        query.includeKey("user")
+    func fetchUpdates() {
+        let query = PFQuery(className: "Post")
+        query.includeKey("org")
+        query.includeKey("event")
+        query.order(byDescending: "createdAt")
         
-        // fetch data asynchronously
+        
         query.findObjectsInBackground { (updates: [PFObject]?, error: Error?) in
             if let updates = updates {
-                // do something with the array of object returned by the call
-                self.Updates = updates
+                self.updates = updates
+                print(self.updates)
                 self.tableView.reloadData()
-                // Tell the refreshControl to stop spinning
                 self.refreshControl.endRefreshing()
-            } else {
-                print(error?.localizedDescription as Any)
+                
             }
         }
     }
@@ -107,14 +100,14 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     
     
-    override func viewWillAppear(_ animated: Bool) {
-        fetchData()
-        tableView.contentOffset = CGPoint(x: 0, y: 0) //jumps tableView back up to the top
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        fetchData()
+//        tableView.contentOffset = CGPoint(x: 0, y: 0) //jumps tableView back up to the top
+//    }
     
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Updates?.count ?? 0
+        return updates.count
     }
     
     
@@ -132,26 +125,15 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell") as! PostCell
         
-        let update = Updates![indexPath.row]
-        let photo = update["media"] as! PFFile
-        let name = update["user"] as! PFUser
+        let update = updates[indexPath.row]
+        let action = update["action"] as! String
         
         
         
         
-        cell.nameLabel.text = name as? String
-        
-        if let date = update["date"]{
-            cell.dateLabel.text = date as? String
-        } else {
-            cell.dateLabel.text = "No Date"
-        }
+        cell.nameLabel.text = action
         
         
-        //set the photo image
-        photo.getDataInBackground { (imageData: Data!, error: Error?) in
-            cell.profilePicImageView.image = UIImage(data:imageData)
-        }
         
 //        if let profPic = user["portrait"] as? PFFile {
 //            profPic.getDataInBackground { (imageData: Data!, error: Error?) in
