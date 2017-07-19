@@ -16,6 +16,10 @@
 		8614832C1F17F2AE00C18917 /* CauseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8614832B1F17F2AE00C18917 /* CauseCell.swift */; };
 		8614832E1F18305000C18917 /* Map.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8614832D1F18305000C18917 /* Map.storyboard */; };
 		861483321F18425D00C18917 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 861483311F18425D00C18917 /* MapViewController.swift */; };
+		A00FB5961F1ED45A0036340D /* OrgCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00FB5951F1ED45A0036340D /* OrgCollectionViewCell.swift */; };
+		A00FB5981F1ED46C0036340D /* EventCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00FB5971F1ED46C0036340D /* EventCollectionViewCell.swift */; };
+		A00FB59A1F1ED47B0036340D /* IndCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00FB5991F1ED47B0036340D /* IndCollectionViewCell.swift */; };
+		A00FB59C1F1ED7380036340D /* BrowseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00FB59B1F1ED7380036340D /* BrowseViewController.swift */; };
 		A07AD2131F13FAC500100D69 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07AD2121F13FAC500100D69 /* AppDelegate.swift */; };
 		A07AD2181F13FAC500100D69 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A07AD2161F13FAC500100D69 /* Main.storyboard */; };
 		A07AD21A1F13FAC500100D69 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A07AD2191F13FAC500100D69 /* Assets.xcassets */; };
@@ -31,6 +35,9 @@
 		A0B95E821F185D4900EBD019 /* IndividualProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B95E811F185D4900EBD019 /* IndividualProfileViewController.swift */; };
 		A0B95E841F185D6600EBD019 /* OrganizationProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B95E831F185D6600EBD019 /* OrganizationProfileViewController.swift */; };
 		A0B95E861F185D7900EBD019 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B95E851F185D7900EBD019 /* UserProfileViewController.swift */; };
+		A0B95E881F1D8CA800EBD019 /* Pending.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B95E871F1D8CA800EBD019 /* Pending.swift */; };
+		A0B95E8A1F1D94A200EBD019 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B95E891F1D94A200EBD019 /* EditProfileViewController.swift */; };
+		A0B95E8C1F1E782500EBD019 /* OrgEventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B95E8B1F1E782500EBD019 /* OrgEventDetailViewController.swift */; };
 		CC14168D1F16A06800BF2A81 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC14168C1F16A06800BF2A81 /* Event.swift */; };
 		CC14168F1F16A42600BF2A81 /* CreateEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC14168E1F16A42600BF2A81 /* CreateEventViewController.swift */; };
 		CCAF14F61F1835980097C7A3 /* OrgEventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAF14F51F1835980097C7A3 /* OrgEventsViewController.swift */; };
@@ -77,6 +84,10 @@
 		8614832B1F17F2AE00C18917 /* CauseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CauseCell.swift; sourceTree = "<group>"; };
 		8614832D1F18305000C18917 /* Map.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Map.storyboard; sourceTree = "<group>"; };
 		861483311F18425D00C18917 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		A00FB5951F1ED45A0036340D /* OrgCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrgCollectionViewCell.swift; sourceTree = "<group>"; };
+		A00FB5971F1ED46C0036340D /* EventCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCollectionViewCell.swift; sourceTree = "<group>"; };
+		A00FB5991F1ED47B0036340D /* IndCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndCollectionViewCell.swift; sourceTree = "<group>"; };
+		A00FB59B1F1ED7380036340D /* BrowseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseViewController.swift; sourceTree = "<group>"; };
 		A07AD20F1F13FAC500100D69 /* Serve.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Serve.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A07AD2121F13FAC500100D69 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A07AD2171F13FAC500100D69 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -98,6 +109,9 @@
 		A0B95E811F185D4900EBD019 /* IndividualProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndividualProfileViewController.swift; sourceTree = "<group>"; };
 		A0B95E831F185D6600EBD019 /* OrganizationProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrganizationProfileViewController.swift; sourceTree = "<group>"; };
 		A0B95E851F185D7900EBD019 /* UserProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
+		A0B95E871F1D8CA800EBD019 /* Pending.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pending.swift; sourceTree = "<group>"; };
+		A0B95E891F1D94A200EBD019 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
+		A0B95E8B1F1E782500EBD019 /* OrgEventDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrgEventDetailViewController.swift; sourceTree = "<group>"; };
 		CC14168C1F16A06800BF2A81 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		CC14168E1F16A42600BF2A81 /* CreateEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventViewController.swift; sourceTree = "<group>"; };
 		CCAF14F51F1835980097C7A3 /* OrgEventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrgEventsViewController.swift; sourceTree = "<group>"; };
@@ -199,6 +213,11 @@
 				A07AD21B1F13FAC500100D69 /* LaunchScreen.storyboard */,
 				A07AD21E1F13FAC500100D69 /* Info.plist */,
 				A07AD2461F1573BA00100D69 /* PostCell.swift */,
+				8614832B1F17F2AE00C18917 /* CauseCell.swift */,
+				CCD8C2AE1F183A0E00B46AD7 /* EventTableViewCell.swift */,
+				A00FB5951F1ED45A0036340D /* OrgCollectionViewCell.swift */,
+				A00FB5971F1ED46C0036340D /* EventCollectionViewCell.swift */,
+				A00FB5991F1ED47B0036340D /* IndCollectionViewCell.swift */,
 				CCED38841F1D926500A3DD2E /* PendingCell.swift */,
 				8614832B1F17F2AE00C18917 /* CauseCell.swift */,
 				CCD8C2AE1F183A0E00B46AD7 /* EventTableViewCell.swift */,
@@ -239,6 +258,7 @@
 		CCD7557B1F158DF30033FF7A /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				A0B95E8B1F1E782500EBD019 /* OrgEventDetailViewController.swift */,
 				A07AD2401F144AF800100D69 /* LoginViewController.swift */,
 				CC14168E1F16A42600BF2A81 /* CreateEventViewController.swift */,
 				A07AD2421F15408600100D69 /* SignupViewController.swift */,
@@ -248,6 +268,7 @@
 				861483291F17EC2D00C18917 /* OrgLoginViewController.swift */,
 				861483191F16A44A00C18917 /* IndividualLoginViewController.swift */,
 				861483311F18425D00C18917 /* MapViewController.swift */,
+				A0B95E871F1D8CA800EBD019 /* Pending.swift */,
 				A0B95E791F16DB6C00EBD019 /* EventDetailViewController.swift */,
 				CCAF14F51F1835980097C7A3 /* OrgEventsViewController.swift */,
 				CCED38811F1D926500A3DD2E /* OrgEventDetailViewController.swift */,
@@ -256,6 +277,8 @@
 				A0B95E811F185D4900EBD019 /* IndividualProfileViewController.swift */,
 				A0B95E831F185D6600EBD019 /* OrganizationProfileViewController.swift */,
 				A0B95E851F185D7900EBD019 /* UserProfileViewController.swift */,
+				A0B95E891F1D94A200EBD019 /* EditProfileViewController.swift */,
+				A00FB59B1F1ED7380036340D /* BrowseViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -560,10 +583,19 @@
 				CC14168D1F16A06800BF2A81 /* Event.swift in Sources */,
 				CCFB6C221F15DBAC00E59D5C /* EditOrganizationViewController.swift in Sources */,
 				A07AD2411F144AF800100D69 /* LoginViewController.swift in Sources */,
+				A00FB5961F1ED45A0036340D /* OrgCollectionViewCell.swift in Sources */,
 				CCD8C2AF1F183A0E00B46AD7 /* EventTableViewCell.swift in Sources */,
+				A00FB59C1F1ED7380036340D /* BrowseViewController.swift in Sources */,
+				A0B95E8C1F1E782500EBD019 /* OrgEventDetailViewController.swift in Sources */,
 				CCED38881F1D926500A3DD2E /* PendingCell.swift in Sources */,
 				A0B95E861F185D7900EBD019 /* UserProfileViewController.swift in Sources */,
+				A00FB59A1F1ED47B0036340D /* IndCollectionViewCell.swift in Sources */,
 				A07AD2451F156DC000100D69 /* FeedViewController.swift in Sources */,
+				A00FB5981F1ED46C0036340D /* EventCollectionViewCell.swift in Sources */,
+				A0B95E781F15A7A600EBD019 /* Update.swift in Sources */,
+				861483281F17E93200C18917 /* Cause.swift in Sources */,
+				A0B95E881F1D8CA800EBD019 /* Pending.swift in Sources */,
+				A0B95E8A1F1D94A200EBD019 /* EditProfileViewController.swift in Sources */,
 				CCED38851F1D926500A3DD2E /* OrgEventDetailViewController.swift in Sources */,
 				A0B95E781F15A7A600EBD019 /* Update.swift in Sources */,
 				861483281F17E93200C18917 /* Cause.swift in Sources */,

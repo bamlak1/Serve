@@ -1,0 +1,28 @@
+//
+//  MapEventCell.swift
+//  Serve
+//
+//  Created by Olga Andreeva on 7/17/17.
+//  Copyright © 2017 Bamlak Gessessew. All rights reserved.
+//
+
+import UIKit
+
+class MapEventCell: UICollectionViewCell {
+    @IBOutlet weak var eventImage: UIImageView!
+    @IBOutlet weak var orgName: UILabel!
+    @IBOutlet weak var eventName: UILabel!
+    @IBOutlet weak var eventDate: UILabel!
+    
+    @IBInspectable var selectionColor: UIColor = .gray {
+        didSet {
+            configureSelectedBackgroundView()
+        }
+    }
+    
+    func configureSelectedBackgroundView() {
+        let view = UIView()
+        view.backgroundColor = selectionColor
+        selectedBackgroundView = view
+    }
+}
