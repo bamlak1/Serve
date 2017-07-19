@@ -37,7 +37,7 @@ class Post: NSObject {
         
         let post = PFObject(className: "Post")
         
-        post["org"] = PFUser.current()
+        post["user"] = PFUser.current()
         post["action"] = "created event"
         post["event"] = eventCreated
         
