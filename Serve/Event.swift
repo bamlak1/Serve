@@ -40,7 +40,7 @@ class Event: NSObject {
         
         event.saveInBackground(block: completion)
         
-        Post.orgCreatePost(eventCreated: event, title: title, thumbnail: image) { (success: Bool, error: Error?) in
+        Post.orgCreatePost(eventCreated: event, title: title) { (success: Bool, error: Error?) in
             if success {
                 print("createPost created")
             } else {

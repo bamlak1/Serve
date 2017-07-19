@@ -8,6 +8,7 @@
 
 import UIKit
 import TTTAttributedLabel
+import Parse
 
 
 class PostCell: UITableViewCell {
@@ -23,7 +24,16 @@ class PostCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     
     @IBOutlet weak var actionLabel: UILabel!
+    
+    var event : PFObject?
+    var user: PFUser?
 
+    @IBOutlet weak var eventButtonOutlet: UIButton!
+    @IBAction func eventLabelPressed(_ sender: Any) {
+        
+        
+    }
+ 
     
     override func awakeFromNib() {
         super.awakeFromNib()
