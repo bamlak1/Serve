@@ -68,7 +68,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         query.findObjectsInBackground { (updates: [PFObject]?, error: Error?) in
             if let updates = updates {
                 self.updates = updates
-                print(self.updates)
+                print("Loaded updates")
                 self.tableView.reloadData()
                 self.refreshControl.endRefreshing()
                 
@@ -126,20 +126,27 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell") as! PostCell
         
         let update = updates[indexPath.row]
+        let org = update["org"] as! PFObject
+        //print(org)
+        let event = update["event"] as! PFObject
+        let orgName = org["username"] as! String
+        let eventTitle = event["title"] as! String
         let action = update["action"] as! String
         
+        if let profileImage = org["profile_image"] as? PFFile{
+            profileImage.getDataInBackground { (data: Data?, error: Error?) in
+                if error != nil {
+                    print(error?.localizedDescription ?? "error")
+                } else {
+                    let finalImage = UIImage(data: data!)
+                    cell.profilePicImageView.image = finalImage
+                }
+            }
+        }
         
-        
-        
-        cell.nameLabel.text = action
-        
-        
-        
-//        if let profPic = user["portrait"] as? PFFile {
-//            profPic.getDataInBackground { (imageData: Data!, error: Error?) in
-//                cell.profileViewer.image = UIImage(data:imageData)
-//            }
-//        }
+        cell.nameLabel.text = orgName
+        cell.actionLabel.text = action
+        cell.eventLabel.text = eventTitle
         
         return cell
     }
