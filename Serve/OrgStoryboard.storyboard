@@ -22,31 +22,93 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Event Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qre-mL-Ryp">
-                                <rect key="frame" x="157" y="105" width="176" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n33-KP-Qg3">
-                                <rect key="frame" x="243" y="569" width="90" height="30"/>
+                                <rect key="frame" x="269" y="580" width="90" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="temp sign up"/>
                                 <connections>
                                     <action selector="signUpPressed:" destination="tZa-Zn-N20" eventType="touchUpInside" id="4x4-Zd-eNx"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Event Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qre-mL-Ryp">
+                                <rect key="frame" x="16" y="200" width="343" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Organization" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EJw-jV-VTW">
+                                <rect key="frame" x="16" y="221" width="343" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Start - End" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L0O-3W-DcV">
+                                <rect key="frame" x="16" y="241" width="343" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Location" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3hU-Hc-exH">
+                                <rect key="frame" x="16" y="262" width="343" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Description..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NsN-4V-g4i">
+                                <rect key="frame" x="16" y="281" width="343" height="75"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="# of Volunteers" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gPr-oP-VEL">
+                                <rect key="frame" x="16" y="364" width="343" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="# of Pending Approvals" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AFR-Gh-rp4">
+                                <rect key="frame" x="16" y="387" width="343" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YmV-dZ-bYi">
+                                <rect key="frame" x="0.0" y="64" width="375" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Volunteer Expected Tasks..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="49Z-oo-uzN">
+                                <rect key="frame" x="16" y="416" width="343" height="75"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="bannerImageView" destination="YmV-dZ-bYi" id="hQK-rI-7tA"/>
+                        <outlet property="dateLabel" destination="L0O-3W-DcV" id="0YF-9N-QXa"/>
+                        <outlet property="descriptionLabel" destination="NsN-4V-g4i" id="lbH-1Q-VDr"/>
+                        <outlet property="expectedTasksLabel" destination="49Z-oo-uzN" id="ehK-Ai-AuP"/>
+                        <outlet property="locationLabel" destination="3hU-Hc-exH" id="RIL-Yv-PYb"/>
+                        <outlet property="orgLabel" destination="EJw-jV-VTW" id="7uF-EF-g7c"/>
+                        <outlet property="pendingLabel" destination="AFR-Gh-rp4" id="zgt-wC-eM2"/>
                         <outlet property="titleLabel" destination="qre-mL-Ryp" id="VsT-8b-xk7"/>
+                        <outlet property="volunteerLabel" destination="gPr-oP-VEL" id="FeO-Iv-38P"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gH9-Vb-mwe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4070" y="-913"/>
+            <point key="canvasLocation" x="4069.5999999999999" y="-913.49325337331345"/>
         </scene>
         <!--Events-->
         <scene sceneID="no2-NZ-Z6K">
@@ -286,7 +348,7 @@
             </objects>
             <point key="canvasLocation" x="4973.6000000000004" y="-192.05397301349328"/>
         </scene>
-        <!--Organization View Controller-->
+        <!--Organization-->
         <scene sceneID="mWb-V8-m2K">
             <objects>
                 <viewController id="9jP-Tf-ru3" customClass="OrganizationViewController" customModule="Serve" customModuleProvider="target" sceneMemberID="viewController">
@@ -432,7 +494,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="R2u-6N-9OO"/>
+                    <navigationItem key="navigationItem" title="Organization" id="R2u-6N-9OO"/>
                     <connections>
                         <outlet property="bannerImageView" destination="m8q-SW-G2U" id="AU7-gD-bnf"/>
                         <outlet property="contactLabel" destination="nXB-tL-LoF" id="Mse-cJ-ufA"/>
@@ -520,7 +582,7 @@
             </objects>
             <point key="canvasLocation" x="4973.6000000000004" y="545.57721139430294"/>
         </scene>
-        <!--Pending Approvals View Controller-->
+        <!--Pending Approvals-->
         <scene sceneID="5sP-ey-rxV">
             <objects>
                 <viewController id="MVB-YZ-18e" customClass="PendingApprovalsViewController" customModule="Serve" customModuleProvider="target" sceneMemberID="viewController">
@@ -580,7 +642,7 @@
                             </tableViewCell>
                         </prototypes>
                     </tableView>
-                    <navigationItem key="navigationItem" id="0Ka-hP-dsW"/>
+                    <navigationItem key="navigationItem" title="Pending Approvals" id="0Ka-hP-dsW"/>
                     <connections>
                         <outlet property="tableView" destination="tNn-pB-fCx" id="ZgC-PH-gzt"/>
                     </connections>
