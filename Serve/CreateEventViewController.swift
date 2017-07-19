@@ -25,13 +25,15 @@ class CreateEventViewController: UIViewController, UIImagePickerControllerDelega
     @IBOutlet weak var locationButton: UIButton!
     @IBOutlet weak var locationLabel: UILabel!
     
+    var startDate: NSDate?
+    
     
 //    let formatter = DateFormatter()
 //    formatter.dateFormat = "MM/dd/YYYY hh:mm aa"
 //    let date = Date()
 //    startLabel.text = formatter.string(from: date)
 //    endLabel.text = formatter.string(from: date)
-//    
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,6 +75,7 @@ class CreateEventViewController: UIViewController, UIImagePickerControllerDelega
     @IBAction func startDatePressed(_ sender: Any) {
         let picker = showDatePicker()
         picker.completionHandler = { date in
+            self.startDate = date as! NSDate
             let formatter = DateFormatter()
             formatter.dateFormat = "MM/dd/YYYY hh:mm aa"
             self.startLabel.text = formatter.string(from: date)
@@ -114,7 +117,7 @@ class CreateEventViewController: UIViewController, UIImagePickerControllerDelega
     
     @IBAction func publishPressed(_ sender: Any) {
         print("publishEvent pressed")
-        Event.postEvent(image: bannerImageView.image, title: titletextField.text, description: descriptionTextView.text, location: locationLabel.text, start: startLabel.text, end: endLabel.text, jobs: expectedTasksTextView.text) { (success: Bool, error: Error?) in
+        Event.postEvent(image: bannerImageView.image, title: titletextField.text, description: descriptionTextView.text, location: locationLabel.text, startDate: startDate, start: startLabel.text, end: endLabel.text, jobs: expectedTasksTextView.text) { (success: Bool, error: Error?) in
             if success {
                 print("Event created")
             } else {
@@ -140,6 +143,9 @@ class CreateEventViewController: UIViewController, UIImagePickerControllerDelega
         dismiss(animated: true , completion: nil)
     }
     
+    @IBAction func cancelPressed(_ sender: Any) {
+        dismiss(animated: true , completion: nil)
+    }
 
 
     /*

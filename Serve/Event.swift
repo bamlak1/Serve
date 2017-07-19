@@ -14,7 +14,7 @@ import SwiftDate
 
 class Event: NSObject {
     
-    class func postEvent(image: UIImage?, title: String?, description: String?, location: String?, start: String?,end: String?, jobs: String, withCompletion completion: PFBooleanResultBlock?) {
+    class func postEvent(image: UIImage?, title: String?, description: String?, location: String?, startDate: NSDate?, start: String?,end: String?, jobs: String, withCompletion completion: PFBooleanResultBlock?) {
         
         let event = PFObject(className: "Event")
         
@@ -25,6 +25,7 @@ class Event: NSObject {
         event["author"] = PFUser.current()
         event["location"] = location
         event["start"] = start
+        event["start_date"] = startDate
         event["end"] = end
         event["completed"] = false
         event["hiring"] = true

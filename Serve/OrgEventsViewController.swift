@@ -118,10 +118,12 @@ class OrgEventsViewController: UIViewController, UITableViewDataSource, UITableV
         let org = PFUser.current()
         let id = org!.objectId!
         
+        let date = Date()
         
         let query = PFQuery(className: "Event")
         query.whereKey("authorId", equalTo: id)
-        query.whereKey("completed", equalTo: false)
+        //query.whereKey("completed", equalTo: false)
+        query.whereKey("start_date", greaterThan: date)
         //TODO: Sort by having closest event at the top
         query.order(byDescending: "createdAt")
         query.includeKey("author")
@@ -144,10 +146,11 @@ class OrgEventsViewController: UIViewController, UITableViewDataSource, UITableV
         let org = PFUser.current()
         let id = org!.objectId!
         
+        let date = Date()
         
         let query = PFQuery(className: "Event")
         query.whereKey("authorId", equalTo: id)
-        query.whereKey("completed", equalTo: true)
+        query.whereKey("start_date", lessThan: date)
         //TODO: Sort by having closest event at the top
         query.order(byDescending: "createdAt")
         query.includeKey("author")
