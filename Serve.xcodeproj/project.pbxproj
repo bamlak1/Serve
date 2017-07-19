@@ -206,8 +206,8 @@
 				CCD7557C1F158DFE0033FF7A /* Models */,
 				CCD7557B1F158DF30033FF7A /* ViewControllers */,
 				CCD7557A1F158C7E0033FF7A /* Storyboards */,
-				CC2453811F20172D00D765E5 /* Support */,
 				CC2453821F20174900D765E5 /* Views */,
+				CC2453811F20172D00D765E5 /* Support */,
 			);
 			path = Serve;
 			sourceTree = "<group>";
