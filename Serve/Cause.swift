@@ -5,7 +5,6 @@
 //  Created by Olga Andreeva on 7/13/17.
 //  Copyright © 2017 Bamlak Gessessew. All rights reserved.
 //
-
 import Foundation
 
 class Cause {
