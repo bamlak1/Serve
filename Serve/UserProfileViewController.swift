@@ -206,6 +206,20 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
         }
         profileTableView.reloadData()
     }
+    
+    @IBAction func logOutPressed(_ sender: Any) {
+        PFUser.logOutInBackground { (error: Error?) in
+            if let error = error{
+                print(error.localizedDescription)
+            } else {
+                print("logout succesful")
+                //PFUser.logOutInBackground()
+                let main = UIStoryboard(name: "Main", bundle: nil)
+                let logInScreen = main.instantiateInitialViewController()
+                self.present(logInScreen!, animated: true, completion: nil)
+            }
+        }
+    }
     /*
      // MARK: - Navigation
      

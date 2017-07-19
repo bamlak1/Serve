@@ -26,6 +26,7 @@ class CreateEventViewController: UIViewController, UIImagePickerControllerDelega
     @IBOutlet weak var locationLabel: UILabel!
     
     var startDate: NSDate?
+    var endDate: NSDate?
     
     
 //    let formatter = DateFormatter()
@@ -86,6 +87,7 @@ class CreateEventViewController: UIViewController, UIImagePickerControllerDelega
     @IBAction func endDatePressed(_ sender: Any) {
         let picker = showDatePicker()
         picker.completionHandler = { date in
+            self.endDate = date as! NSDate
             let formatter = DateFormatter()
             formatter.dateFormat = "MM/dd/YYYY hh:mm aa"
             self.endLabel.text = formatter.string(from: date)
@@ -117,7 +119,7 @@ class CreateEventViewController: UIViewController, UIImagePickerControllerDelega
     
     @IBAction func publishPressed(_ sender: Any) {
         print("publishEvent pressed")
-        Event.postEvent(image: bannerImageView.image, title: titletextField.text, description: descriptionTextView.text, location: locationLabel.text, startDate: startDate, start: startLabel.text, end: endLabel.text, jobs: expectedTasksTextView.text) { (success: Bool, error: Error?) in
+        Event.postEvent(image: bannerImageView.image, title: titletextField.text, description: descriptionTextView.text, location: locationLabel.text, startDate: startDate, start: startLabel.text, endDate: endDate, end: endLabel.text, jobs: expectedTasksTextView.text) { (success: Bool, error: Error?) in
             if success {
                 print("Event created")
             } else {
