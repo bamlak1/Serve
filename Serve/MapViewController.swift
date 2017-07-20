@@ -19,6 +19,7 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
     var resultsArray = [String]()
     var returnedEvents: [PFObject] = []
     var markers: [GMSMarker] = []
+    var previousMarker: GMSMarker!
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var collectionView: UICollectionView!
     var markerNum = 1
@@ -37,6 +38,15 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
         collectionView.backgroundColor = UIColor.clear
         searchResultController = SearchResultsViewController()
         searchResultController.delegate = self
+    }
+    
+    @IBAction func showSettings(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Map", bundle: nil)
+        let popOverVC = storyboard.instantiateViewController(withIdentifier: "popUpStoryboard") as! PopUpViewController
+        self.addChildViewController(popOverVC)
+        popOverVC.view.frame = self.view.frame
+        self.view.addSubview(popOverVC.view)
+        popOverVC.didMove(toParentViewController: self)
     }
 
     @IBAction func showSearchController(_ sender: Any) {
@@ -66,6 +76,7 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
         cell.eventName.text = eventData["title"] as? String
         cell.eventDate.text = (eventData["start"] as? String)! + " - " + (eventData["end"] as? String)!
         cell.orgName.text = eventData["author"] as? String
+        cell.location.text = eventData["location"] as? String
         cell.backgroundColor = UIColor(red:1.00, green:1.00, blue:1.00, alpha:0.9)
         cell.layer.borderWidth = 3.0
         if cell.isSelected {
@@ -85,16 +96,19 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
             selectedIndexPath = IndexPath(row: index - 1, section: 0)
             self.collectionView.scrollToItem(at: selectedIndexPath, at: .right, animated: true)
             self.collectionView.selectItem(at: selectedIndexPath, animated: true, scrollPosition: .right)
+            marker.icon = GMSMarker.markerImage(with: UIColor.green)
+            updateColors(currentMarker: marker)
+            previousMarker = marker
         }
         return true
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let currentMarker = markers[indexPath.row + 1]
+        let marker = markers[indexPath.row + 1]
         if let cell = collectionView.cellForItem(at: indexPath) {
             cell.layer.borderColor = UIColor(red:0.34, green:0.71, blue:1.00, alpha:1.0).cgColor
-            currentMarker.icon = GMSMarker.markerImage(with: UIColor.yellow)
-            mapView.animate(toLocation: CLLocationCoordinate2D(latitude: currentMarker.position.latitude, longitude: currentMarker.position.longitude))
+            updateColors(currentMarker: marker)
+            previousMarker = marker
         }
         
         if selectedIndexPath != nil {
@@ -107,6 +121,14 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
             markers[selectedIndexPath.row + 1].icon = GMSMarker.markerImage(with: UIColor(red:0.34, green:0.71, blue:1.00, alpha:1.0))
         }
         selectedIndexPath = indexPath
+    }
+    
+    func updateColors(currentMarker: GMSMarker) {
+        if (previousMarker != nil && previousMarker != currentMarker) {
+            mapView.animate(toLocation: CLLocationCoordinate2D(latitude: currentMarker.position.latitude, longitude: currentMarker.position.longitude))
+            previousMarker.icon = GMSMarker.markerImage(with: UIColor(red:0.34, green:0.71, blue:1.00, alpha:1.0))
+            currentMarker.icon = GMSMarker.markerImage(with: UIColor.green)
+        }
     }
     
     // Using the user's manually inputed address, geocodes it, centers the map feed to that location, and then creates a marker for it
