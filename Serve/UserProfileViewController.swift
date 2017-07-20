@@ -23,9 +23,9 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
     
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     
-    var user: PFUser!
-    var followingCount: Int = 0
-    var friendsCount: Int = 0
+    var user: PFUser?
+    //var followingCount: Int = 0
+    //var friendsCount: Int = 0
     var userPosts: [PFObject] = []
     var userPastPosts: [PFObject] = []
     var newProfPic: UIImage?
@@ -39,32 +39,53 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
         profileTableView.delegate = self
         
         
+        
+        loadUserData()
+    }
+    
+
+    func loadUserData() {
         user = PFUser.current()
-        if let username = user?["username"] {
+        
+        if let username = user!["username"] {
             nameLabel.text = (username as! String)
         }
         
-        if let interests = user?["interests"] {
+        if let interests = user!["interests"] {
             interestsLabel.text = (interests as! String)
         }
-        if let friendsCount = user?["friendsCount"] {
+        if let friendsCount = user!["friendsCount"] {
             friendsCountLabel.text = (friendsCount as! String)
         }
-        if let followingCount = user?["followingCount"] {
+        if let followingCount = user!["followingCount"] {
             followingCountLabel.text = (followingCount as! String)
         }
-//        if(newProfPic != nil){
-//            profilePicImageView.image = newProfPic
-//            return something about profilePicImageView
-//        }
-        //let profpicURL = user[] find out how to reference
-        //profilePicImageView.af_setImage(withURL: profpicURL!)
+        
+        if let banner = user!["banner"] as? PFFile {
+            banner.getDataInBackground(block: { (data: Data?, error: Error?) in
+                if (error != nil) {
+                    print(error?.localizedDescription ?? "error")
+                } else {
+                    let finalImage = UIImage(data: data!)
+                    self.bannerImageView.image = finalImage
+                }
+            })
+        }
+        
+        if let profileImage = user!["profile_image"] as? PFFile {
+            profileImage.getDataInBackground(block: { (data: Data?, error: Error?) in
+                if (error != nil) {
+                    print(error?.localizedDescription ?? "error")
+                } else {
+                    let finalImage = UIImage(data: data!)
+                    self.profilePicImageView.image = finalImage
+                }
+            })
+        }
         
         profilePicImageView.layer.cornerRadius = profilePicImageView.frame.size.width / 2;
         profilePicImageView.clipsToBounds = true;
-        
         loadData()
-    
     }
     
     func loadData() {
@@ -85,7 +106,7 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
     
     
     @IBAction func indexChanged(_ sender: UISegmentedControl) {
-        loadData()
+        loadUserData()
     }
     
     

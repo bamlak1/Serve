@@ -22,11 +22,10 @@ class PendingCell: UITableViewCell {
     
     @IBAction func yesPressed(_ sender: Any) {
         event.addUniqueObject(user, forKey: "accepted_users")
-        user.addUniqueObject(event, forKey: "accepted_events")
+        event.incrementKey("volunteers")
         request["completed"] = true
         
         event.saveInBackground()
-        user.saveInBackground()
         request.saveInBackground()
         
         print("accepted")

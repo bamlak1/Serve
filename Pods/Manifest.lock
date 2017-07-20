@@ -1,4 +1,5 @@
 PODS:
+  - AFNetworking (0.9.0)
   - Alamofire (4.5.0)
   - AlamofireImage (3.2.0):
     - Alamofire (~> 4.1)
@@ -33,6 +34,7 @@ PODS:
   - TTTAttributedLabel (2.0.0)
 
 DEPENDENCIES:
+  - AFNetworking (= 0.9)
   - Alamofire (~> 4.4)
   - AlamofireImage (~> 3.1)
   - DateTimePicker
@@ -50,6 +52,7 @@ DEPENDENCIES:
   - TTTAttributedLabel
 
 SPEC CHECKSUMS:
+  AFNetworking: 4eca970d4c3ee62d7efe4240da2a9352df31d1e2
   Alamofire: f28cdffd29de33a7bfa022cbd63ae95a27fae140
   AlamofireImage: 157ed682cc81d3b9db4fb90c1f12180ac552d93b
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
@@ -67,6 +70,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
 
-PODFILE CHECKSUM: 1b3c4a3277f0fff5abd8a77c1cd032f05929e762
+PODFILE CHECKSUM: e06cead8b013f39ea15f02e04a228391306e0f45
 
 COCOAPODS: 1.2.1
