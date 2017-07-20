@@ -10,7 +10,7 @@ import UIKit
 import Parse
 
 
-class UserProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class UserProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var bannerImageView: UIImageView!
     @IBOutlet weak var profilePicImageView: UIImageView!
@@ -28,8 +28,6 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
     //var friendsCount: Int = 0
     var userPosts: [PFObject] = []
     var userPastPosts: [PFObject] = []
-    var newProfPic: UIImage?
-    
     
     
     override func viewDidLoad() {
@@ -85,18 +83,8 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
         
         profilePicImageView.layer.cornerRadius = profilePicImageView.frame.size.width / 2;
         profilePicImageView.clipsToBounds = true;
-        loadData()
-    }
-    
-    func loadData() {
-        switch segmentedControl.selectedSegmentIndex {
-        case 0:
-            fetchUserUpdates()
-        case 1:
-            fetchPastUserUpdates()
-        default:
-            profileTableView.reloadData()
-        }
+
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -235,58 +223,7 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
         profileTableView.reloadData()
     }
     
-    func imagePickerController(_ picker: UIImagePickerController,
-                               didFinishPickingMediaWithInfo info: [String : Any]) {
-        // Get the image captured by the UIImagePickerController
-        let originalImage = info[UIImagePickerControllerOriginalImage] as! UIImage
-        let editedImage = info[UIImagePickerControllerEditedImage] as! UIImage
-        
-        // Do something with the images (based on your use case)
-        newProfPic = editedImage
-        
-        // Dismiss UIImagePickerController to go back to your original view controller
-        dismiss(animated: true, completion: nil)
-    }
-    
-    
-    @IBAction func didPressProfilePic(_ sender: Any) {
-        choosePhoto()
-        
-    }
-    
-    func choosePhoto() {
-        // Instantiate a UIImagePickerController
-        let vc = UIImagePickerController()
-        vc.delegate = self
-        vc.allowsEditing = true
-        vc.sourceType = UIImagePickerControllerSourceType.photoLibrary
-        
-        // Check that the camera is indeed supported on the device before trying to present it
-        if UIImagePickerController.isSourceTypeAvailable(.camera) {
-            print("Camera is available 📸")
-            vc.sourceType = .camera
-        } else {
-            print("Camera 🚫 available so we will use photo library instead")
-            vc.sourceType = .photoLibrary
-        }
-        
-        // Present the camera or photo library
-        self.present(vc, animated: true, completion: nil)
-    }
-    
-    @IBAction func logOutPressed(_ sender: Any) {
-        PFUser.logOutInBackground { (error: Error?) in
-            if let error = error{
-                print(error.localizedDescription)
-            } else {
-                print("logout succesful")
-                //PFUser.logOutInBackground()
-                let main = UIStoryboard(name: "Main", bundle: nil)
-                let logInScreen = main.instantiateInitialViewController()
-                self.present(logInScreen!, animated: true, completion: nil)
-            }
-        }
-    }
+
     /*
      // MARK: - Navigation
      
