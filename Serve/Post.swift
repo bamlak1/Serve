@@ -2,11 +2,11 @@
 //  Update.swift
 //  Serve
 //
-//  Created by Bamlak Gessessew on 7/19/17.
+//  Created by Bamlak Gessessew on 7/11/17.
 //  Copyright © 2017 Bamlak Gessessew. All rights reserved.
 //
-import Foundation
 
+import Foundation
 import Parse
 
 
@@ -52,7 +52,7 @@ class Post: NSObject {
         post["action"] = "created event"
         post["event"] = eventCreated
         
-        
+
         post.saveInBackground(block: completion)
     }
     
@@ -85,4 +85,3 @@ class Post: NSObject {
     
     
 }
-
