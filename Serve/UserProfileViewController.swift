@@ -10,7 +10,7 @@ import UIKit
 import Parse
 
 
-class UserProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class UserProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet weak var bannerImageView: UIImageView!
     @IBOutlet weak var profilePicImageView: UIImageView!
@@ -28,6 +28,8 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
     var friendsCount: Int = 0
     var userPosts: [PFObject] = []
     var userPastPosts: [PFObject] = []
+    var newProfPic: UIImage?
+    
     
     
     override func viewDidLoad() {
@@ -51,6 +53,10 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
         if let followingCount = user?["followingCount"] {
             followingCountLabel.text = (followingCount as! String)
         }
+//        if(newProfPic != nil){
+//            profilePicImageView.image = newProfPic
+//            return something about profilePicImageView
+//        }
         //let profpicURL = user[] find out how to reference
         //profilePicImageView.af_setImage(withURL: profpicURL!)
         
@@ -58,6 +64,7 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
         profilePicImageView.clipsToBounds = true;
         
         loadData()
+    
     }
     
     func loadData() {
@@ -205,6 +212,45 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
             }
         }
         profileTableView.reloadData()
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [String : Any]) {
+        // Get the image captured by the UIImagePickerController
+        let originalImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+        let editedImage = info[UIImagePickerControllerEditedImage] as! UIImage
+        
+        // Do something with the images (based on your use case)
+        newProfPic = editedImage
+        
+        // Dismiss UIImagePickerController to go back to your original view controller
+        dismiss(animated: true, completion: nil)
+    }
+    
+    
+    @IBAction func didPressProfilePic(_ sender: Any) {
+        choosePhoto()
+        
+    }
+    
+    func choosePhoto() {
+        // Instantiate a UIImagePickerController
+        let vc = UIImagePickerController()
+        vc.delegate = self
+        vc.allowsEditing = true
+        vc.sourceType = UIImagePickerControllerSourceType.photoLibrary
+        
+        // Check that the camera is indeed supported on the device before trying to present it
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            print("Camera is available 📸")
+            vc.sourceType = .camera
+        } else {
+            print("Camera 🚫 available so we will use photo library instead")
+            vc.sourceType = .photoLibrary
+        }
+        
+        // Present the camera or photo library
+        self.present(vc, animated: true, completion: nil)
     }
     
     @IBAction func logOutPressed(_ sender: Any) {

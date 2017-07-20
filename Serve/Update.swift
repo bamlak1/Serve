@@ -6,8 +6,7 @@
 //  Copyright © 2017 Bamlak Gessessew. All rights reserved.
 //
 import Foundation
-<<<<<<< HEAD
-=======
+
 import Parse
 
 
@@ -86,4 +85,4 @@ class Post: NSObject {
     
     
 }
->>>>>>> 016be7ae45f8fd900d3e7b9a1871bad37f190cc2
+
