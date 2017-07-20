@@ -227,20 +227,7 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
         }
     }
     
-    func locateWithLongitude(lon: Double,lat: Double, title: String) {
-        
-        DispatchQueue.main.async() { () -> Void in
-            let position = CLLocationCoordinate2DMake(lat, lon)
-            let marker = GMSMarker(position: position)
-            
-            let camera  = GMSCameraPosition.camera(withLatitude: lat, longitude: lon, zoom: 10)
-            self.mapView.camera = camera
-            
-            marker.title = title
-            marker.map = self.mapView
-        }
-    }
-    
+    // Based on what has been typed into the search bar, dynamically updates the results in the table view
     func searchBar(_ searchBar: UISearchBar,
                    textDidChange searchText: String){
         let placesClient = GMSPlacesClient()
@@ -257,7 +244,6 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
             self.searchResultController.reloadDataWithArray(array: self.resultsArray)
         }
     }
-    
 
     /*
     // MARK: - Navigation
