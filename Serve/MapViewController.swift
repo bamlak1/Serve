@@ -8,25 +8,41 @@
 
 import UIKit
 import GoogleMaps
+import GooglePlaces
 import Parse
 import SwiftyJSON
 
-class MapViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, GMSMapViewDelegate {
+class MapViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, GMSMapViewDelegate, UISearchBarDelegate, LocateOnTheMap {
+    
     var key = "AIzaSyBCmydPROEO4zxGSnoB02DjRwIpejPgZjA"
+    var searchResultController: SearchResultsViewController!
+    var resultsArray = [String]()
     var returnedEvents: [PFObject] = []
     var markers: [GMSMarker] = []
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var collectionView: UICollectionView!
     var markerNum = 1
     var selectedIndexPath: IndexPath!
+    @IBOutlet weak var searchBar: UISearchBar!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
         fetchUserLocation()
         fetchEventLocations()
         mapView.delegate = self
         collectionView.allowsMultipleSelection = false
         collectionView.backgroundColor = UIColor.clear
+        searchResultController = SearchResultsViewController()
+        searchResultController.delegate = self
+    }
+
+    @IBAction func showSearchController(_ sender: Any) {
+        let searchController = UISearchController(searchResultsController: searchResultController)
+        searchController.searchBar.delegate = self
+        self.present(searchController, animated: true, completion: nil)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -65,7 +81,6 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
     // Uses each marker's associated number to scroll to that event cell in the CollectionView
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
         let index: Int = (marker.userData as! Dictionary)["number"]!
-        print(index)
         if (index != 0) {
             selectedIndexPath = IndexPath(row: index - 1, section: 0)
             self.collectionView.scrollToItem(at: selectedIndexPath, at: .right, animated: true)
@@ -212,6 +227,23 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
         }
     }
     
+    // Based on what has been typed into the search bar, dynamically updates the results in the table view
+    func searchBar(_ searchBar: UISearchBar,
+                   textDidChange searchText: String){
+        let placesClient = GMSPlacesClient()
+        placesClient.autocompleteQuery(searchText, bounds: nil, filter: nil) { (results, error:Error?) -> Void in
+            self.resultsArray.removeAll()
+            if results == nil {
+                return
+            }
+            for result in results!{
+                if let result = result as? GMSAutocompletePrediction{
+                    self.resultsArray.append(result.attributedFullText.string)
+                }
+            }
+            self.searchResultController.reloadDataWithArray(array: self.resultsArray)
+        }
+    }
 
     /*
     // MARK: - Navigation
