@@ -1,4 +1,4 @@
-
+//
 //  BrowseViewController.swift
 //  Serve
 //
@@ -36,18 +36,18 @@ class BrowseViewController: UIViewController, UICollectionViewDataSource, UIColl
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell1 = collectionView.dequeueReusableCell(withReuseIdentifier: "OrgCollectionViewCell", for: indexPath) as! OrgCollectionViewCell
-//        
-//        let cell2 = collectionView.dequeueReusableCell(withReuseIdentifier: "EventCollectionViewCell", for: indexPath) as! EventCollectionViewCell
-//        
-//        let cell3 = collectionView.dequeueReusableCell(withReuseIdentifier: "IndCollectionViewCell", for: indexPath) as! IndCollectionViewCell
+        
+        let cell2 = collectionView.dequeueReusableCell(withReuseIdentifier: "EventCollectionViewCell", for: indexPath) as! EventCollectionViewCell
+        
+        let cell3 = collectionView.dequeueReusableCell(withReuseIdentifier: "IndCollectionViewCell", for: indexPath) as! IndCollectionViewCell
         
         cell1.nameLabel.text = names[1]
-//        cell2.nameLabel.text = names[2]
-//        cell3.nameLabel.text = names[3]
+        cell2.nameLabel.text = names[2]
+        cell3.nameLabel.text = names[3]
         
         return cell1
-//        return cell3
-//        return cell2
+        return cell3
+        return cell2
         
     }
     
