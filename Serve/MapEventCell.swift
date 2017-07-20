@@ -12,6 +12,7 @@ class MapEventCell: UICollectionViewCell {
     @IBOutlet weak var orgName: UILabel!
     @IBOutlet weak var eventName: UILabel!
     @IBOutlet weak var eventDate: UILabel!
+    @IBOutlet weak var location: UILabel!
     
     @IBInspectable var selectionColor: CGColor! {
         didSet {
