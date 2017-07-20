@@ -145,6 +145,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
         }
         
+        cell.nameButtonOutlet.tag = indexPath.row
         cell.eventButtonOutlet.tag = indexPath.row
         cell.nameLabel.text = orgName
         cell.actionLabel.text = action

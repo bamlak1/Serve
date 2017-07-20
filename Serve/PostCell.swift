@@ -29,10 +29,10 @@ class PostCell: UITableViewCell {
     var user: PFUser?
 
     @IBOutlet weak var eventButtonOutlet: UIButton!
-    @IBAction func eventLabelPressed(_ sender: Any) {
-        
-        
-    }
+
+    @IBOutlet weak var nameButtonOutlet: UIButton!
+    
+    
  
     
     override func awakeFromNib() {
