@@ -10,7 +10,8 @@ import UIKit
 import Parse
 
 class OrgLoginViewController: UIViewController, UICollectionViewDataSource {
-    var causes = [Cause]()
+    
+    var causes : [PFObject] = []
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var organizationName: UITextField!
@@ -56,7 +57,23 @@ class OrgLoginViewController: UIViewController, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CauseCell", for: indexPath) as! CauseCell
-        cell.cause = causes[indexPath.item]
+        let cause = causes[indexPath.item]
+        cell.cause = cause
+        let name = cause["name"] as! String
+        
+        if let image = cause["image"] as? PFFile {
+            image.getDataInBackground { (data: Data?, error: Error?) in
+                if error != nil {
+                    print(error?.localizedDescription ?? "error")
+                } else {
+                    let finalImage = UIImage(data: data!)
+                    cell.causeImageView.image = finalImage
+                }
+            }
+        }
+        
+        cell.causeName.text = name
+        
         if cell.isSelected == true {
             cell.backgroundColor = UIColor.orange
         } else {
@@ -67,15 +84,26 @@ class OrgLoginViewController: UIViewController, UICollectionViewDataSource {
 
     // Initializes different cause categories with a name and icon URL and adds them to the causes array
     func fetchTopCauses() {
-        causes.append(Cause(name: "Children", iconUrl: NSURL(string: "https://cdns.iconmonstr.com/wp-content/assets/preview/2016/240/iconmonstr-generation-4.png")! as URL))
-        causes.append(Cause(name: "Education", iconUrl: NSURL(string: "https://cdns.iconmonstr.com/wp-content/assets/preview/2017/240/iconmonstr-education-1.png")! as URL))
-        causes.append(Cause(name: "Health", iconUrl: NSURL(string: "https://cdns.iconmonstr.com/wp-content/assets/preview/2012/240/iconmonstr-favorite-3.png")! as URL))
-        causes.append(Cause(name: "Arts & Culture", iconUrl: NSURL(string: "https://cdns.iconmonstr.com/wp-content/assets/preview/2017/240/iconmonstr-bank-1.png")! as URL))
-        causes.append(Cause(name: "Seniors", iconUrl: NSURL(string: "https://cdns.iconmonstr.com/wp-content/assets/preview/2016/240/iconmonstr-generation-16.png")! as URL))
-        causes.append(Cause(name: "Human Rights", iconUrl: NSURL(string: "https://cdns.iconmonstr.com/wp-content/assets/preview/2012/240/iconmonstr-globe-5.png")! as URL))
-        causes.append(Cause(name: "Homeless Outreach", iconUrl: NSURL(string: "https://cdns.iconmonstr.com/wp-content/assets/preview/2012/240/iconmonstr-home-10.png")! as URL))
-        causes.append(Cause(name: "LGBT", iconUrl: NSURL(string: "https://cdns.iconmonstr.com/wp-content/assets/preview/2013/240/iconmonstr-flag-3.png")! as URL))
-        causes.append(Cause(name: "Other", iconUrl: NSURL(string: "https://cdns.iconmonstr.com/wp-content/assets/preview/2012/240/iconmonstr-help-3.png")! as URL))
+        let query = PFQuery(className: "Cause")
+        
+        query.findObjectsInBackground { (causes: [PFObject]?, error: Error?) in
+            self.causes = causes!
+            self.collectionView.reloadData()
+        }
+        
+        
+        
+        
+        
+//        causes.append(Cause(name: "Children", iconUrl: NSURL(string: "https://cdns.iconmonstr.com/wp-content/assets/preview/2016/240/iconmonstr-generation-4.png")! as URL))
+//        causes.append(Cause(name: "Education", iconUrl: NSURL(string: "https://cdns.iconmonstr.com/wp-content/assets/preview/2017/240/iconmonstr-education-1.png")! as URL))
+//        causes.append(Cause(name: "Health", iconUrl: NSURL(string: "https://cdns.iconmonstr.com/wp-content/assets/preview/2012/240/iconmonstr-favorite-3.png")! as URL))
+//        causes.append(Cause(name: "Arts & Culture", iconUrl: NSURL(string: "https://cdns.iconmonstr.com/wp-content/assets/preview/2017/240/iconmonstr-bank-1.png")! as URL))
+//        causes.append(Cause(name: "Seniors", iconUrl: NSURL(string: "https://cdns.iconmonstr.com/wp-content/assets/preview/2016/240/iconmonstr-generation-16.png")! as URL))
+//        causes.append(Cause(name: "Human Rights", iconUrl: NSURL(string: "https://cdns.iconmonstr.com/wp-content/assets/preview/2012/240/iconmonstr-globe-5.png")! as URL))
+//        causes.append(Cause(name: "Homeless Outreach", iconUrl: NSURL(string: "https://cdns.iconmonstr.com/wp-content/assets/preview/2012/240/iconmonstr-home-10.png")! as URL))
+//        causes.append(Cause(name: "LGBT", iconUrl: NSURL(string: "https://cdns.iconmonstr.com/wp-content/assets/preview/2013/240/iconmonstr-flag-3.png")! as URL))
+//        causes.append(Cause(name: "Other", iconUrl: NSURL(string: "https://cdns.iconmonstr.com/wp-content/assets/preview/2012/240/iconmonstr-help-3.png")! as URL))
     }
     
 
