@@ -13,11 +13,11 @@ protocol PostCellDelegate{
     func callSegueFromCell(myData user: Any, type: String)
 }
 
-class FeedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, PostCellDelegate {
+class FeedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate{
 
     
     var isMoreDataLoading = false
-    var user: PFUser?
+    var currentUser = PFUser.current()
     var updates: [PFObject] = []
     var refreshControl: UIRefreshControl!
     
@@ -115,15 +115,6 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     
-    @IBAction func didPressProfPic(_ sender: Any) {
-        let userType = user?["type"] as! String
-        if (userType == "Individual"){
-            self.performSegue(withIdentifier: "individualProfile", sender: nil)
-        } else {
-            self.performSegue(withIdentifier: "organizationProfile", sender: nil)
-        }
-        
-    }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -151,7 +142,6 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
         
 
-        cell.delegate = self
         cell.nameButtonOutlet.tag = indexPath.row 
         cell.eventButtonOutlet.tag = indexPath.row
         cell.nameLabel.text = name
@@ -161,16 +151,6 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         return cell
     }
     
-    func callSegueFromCell(myData dataObject: Any, type: String) {
-        if type == "Organization" {
-            self.performSegue(withIdentifier: "orgClick", sender: nil)
-        } else {
-            performSegue(withIdentifier: "userClick", sender: nil)
-        }
-        
-    }
- 
-
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
