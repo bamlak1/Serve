@@ -13,6 +13,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
     
     @IBOutlet weak var bannerView: UIImageView!
     @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var bioTextView: UITextView!
 
     
     //Variable that is used to determine which imageview to fill when an image is selected
@@ -20,7 +21,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        contactTextView.delegate = self
+        bioTextView.delegate = self
 //        missionTextView.delegate = self
         
     }
@@ -76,10 +77,10 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
                 user["profile_image"] = Event.getPFFileFromImage(image: image2)
             }
             
-//            if missionTextView.text != "" {
-//                user["mission"] = missionTextView.text
-//            }
-//            
+            if bioTextView.text != "" {
+                user["bio"] = bioTextView.text
+            }
+            
 //            if contactTextView.text != "" {
 //                user["contact"] = contactTextView.text
 //            }

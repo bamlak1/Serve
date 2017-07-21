@@ -187,7 +187,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             let user = update["user"] as! PFUser
             
             
-            let vc = segue.destination as! ViewOrgPageViewController
+            let vc = segue.destination as! OtherUserViewController
             vc.user = user
         }
         

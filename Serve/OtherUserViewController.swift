@@ -1,15 +1,16 @@
 //
-//  OrganizationViewController.swift
+//  OtherUserViewController.swift
 //  Serve
 //
-//  Created by Michael Hamlett on 7/20/17.
+//  Created by Michael Hamlett on 7/21/17.
 //  Copyright © 2017 Bamlak Gessessew. All rights reserved.
 //
 
 import UIKit
 import Parse
 
-class ViewOrgPageViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate{
+class OtherUserViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+
     
     var user : PFUser?
     var updates : [PFObject] = []
@@ -20,10 +21,10 @@ class ViewOrgPageViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var bannerImageView: UIImageView!
     @IBOutlet weak var orgNameLabel: UILabel!
     @IBOutlet weak var missionLabel: UILabel!
-    @IBOutlet weak var numHelpedLabel: UILabel!
-    @IBOutlet weak var numVolLabel: UILabel!
-    @IBOutlet weak var contactLabel: UILabel!
     @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var InterestsLabel: UILabel!
+    @IBOutlet weak var followingLabel: UILabel!
+    @IBOutlet weak var followersLabel: UILabel!
     
     
     
@@ -65,10 +66,10 @@ class ViewOrgPageViewController: UIViewController, UITableViewDelegate, UITableV
                 missionLabel.text = (mission as! String)
             }
             
-            if let contact = user?["contact"] {
-                contactLabel.text = (contact as! String)
-            }
-            
+//            if let contact = user?["contact"] {
+//                contactLabel.text = (contact as! String)
+//            }
+//            
             if let banner = user?["banner"] as? PFFile {
                 banner.getDataInBackground(block: { (data: Data?, error: Error?) in
                     if (error != nil) {
@@ -123,7 +124,7 @@ class ViewOrgPageViewController: UIViewController, UITableViewDelegate, UITableV
         }
         
         
-
+        
         
     }
     
@@ -176,9 +177,18 @@ class ViewOrgPageViewController: UIViewController, UITableViewDelegate, UITableV
         cell.eventLabel.text = eventTitle
         
         return cell
-        
-        
     }
+    
+    
+    @IBAction func followPressed(_ sender: Any) {
+        let currentUser = PFUser.current()
+        let otherUser = user!
+        
+        currentUser!.addUniqueObject(otherUser, forKey: "following")
+        
+        currentUser!.saveInBackground()
+    }
+    
     
     /*
      // MARK: - Navigation

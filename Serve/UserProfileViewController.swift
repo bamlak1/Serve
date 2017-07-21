@@ -10,24 +10,24 @@ import UIKit
 import Parse
 
 
-class UserProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class UserProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
     
     @IBOutlet weak var bannerImageView: UIImageView!
     @IBOutlet weak var profilePicImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var interestsLabel: UILabel!
-    
+    @IBOutlet weak var bioLabel: UILabel!
     @IBOutlet weak var followingCountLabel: UILabel!
-    @IBOutlet weak var friendsCountLabel: UILabel!
     @IBOutlet weak var profileTableView: UITableView!
+    @IBOutlet weak var followerCountLabel: UILabel!
     
     @IBOutlet weak var segmentedControl: UISegmentedControl!
+ 
     
     var user: PFUser?
-    //var followingCount: Int = 0
-    //var friendsCount: Int = 0
     var userPosts: [PFObject] = []
     var userPastPosts: [PFObject] = []
+    var refreshControl = UIRefreshControl()
     
     
     override func viewDidLoad() {
@@ -36,11 +36,17 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
         profileTableView.dataSource = self
         profileTableView.delegate = self
         
-        
+        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(UserProfileViewController.didPullToRefresh(_:)), for: .valueChanged)
+        profileTableView.insertSubview(refreshControl, at: 0)
         
         loadUserData()
     }
     
+    func didPullToRefresh(_ refreshControl: UIRefreshControl) {
+        loadUserData()
+        //load tableveiw
+    }
 
     func loadUserData() {
         user = PFUser.current()
@@ -52,8 +58,11 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
         if let interests = user!["interests"] {
             interestsLabel.text = (interests as! String)
         }
+        if let bio = user!["bio"] {
+            bioLabel.text = bio as! String
+        }
         if let friendsCount = user!["friendsCount"] {
-            friendsCountLabel.text = (friendsCount as! String)
+            followerCountLabel.text = (friendsCount as! String)
         }
         if let followingCount = user!["followingCount"] {
             followingCountLabel.text = (followingCount as! String)
@@ -83,7 +92,7 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
         
         profilePicImageView.layer.cornerRadius = profilePicImageView.frame.size.width / 2;
         profilePicImageView.clipsToBounds = true;
-
+        self.refreshControl.endRefreshing()
         
     }
     
@@ -97,9 +106,7 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
         loadUserData()
     }
     
-    
-    @IBAction func didPressEditProfile(_ sender: Any) {
-    }
+
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch segmentedControl.selectedSegmentIndex {

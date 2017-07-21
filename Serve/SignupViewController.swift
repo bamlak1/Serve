@@ -61,6 +61,7 @@ class SignupViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         switch self.selectedType {
         case .Individual:
             newUser["type"] = "Individual"
+            newUser["following"] = []
             self.performSegue(withIdentifier: "loginIndivSegue", sender: nil)
         //Insert code to initialize individual properties
         case .Organization:
