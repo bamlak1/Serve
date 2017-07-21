@@ -11,11 +11,11 @@ import Parse
 
 class OtherUserViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
-    
+    var currentUser = PFUser.current()
+    var followingArr : [String]?
     var user : PFUser?
     var updates : [PFObject] = []
     var refreshControl = UIRefreshControl()
-    
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var bannerImageView: UIImageView!
@@ -25,6 +25,7 @@ class OtherUserViewController: UIViewController, UITableViewDataSource, UITableV
     @IBOutlet weak var InterestsLabel: UILabel!
     @IBOutlet weak var followingLabel: UILabel!
     @IBOutlet weak var followersLabel: UILabel!
+    @IBOutlet weak var followOutlet: UIButton!
     
     
     
@@ -38,7 +39,7 @@ class OtherUserViewController: UIViewController, UITableViewDataSource, UITableV
         tableView.delegate = self
         tableView.dataSource = self
         
-        retrieveOrgData()
+        retrieveUserData()
         retrieveOrgUpdates()
         
         // Do any additional setup after loading the view.
@@ -51,10 +52,10 @@ class OtherUserViewController: UIViewController, UITableViewDataSource, UITableV
     
     func didPullToRefresh(_ refreshControl: UIRefreshControl) {
         retrieveOrgUpdates()
-        retrieveOrgData()
+        retrieveUserData()
     }
     
-    func retrieveOrgData() {
+    func retrieveUserData() {
         let type = user?["type"] as! String
         switch type {
         case "Organization":
@@ -91,11 +92,16 @@ class OtherUserViewController: UIViewController, UITableViewDataSource, UITableV
                     }
                 })
             }
+            
             self.refreshControl.endRefreshing()
             
             
         case "Individual":
             print("loading user")
+            
+            if let bio = user?["bio"] {
+                missionLabel.text = bio as! String
+            }
             if let banner = user?["banner"] as? PFFile {
                 banner.getDataInBackground(block: { (data: Data?, error: Error?) in
                     if (error != nil) {
@@ -118,6 +124,12 @@ class OtherUserViewController: UIViewController, UITableViewDataSource, UITableV
                 })
                 
             }
+            followingArr = (currentUser!["following"] as! [String])
+            if (followingArr?.contains(user!.objectId!))! {
+                followOutlet.isSelected = true
+            }
+            
+            self.refreshControl.endRefreshing()
             
         default:
             break
@@ -131,7 +143,7 @@ class OtherUserViewController: UIViewController, UITableViewDataSource, UITableV
     
     func retrieveOrgUpdates() {
         let query = PFQuery(className: "Post")
-        query.whereKey("user", equalTo: user)
+        query.whereKey("user", equalTo: user!)
         query.includeKey("user")
         query.includeKey("event")
         query.order(byDescending: "createdAt")
@@ -146,6 +158,7 @@ class OtherUserViewController: UIViewController, UITableViewDataSource, UITableV
             }
         }
     }
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return updates.count
@@ -181,12 +194,26 @@ class OtherUserViewController: UIViewController, UITableViewDataSource, UITableV
     
     
     @IBAction func followPressed(_ sender: Any) {
-        let currentUser = PFUser.current()
-        let otherUser = user!
-        
-        currentUser!.addUniqueObject(otherUser, forKey: "following")
-        
+        //print(followingArr!)
+        if (followOutlet.isSelected) {
+            self.currentUser!.remove(user!.objectId, forKey: "following")
+            self.currentUser?.incrementKey("following_count", byAmount: -1)
+            if let index = followingArr?.index(of: user!.objectId!) {
+                followingArr!.remove(at: index)
+            }
+            
+            followOutlet.isSelected = false
+            currentUser!.saveInBackground()
+            print("Unfollowed")
+        } else {
+        self.currentUser!.addUniqueObject(user?.objectId!, forKey: "following")
+        self.currentUser?.incrementKey("following_count")
+        followingArr?.append(user!.objectId!)
+            
+        followOutlet.isSelected = true
         currentUser!.saveInBackground()
+        print("followed")
+        }
     }
     
     
