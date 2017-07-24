@@ -22,9 +22,33 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0I3-BK-xqw" customClass="GMSMapView">
-                                <rect key="frame" x="-1" y="32" width="377" height="586"/>
+                                <rect key="frame" x="-1" y="0.0" width="377" height="618"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IJm-tC-r7d">
+                                <rect key="frame" x="329" y="81" width="38" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="gear white"/>
+                                <connections>
+                                    <action selector="showSettings:" destination="exp-UR-BEO" eventType="touchUpInside" id="W4e-jf-c5g"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9J7-v5-l9r">
+                                <rect key="frame" x="330" y="132" width="36" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="home"/>
+                                <connections>
+                                    <action selector="returnHome:" destination="exp-UR-BEO" eventType="touchUpInside" id="EX7-Kx-r45"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wwI-IP-Tf3">
+                                <rect key="frame" x="325" y="37" width="46" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="magnifying"/>
+                                <connections>
+                                    <action selector="showSearchController:" destination="exp-UR-BEO" eventType="touchUpInside" id="cps-jQ-OcR"/>
+                                </connections>
+                            </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="8Jw-CJ-93Z">
                                 <rect key="frame" x="0.0" y="446" width="375" height="164"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -36,7 +60,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MapEventCell" id="jAN-O9-kk0" customClass="MapEventCell" customModule="Serve" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="8.5" width="263" height="147"/>
+                                        <rect key="frame" x="0.0" y="9" width="263" height="147"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="263" height="147"/>
@@ -90,22 +114,6 @@
                                     <outlet property="delegate" destination="exp-UR-BEO" id="2v2-Y0-bij"/>
                                 </connections>
                             </collectionView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wwI-IP-Tf3">
-                                <rect key="frame" x="325" y="37" width="46" height="36"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="magnifying"/>
-                                <connections>
-                                    <action selector="showSearchController:" destination="exp-UR-BEO" eventType="touchUpInside" id="cps-jQ-OcR"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IJm-tC-r7d">
-                                <rect key="frame" x="329" y="81" width="38" height="36"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="gear white"/>
-                                <connections>
-                                    <action selector="showSettings:" destination="exp-UR-BEO" eventType="touchUpInside" id="W4e-jf-c5g"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -120,10 +128,10 @@
             </objects>
             <point key="canvasLocation" x="4074.4000000000001" y="95.802098950524751"/>
         </scene>
-        <!--Pop Up View Controller-->
+        <!--Map Settings View Controller-->
         <scene sceneID="izN-p8-yah">
             <objects>
-                <viewController storyboardIdentifier="popUpStoryboard" id="LPX-9O-MVN" customClass="PopUpViewController" customModule="Serve" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="popUpStoryboard" id="LPX-9O-MVN" customClass="MapSettingsViewController" customModule="Serve" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="VUo-nT-bsM"/>
                         <viewControllerLayoutGuide type="bottom" id="Rab-fM-oLN"/>
@@ -137,7 +145,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Ku-xU-EvJ">
-                                        <rect key="frame" x="120" y="251" width="46" height="30"/>
+                                        <rect key="frame" x="232" y="295" width="46" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="Close">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -146,21 +154,62 @@
                                             <action selector="closeSettings:" destination="LPX-9O-MVN" eventType="touchUpInside" id="eAY-NY-GRj"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XYr-Ku-jhp">
-                                        <rect key="frame" x="122" y="94" width="42" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XYr-Ku-jhp">
+                                        <rect key="frame" x="100" y="8" width="86" height="26"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4K0-sX-FvA">
+                                        <rect key="frame" x="178" y="176" width="51" height="31"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <connections>
+                                            <action selector="switchMyEvents:" destination="LPX-9O-MVN" eventType="valueChanged" id="oP3-fr-pMi"/>
+                                        </connections>
+                                    </switch>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="My Events" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AHn-4Q-K2K">
+                                        <rect key="frame" x="53" y="181" width="88" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Other Events" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iap-UV-QZh">
+                                        <rect key="frame" x="42" y="222" width="111" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="38g-2N-SLm">
+                                        <rect key="frame" x="178" y="222" width="51" height="31"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <connections>
+                                            <action selector="switchOtherEvents:" destination="LPX-9O-MVN" eventType="valueChanged" id="owF-Fy-xbr"/>
+                                        </connections>
+                                    </switch>
+                                    <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="-0.5" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="KlL-sT-KAq">
+                                        <rect key="frame" x="57" y="80" width="184" height="31"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </slider>
                                 </subviews>
                                 <color key="backgroundColor" red="0.46122420269999997" green="0.61935058929999998" blue="0.9924670458" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="5pE-M3-Mk6" appends="YES" id="bsB-oP-Am2"/>
+                        </connections>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rgw-5X-MDL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="5pE-M3-Mk6">
+                    <connections>
+                        <action selector="dismissSettings:" destination="LPX-9O-MVN" id="ncl-o4-Evx"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="4912.8000000000002" y="95.802098950524751"/>
         </scene>
@@ -185,6 +234,7 @@
     </scenes>
     <resources>
         <image name="gear white" width="36" height="36"/>
+        <image name="home" width="36" height="36"/>
         <image name="magnifying" width="36" height="36"/>
     </resources>
 </document>
