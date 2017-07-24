@@ -258,7 +258,6 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
                 self.pastEvents = events!
                 self.profileTableView.reloadData()
                 self.refreshControl.endRefreshing()
-                print(self.pastEvents)
                 print("Loaded past events")
             } else {
                 print(error?.localizedDescription ?? "error loading data")
