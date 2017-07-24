@@ -109,6 +109,29 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
             }
         }
     }
+    
+    
+
+    @IBAction func causesPressed(_ sender: Any) {
+        let vc = UIStoryboard(name: "Individual", bundle: nil).instantiateViewController(withIdentifier: "causePopUp") as! CausesPopUpViewController
+        self.addChildViewController(vc)
+        vc.view.frame = self.view.frame
+        self.view.addSubview(vc.view)
+        vc.didMove(toParentViewController: self)
+        
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if(text == "\n") {
+            bioTextView.resignFirstResponder()
+            return false
+        }
+        return true
+    }
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        textView.text = ""
+    }
+    
     /*
      // MARK: - Navigation
      

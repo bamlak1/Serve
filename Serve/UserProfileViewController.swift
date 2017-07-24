@@ -23,8 +23,8 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
     
     @IBOutlet weak var segmentedControl: UISegmentedControl!
  
-    
-    var user: PFUser?
+    var user : PFUser?
+    //var userCauses: : [PFObject] = []
     var userPosts: [PFObject] = []
     var upcomingEvents : [PFObject] = []
     var pastEvents: [PFObject] = []
@@ -41,6 +41,7 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
         refreshControl.addTarget(self, action: #selector(UserProfileViewController.didPullToRefresh(_:)), for: .valueChanged)
         profileTableView.insertSubview(refreshControl, at: 0)
         
+        retrieveUser()
         loadUserData()
         fetchUserUpdates()
         retrievePastEvents()
@@ -55,17 +56,24 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
     }
 
     func loadUserData() {
-        user = PFUser.current()
         
         if let username = user!["username"] {
             nameLabel.text = (username as! String)
         }
         
-        if let interests = user!["interests"] {
-            interestsLabel.text = (interests as! String)
+        if let causes = user!["causes"] as? [PFObject] {
+            for index in 0...1{
+                let cause = causes[index]
+                let name = cause["name"] as! String
+                interestsLabel.text?.append("\(name), " )
+                
+            }
+            let lastCause = causes[2]
+            let name = lastCause["name"] as! String
+            interestsLabel.text?.append(name)
         }
         if let bio = user!["bio"] {
-            bioLabel.text = bio as! String
+            bioLabel.text = (bio as! String)
         }
         if let friendsCount = user!["friendsCount"] {
             followerCountLabel.text = (friendsCount as! String)
@@ -258,7 +266,7 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
                 self.pastEvents = events!
                 self.profileTableView.reloadData()
                 self.refreshControl.endRefreshing()
-                print(self.pastEvents)
+                //print(self.pastEvents)
                 print("Loaded past events")
             } else {
                 print(error?.localizedDescription ?? "error loading data")
@@ -288,6 +296,17 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
             } else {
                 print(error?.localizedDescription ?? "error loading data")
             }
+        }
+        
+    }
+    
+    func retrieveUser() {
+        let query = PFUser.query()
+        query?.includeKey("causes")
+        do {
+            try self.user = query?.getObjectWithId((PFUser.current()?.objectId)!) as! PFUser
+        } catch {
+            print("error")
         }
         
     }
