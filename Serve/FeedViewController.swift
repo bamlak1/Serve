@@ -9,11 +9,15 @@
 import UIKit
 import Parse
 
-class FeedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
+protocol PostCellDelegate{
+    func callSegueFromCell(myData user: Any, type: String)
+}
+
+class FeedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate{
 
     
     var isMoreDataLoading = false
-    var user: PFUser?
+    var currentUser = PFUser.current()
     var updates: [PFObject] = []
     var refreshControl: UIRefreshControl!
     
@@ -111,30 +115,22 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     
-    @IBAction func didPressProfPic(_ sender: Any) {
-        let userType = user?["type"] as! String
-        if (userType == "Individual"){
-            self.performSegue(withIdentifier: "individualProfile", sender: nil)
-        } else {
-            self.performSegue(withIdentifier: "organizationProfile", sender: nil)
-        }
-        
-    }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell") as! PostCell
         
         let update = updates[indexPath.row]
-        let org = update["user"] as? PFUser
-        cell.user = org
+        let user = update["user"] as? PFUser
+        cell.user = user
+        cell.userType = user?["type"] as! String
         let event = update["event"] as! PFObject
         cell.event = event
-        let orgName = org?["username"] as! String
+        let name = user?["username"] as! String
         let eventTitle = event["title"] as! String
         let action = update["action"] as! String
         
-        if let profileImage = org?["profile_image"] as? PFFile{
+        if let profileImage = user?["profile_image"] as? PFFile{
             profileImage.getDataInBackground { (data: Data?, error: Error?) in
                 if error != nil {
                     print(error?.localizedDescription ?? "error")
@@ -145,25 +141,36 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
         }
         
+
+        cell.nameButtonOutlet.tag = indexPath.row 
         cell.eventButtonOutlet.tag = indexPath.row
-        cell.nameLabel.text = orgName
+        cell.nameLabel.text = name
         cell.actionLabel.text = action
         cell.eventLabel.text = eventTitle
         
         return cell
     }
     
-    
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "other" {
+            let button = sender as! UIButton
+            let indexPath = button.tag
+            let update = updates[indexPath]
+            let user = update["user"] as! PFUser
+            
+            
+            let vc = segue.destination as! OtherUserViewController
+            vc.user = user
+        }
+        
         if segue.identifier == "event"{
             let button = sender as! UIButton
             let indexPath = button.tag
