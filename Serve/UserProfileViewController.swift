@@ -142,7 +142,7 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
             let cell = profileTableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as! PostCell
             let post = userPosts[indexPath.row]
             let username = user?["username"] as! String
-            let image = user?["profile_image"] as! PFFile
+            let image = user?["profile_image"] as? PFFile
             //let caption = post["caption"] as! String
             //let date = post["date"] as! String
             //let fives = post["high-fives"] as! String
@@ -154,7 +154,7 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
             //let event = create event stuff
             
             
-            image.getDataInBackground { (data: Data?, error: Error?) in
+            image?.getDataInBackground { (data: Data?, error: Error?) in
                 if(error != nil) {
                     print(error?.localizedDescription ?? "error")
                 } else {

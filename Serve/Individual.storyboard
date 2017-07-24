@@ -406,7 +406,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="xGF-ii-Ypk" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Map" id="snR-kh-0V3"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="6Uu-fA-9Hh">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="6Uu-fA-9Hh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -532,7 +532,7 @@
                                         <rect key="frame" x="0.0" y="382" width="375" height="73"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vcH-ek-1n7" id="m7J-UC-TGm">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="73"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="72.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DYx-nD-w5I">
@@ -593,12 +593,11 @@
                                             <outlet property="profilePicImageView" destination="y4J-I4-LsX" id="WNL-Na-0G2"/>
                                         </connections>
                                     </tableViewCell>
-
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="EventTableViewCell" rowHeight="291" id="VCL-5e-dBA" customClass="EventTableViewCell" customModule="Serve" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="455" width="375" height="291"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VCL-5e-dBA" id="rLl-CX-esX">
-
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="290.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kpq-7G-N1z">
@@ -670,7 +669,6 @@
         <!--Browse-->
         <scene sceneID="eHO-TV-gUS">
             <objects>
-
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="XOU-YT-dul" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Browse" image="moment-icon" id="BjS-r9-jQ5"/>
                     <toolbarItems/>
@@ -679,7 +677,6 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
-
                     <connections>
                         <segue destination="e3P-GA-qg6" kind="relationship" relationship="rootViewController" id="fnT-GC-aop"/>
                     </connections>
@@ -701,7 +698,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="85"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nHs-Rs-1co" id="cqY-Nx-xTH">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="85"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="84.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KWY-xa-k3C">
@@ -899,7 +896,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="sQP-5c-97e" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Feed" id="bSN-co-MCs"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="fpw-wa-Fwg">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="fpw-wa-Fwg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1108,7 +1105,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="V3a-ho-KCe" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Profile" id="q2l-W8-7pd"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Om9-p4-NAh">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Om9-p4-NAh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1299,10 +1296,7 @@
         <image name="edit-icon" width="30" height="27"/>
         <image name="moment-icon" width="30" height="30"/>
     </resources>
-
     <inferredMetricsTieBreakers>
         <segue reference="mJZ-G1-Mq3"/>
-        <segue reference="l8D-dn-gyf"/>
     </inferredMetricsTieBreakers>
-
 </document>
