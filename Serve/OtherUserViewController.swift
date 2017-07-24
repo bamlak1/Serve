@@ -93,6 +93,12 @@ class OtherUserViewController: UIViewController, UITableViewDataSource, UITableV
                 })
             }
             
+            followingArr = (currentUser!["following"] as! [String])
+            print(followingArr!)
+            if (followingArr?.contains(user!.objectId!))! {
+                followOutlet.isSelected = true
+            }
+            
             self.refreshControl.endRefreshing()
             
             
@@ -125,6 +131,7 @@ class OtherUserViewController: UIViewController, UITableViewDataSource, UITableV
                 
             }
             followingArr = (currentUser!["following"] as! [String])
+            print(followingArr!)
             if (followingArr?.contains(user!.objectId!))! {
                 followOutlet.isSelected = true
             }
