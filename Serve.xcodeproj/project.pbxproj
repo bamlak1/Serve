@@ -19,6 +19,9 @@
 		A00FB5981F1ED46C0036340D /* EventCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00FB5971F1ED46C0036340D /* EventCollectionViewCell.swift */; };
 		A00FB59A1F1ED47B0036340D /* IndCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00FB5991F1ED47B0036340D /* IndCollectionViewCell.swift */; };
 		A00FB59C1F1ED7380036340D /* BrowseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00FB59B1F1ED7380036340D /* BrowseViewController.swift */; };
+		A03D91511F26CC22006CF35F /* CausesPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03D91501F26CC22006CF35F /* CausesPopUpViewController.swift */; };
+		A03D91531F26CC2A006CF35F /* CauseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03D91521F26CC2A006CF35F /* CauseTableViewCell.swift */; };
+		A03D91551F26CC3F006CF35F /* CauseTVCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03D91541F26CC3F006CF35F /* CauseTVCellDelegate.swift */; };
 		A06309F21F215C2E002E886A /* BrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06309F11F215C2E002E886A /* BrowserViewController.swift */; };
 		A06309F41F215D2E002E886A /* EventBrowseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06309F31F215D2E002E886A /* EventBrowseCell.swift */; };
 		A06309F61F216833002E886A /* OrgBrowseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06309F51F216833002E886A /* OrgBrowseCell.swift */; };
@@ -94,6 +97,9 @@
 		A00FB5971F1ED46C0036340D /* EventCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCollectionViewCell.swift; sourceTree = "<group>"; };
 		A00FB5991F1ED47B0036340D /* IndCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndCollectionViewCell.swift; sourceTree = "<group>"; };
 		A00FB59B1F1ED7380036340D /* BrowseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseViewController.swift; sourceTree = "<group>"; };
+		A03D91501F26CC22006CF35F /* CausesPopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CausesPopUpViewController.swift; sourceTree = "<group>"; };
+		A03D91521F26CC2A006CF35F /* CauseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CauseTableViewCell.swift; sourceTree = "<group>"; };
+		A03D91541F26CC3F006CF35F /* CauseTVCellDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CauseTVCellDelegate.swift; sourceTree = "<group>"; };
 		A06309F11F215C2E002E886A /* BrowserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowserViewController.swift; sourceTree = "<group>"; };
 		A06309F31F215D2E002E886A /* EventBrowseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventBrowseCell.swift; sourceTree = "<group>"; };
 		A06309F51F216833002E886A /* OrgBrowseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrgBrowseCell.swift; sourceTree = "<group>"; };
@@ -300,6 +306,7 @@
 		CC2453821F20174900D765E5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A03D91521F26CC2A006CF35F /* CauseTableViewCell.swift */,
 				A00FB5971F1ED46C0036340D /* EventCollectionViewCell.swift */,
 				A00FB5991F1ED47B0036340D /* IndCollectionViewCell.swift */,
 				A07AD2461F1573BA00100D69 /* PostCell.swift */,
@@ -330,6 +337,7 @@
 		CCD7557B1F158DF30033FF7A /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				A03D91501F26CC22006CF35F /* CausesPopUpViewController.swift */,
 				A06309FF1F2675E7002E886A /* CreateCauseViewController.swift */,
 				A06309FD1F2675C9002E886A /* SearchResultsViewController.swift */,
 				A06309FB1F2675B5002E886A /* MapSettingsViewController.swift */,
@@ -348,6 +356,7 @@
 				CC2453741F20151500D765E5 /* Cause.swift */,
 				CC2453781F20157500D765E5 /* Pending.swift */,
 				CC2453721F2014E400D765E5 /* Update.swift */,
+				A03D91541F26CC3F006CF35F /* CauseTVCellDelegate.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -647,6 +656,8 @@
 				CC2453791F20157500D765E5 /* Pending.swift in Sources */,
 				A07AD2411F144AF800100D69 /* LoginViewController.swift in Sources */,
 				A00FB5961F1ED45A0036340D /* OrgCollectionViewCell.swift in Sources */,
+				A03D91531F26CC2A006CF35F /* CauseTableViewCell.swift in Sources */,
+				A03D91511F26CC22006CF35F /* CausesPopUpViewController.swift in Sources */,
 				A06309F41F215D2E002E886A /* EventBrowseCell.swift in Sources */,
 				CCD8C2AF1F183A0E00B46AD7 /* EventTableViewCell.swift in Sources */,
 				A00FB59C1F1ED7380036340D /* BrowseViewController.swift in Sources */,
@@ -656,6 +667,7 @@
 				CC2453731F2014E400D765E5 /* Update.swift in Sources */,
 				A06309F81F216873002E886A /* PeopleBrowseCell.swift in Sources */,
 				A07AD2451F156DC000100D69 /* FeedViewController.swift in Sources */,
+				A03D91551F26CC3F006CF35F /* CauseTVCellDelegate.swift in Sources */,
 				A00FB5981F1ED46C0036340D /* EventCollectionViewCell.swift in Sources */,
 				A06309F61F216833002E886A /* OrgBrowseCell.swift in Sources */,
 				A0B95E8A1F1D94A200EBD019 /* EditProfileViewController.swift in Sources */,

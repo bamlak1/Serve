@@ -10,7 +10,7 @@ import UIKit
 import Parse
 import SwiftyJSON
 
-class BrowserViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate  {
+class BrowserViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UISearchBarDelegate  {
     
     
     var Events: [PFObject] = []
@@ -189,16 +189,16 @@ class BrowserViewController: UIViewController, UICollectionViewDataSource, UICol
             let eventDetailViewController = segue.destination as! EventDetailViewController //tell it its destination
             eventDetailViewController.event = event
         }
-//        if let indexPath = collectionView2.indexPath(for: cell) {//get this to find the actual post
-//            let org = filteredOrgs[indexPath.item] //get the current post
-//            let otherUserViewController = segue.destination as! OtherUserViewController //tell it its destination
-//            otherUserViewController.user = org
-//        }
-//        if let indexPath = collectionView3.indexPath(for: cell) {//get this to find the actual post
-//            let person = filteredPeople[indexPath.item] //get the current post
-//            let otherUserViewController = segue.destination as! OtherUserViewController //tell it its destination
-//            otherUserViewController.user = person
-//        }
+        if let indexPath = collectionView2.indexPath(for: cell) {//get this to find the actual post
+            let org = filteredOrgs[indexPath.item] //get the current post
+            let otherUserViewController = segue.destination as! OtherUserViewController //tell it its destination
+            otherUserViewController.user = org as! PFUser
+        }
+        if let indexPath = collectionView3.indexPath(for: cell) {//get this to find the actual post
+            let person = filteredPeople[indexPath.item] //get the current post
+            let otherUserViewController = segue.destination as! OtherUserViewController //tell it its destination
+            otherUserViewController.user = person as! PFUser
+        }
         
     }
     
@@ -266,25 +266,38 @@ class BrowserViewController: UIViewController, UICollectionViewDataSource, UICol
         query.findObjectsInBackground { (users: [PFObject]?, error: Error?) in
             for user in users! {
                 let userType = user["type"] as! String
-                if (userType == "Individual") {
-                    if let people = users {
+                
+                if let people = users {
+                    if (userType == "Individual") {
                         self.People = people
                         self.filteredPeople = people
                         print("Loaded ppl")
                         self.collectionView3.reloadData()
                         
                     }
-                }
-            
-             else {
-                    if let orgs = users {
+                    
+                if let orgs = users {
+                    if (userType == "Organization") {
                         self.Orgs = orgs
                         self.filteredOrgs = orgs
                         print("Loaded orgs")
                         self.collectionView2.reloadData()
-                        
                     }
+                
                 }
+                    
+                
+                }
+            
+//             else {
+//                    if let orgs = users {
+//                        self.Orgs = orgs
+//                        self.filteredOrgs = orgs
+//                        print("Loaded orgs")
+//                        self.collectionView2.reloadData()
+//                        
+//                    }
+//                }
                 
             }
     
