@@ -24,8 +24,8 @@ class Cause {
         
         cause["name"] = name
         cause["image"] = getPFFileFromImage(image: image)
-        cause["orgs"] = []
         cause["events"] = []
+        cause["users"] = []
         
         cause.saveInBackground(block: completion)
         

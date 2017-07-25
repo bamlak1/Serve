@@ -24,7 +24,6 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var segmentedControl: UISegmentedControl!
  
     var user : PFUser?
-    //var userCauses: : [PFObject] = []
     var userPosts: [PFObject] = []
     var upcomingEvents : [PFObject] = []
     var pastEvents: [PFObject] = []
@@ -49,6 +48,7 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func didPullToRefresh(_ refreshControl: UIRefreshControl) {
+        retrieveUser()
         loadUserData()
         fetchUserUpdates()
         retrieveUpcomingEvents()

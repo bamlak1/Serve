@@ -13,6 +13,7 @@ class OtherUserViewController: UIViewController, UITableViewDataSource, UITableV
 
     var currentUser = PFUser.current()
     var followingArr : [String]?
+    var userID : String?
     var user : PFUser?
     var updates : [PFObject] = []
     var refreshControl = UIRefreshControl()
@@ -22,7 +23,7 @@ class OtherUserViewController: UIViewController, UITableViewDataSource, UITableV
     @IBOutlet weak var orgNameLabel: UILabel!
     @IBOutlet weak var missionLabel: UILabel!
     @IBOutlet weak var profileImageView: UIImageView!
-    @IBOutlet weak var InterestsLabel: UILabel!
+    @IBOutlet weak var interestsLabel: UILabel!
     @IBOutlet weak var followingLabel: UILabel!
     @IBOutlet weak var followersLabel: UILabel!
     @IBOutlet weak var followOutlet: UIButton!
@@ -39,8 +40,9 @@ class OtherUserViewController: UIViewController, UITableViewDataSource, UITableV
         tableView.delegate = self
         tableView.dataSource = self
         
-        retrieveUserData()
-        retrieveOrgUpdates()
+        retrieveUser()
+        setUserData()
+        retrieveUpdates()
         
         // Do any additional setup after loading the view.
     }
@@ -51,11 +53,12 @@ class OtherUserViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     func didPullToRefresh(_ refreshControl: UIRefreshControl) {
-        retrieveOrgUpdates()
-        retrieveUserData()
+        retrieveUser()
+        retrieveUpdates()
+        setUserData()
     }
     
-    func retrieveUserData() {
+    func setUserData() {
         let type = user?["type"] as! String
         switch type {
         case "Organization":
@@ -80,6 +83,18 @@ class OtherUserViewController: UIViewController, UITableViewDataSource, UITableV
                         self.bannerImageView.image = finalImage
                     }
                 })
+            }
+            
+            if let userCauses = user?["causes"] as? [PFObject]{
+                for index in 0...1{
+                    let cause = userCauses[index]
+                    let name = cause["name"] as! String
+                    interestsLabel.text?.append("\(name), " )
+                    
+                }
+                let lastCause = userCauses[2]
+                let name = lastCause["name"] as! String
+                interestsLabel.text?.append(name)
             }
             
             if let profileImage = user?["profile_image"] as? PFFile {
@@ -119,6 +134,18 @@ class OtherUserViewController: UIViewController, UITableViewDataSource, UITableV
                 })
             }
             
+            if let userCauses = user?["causes"] as? [PFObject]{
+                for index in 0...1{
+                    let cause = userCauses[index]
+                    let name = cause["name"] as! String
+                    interestsLabel.text?.append("\(name), " )
+                    
+                }
+                let lastCause = userCauses[2]
+                let name = lastCause["name"] as! String
+                interestsLabel.text?.append(name)
+            }
+            
             if let profileImage = user?["profile_image"] as? PFFile {
                 profileImage.getDataInBackground(block: { (data: Data?, error: Error?) in
                     if (error != nil) {
@@ -131,7 +158,7 @@ class OtherUserViewController: UIViewController, UITableViewDataSource, UITableV
                 
             }
             followingArr = (currentUser!["following"] as! [String])
-            print(followingArr!)
+            //print(followingArr!)
             if (followingArr?.contains(user!.objectId!))! {
                 followOutlet.isSelected = true
             }
@@ -148,7 +175,7 @@ class OtherUserViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     
-    func retrieveOrgUpdates() {
+    func retrieveUpdates() {
         let query = PFQuery(className: "Post")
         query.whereKey("user", equalTo: user!)
         query.includeKey("user")
@@ -223,6 +250,16 @@ class OtherUserViewController: UIViewController, UITableViewDataSource, UITableV
         }
     }
     
+    func retrieveUser() {
+        let query = PFUser.query()
+        query?.includeKey("causes")
+        do {
+            try self.user = query?.getObjectWithId(self.userID!) as! PFUser
+        } catch {
+            print("error")
+        }
+        
+    }
     
     /*
      // MARK: - Navigation

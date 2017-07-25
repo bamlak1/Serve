@@ -165,10 +165,11 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             let indexPath = button.tag
             let update = updates[indexPath]
             let user = update["user"] as! PFUser
+            let id = user.objectId!
             
             
             let vc = segue.destination as! OtherUserViewController
-            vc.user = user
+            vc.userID = id
         }
         
         if segue.identifier == "event"{
