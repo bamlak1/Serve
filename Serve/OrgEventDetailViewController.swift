@@ -24,16 +24,7 @@ class OrgEventDetailViewController: UIViewController {
     @IBOutlet weak var volunteerLabel: UILabel!
     @IBOutlet weak var expectedTasksLabel: UILabel!
     
-    @IBAction func signUpPressed(_ sender: Any) {
-        Pending.postPending(user: PFUser.current()!, event: event!, auto: false) { (success: Bool, error: Error?) in
-            if success {
-                print("pending request made")
-            } else {
-                print(error?.localizedDescription ?? "error")
-            }
-        }
-        
-    }
+
     
     
     

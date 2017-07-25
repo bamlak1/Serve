@@ -32,12 +32,13 @@ class Post: NSObject {
         
     }
     
-    class func userInterestedPost(eventInterest: PFObject, title: String?,completion: PFBooleanResultBlock?) {
+    class func userInterestedPost(eventInterest: PFObject, title: String?,caption: String?,completion: PFBooleanResultBlock?) {
         let post = PFObject(className: "Post")
         
         post["user"] = PFUser.current()
         post["action"] = "is interested in"
         post["event"] = eventInterest
+        post["caption"] = caption
         
         
         post.saveInBackground(block: completion)

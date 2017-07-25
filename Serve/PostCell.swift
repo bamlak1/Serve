@@ -25,6 +25,8 @@ class PostCell: UITableViewCell {
     
     @IBOutlet weak var actionLabel: UILabel!
     
+    @IBOutlet weak var captionLabel: UILabel!
+    
     var delegate : PostCellDelegate!
     var event : PFObject?
     var user: PFUser?

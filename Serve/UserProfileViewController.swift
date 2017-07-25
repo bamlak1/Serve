@@ -122,6 +122,10 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
                 }
             }
             
+            if let caption = post["caption"] as? String {
+                cell.captionLabel.text = caption
+            }
+            
             cell.nameLabel.text = username
             cell.eventLabel.text = eventTitle
             cell.actionLabel.text = action

@@ -141,6 +141,10 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
         }
         
+        if let caption = update["caption"] as? String {
+            cell.captionLabel.text = caption
+        }
+        
 
         cell.nameButtonOutlet.tag = indexPath.row 
         cell.eventButtonOutlet.tag = indexPath.row
