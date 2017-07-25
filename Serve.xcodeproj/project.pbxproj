@@ -23,6 +23,10 @@
 		A06309F41F215D2E002E886A /* EventBrowseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06309F31F215D2E002E886A /* EventBrowseCell.swift */; };
 		A06309F61F216833002E886A /* OrgBrowseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06309F51F216833002E886A /* OrgBrowseCell.swift */; };
 		A06309F81F216873002E886A /* PeopleBrowseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06309F71F216873002E886A /* PeopleBrowseCell.swift */; };
+		A06309FA1F2675A9002E886A /* OtherUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06309F91F2675A9002E886A /* OtherUserViewController.swift */; };
+		A06309FC1F2675B5002E886A /* MapSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06309FB1F2675B5002E886A /* MapSettingsViewController.swift */; };
+		A06309FE1F2675C9002E886A /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06309FD1F2675C9002E886A /* SearchResultsViewController.swift */; };
+		A0630A001F2675E7002E886A /* CreateCauseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06309FF1F2675E7002E886A /* CreateCauseViewController.swift */; };
 		A07AD2131F13FAC500100D69 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07AD2121F13FAC500100D69 /* AppDelegate.swift */; };
 		A07AD2181F13FAC500100D69 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A07AD2161F13FAC500100D69 /* Main.storyboard */; };
 		A07AD21A1F13FAC500100D69 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A07AD2191F13FAC500100D69 /* Assets.xcassets */; };
@@ -94,6 +98,10 @@
 		A06309F31F215D2E002E886A /* EventBrowseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventBrowseCell.swift; sourceTree = "<group>"; };
 		A06309F51F216833002E886A /* OrgBrowseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrgBrowseCell.swift; sourceTree = "<group>"; };
 		A06309F71F216873002E886A /* PeopleBrowseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleBrowseCell.swift; sourceTree = "<group>"; };
+		A06309F91F2675A9002E886A /* OtherUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherUserViewController.swift; sourceTree = "<group>"; };
+		A06309FB1F2675B5002E886A /* MapSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapSettingsViewController.swift; sourceTree = "<group>"; };
+		A06309FD1F2675C9002E886A /* SearchResultsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
+		A06309FF1F2675E7002E886A /* CreateCauseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateCauseViewController.swift; sourceTree = "<group>"; };
 		A07AD20F1F13FAC500100D69 /* Serve.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Serve.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A07AD2121F13FAC500100D69 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A07AD2171F13FAC500100D69 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -322,6 +330,10 @@
 		CCD7557B1F158DF30033FF7A /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				A06309FF1F2675E7002E886A /* CreateCauseViewController.swift */,
+				A06309FD1F2675C9002E886A /* SearchResultsViewController.swift */,
+				A06309FB1F2675B5002E886A /* MapSettingsViewController.swift */,
+				A06309F91F2675A9002E886A /* OtherUserViewController.swift */,
 				CC24537E1F2016C800D765E5 /* Org */,
 				CC24537F1F2016CF00D765E5 /* Individual */,
 				CC2453801F2016DA00D765E5 /* Login */,
@@ -629,7 +641,9 @@
 				A07AD2431F15408600100D69 /* SignupViewController.swift in Sources */,
 				CC14168D1F16A06800BF2A81 /* Event.swift in Sources */,
 				CC24537D1F2015F200D765E5 /* MapEventCell.swift in Sources */,
+				A0630A001F2675E7002E886A /* CreateCauseViewController.swift in Sources */,
 				CCFB6C221F15DBAC00E59D5C /* EditOrganizationViewController.swift in Sources */,
+				A06309FA1F2675A9002E886A /* OtherUserViewController.swift in Sources */,
 				CC2453791F20157500D765E5 /* Pending.swift in Sources */,
 				A07AD2411F144AF800100D69 /* LoginViewController.swift in Sources */,
 				A00FB5961F1ED45A0036340D /* OrgCollectionViewCell.swift in Sources */,
@@ -645,6 +659,7 @@
 				A00FB5981F1ED46C0036340D /* EventCollectionViewCell.swift in Sources */,
 				A06309F61F216833002E886A /* OrgBrowseCell.swift in Sources */,
 				A0B95E8A1F1D94A200EBD019 /* EditProfileViewController.swift in Sources */,
+				A06309FC1F2675B5002E886A /* MapSettingsViewController.swift in Sources */,
 				A0B95E841F185D6600EBD019 /* OrganizationProfileViewController.swift in Sources */,
 				CCED38871F1D926500A3DD2E /* PendingApprovalsViewController.swift in Sources */,
 				A0B95E7A1F16DB6C00EBD019 /* EventDetailViewController.swift in Sources */,
@@ -655,6 +670,7 @@
 				CCAF14F61F1835980097C7A3 /* OrgEventsViewController.swift in Sources */,
 				CC14168F1F16A42600BF2A81 /* CreateEventViewController.swift in Sources */,
 				A06309F21F215C2E002E886A /* BrowserViewController.swift in Sources */,
+				A06309FE1F2675C9002E886A /* SearchResultsViewController.swift in Sources */,
 				A07AD2471F1573BA00100D69 /* PostCell.swift in Sources */,
 				CC2453711F20146600D765E5 /* OrgEventDetailViewController.swift in Sources */,
 				CCFB6C201F15DA1100E59D5C /* OrganizationViewController.swift in Sources */,

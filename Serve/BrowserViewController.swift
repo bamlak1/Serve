@@ -16,9 +16,12 @@ class BrowserViewController: UIViewController, UICollectionViewDataSource, UICol
     var Events: [PFObject] = []
     var Orgs: [PFObject] = []
     var People: [PFObject] = []
-    var user: PFUser!
+    
     var resultsController = UIViewController()
-    var filteredEvents = [String]()
+    var filteredEvents: [PFObject] = []
+    var filteredOrgs: [PFObject] = []
+    var filteredPeople: [PFObject] = []
+    
     
     
     
@@ -42,9 +45,9 @@ class BrowserViewController: UIViewController, UICollectionViewDataSource, UICol
         
         
         fetchEvents()
-//        fetchUsers()
-        fetchOrgs()
-        fetchPeople()
+        fetchUsers()
+//        fetchOrgs()
+//        fetchPeople()
         
         // Do any additional setup after loading the view.
     }
@@ -61,7 +64,36 @@ class BrowserViewController: UIViewController, UICollectionViewDataSource, UICol
 //        }
 //    }
     
-    
+    func searchBar(_ searchController: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty {
+            filteredEvents = Events
+            filteredOrgs = Orgs
+            filteredPeople = People
+            
+        } else {
+            
+            filteredEvents = Events.filter { (event: PFObject) -> Bool in
+                let title = event["title"] as! String
+                return title.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+                
+            }
+            filteredOrgs = Orgs.filter { (org: PFObject) -> Bool in
+                let title = org["username"] as! String
+                return title.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+                
+            }
+            filteredPeople = People.filter { (person: PFObject) -> Bool in
+                let title = person["username"] as! String
+                return title.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+                
+            }
+        }
+        
+        collectionView.reloadData()
+        collectionView2.reloadData()
+        collectionView3.reloadData()
+        
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -70,11 +102,11 @@ class BrowserViewController: UIViewController, UICollectionViewDataSource, UICol
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == self.collectionView {
-            return Events.count
+            return filteredEvents.count
         } else if collectionView == self.collectionView2 {
-            return Orgs.count
+            return filteredOrgs.count
         } else {
-            return People.count
+            return filteredPeople.count
         }
         
     }
@@ -85,7 +117,7 @@ class BrowserViewController: UIViewController, UICollectionViewDataSource, UICol
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EventBrowseCell", for: indexPath) as! EventBrowseCell
             
             
-            let eventData = Events[indexPath.item]
+            let eventData = filteredEvents[indexPath.item]
             
             if let banner = eventData["banner"] as? PFFile {
                 banner.getDataInBackground(block: { (data: Data?, error: Error?) in
@@ -106,9 +138,9 @@ class BrowserViewController: UIViewController, UICollectionViewDataSource, UICol
             
             
             
-            let orgData = Orgs[indexPath.item]
+            let orgData = filteredOrgs[indexPath.item]
             
-            if let profPic = orgData["profPic"] as? PFFile {
+            if let profPic = orgData["profile_image"] as? PFFile {
                 profPic.getDataInBackground(block: { (data: Data?, error: Error?) in
                     if (error != nil) {
                         print(error?.localizedDescription ?? "error")
@@ -118,7 +150,7 @@ class BrowserViewController: UIViewController, UICollectionViewDataSource, UICol
                     }
                 })
             }
-            cell2.nameLabel.text = orgData["title"] as? String
+            cell2.nameLabel.text = orgData["username"] as? String
             
             
             return cell2
@@ -127,19 +159,21 @@ class BrowserViewController: UIViewController, UICollectionViewDataSource, UICol
             
             
             
-            let peopleData = People[indexPath.item]
+            let peopleData = filteredPeople[indexPath.item]
             
-            if let profPic = peopleData["banner"] as? PFFile {
+            if let profPic = peopleData["profile_image"] as? PFFile {
                 profPic.getDataInBackground(block: { (data: Data?, error: Error?) in
                     if (error != nil) {
                         print(error?.localizedDescription ?? "error")
                     } else {
                         let finalImage = UIImage(data: data!)
+                        cell3.imageViewer.layer.cornerRadius = cell3.imageViewer.frame.size.width / 2;
+                        cell3.imageViewer.clipsToBounds = true;
                         cell3.imageViewer.image = finalImage
                     }
                 })
             }
-            cell3.nameLabel.text = peopleData["title"] as? String
+            cell3.nameLabel.text = peopleData["username"] as? String
             
             
             return cell3
@@ -151,22 +185,35 @@ class BrowserViewController: UIViewController, UICollectionViewDataSource, UICol
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let cell = sender as! UICollectionViewCell
         if let indexPath = collectionView.indexPath(for: cell) {//get this to find the actual post
-            let event = Events[indexPath.item] //get the current post
+            let event = filteredEvents[indexPath.item] //get the current post
             let eventDetailViewController = segue.destination as! EventDetailViewController //tell it its destination
             eventDetailViewController.event = event
         }
+//        if let indexPath = collectionView2.indexPath(for: cell) {//get this to find the actual post
+//            let org = filteredOrgs[indexPath.item] //get the current post
+//            let otherUserViewController = segue.destination as! OtherUserViewController //tell it its destination
+//            otherUserViewController.user = org
+//        }
+//        if let indexPath = collectionView3.indexPath(for: cell) {//get this to find the actual post
+//            let person = filteredPeople[indexPath.item] //get the current post
+//            let otherUserViewController = segue.destination as! OtherUserViewController //tell it its destination
+//            otherUserViewController.user = person
+//        }
+        
     }
+    
     
     func fetchEvents() {
         let query = PFQuery(className: "Event")
         query.includeKey("user")
-        query.includeKey("event")
+        //query.includeKey("event")
         query.order(byDescending: "createdAt")
         
         
         query.findObjectsInBackground { (events: [PFObject]?, error: Error?) in
             if let events = events {
                 self.Events = events
+                self.filteredEvents = events
                 print("Loaded events")
                 self.collectionView.reloadData()
                 
@@ -183,6 +230,7 @@ class BrowserViewController: UIViewController, UICollectionViewDataSource, UICol
         query.findObjectsInBackground { (orgs: [PFObject]?, error: Error?) in
             if let orgs = orgs {
                 self.Orgs = orgs
+                self.filteredOrgs = orgs
                 print("Loaded orgs")
                 self.collectionView2.reloadData()
                 
@@ -200,6 +248,7 @@ class BrowserViewController: UIViewController, UICollectionViewDataSource, UICol
         query.findObjectsInBackground { (people: [PFObject]?, error: Error?) in
             if let people = people {
                 self.People = people
+                self.filteredPeople = people
                 print("Loaded ppl")
                 self.collectionView3.reloadData()
                 
@@ -210,30 +259,37 @@ class BrowserViewController: UIViewController, UICollectionViewDataSource, UICol
     func fetchUsers() {
         let query = PFQuery(className: "_User")
         query.includeKey("type")
-        let userType = user?["type"] as! String
-        if (userType == "Individual") {
-            query.findObjectsInBackground { (people: [PFObject]?, error: Error?) in
-                if let people = people {
-                    self.People = people
-                    print("Loaded ppl")
-                    self.collectionView3.reloadData()
-                    
-                }
-            }
+        query.includeKey("username")
+        query.includeKey("profile_image")
         
-        } else {
-            query.findObjectsInBackground { (orgs: [PFObject]?, error: Error?) in
-                if let orgs = orgs {
-                    self.Orgs = orgs
-                    print("Loaded orgs")
-                    self.collectionView2.reloadData()
-                    
+        
+        query.findObjectsInBackground { (users: [PFObject]?, error: Error?) in
+            for user in users! {
+                let userType = user["type"] as! String
+                if (userType == "Individual") {
+                    if let people = users {
+                        self.People = people
+                        self.filteredPeople = people
+                        print("Loaded ppl")
+                        self.collectionView3.reloadData()
+                        
+                    }
                 }
-            }
             
-        }
+             else {
+                    if let orgs = users {
+                        self.Orgs = orgs
+                        self.filteredOrgs = orgs
+                        print("Loaded orgs")
+                        self.collectionView2.reloadData()
+                        
+                    }
+                }
+                
+            }
     
     }
+}
     
     
     
