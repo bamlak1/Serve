@@ -41,7 +41,6 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
         profileTableView.insertSubview(refreshControl, at: 0)
         
         retrieveUser()
-        loadUserData()
         fetchUserUpdates()
         retrievePastEvents()
         retrieveUpcomingEvents()
@@ -49,67 +48,11 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
     
     func didPullToRefresh(_ refreshControl: UIRefreshControl) {
         retrieveUser()
-        loadUserData()
         fetchUserUpdates()
         retrieveUpcomingEvents()
         retrievePastEvents()
     }
 
-    func loadUserData() {
-        
-        if let username = user!["username"] {
-            nameLabel.text = (username as! String)
-        }
-        
-        if let causes = user!["causes"] as? [PFObject] {
-            for index in 0...1{
-                let cause = causes[index]
-                let name = cause["name"] as! String
-                interestsLabel.text?.append("\(name), " )
-                
-            }
-            let lastCause = causes[2]
-            let name = lastCause["name"] as! String
-            interestsLabel.text?.append(name)
-        }
-        if let bio = user!["bio"] {
-            bioLabel.text = (bio as! String)
-        }
-        if let friendsCount = user!["friendsCount"] {
-            followerCountLabel.text = (friendsCount as! String)
-        }
-        if let followingCount = user!["followingCount"] {
-            followingCountLabel.text = (followingCount as! String)
-        }
-        
-        if let banner = user!["banner"] as? PFFile {
-            banner.getDataInBackground(block: { (data: Data?, error: Error?) in
-                if (error != nil) {
-                    print(error?.localizedDescription ?? "error")
-                } else {
-                    let finalImage = UIImage(data: data!)
-                    self.bannerImageView.image = finalImage
-                }
-            })
-        }
-        
-        if let profileImage = user!["profile_image"] as? PFFile {
-            profileImage.getDataInBackground(block: { (data: Data?, error: Error?) in
-                if (error != nil) {
-                    print(error?.localizedDescription ?? "error")
-                } else {
-                    let finalImage = UIImage(data: data!)
-                    self.profilePicImageView.image = finalImage
-                }
-            })
-        }
-        
-        profilePicImageView.layer.cornerRadius = profilePicImageView.frame.size.width / 2;
-        profilePicImageView.clipsToBounds = true;
-        self.refreshControl.endRefreshing()
-        
-    }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -117,7 +60,7 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
     
     
     @IBAction func indexChanged(_ sender: UISegmentedControl) {
-        loadUserData()
+        retrieveUser()
         retrievePastEvents()
         retrieveUpcomingEvents()
     }
@@ -308,6 +251,58 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
         } catch {
             print("error")
         }
+        
+        
+        if let username = user!["username"] {
+            nameLabel.text = (username as! String)
+        }
+        
+        if let causes = user!["causes"] as? [PFObject] {
+            for index in 0...1{
+                let cause = causes[index]
+                let name = cause["name"] as! String
+                interestsLabel.text?.append("\(name), " )
+                
+            }
+            let lastCause = causes[2]
+            let name = lastCause["name"] as! String
+            interestsLabel.text?.append(name)
+        }
+        if let bio = user!["bio"] {
+            bioLabel.text = (bio as! String)
+        }
+        if let friendsCount = user!["friendsCount"] {
+            followerCountLabel.text = (friendsCount as! String)
+        }
+        if let followingCount = user!["followingCount"] {
+            followingCountLabel.text = (followingCount as! String)
+        }
+        
+        if let banner = user!["banner"] as? PFFile {
+            banner.getDataInBackground(block: { (data: Data?, error: Error?) in
+                if (error != nil) {
+                    print(error?.localizedDescription ?? "error")
+                } else {
+                    let finalImage = UIImage(data: data!)
+                    self.bannerImageView.image = finalImage
+                }
+            })
+        }
+        
+        if let profileImage = user!["profile_image"] as? PFFile {
+            profileImage.getDataInBackground(block: { (data: Data?, error: Error?) in
+                if (error != nil) {
+                    print(error?.localizedDescription ?? "error")
+                } else {
+                    let finalImage = UIImage(data: data!)
+                    self.profilePicImageView.image = finalImage
+                }
+            })
+        }
+        
+        profilePicImageView.layer.cornerRadius = profilePicImageView.frame.size.width / 2;
+        profilePicImageView.clipsToBounds = true;
+        self.refreshControl.endRefreshing()
         
     }
     
