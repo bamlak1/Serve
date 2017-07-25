@@ -20,13 +20,21 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var followingCountLabel: UILabel!
     @IBOutlet weak var profileTableView: UITableView!
     @IBOutlet weak var followerCountLabel: UILabel!
+    @IBOutlet weak var editButton: UIButton!
+    @IBOutlet weak var followButton: UIButton!
+    
     
     @IBOutlet weak var segmentedControl: UISegmentedControl!
  
     var user : PFUser?
+    var userType: String?
+    var currentUser = PFUser.current()
+    //By default userID is set to the currentUser ID
+    var userID = PFUser.current()?.objectId
     var userPosts: [PFObject] = []
     var upcomingEvents : [PFObject] = []
     var pastEvents: [PFObject] = []
+    var followingArr : [String]?
     var refreshControl = UIRefreshControl()
     
     
@@ -114,6 +122,10 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
                 }
             }
             
+            if let caption = post["caption"] as? String {
+                cell.captionLabel.text = caption
+            }
+            
             cell.nameLabel.text = username
             cell.eventLabel.text = eventTitle
             cell.actionLabel.text = action
@@ -170,9 +182,6 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func fetchUserUpdates() {
-        let user = PFUser.current()
-        //let id = user!.objectId!
-        
         
         let query = PFQuery(className: "Post")
         query.whereKey("user", equalTo: user!)
@@ -192,12 +201,15 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func retrievePastEvents() {
-        let user = PFUser.current()
         
         let date = Date()
         
         let query = PFQuery(className: "Event")
-        query.whereKey("accepted_users", equalTo: user)
+        if userType == "Individual" {
+            query.whereKey("accepted_users" , equalTo: user!)
+        } else {
+            query.whereKey("author", equalTo: user!)
+        }
         query.whereKey("start_date", lessThan: date)
         query.order(byDescending: "createdAt")
         query.includeKey("author")
@@ -210,7 +222,7 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
                 self.profileTableView.reloadData()
                 self.refreshControl.endRefreshing()
                 //print(self.pastEvents)
-                print("Loaded past events")
+                //print("Loaded past events")
             } else {
                 print(error?.localizedDescription ?? "error loading data")
             }
@@ -219,12 +231,15 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func retrieveUpcomingEvents() {
-        let user = PFUser.current()
-        
+
         let date = Date()
         
         let query = PFQuery(className: "Event")
-        query.whereKey("accepted_users", equalTo: user)
+        if userType == "Individual" {
+            query.whereKey("accepted_users" , equalTo: user!)
+        } else {
+            query.whereKey("author", equalTo: user!)
+        }
         query.whereKey("start_date", greaterThan: date)
         query.order(byDescending: "createdAt")
         query.includeKey("author")
@@ -235,7 +250,7 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
             if events != nil {
                 self.upcomingEvents = events!
                 self.profileTableView.reloadData()
-                print("Loaded upcoming events")
+                //print("Loaded upcoming events")
             } else {
                 print(error?.localizedDescription ?? "error loading data")
             }
@@ -243,14 +258,19 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
         
     }
     
+    //FIX THE QUERY SO ITS ASYNC /////////////////////////////////////////////////////////////
     func retrieveUser() {
         let query = PFUser.query()
         query?.includeKey("causes")
         do {
-            try self.user = query?.getObjectWithId((PFUser.current()?.objectId)!) as! PFUser
+            //self.user = query?.getObjectInBackground(withId: self.userID!) as! PFUser
+            try self.user = query?.getObjectWithId(self.userID!) as! PFUser
         } catch {
             print("error")
         }
+        
+        let type = user!["type"] as! String
+        userType = type
         
         
         if let username = user!["username"] {
@@ -300,11 +320,59 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
             })
         }
         
+        if user?.objectId == PFUser.current()?.objectId {
+            print("on current user's page")
+            editButton.isEnabled = true
+            editButton.isHidden = false
+            followButton.isEnabled = false
+            followButton.isHidden = true
+        } else if user?.objectId != PFUser.current()?.objectId {
+            print("on other user's page")
+            followButton.isEnabled = true
+            followButton.isHidden = false
+            editButton.isEnabled = false
+            editButton.isHidden = true
+        }
+        
+        if followButton.isEnabled{
+            followingArr = (currentUser!["following"] as! [String])
+            //print(followingArr!)
+            if (followingArr?.contains(user!.objectId!))! {
+                followButton.isSelected = true
+            }
+        }
+        
+        
         profilePicImageView.layer.cornerRadius = profilePicImageView.frame.size.width / 2;
         profilePicImageView.clipsToBounds = true;
         self.refreshControl.endRefreshing()
         
     }
+    
+    @IBAction func followPressed(_ sender: Any) {
+        //print(followingArr!)
+        if (followButton.isSelected) {
+            self.currentUser!.remove(user!.objectId!, forKey: "following")
+            self.currentUser?.incrementKey("following_count", byAmount: -1)
+            if let index = followingArr?.index(of: user!.objectId!) {
+                followingArr!.remove(at: index)
+            }
+            
+            followButton.isSelected = false
+            currentUser!.saveInBackground()
+            print("Unfollowed")
+        } else {
+            self.currentUser!.addUniqueObject(user?.objectId!, forKey: "following")
+            self.currentUser?.incrementKey("following_count")
+            followingArr?.append(user!.objectId!)
+            
+            followButton.isSelected = true
+            currentUser!.saveInBackground()
+            print("followed")
+        }
+    }
+
+    
     
 
 

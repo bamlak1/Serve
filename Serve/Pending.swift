@@ -10,7 +10,7 @@ import Parse
 
 class Pending: NSObject {
     
-    class func postPending(user: PFUser, event: PFObject, auto: Bool, withCompletion completion: PFBooleanResultBlock?) {
+    class func postPending(user: PFUser, event: PFObject, caption: String?, auto: Bool, withCompletion completion: PFBooleanResultBlock?) {
         
         let pendingRequest = PFObject(className: "Pending")
         
@@ -22,7 +22,7 @@ class Pending: NSObject {
         pendingRequest["user_name"] = user["username"]
         pendingRequest["completed"] = false
         
-        Post.userInterestedPost(eventInterest: event, title: eventTitle) { (success: Bool, error: Error?) in
+        Post.userInterestedPost(eventInterest: event, title: eventTitle, caption: caption) { (success: Bool, error: Error?) in
             if success {
                 print("interestPost created")
             } else {

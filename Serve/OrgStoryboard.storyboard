@@ -22,14 +22,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n33-KP-Qg3">
-                                <rect key="frame" x="269" y="580" width="90" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="temp sign up"/>
-                                <connections>
-                                    <action selector="signUpPressed:" destination="tZa-Zn-N20" eventType="touchUpInside" id="4x4-Zd-eNx"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Event Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qre-mL-Ryp">
                                 <rect key="frame" x="16" y="200" width="343" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -752,7 +744,7 @@
                 <navigationController storyboardIdentifier="OrgNavControl" automaticallyAdjustsScrollViewInsets="NO" id="cRY-vI-r1X" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Organization" id="yOY-bq-n3u"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Jvn-KA-MQN">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Jvn-KA-MQN">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -791,7 +783,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4gG-p4-mau" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Pending Approvals" id="BGW-vo-OwY"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="V3o-4U-cAV">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="V3o-4U-cAV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -810,7 +802,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="g9u-XE-Wz5" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Events" id="b9c-Tq-N48"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="GEn-5V-RWa">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="GEn-5V-RWa">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

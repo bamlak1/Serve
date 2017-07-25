@@ -24,18 +24,7 @@ class EventDetailViewController: UIViewController {
     @IBOutlet weak var volunteerLabel: UILabel!
     @IBOutlet weak var expectedTasksLabel: UILabel!
     
-    @IBAction func signUpPressed(_ sender: Any) {
-        Pending.postPending(user: PFUser.current()!, event: event!, auto: false) { (success: Bool, error: Error?) in
-            if success {
-                print("pending request made")
-            } else {
-                print(error?.localizedDescription ?? "error")
-            }
-        }
-        
-        
-        
-    }
+
     
     
     
@@ -47,13 +36,13 @@ class EventDetailViewController: UIViewController {
         let start = event?["start"] as! String
         let end = event?["end"] as! String
         dateLabel.text = "\(start) - \(end)"
-        locationLabel.text = event?["location"] as! String
-        descriptionLabel.text = event?["description"] as! String
+        locationLabel.text = (event?["location"] as! String)
+        descriptionLabel.text = (event?["description"] as! String)
         let pendingCount = event?["pending_count"] as? Int ?? 0
         pendingLabel.text = "\(pendingCount) pending requests"
         let volunteerCount = event?["volunteers"] as? Int ?? 0
         volunteerLabel.text = "\(volunteerCount) volunteers"
-        expectedTasksLabel.text = event?["expected_tasks"] as! String
+        expectedTasksLabel.text = (event?["expected_tasks"] as! String)
         
         
         let image = event?["banner"] as! PFFile
@@ -75,13 +64,12 @@ class EventDetailViewController: UIViewController {
     }
     
     
-    /*
-     // MARK: - Navigation
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
+   
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
+        let vc = segue.destination as! ComposeUpdateViewController
+
+        vc.event = self.event
      }
-     */
+    
     
 }
