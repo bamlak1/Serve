@@ -11,7 +11,7 @@ import Parse
 
 class OrganizationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate{
     
-    let user = PFUser.current()!
+    var user : PFUser?
     var updates : [PFObject] = []
     var refreshControl = UIRefreshControl()
     
@@ -24,6 +24,7 @@ class OrganizationViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var numVolLabel: UILabel!
     @IBOutlet weak var contactLabel: UILabel!
     @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var causesLabel: UILabel!
     
    
 
@@ -37,7 +38,8 @@ class OrganizationViewController: UIViewController, UITableViewDelegate, UITable
         tableView.delegate = self
         tableView.dataSource = self
         
-        retrieveOrgData()
+        retrieveOrg()
+        setOrgData()
         retrieveOrgUpdates()
 
         // Do any additional setup after loading the view.
@@ -49,22 +51,36 @@ class OrganizationViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func didPullToRefresh(_ refreshControl: UIRefreshControl) {
+        retrieveOrg()
         retrieveOrgUpdates()
-        retrieveOrgData()
+        setOrgData()
     }
     
-    func retrieveOrgData() {
-        orgNameLabel.text = (user["username"] as! String)
+    func setOrgData() {
+        orgNameLabel.text = (user!["username"] as! String)
         
-        if let mission = user["mission"] {
+        if let mission = user!["mission"] {
             missionLabel.text = (mission as! String)
         }
         
-        if let contact = user["contact"] {
+        if let contact = user!["contact"] {
             contactLabel.text = (contact as! String)
         }
         
-        if let banner = user["banner"] as? PFFile {
+        if let causes = user!["causes"] as? [PFObject] {
+            for index in 0...1{
+                let cause = causes[index]
+                let name = cause["name"] as! String
+                causesLabel.text?.append("\(name), " )
+                
+            }
+            let lastCause = causes[2]
+            let name = lastCause["name"] as! String
+            causesLabel.text?.append(name)
+        }
+        
+        if user!["banner"] != nil {
+            let banner = user!["banner"] as! PFFile
             banner.getDataInBackground(block: { (data: Data?, error: Error?) in
                 if (error != nil) {
                     print(error?.localizedDescription ?? "error")
@@ -75,7 +91,7 @@ class OrganizationViewController: UIViewController, UITableViewDelegate, UITable
             })
         }
         
-        if let profileImage = user["profile_image"] as? PFFile {
+        if let profileImage = user!["profile_image"] as? PFFile {
             profileImage.getDataInBackground(block: { (data: Data?, error: Error?) in
                 if (error != nil) {
                     print(error?.localizedDescription ?? "error")
@@ -89,7 +105,8 @@ class OrganizationViewController: UIViewController, UITableViewDelegate, UITable
         
     }
 
-    
+
+
     func retrieveOrgUpdates() {
         let query = PFQuery(className: "Post")
         query.whereKey("user", equalTo: user)
@@ -107,6 +124,7 @@ class OrganizationViewController: UIViewController, UITableViewDelegate, UITable
             }
         }
     }
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return updates.count
@@ -139,6 +157,17 @@ class OrganizationViewController: UIViewController, UITableViewDelegate, UITable
         
         return cell
         
+        
+    }
+    
+    func retrieveOrg() {
+        let query = PFUser.query()
+        query?.includeKey("causes")
+        do {
+            try self.user = (query?.getObjectWithId((PFUser.current()?.objectId)!) as! PFUser)
+        } catch {
+            print("error")
+        }
         
     }
     

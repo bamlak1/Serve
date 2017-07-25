@@ -78,6 +78,12 @@ class CausesPopUpViewController: UIViewController, UITableViewDataSource, UITabl
         let user = PFUser.current()
         user?.addUniqueObjects(from: addedCauses, forKey: "causes")
         user?.saveInBackground()
+        
+        for cause in addedCauses{
+            cause.addUniqueObject(user!, forKey: "users")
+            cause.saveInBackground()
+        }
+        
         removeAnimate()
     }
     

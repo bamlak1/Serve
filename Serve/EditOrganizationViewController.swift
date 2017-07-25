@@ -96,6 +96,15 @@ class EditOrganizationViewController: UIViewController, UINavigationControllerDe
         dismiss(animated: true, completion: nil)
     }
 
+    @IBAction func interestsPressed(_ sender: Any) {
+        let vc = UIStoryboard(name: "Individual", bundle: nil).instantiateViewController(withIdentifier: "causePopUp") as! CausesPopUpViewController
+        self.addChildViewController(vc)
+        vc.view.frame = self.view.frame
+        self.view.addSubview(vc.view)
+        vc.didMove(toParentViewController: self)
+    }
+    
+    
     @IBAction func logOutPressed(_ sender: Any) {
         PFUser.logOutInBackground { (error: Error?) in
             if let error = error{
