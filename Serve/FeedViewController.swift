@@ -168,7 +168,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             let id = user.objectId!
             
             
-            let vc = segue.destination as! OtherUserViewController
+            let vc = segue.destination as! UserProfileViewController
             vc.userID = id
         }
         

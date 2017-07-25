@@ -524,6 +524,16 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NSD-53-yq3">
+                                            <rect key="frame" x="300" y="161" width="75" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="Follow"/>
+                                            <state key="selected" title="Following"/>
+                                            <connections>
+                                                <action selector="followPressed:" destination="hCQ-Ki-PUo" eventType="touchUpInside" id="fQY-1J-YbI"/>
+                                                <action selector="followPressed:" destination="oyj-n5-BxC" eventType="touchUpInside" id="qgj-fN-fW9"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
@@ -653,6 +663,8 @@
                     <connections>
                         <outlet property="bannerImageView" destination="wHE-oF-aGx" id="YXx-ZJ-QBd"/>
                         <outlet property="bioLabel" destination="NMq-Mx-Iyr" id="jRb-EZ-tJK"/>
+                        <outlet property="editButton" destination="zwu-55-Jiw" id="Shn-QR-hE0"/>
+                        <outlet property="followButton" destination="NSD-53-yq3" id="BQ8-Iq-Ovj"/>
                         <outlet property="followerCountLabel" destination="iXw-Xg-vlk" id="SBe-mI-dSU"/>
                         <outlet property="followingCountLabel" destination="FmY-dh-H8t" id="kB8-xS-Zgx"/>
                         <outlet property="interestsLabel" destination="NiD-8R-KpA" id="0bz-BF-z7e"/>
@@ -751,7 +763,7 @@
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qxz-5G-74u">
                                             <rect key="frame" x="74" y="3" width="30" height="30"/>
                                             <connections>
-                                                <segue destination="oyj-n5-BxC" kind="show" identifier="other" id="IFd-R7-J2L"/>
+                                                <segue destination="hCQ-Ki-PUo" kind="show" identifier="other" id="pAn-mp-cSG"/>
                                             </connections>
                                         </button>
                                     </subviews>
@@ -1423,6 +1435,7 @@
         <image name="moment-icon" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="mJZ-G1-Mq3"/>
+        <segue reference="pAn-mp-cSG"/>
+        <segue reference="G6f-qI-nsY"/>
     </inferredMetricsTieBreakers>
 </document>
