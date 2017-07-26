@@ -36,7 +36,11 @@ class MapSettingsViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-    // When the user presses the close button, hides the settings menu 
+    @IBAction func doNotCloseSettings(_ sender: Any) {
+        print("no closing here!")
+    }
+    
+    // When the user presses the close button, hides the settings menu
     // Redraws the circle using the appropriate radius
     @IBAction func closeSettings(_ sender: Any) {
         self.removeAnimate()
