@@ -99,35 +99,12 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
         case 0:
             let cell = profileTableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as! PostCell
             let post = userPosts[indexPath.row]
-            let username = user?["username"] as! String
-            let image = user?["profile_image"] as? PFFile
-            //let caption = post["caption"] as! String
-            //let date = post["date"] as! String
-            //let fives = post["high-fives"] as! String
-            let action = post["action"] as! String
+            let user = post["user"] as! PFUser
             let event = post["event"] as! PFObject
-
+            cell.user = user
             cell.event = event
-            let eventTitle = event["title"] as! String
-            //let event = create event stuff
+            cell.post = post
             
-            
-            image?.getDataInBackground { (data: Data?, error: Error?) in
-                if(error != nil) {
-                    print(error?.localizedDescription ?? "error")
-                } else {
-                    let finalImage = UIImage(data: data!)
-                    cell.profilePicImageView.image = finalImage
-                }
-            }
-            
-            if let caption = post["caption"] as? String {
-                cell.captionLabel.text = caption
-            }
-            
-            cell.nameLabel.text = username
-            cell.eventLabel.text = eventTitle
-            cell.actionLabel.text = action
             returnCell = cell
         case 1:
             let cell = profileTableView.dequeueReusableCell(withIdentifier: "EventTableViewCell", for: indexPath) as! EventTableViewCell
@@ -185,6 +162,7 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
         let query = PFQuery(className: "Post")
         query.whereKey("user", equalTo: user!)
         query.includeKey("event")
+        query.includeKey("user")
         query.order(byDescending: "createdAt")
         
         query.limit = 10

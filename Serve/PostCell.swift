@@ -31,6 +31,7 @@ class PostCell: UITableViewCell {
     var event : PFObject?
     var user: PFUser?
     var userType: String?
+    var pic : PFFile?
 
     @IBOutlet weak var eventButtonOutlet: UIButton!
 
@@ -43,6 +44,27 @@ class PostCell: UITableViewCell {
         
         if(self.delegate != nil ) {
             self.delegate.callSegueFromCell(myData: user, type: type)
+        }
+    }
+    
+    var post : PFObject! {
+        didSet{
+            nameLabel.text = (user!["username"] as! String)
+            eventLabel.text = (event!["title"] as! String)
+            actionLabel.text = (post["action"] as! String)
+            userType = (user!["type"] as! String)
+            pic = (user!["profile_image"] as! PFFile)
+            pic?.getDataInBackground { (data: Data?, error: Error?) in
+                if error != nil {
+                    print(error?.localizedDescription ?? "error")
+                } else {
+                    let finalImage = UIImage(data: data!)
+                    self.profilePicImageView.image = finalImage
+                }
+            }
+            if post["caption"] != nil {
+                captionLabel.text = (post["caption"] as! String)
+            }
         }
     }
    
