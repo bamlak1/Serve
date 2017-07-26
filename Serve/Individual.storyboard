@@ -892,14 +892,7 @@
                                 <rect key="frame" x="16" y="364" width="343" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="# of Pending Approvals" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lKH-Am-Dv6">
-                                <rect key="frame" x="16" y="387" width="343" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" red="0.30227412269999998" green="0.69466095510000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UF8-KB-zt7">
@@ -922,7 +915,15 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="ht3-vq-D1d" kind="presentation" id="gBw-7Y-AIA"/>
+                                    <segue destination="ht3-vq-D1d" kind="presentation" identifier="compose" id="gBw-7Y-AIA"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eNg-dC-dQa">
+                                <rect key="frame" x="16" y="359" width="343" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <connections>
+                                    <segue destination="mkf-PU-1Wz" kind="show" identifier="accepted" id="6Ex-SA-bnt"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -935,14 +936,13 @@
                         <outlet property="expectedTasksLabel" destination="RY6-zC-gfx" id="gVx-o9-Wda"/>
                         <outlet property="locationLabel" destination="zT6-8G-eeA" id="UpE-9l-lCc"/>
                         <outlet property="orgLabel" destination="OMC-Qq-lzP" id="n4u-fb-BIA"/>
-                        <outlet property="pendingLabel" destination="lKH-Am-Dv6" id="igC-IA-G4y"/>
                         <outlet property="titleLabel" destination="Zdu-lv-5mx" id="ODr-YT-T3u"/>
                         <outlet property="volunteerLabel" destination="SBR-Bz-7qT" id="oPf-Zg-x8k"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EjR-up-Lt3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8735" y="-1351"/>
+            <point key="canvasLocation" x="8738" y="-1351"/>
         </scene>
         <!--Compose Update View Controller-->
         <scene sceneID="uaK-lG-n6H">
@@ -1034,6 +1034,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vPQ-Lb-y5r" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="9538" y="-1358"/>
+        </scene>
+        <!--AcceptedUsers-->
+        <scene sceneID="0PR-gA-RGf">
+            <objects>
+                <viewControllerPlaceholder storyboardName="OrgStoryboard" referencedIdentifier="AcceptedUsers" id="mkf-PU-1Wz" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VUi-D8-Ayw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="10287" y="-1496"/>
         </scene>
         <!--Edit Profile View Controller-->
         <scene sceneID="aLb-pC-FN7">

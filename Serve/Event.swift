@@ -22,7 +22,9 @@ class Event: NSObject {
         event["title"] = title
         event["banner"] = getPFFileFromImage(image: image)
         event["description"] = description
-        event["author"] = PFUser.current()
+        let user = PFUser.current()
+        event["author"] = user
+        event["org_name"] = user!["username"] as! String
         event["location"] = location
         event["start"] = start
         event["start_date"] = startDate
