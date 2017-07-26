@@ -13,4 +13,10 @@ class MapEventCell: UICollectionViewCell {
     @IBOutlet weak var eventName: UILabel!
     @IBOutlet weak var eventDate: UILabel!
     @IBOutlet weak var location: UILabel!
+    
+    override var isSelected: Bool {
+        didSet {
+            self.layer.borderColor = self.isSelected ? UIColor(red:0.34, green:0.71, blue:1.00, alpha:1.0).cgColor : UIColor.black.cgColor
+        }
+    }
 }
