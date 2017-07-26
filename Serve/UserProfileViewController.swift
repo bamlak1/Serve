@@ -27,11 +27,8 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var segmentedControl: UISegmentedControl!
  
     var user : PFUser?
-    var causes: [PFObject] = []
     var userType: String?
     var currentUser = PFUser.current()
-    //By default userID is set to the currentUser ID
-    var userID : String?
     var userPosts: [PFObject] = []
     var upcomingEvents : [PFObject] = []
     var pastEvents: [PFObject] = []
@@ -49,15 +46,14 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
         refreshControl.addTarget(self, action: #selector(UserProfileViewController.didPullToRefresh(_:)), for: .valueChanged)
         profileTableView.insertSubview(refreshControl, at: 0)
         
-        fake()
-        //retrieveUser()
+        setUser()
         fetchUserUpdates()
-        retrievePastEvents()
-        retrieveUpcomingEvents()
+        //retrievePastEvents()
+        //retrieveUpcomingEvents()
     }
     
     func didPullToRefresh(_ refreshControl: UIRefreshControl) {
-        //retrieveUser()
+        setUser()
         fetchUserUpdates()
         retrieveUpcomingEvents()
         retrievePastEvents()
@@ -70,9 +66,10 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
     
     
     @IBAction func indexChanged(_ sender: UISegmentedControl) {
-        //retrieveUser()
+        fetchUserUpdates()
         retrievePastEvents()
         retrieveUpcomingEvents()
+
     }
     
 
@@ -102,79 +99,22 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
         case 0:
             let cell = profileTableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as! PostCell
             let post = userPosts[indexPath.row]
-            let username = user?["username"] as! String
-            let image = user?["profile_image"] as? PFFile
-            //let caption = post["caption"] as! String
-            //let date = post["date"] as! String
-            //let fives = post["high-fives"] as! String
-            let action = post["action"] as! String
+            let user = post["user"] as! PFUser
             let event = post["event"] as! PFObject
-
+            cell.user = user
             cell.event = event
-            let eventTitle = event["title"] as! String
-            //let event = create event stuff
+            cell.post = post
             
-            
-            image?.getDataInBackground { (data: Data?, error: Error?) in
-                if(error != nil) {
-                    print(error?.localizedDescription ?? "error")
-                } else {
-                    let finalImage = UIImage(data: data!)
-                    cell.profilePicImageView.image = finalImage
-                }
-            }
-            
-            if let caption = post["caption"] as? String {
-                cell.captionLabel.text = caption
-            }
-            
-            cell.nameLabel.text = username
-            cell.eventLabel.text = eventTitle
-            cell.actionLabel.text = action
             returnCell = cell
         case 1:
             let cell = profileTableView.dequeueReusableCell(withIdentifier: "EventTableViewCell", for: indexPath) as! EventTableViewCell
             let event = upcomingEvents[indexPath.row]
-            let image = event["banner"] as! PFFile
-            let description = event["description"] as! String
-            let start = event["start"] as! String
-            let end = event["end"] as! String
-            let title = event["title"] as! String
-            
-            image.getDataInBackground { (data: Data?, error: Error?) in
-                if(error != nil) {
-                    print(error?.localizedDescription ?? "error")
-                } else {
-                    let finalImage = UIImage(data: data!)
-                    cell.bannerImageView.image = finalImage
-                }
-            }
-            
-            cell.eventNameLabel.text = title
-            cell.dateTimeLabel.text = "\(start) - \(end)"
-            cell.descriptionLabel.text = description
+            cell.event = event
             returnCell = cell
         case 2:
             let cell = profileTableView.dequeueReusableCell(withIdentifier: "EventTableViewCell", for: indexPath) as! EventTableViewCell
             let event = pastEvents[indexPath.row]
-            let image = event["banner"] as! PFFile
-            let description = event["description"] as! String
-            let start = event["start"] as! String
-            let end = event["end"] as! String
-            let title = event["title"] as! String
-            
-            image.getDataInBackground { (data: Data?, error: Error?) in
-                if(error != nil) {
-                    print(error?.localizedDescription ?? "error")
-                } else {
-                    let finalImage = UIImage(data: data!)
-                    cell.bannerImageView.image = finalImage
-                }
-            }
-            
-            cell.eventNameLabel.text = title
-            cell.dateTimeLabel.text = "\(start) - \(end)"
-            cell.descriptionLabel.text = description
+            cell.event = event
             returnCell = cell
         default:
             break
@@ -188,6 +128,7 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
         let query = PFQuery(className: "Post")
         query.whereKey("user", equalTo: user!)
         query.includeKey("event")
+        query.includeKey("user")
         query.order(byDescending: "createdAt")
         
         query.limit = 10
@@ -260,7 +201,7 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
         
     }
     
-    func fake() {
+    func setUser() {
 
         if user == nil {
             user = PFUser.current()!
@@ -342,111 +283,7 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
         profilePicImageView.clipsToBounds = true;
         self.refreshControl.endRefreshing()
     }
-    
-    //FIX THE QUERY SO ITS ASYNC /////////////////////////////////////////////////////////////
-    func retrieveUser() {
-//        let query = PFUser.query()
-//        query?.includeKey("causes")
-//        do {
-//            //self.user = query?.getObjectInBackground(withId: self.userID!) as! PFUser
-//            try self.user = query?.getObjectWithId(self.userID!) as! PFUser
-//        } catch {
-//            print("error")
-//        }
-        
-        print("before query")
-        let query = PFQuery(className: "_User")
-        //query?.whereKey("id", equalTo: userID!)
-        query.findObjectsInBackground(block: { (users: [PFObject]?, error: Error?) in
-            if users != nil {
-                print("ya")
-            } else {
-                print(error?.localizedDescription ?? "errpr")
-            }
-       })
-        print("after query")
-        print(self.user)
-        
-        let type = user!["type"] as! String
-        userType = type
-        
-        
-        if let username = user!["username"] {
-            nameLabel.text = (username as! String)
-        }
-        
-//        if let causes = user!["causes"] as? [PFObject] {
-//            for index in 0...1{
-//                let cause = causes[index]
-//                let name = cause["name"] as! String
-//                interestsLabel.text?.append("\(name), " )
-//                
-//            }
-//            let lastCause = causes[2]
-//            let name = lastCause["name"] as! String
-//            interestsLabel.text?.append(name)
-//        }
-        if let bio = user!["bio"] {
-            bioLabel.text = (bio as! String)
-        }
-        if let friendsCount = user!["friendsCount"] {
-            followerCountLabel.text = (friendsCount as! String)
-        }
-        if let followingCount = user!["followingCount"] {
-            followingCountLabel.text = (followingCount as! String)
-        }
-        
-        if let banner = user!["banner"] as? PFFile {
-            banner.getDataInBackground(block: { (data: Data?, error: Error?) in
-                if (error != nil) {
-                    print(error?.localizedDescription ?? "error")
-                } else {
-                    let finalImage = UIImage(data: data!)
-                    self.bannerImageView.image = finalImage
-                }
-            })
-        }
-        
-        if let profileImage = user!["profile_image"] as? PFFile {
-            profileImage.getDataInBackground(block: { (data: Data?, error: Error?) in
-                if (error != nil) {
-                    print(error?.localizedDescription ?? "error")
-                } else {
-                    let finalImage = UIImage(data: data!)
-                    self.profilePicImageView.image = finalImage
-                }
-            })
-        }
-        
-        if user?.objectId == PFUser.current()?.objectId {
-            print("on current user's page")
-            editButton.isEnabled = true
-            editButton.isHidden = false
-            followButton.isEnabled = false
-            followButton.isHidden = true
-        } else if user?.objectId != PFUser.current()?.objectId {
-            print("on other user's page")
-            followButton.isEnabled = true
-            followButton.isHidden = false
-            editButton.isEnabled = false
-            editButton.isHidden = true
-        }
-        
-        if followButton.isEnabled{
-            followingArr = (currentUser!["following"] as! [String])
-            //print(followingArr!)
-            if (followingArr?.contains(user!.objectId!))! {
-                followButton.isSelected = true
-            }
-        }
-        
-        
-        profilePicImageView.layer.cornerRadius = profilePicImageView.frame.size.width / 2;
-        profilePicImageView.clipsToBounds = true;
-        self.refreshControl.endRefreshing()
-        
-    }
-    
+
     
     @IBAction func followPressed(_ sender: Any) {
         //print(followingArr!)

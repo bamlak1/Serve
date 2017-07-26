@@ -9,7 +9,7 @@
 import UIKit
 import Parse
 
-class PendingApprovalsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class PendingApprovalsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, PendingCellDelegate {
     
     @IBOutlet var tableView: UITableView!
     
@@ -47,28 +47,13 @@ class PendingApprovalsViewController: UIViewController, UITableViewDelegate, UIT
         let request = pending[indexPath.row]
         let user = request["user"] as! PFUser
         let event = request["event"] as! PFObject
-        cell.request = request
+        
+        cell.delegate = self
+        cell.indexPath = indexPath
         cell.event = event
         cell.user = user
-        
-        
-        let name = request["user_name"] as! String
-        let eventName = request["event_name"] as! String
-        
-        if user["profile_image"] != nil {
-            let profileImage = user["profile_image"] as! PFFile
-            profileImage.getDataInBackground(block: { (data: Data?, error: Error?) in
-                if error != nil {
-                    print(error?.localizedDescription ?? "error")
-                } else {
-                    let finalImage = UIImage(data: data!)
-                    cell.profileImageView.image = finalImage
-                }
-            })
-        }
-    
-        cell.nameLabel.text = name
-        cell.eventTitle.text = eventName
+        cell.request = request
+
         
         return cell
     }
@@ -95,6 +80,13 @@ class PendingApprovalsViewController: UIViewController, UITableViewDelegate, UIT
             }
         }
         
+    }
+    
+    func didclickOnCellAtIndex(at index: IndexPath) {
+        pending.remove(at: index.row)
+        tableView.deleteRows(at: [index], with: UITableViewRowAnimation.right)
+        
+        print("button tapped at index:\(index)")
     }
     
     

@@ -122,35 +122,12 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         let update = updates[indexPath.row]
         let user = update["user"] as? PFUser
-        cell.user = user
-        cell.userType = user?["type"] as! String
         let event = update["event"] as! PFObject
+        cell.indexPath = indexPath
+        cell.user = user
         cell.event = event
-        let name = user?["username"] as! String
-        let eventTitle = event["title"] as! String
-        let action = update["action"] as! String
+        cell.post = update
         
-        if let profileImage = user?["profile_image"] as? PFFile{
-            profileImage.getDataInBackground { (data: Data?, error: Error?) in
-                if error != nil {
-                    print(error?.localizedDescription ?? "error")
-                } else {
-                    let finalImage = UIImage(data: data!)
-                    cell.profilePicImageView.image = finalImage
-                }
-            }
-        }
-        
-        if let caption = update["caption"] as? String {
-            cell.captionLabel.text = caption
-        }
-        
-
-        cell.nameButtonOutlet.tag = indexPath.row 
-        cell.eventButtonOutlet.tag = indexPath.row
-        cell.nameLabel.text = name
-        cell.actionLabel.text = action
-        cell.eventLabel.text = eventTitle
         
         return cell
     }
