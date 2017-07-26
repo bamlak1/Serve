@@ -12,6 +12,7 @@ import Parse
 class EventDetailViewController: UIViewController {
     
     var event: PFObject?
+    var org : PFUser?
     
     @IBOutlet weak var bannerImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -31,9 +32,7 @@ class EventDetailViewController: UIViewController {
         super.viewDidLoad()
         
         titleLabel.text = event?["title"] as? String
-        if let orgName = event?["org_name"] as? String{
-            orgLabel.text = orgName
-        }
+        orgLabel.text = (org!["username"] as! String)
         let start = event?["start"] as! String
         let end = event?["end"] as! String
         dateLabel.text = "\(start) - \(end)"
@@ -54,7 +53,6 @@ class EventDetailViewController: UIViewController {
             }
         }
         
-        // Do any additional setup after loading the view.
     }
     
     override func didReceiveMemoryWarning() {
@@ -74,6 +72,9 @@ class EventDetailViewController: UIViewController {
             let vc = segue.destination as! ComposeUpdateViewController
             
             vc.event = self.event
+        } else if segue.identifier == "org"{
+            let vc = segue.destination as! UserProfileViewController
+            vc.user = org
         }
      }
     

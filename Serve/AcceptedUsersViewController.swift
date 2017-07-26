@@ -53,20 +53,17 @@ class AcceptedUsersViewController: UIViewController, UITableViewDataSource, UITa
             if events != nil {
                 let event = events!.first
                 self.users = event!["accepted_users"] as! [PFUser]
-                print(self.users)
                 self.tableView.reloadData()
                 
             }
         }
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+ 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        let cell = sender as! UserCell
+        let vc = segue.destination as! UserProfileViewController
+        vc.user = cell.user
     }
-    */
+   
 
 }
