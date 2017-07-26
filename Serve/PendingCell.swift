@@ -16,17 +16,43 @@ class PendingCell: UITableViewCell {
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var eventTitle: UILabel!
     
+    var pic : PFFile?
+    var delegate : PendingCellDelegate!
+    var indexPath: IndexPath!
+    
     var event : PFObject!
     var user : PFUser!
-    var request : PFObject!
+    var request : PFObject! {
+        didSet{
+            
+            nameLabel.text = (user["username"] as! String)
+            eventTitle.text = (request["event_name"] as! String)
+            
+            if user!["profile_image"] != nil {
+                pic = (user!["profile_image"] as! PFFile)
+                pic?.getDataInBackground(block: { (data: Data?, error: Error?) in
+                    if error != nil {
+                        print(error?.localizedDescription ?? "error")
+                    } else {
+                        let finalImage = UIImage(data: data!)
+                        self.profileImageView.image = finalImage
+                    }
+                })
+                
+            }
+        }
+    }
     
     @IBAction func yesPressed(_ sender: Any) {
+        event.remove(user, forKey: "pending_users")
         event.addUniqueObject(user, forKey: "accepted_users")
         event.incrementKey("volunteers")
         request["completed"] = true
         
         event.saveInBackground()
         request.saveInBackground()
+        
+        self.delegate?.didclickOnCellAtIndex(at: indexPath)
         
         print("accepted")
     }
@@ -35,12 +61,12 @@ class PendingCell: UITableViewCell {
     @IBAction func noPressed(_ sender: Any) {
         
         event.remove(user, forKey: "pending_users")
-        user.remove(event, forKey: "pending_events")
         request["completed"] = true
         
         event.saveInBackground()
-        user.saveInBackground()
         request.saveInBackground()
+        
+        self.delegate?.didclickOnCellAtIndex(at: indexPath)
         
         print("denied")
     }

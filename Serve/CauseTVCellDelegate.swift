@@ -11,3 +11,7 @@ import Foundation
 protocol CauseTVCellDelegate {
     func didclickOnCellAtIndex(at index:IndexPath)
 }
+
+protocol PendingCellDelegate {
+    func didclickOnCellAtIndex(at index:IndexPath)
+}
