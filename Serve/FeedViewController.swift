@@ -63,7 +63,13 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     
     func fetchUpdates() {
+        var following = currentUser!["following"] as! [String]
+        let id = (currentUser?.objectId)!
+        following.append(id)
+    
+        
         let query = PFQuery(className: "Post")
+        query.whereKey("user_id", containedIn: following)
         query.includeKey("user")
         query.includeKey("event")
         query.order(byDescending: "createdAt")

@@ -36,6 +36,7 @@ class Post: NSObject {
         let post = PFObject(className: "Post")
         
         post["user"] = PFUser.current()
+        post["user_id"] = (PFUser.current()?.objectId)!
         post["action"] = "is interested in"
         post["event"] = eventInterest
         post["caption"] = caption
@@ -49,6 +50,7 @@ class Post: NSObject {
         let post = PFObject(className: "Post")
         
         post["user"] = PFUser.current()
+        post["user_id"] = (PFUser.current()?.objectId)!
         post["action"] = "created event"
         post["event"] = eventCreated
         
