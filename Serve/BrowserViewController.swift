@@ -23,15 +23,17 @@ class BrowserViewController: UIViewController, UICollectionViewDataSource, UICol
     var filteredPeople: [PFObject] = []
     
     
+    @IBOutlet weak var searchBar: UISearchBar!
     
     
     @IBOutlet weak var collectionView: UICollectionView!
     
     @IBOutlet weak var collectionView2: UICollectionView!
     
-    @IBOutlet weak var searchController: UISearchBar!
+ 
     
     @IBOutlet weak var collectionView3: UICollectionView!
+    
     
     
     override func viewDidLoad() {
@@ -45,9 +47,9 @@ class BrowserViewController: UIViewController, UICollectionViewDataSource, UICol
         
         
         fetchEvents()
-        fetchUsers()
-//        fetchOrgs()
-//        fetchPeople()
+//        fetchUsers()
+        fetchOrgs()
+        fetchPeople()
         
         // Do any additional setup after loading the view.
     }
@@ -64,14 +66,14 @@ class BrowserViewController: UIViewController, UICollectionViewDataSource, UICol
 //        }
 //    }
     
-    func searchBar(_ searchController: UISearchBar, textDidChange searchText: String) {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.isEmpty {
             filteredEvents = Events
             filteredOrgs = Orgs
             filteredPeople = People
             
         } else {
-            
+            print("search bar activated")
             filteredEvents = Events.filter { (event: PFObject) -> Bool in
                 let title = event["title"] as! String
                 return title.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
@@ -192,7 +194,7 @@ class BrowserViewController: UIViewController, UICollectionViewDataSource, UICol
         if let indexPath = collectionView2.indexPath(for: cell) {//get this to find the actual post
             let org = filteredOrgs[indexPath.item] //get the current post
             let otherUserViewController = segue.destination as! OtherUserViewController //tell it its destination
-            otherUserViewController.user = org as! PFUser
+            otherUserViewController.user = org as? PFUser
         }
         if let indexPath = collectionView3.indexPath(for: cell) {//get this to find the actual post
             let person = filteredPeople[indexPath.item] //get the current post
@@ -222,43 +224,36 @@ class BrowserViewController: UIViewController, UICollectionViewDataSource, UICol
     }
     
     func fetchOrgs() {
-        let query = PFQuery(className: "Event")
-        query.includeKey("user")
-        query.includeKey("event")
+        let query = PFQuery(className: "_User")
+        query.includeKey("type")
+        query.whereKey("type", equalTo: "Organization")
+        query.includeKey("username")
+        query.includeKey("profile_image")
         
         
-        query.findObjectsInBackground { (orgs: [PFObject]?, error: Error?) in
-            if let orgs = orgs {
-                self.Orgs = orgs
-                self.filteredOrgs = orgs
-                print("Loaded orgs")
-                self.collectionView2.reloadData()
+        query.findObjectsInBackground { (users: [PFObject]?, error: Error?) in
+            for user in users! {
+                let userType = user["type"] as! String
+                
+                if let orgs = users {
+                    if (userType == "Organization") {
+                        self.Orgs = orgs
+                        self.filteredOrgs = orgs
+                        print("Loaded orgs")
+                        self.collectionView2.reloadData()
+                        
+                    }
+                }
                 
             }
+            
         }
     }
     
     func fetchPeople() {
-        let query = PFQuery(className: "Event")
-        query.includeKey("user")
-        query.includeKey("event")
-        
-        
-        
-        query.findObjectsInBackground { (people: [PFObject]?, error: Error?) in
-            if let people = people {
-                self.People = people
-                self.filteredPeople = people
-                print("Loaded ppl")
-                self.collectionView3.reloadData()
-                
-            }
-        }
-    }
-    
-    func fetchUsers() {
         let query = PFQuery(className: "_User")
         query.includeKey("type")
+        query.whereKey("type", equalTo: "Individual")
         query.includeKey("username")
         query.includeKey("profile_image")
         
@@ -275,34 +270,40 @@ class BrowserViewController: UIViewController, UICollectionViewDataSource, UICol
                         self.collectionView3.reloadData()
                         
                     }
-                    
-                if let orgs = users {
-                    if (userType == "Organization") {
-                        self.Orgs = orgs
-                        self.filteredOrgs = orgs
-                        print("Loaded orgs")
-                        self.collectionView2.reloadData()
-                    }
-                
                 }
-                    
                 
-                }
+            }
             
-//             else {
-//                    if let orgs = users {
-//                        self.Orgs = orgs
-//                        self.filteredOrgs = orgs
-//                        print("Loaded orgs")
-//                        self.collectionView2.reloadData()
+        }
+    }
+//    
+//    func fetchUsers() {
+//        let query = PFQuery(className: "_User")
+//        query.includeKey("type")
+//        query.whereKey("type", equalTo: "Individual")
+//        query.includeKey("username")
+//        query.includeKey("profile_image")
+//        
+//        
+//        query.findObjectsInBackground { (users: [PFObject]?, error: Error?) in
+//            for user in users! {
+//                let userType = user["type"] as! String
+//                
+//                if let people = users {
+//                    if (userType == "Individual") {
+//                        self.People = people
+//                        self.filteredPeople = people
+//                        print("Loaded ppl")
+//                        self.collectionView3.reloadData()
 //                        
 //                    }
 //                }
-                
-            }
-    
-    }
-}
+//
+//                
+//            }
+//    
+//    }
+//}
     
     
     

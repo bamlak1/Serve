@@ -22,6 +22,7 @@
 		A03D91511F26CC22006CF35F /* CausesPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03D91501F26CC22006CF35F /* CausesPopUpViewController.swift */; };
 		A03D91531F26CC2A006CF35F /* CauseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03D91521F26CC2A006CF35F /* CauseTableViewCell.swift */; };
 		A03D91551F26CC3F006CF35F /* CauseTVCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03D91541F26CC3F006CF35F /* CauseTVCellDelegate.swift */; };
+		A03D91571F280422006CF35F /* ComposeUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03D91561F280422006CF35F /* ComposeUpdateViewController.swift */; };
 		A06309F21F215C2E002E886A /* BrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06309F11F215C2E002E886A /* BrowserViewController.swift */; };
 		A06309F41F215D2E002E886A /* EventBrowseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06309F31F215D2E002E886A /* EventBrowseCell.swift */; };
 		A06309F61F216833002E886A /* OrgBrowseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06309F51F216833002E886A /* OrgBrowseCell.swift */; };
@@ -100,6 +101,7 @@
 		A03D91501F26CC22006CF35F /* CausesPopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CausesPopUpViewController.swift; sourceTree = "<group>"; };
 		A03D91521F26CC2A006CF35F /* CauseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CauseTableViewCell.swift; sourceTree = "<group>"; };
 		A03D91541F26CC3F006CF35F /* CauseTVCellDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CauseTVCellDelegate.swift; sourceTree = "<group>"; };
+		A03D91561F280422006CF35F /* ComposeUpdateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposeUpdateViewController.swift; sourceTree = "<group>"; };
 		A06309F11F215C2E002E886A /* BrowserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowserViewController.swift; sourceTree = "<group>"; };
 		A06309F31F215D2E002E886A /* EventBrowseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventBrowseCell.swift; sourceTree = "<group>"; };
 		A06309F51F216833002E886A /* OrgBrowseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrgBrowseCell.swift; sourceTree = "<group>"; };
@@ -225,6 +227,7 @@
 		A07AD2111F13FAC500100D69 /* Serve */ = {
 			isa = PBXGroup;
 			children = (
+				A03D91561F280422006CF35F /* ComposeUpdateViewController.swift */,
 				CCD7557C1F158DFE0033FF7A /* Models */,
 				CCD7557B1F158DF30033FF7A /* ViewControllers */,
 				CCD7557A1F158C7E0033FF7A /* Storyboards */,
@@ -683,6 +686,7 @@
 				CC14168F1F16A42600BF2A81 /* CreateEventViewController.swift in Sources */,
 				A06309F21F215C2E002E886A /* BrowserViewController.swift in Sources */,
 				A06309FE1F2675C9002E886A /* SearchResultsViewController.swift in Sources */,
+				A03D91571F280422006CF35F /* ComposeUpdateViewController.swift in Sources */,
 				A07AD2471F1573BA00100D69 /* PostCell.swift in Sources */,
 				CC2453711F20146600D765E5 /* OrgEventDetailViewController.swift in Sources */,
 				CCFB6C201F15DA1100E59D5C /* OrganizationViewController.swift in Sources */,
