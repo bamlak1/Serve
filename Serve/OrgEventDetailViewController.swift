@@ -31,18 +31,20 @@ class OrgEventDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+    
+        
         titleLabel.text = event?["title"] as? String
         orgLabel.text = event?["author"] as? String
-        let start = event?["start"] as! String
-        let end = event?["end"] as! String
+        let start = event?["start"] as? String
+        let end = event?["end"] as? String
         dateLabel.text = "\(start) - \(end)"
-        locationLabel.text = event?["location"] as! String
-        descriptionLabel.text = event?["description"] as! String
+        locationLabel.text = (event?["location"] as! String)
+        descriptionLabel.text = (event?["description"] as! String)
         let pendingCount = event?["pending_count"] as? Int ?? 0
         pendingLabel.text = "\(pendingCount) pending requests"
         let volunteerCount = event?["volunteers"] as? Int ?? 0
         volunteerLabel.text = "\(volunteerCount) volunteers"
-        expectedTasksLabel.text = event?["expected_tasks"] as! String
+        expectedTasksLabel.text = (event?["expected_tasks"] as! String)
         
         
         let image = event?["banner"] as! PFFile

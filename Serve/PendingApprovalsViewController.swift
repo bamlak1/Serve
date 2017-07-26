@@ -136,15 +136,31 @@ class PendingApprovalsViewController: UIViewController, UITableViewDelegate, UIT
     //        }
     
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
+
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
+        if segue.identifier == "other" {
+            let button = sender as! UIButton
+            let indexPath = button.tag
+            let request = pending[indexPath]
+            let user = request["user"] as! PFUser
+            //let id = user.objectId!
+            
+            
+            let vc = segue.destination as! UserProfileViewController
+            vc.user = user
+        }
+        
+        if segue.identifier == "event"{
+            let button = sender as! UIButton
+            let indexPath = button.tag
+            let request = pending[indexPath]
+            let event = request["event"] as! PFObject
+            
+            let vc = segue.destination as! OrgEventDetailViewController
+            vc.event = event
+        }
      }
-     */
+ 
     
 }
 

@@ -685,16 +685,18 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="77.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="FirstName LastName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r6L-Md-HxV">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FirstName LastName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r6L-Md-HxV">
                                             <rect key="frame" x="84" y="0.0" width="161" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bMI-8t-kIT">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bMI-8t-kIT">
                                             <rect key="frame" x="8" y="0.0" width="68" height="68"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="68" id="WGI-WM-ywZ"/>
+                                                <constraint firstAttribute="width" constant="68" id="zod-10-8qL"/>
+                                            </constraints>
                                         </imageView>
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Dn-hC-mH6">
                                             <rect key="frame" x="253" y="18" width="50" height="50"/>
@@ -712,14 +714,39 @@
                                                 <action selector="noPressed:" destination="KmU-WT-hCg" eventType="touchUpInside" id="NWb-Gb-gJV"/>
                                             </connections>
                                         </button>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Event Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Vm-Tp-mw6">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Vm-Tp-mw6">
                                             <rect key="frame" x="84" y="29" width="93" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9n2-x6-viZ" userLabel="Name Button">
+                                            <rect key="frame" x="149.5" y="-4" width="30" height="30"/>
+                                            <connections>
+                                                <action selector="namePressed:" destination="KmU-WT-hCg" eventType="touchUpInside" id="aVT-wv-iiv"/>
+                                                <segue destination="yeL-za-73u" kind="show" identifier="other" id="d2X-aE-jqy"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HNL-Rh-6wg" userLabel="Event Button">
+                                            <rect key="frame" x="115.5" y="25" width="30" height="30"/>
+                                            <connections>
+                                                <action selector="eventPressed:" destination="KmU-WT-hCg" eventType="touchUpInside" id="Uwq-Ej-Vbc"/>
+                                                <segue destination="tZa-Zn-N20" kind="show" identifier="event" id="FWT-hz-HBm"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="bMI-8t-kIT" firstAttribute="top" secondItem="p7w-kg-4fl" secondAttribute="top" id="G8W-8v-9R7"/>
+                                        <constraint firstItem="9n2-x6-viZ" firstAttribute="centerY" secondItem="r6L-Md-HxV" secondAttribute="centerY" id="Tif-E2-ugk"/>
+                                        <constraint firstItem="r6L-Md-HxV" firstAttribute="leading" secondItem="bMI-8t-kIT" secondAttribute="trailing" constant="8" id="XEV-Yp-gT6"/>
+                                        <constraint firstItem="HNL-Rh-6wg" firstAttribute="centerX" secondItem="9Vm-Tp-mw6" secondAttribute="centerX" id="Xa4-rp-cbO"/>
+                                        <constraint firstItem="HNL-Rh-6wg" firstAttribute="centerY" secondItem="9Vm-Tp-mw6" secondAttribute="centerY" id="XjP-tN-rQk"/>
+                                        <constraint firstItem="bMI-8t-kIT" firstAttribute="leading" secondItem="p7w-kg-4fl" secondAttribute="leading" constant="8" id="cKy-jJ-rw3"/>
+                                        <constraint firstItem="9Vm-Tp-mw6" firstAttribute="leading" secondItem="bMI-8t-kIT" secondAttribute="trailing" constant="8" id="gS4-bZ-YXk"/>
+                                        <constraint firstItem="r6L-Md-HxV" firstAttribute="top" secondItem="p7w-kg-4fl" secondAttribute="top" id="ioU-xm-lbX"/>
+                                        <constraint firstItem="9n2-x6-viZ" firstAttribute="centerX" secondItem="r6L-Md-HxV" secondAttribute="centerX" id="rPi-Ua-hlN"/>
+                                        <constraint firstItem="9Vm-Tp-mw6" firstAttribute="top" secondItem="9n2-x6-viZ" secondAttribute="bottom" constant="3" id="sOk-4f-rZ0"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="eventTitle" destination="9Vm-Tp-mw6" id="goo-me-Jqd"/>
@@ -738,13 +765,21 @@
             </objects>
             <point key="canvasLocation" x="4069.5999999999999" y="1287.7061469265368"/>
         </scene>
+        <!--UserProfile-->
+        <scene sceneID="ATI-Lk-jDj">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Individual" referencedIdentifier="UserProfile" id="yeL-za-73u" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aef-ga-Pav" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4878" y="1038"/>
+        </scene>
         <!--Organization-->
         <scene sceneID="bW1-ZE-r5z">
             <objects>
                 <navigationController storyboardIdentifier="OrgNavControl" automaticallyAdjustsScrollViewInsets="NO" id="cRY-vI-r1X" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Organization" id="yOY-bq-n3u"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Jvn-KA-MQN">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Jvn-KA-MQN">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -783,7 +818,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4gG-p4-mau" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Pending Approvals" id="BGW-vo-OwY"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="V3o-4U-cAV">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="V3o-4U-cAV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -802,7 +837,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="g9u-XE-Wz5" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Events" id="b9c-Tq-N48"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="GEn-5V-RWa">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="GEn-5V-RWa">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -816,4 +851,7 @@
             <point key="canvasLocation" x="3268" y="-192"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="FWT-hz-HBm"/>
+    </inferredMetricsTieBreakers>
 </document>
