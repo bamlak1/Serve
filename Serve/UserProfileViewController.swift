@@ -27,10 +27,11 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var segmentedControl: UISegmentedControl!
  
     var user : PFUser?
+    var causes: [PFObject] = []
     var userType: String?
     var currentUser = PFUser.current()
     //By default userID is set to the currentUser ID
-    var userID = PFUser.current()?.objectId
+    var userID : String?
     var userPosts: [PFObject] = []
     var upcomingEvents : [PFObject] = []
     var pastEvents: [PFObject] = []
@@ -48,14 +49,15 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
         refreshControl.addTarget(self, action: #selector(UserProfileViewController.didPullToRefresh(_:)), for: .valueChanged)
         profileTableView.insertSubview(refreshControl, at: 0)
         
-        retrieveUser()
+        fake()
+        //retrieveUser()
         fetchUserUpdates()
         retrievePastEvents()
         retrieveUpcomingEvents()
     }
     
     func didPullToRefresh(_ refreshControl: UIRefreshControl) {
-        retrieveUser()
+        //retrieveUser()
         fetchUserUpdates()
         retrieveUpcomingEvents()
         retrievePastEvents()
@@ -68,7 +70,7 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
     
     
     @IBAction func indexChanged(_ sender: UISegmentedControl) {
-        retrieveUser()
+        //retrieveUser()
         retrievePastEvents()
         retrieveUpcomingEvents()
     }
@@ -258,16 +260,112 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
         
     }
     
+    func fake() {
+
+        if user == nil {
+            user = PFUser.current()!
+        }
+        
+        let type = user!["type"] as! String
+        userType = type
+        
+        if let causes = user?["cause_names"] as? [String] {
+            for index in 0...1{
+                let name = causes[index]
+                interestsLabel.text?.append("\(name), " )
+                
+            }
+            let name2 = causes[2]
+            interestsLabel.text?.append(name2)
+        }
+
+        
+        if let username = user!["username"] {
+            nameLabel.text = (username as! String)
+        }
+         if let bio = user!["bio"] {
+            bioLabel.text = (bio as! String)
+        }
+        if let friendsCount = user!["friendsCount"] {
+            followerCountLabel.text = (friendsCount as! String)
+        }
+        if let followingCount = user!["followingCount"] {
+            followingCountLabel.text = (followingCount as! String)
+        }
+        
+        if let banner = user!["banner"] as? PFFile {
+            banner.getDataInBackground(block: { (data: Data?, error: Error?) in
+                if (error != nil) {
+                    print(error?.localizedDescription ?? "error")
+                } else {
+                    let finalImage = UIImage(data: data!)
+                    self.bannerImageView.image = finalImage
+                }
+            })
+        }
+        
+        if let profileImage = user!["profile_image"] as? PFFile {
+            profileImage.getDataInBackground(block: { (data: Data?, error: Error?) in
+                if (error != nil) {
+                    print(error?.localizedDescription ?? "error")
+                } else {
+                    let finalImage = UIImage(data: data!)
+                    self.profilePicImageView.image = finalImage
+                }
+            })
+        }
+        
+        if user?.objectId == PFUser.current()?.objectId {
+            print("on current user's page")
+            editButton.isEnabled = true
+            editButton.isHidden = false
+            followButton.isEnabled = false
+            followButton.isHidden = true
+        } else if user?.objectId != PFUser.current()?.objectId {
+            print("on other user's page")
+            followButton.isEnabled = true
+            followButton.isHidden = false
+            editButton.isEnabled = false
+            editButton.isHidden = true
+        }
+        
+        if followButton.isEnabled{
+            followingArr = (currentUser!["following"] as! [String])
+            //print(followingArr!)
+            if (followingArr?.contains(user!.objectId!))! {
+                followButton.isSelected = true
+            }
+        }
+        
+        
+        profilePicImageView.layer.cornerRadius = profilePicImageView.frame.size.width / 2;
+        profilePicImageView.clipsToBounds = true;
+        self.refreshControl.endRefreshing()
+    }
+    
     //FIX THE QUERY SO ITS ASYNC /////////////////////////////////////////////////////////////
     func retrieveUser() {
-        let query = PFUser.query()
-        query?.includeKey("causes")
-        do {
-            //self.user = query?.getObjectInBackground(withId: self.userID!) as! PFUser
-            try self.user = query?.getObjectWithId(self.userID!) as! PFUser
-        } catch {
-            print("error")
-        }
+//        let query = PFUser.query()
+//        query?.includeKey("causes")
+//        do {
+//            //self.user = query?.getObjectInBackground(withId: self.userID!) as! PFUser
+//            try self.user = query?.getObjectWithId(self.userID!) as! PFUser
+//        } catch {
+//            print("error")
+//        }
+        
+        print("before query")
+        let query = PFQuery(className: "_User")
+        //query?.whereKey("id", equalTo: userID!)
+        query.findObjectsInBackground(block: { (users: [PFObject]?, error: Error?) in
+            if users != nil {
+                print("ya")
+            } else {
+                print(error?.localizedDescription ?? "errpr")
+            }
+       })
+        print("after query")
+        print(self.user)
         
         let type = user!["type"] as! String
         userType = type
@@ -277,17 +375,17 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
             nameLabel.text = (username as! String)
         }
         
-        if let causes = user!["causes"] as? [PFObject] {
-            for index in 0...1{
-                let cause = causes[index]
-                let name = cause["name"] as! String
-                interestsLabel.text?.append("\(name), " )
-                
-            }
-            let lastCause = causes[2]
-            let name = lastCause["name"] as! String
-            interestsLabel.text?.append(name)
-        }
+//        if let causes = user!["causes"] as? [PFObject] {
+//            for index in 0...1{
+//                let cause = causes[index]
+//                let name = cause["name"] as! String
+//                interestsLabel.text?.append("\(name), " )
+//                
+//            }
+//            let lastCause = causes[2]
+//            let name = lastCause["name"] as! String
+//            interestsLabel.text?.append(name)
+//        }
         if let bio = user!["bio"] {
             bioLabel.text = (bio as! String)
         }
@@ -348,6 +446,7 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
         self.refreshControl.endRefreshing()
         
     }
+    
     
     @IBAction func followPressed(_ sender: Any) {
         //print(followingArr!)

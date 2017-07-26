@@ -12,6 +12,7 @@ import Parse
 class CausesPopUpViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, CauseTVCellDelegate {
     
     var causes : [PFObject] = []
+    var names : [String] = []
     var filteredCauses: [PFObject] = []
     var addedCauses: [PFObject] = []
     
@@ -69,6 +70,9 @@ class CausesPopUpViewController: UIViewController, UITableViewDataSource, UITabl
     func didclickOnCellAtIndex(at index: IndexPath) {
         let cell = tableView(tableView, cellForRowAt: index) as! CauseTableViewCell
         addedCauses.append(cell.cause!)
+        let name = cell.nameLabel.text as! String
+        names.append(name)
+        
         
         print("button tapped at index:\(index)")
         print(self.addedCauses)
@@ -77,6 +81,7 @@ class CausesPopUpViewController: UIViewController, UITableViewDataSource, UITabl
     @IBAction func donePressed(_ sender: Any) {
         let user = PFUser.current()
         user?.addUniqueObjects(from: addedCauses, forKey: "causes")
+        user?.addUniqueObjects(from: names, forKey: "cause_names")
         user?.saveInBackground()
         
         for cause in addedCauses{
