@@ -17,6 +17,7 @@ class EventTableViewCell: UITableViewCell {
     @IBOutlet weak var dateTimeLabel: UILabel!
 
     var banner : PFFile?
+
     
     var event : PFObject! {
         didSet{

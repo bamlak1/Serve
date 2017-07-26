@@ -32,6 +32,12 @@ class PostCell: UITableViewCell {
     var user: PFUser?
     var userType: String?
     var pic : PFFile?
+    var indexPath : IndexPath!{
+        didSet{
+            nameButtonOutlet.tag = indexPath.row
+            eventButtonOutlet.tag = indexPath.row
+        }
+    }
 
     @IBOutlet weak var eventButtonOutlet: UIButton!
 
