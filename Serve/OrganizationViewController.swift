@@ -11,7 +11,7 @@ import Parse
 
 class OrganizationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate{
     
-    var user : PFUser?
+    var user = PFUser.current()
     var updates : [PFObject] = []
     var refreshControl = UIRefreshControl()
     
@@ -38,7 +38,6 @@ class OrganizationViewController: UIViewController, UITableViewDelegate, UITable
         tableView.delegate = self
         tableView.dataSource = self
         
-        retrieveOrg()
         setOrgData()
         retrieveOrgUpdates()
 
@@ -51,7 +50,6 @@ class OrganizationViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func didPullToRefresh(_ refreshControl: UIRefreshControl) {
-        retrieveOrg()
         retrieveOrgUpdates()
         setOrgData()
     }
@@ -67,15 +65,13 @@ class OrganizationViewController: UIViewController, UITableViewDelegate, UITable
             contactLabel.text = (contact as! String)
         }
         
-        if let causes = user!["causes"] as? [PFObject] {
+        if let causes = user!["cause_names"] as? [String] {
             for index in 0...1{
-                let cause = causes[index]
-                let name = cause["name"] as! String
+                let name = causes[index]
                 causesLabel.text?.append("\(name), " )
                 
             }
-            let lastCause = causes[2]
-            let name = lastCause["name"] as! String
+            let name = causes[2]
             causesLabel.text?.append(name)
         }
         
@@ -145,16 +141,7 @@ class OrganizationViewController: UIViewController, UITableViewDelegate, UITable
         
     }
     
-    func retrieveOrg() {
-        let query = PFUser.query()
-        query?.includeKey("causes")
-        do {
-            try self.user = (query?.getObjectWithId((PFUser.current()?.objectId)!) as! PFUser)
-        } catch {
-            print("error")
-        }
-        
-    }
+
     
     /*
     // MARK: - Navigation

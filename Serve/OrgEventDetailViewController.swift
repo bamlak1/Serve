@@ -35,8 +35,8 @@ class OrgEventDetailViewController: UIViewController {
         
         titleLabel.text = event?["title"] as? String
         orgLabel.text = event?["author"] as? String
-        let start = event?["start"] as? String
-        let end = event?["end"] as? String
+        let start = event?["start"] as! String
+        let end = event?["end"] as! String
         dateLabel.text = "\(start) - \(end)"
         locationLabel.text = (event?["location"] as! String)
         descriptionLabel.text = (event?["description"] as! String)
@@ -66,13 +66,14 @@ class OrgEventDetailViewController: UIViewController {
     }
     
     
-    /*
-     // MARK: - Navigation
+   
      // In a storyboard-based application, you will often want to do a little preparation before navigation
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
+        if segue.identifier == "accepted" {
+            let vc = segue.destination as! AcceptedUsersViewController
+            vc.event = event
+        }
+    }
+    
     
 }
