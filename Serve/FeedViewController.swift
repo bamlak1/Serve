@@ -158,11 +158,9 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             let indexPath = button.tag
             let update = updates[indexPath]
             let event = update["event"] as! PFObject
-            let org = update["user"] as! PFUser
             
             let vc = segue.destination as! EventDetailViewController
             vc.event = event
-            vc.org = org
         }
     }
 }

@@ -54,7 +54,9 @@ class PendingCell: UITableViewCell {
     
     @IBAction func yesPressed(_ sender: Any) {
         event.remove(user, forKey: "pending_users")
+        event.remove((user.objectId)!, forKey: "pending_ids")
         event.addUniqueObject(user, forKey: "accepted_users")
+        event.addUniqueObject((user.objectId)!, forKey: "accepted_ids")
         event.incrementKey("volunteers")
         request["completed"] = true
         
@@ -69,7 +71,6 @@ class PendingCell: UITableViewCell {
   
     @IBAction func noPressed(_ sender: Any) {
         
-        event.remove(user, forKey: "pending_users")
         request["completed"] = true
         
         event.saveInBackground()
