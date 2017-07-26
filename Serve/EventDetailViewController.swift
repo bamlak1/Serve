@@ -47,7 +47,9 @@ class EventDetailViewController: UIViewController, NotifyEventDelegate{
         }
         signUpButton.setTitle("Signed up", for: .selected)
         titleLabel.text = event?["title"] as? String
-        orgLabel.text = (event?["org_name"] as! String)
+        if event?["org_name"] != nil {
+            orgLabel.text = (event?["org_name"] as! String)
+        }
         let start = event?["start"] as! String
         let end = event?["end"] as! String
         dateLabel.text = "\(start) - \(end)"
