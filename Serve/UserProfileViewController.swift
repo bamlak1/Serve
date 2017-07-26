@@ -109,46 +109,12 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
         case 1:
             let cell = profileTableView.dequeueReusableCell(withIdentifier: "EventTableViewCell", for: indexPath) as! EventTableViewCell
             let event = upcomingEvents[indexPath.row]
-            let image = event["banner"] as! PFFile
-            let description = event["description"] as! String
-            let start = event["start"] as! String
-            let end = event["end"] as! String
-            let title = event["title"] as! String
-            
-            image.getDataInBackground { (data: Data?, error: Error?) in
-                if(error != nil) {
-                    print(error?.localizedDescription ?? "error")
-                } else {
-                    let finalImage = UIImage(data: data!)
-                    cell.bannerImageView.image = finalImage
-                }
-            }
-            
-            cell.eventNameLabel.text = title
-            cell.dateTimeLabel.text = "\(start) - \(end)"
-            cell.descriptionLabel.text = description
+            cell.event = event
             returnCell = cell
         case 2:
             let cell = profileTableView.dequeueReusableCell(withIdentifier: "EventTableViewCell", for: indexPath) as! EventTableViewCell
             let event = pastEvents[indexPath.row]
-            let image = event["banner"] as! PFFile
-            let description = event["description"] as! String
-            let start = event["start"] as! String
-            let end = event["end"] as! String
-            let title = event["title"] as! String
-            
-            image.getDataInBackground { (data: Data?, error: Error?) in
-                if(error != nil) {
-                    print(error?.localizedDescription ?? "error")
-                } else {
-                    let finalImage = UIImage(data: data!)
-                    cell.bannerImageView.image = finalImage
-                }
-            }
-            
-            cell.eventNameLabel.text = title
-            cell.dateTimeLabel.text = "\(start) - \(end)"
-            cell.descriptionLabel.text = description
+            cell.event = event
             returnCell = cell
         default:
             break

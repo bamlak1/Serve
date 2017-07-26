@@ -132,28 +132,13 @@ class OrganizationViewController: UIViewController, UITableViewDelegate, UITable
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell") as! PostCell
         
-        let update = updates[indexPath.row]
-        let org = update["user"] as! PFObject
-        //print(org)
-        let event = update["event"] as! PFObject
-        let orgName = org["username"] as! String
-        let eventTitle = event["title"] as! String
-        let action = update["action"] as! String
+        let post = updates[indexPath.row]
+        let user = post["user"] as! PFUser
+        let event = post["event"] as! PFObject
+        cell.user = user
+        cell.event = event
+        cell.post = post
         
-        if let profileImage = org["profile_image"] as? PFFile{
-            profileImage.getDataInBackground { (data: Data?, error: Error?) in
-                if error != nil {
-                    print(error?.localizedDescription ?? "error")
-                } else {
-                    let finalImage = UIImage(data: data!)
-                    cell.profilePicImageView.image = finalImage
-                }
-            }
-        }
-        
-        cell.nameLabel.text = orgName
-        cell.actionLabel.text = action
-        cell.eventLabel.text = eventTitle
         
         return cell
         

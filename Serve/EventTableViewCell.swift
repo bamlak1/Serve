@@ -6,6 +6,7 @@
 //  Copyright © 2017 Bamlak Gessessew. All rights reserved.
 //
 import UIKit
+import Parse
 
 class EventTableViewCell: UITableViewCell {
     
@@ -15,8 +16,28 @@ class EventTableViewCell: UITableViewCell {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var dateTimeLabel: UILabel!
 
+    var banner : PFFile?
     
-    
+    var event : PFObject! {
+        didSet{
+            banner = event["banner"] as! PFFile
+            banner?.getDataInBackground { (data: Data?, error: Error?) in
+                if(error != nil) {
+                    print(error?.localizedDescription ?? "error")
+                } else {
+                    let finalImage = UIImage(data: data!)
+                    self.bannerImageView.image = finalImage
+                }
+            }
+            
+            descriptionLabel.text = event["description"] as! String
+            eventNameLabel.text = event["title"] as! String
+            
+            let start = event["start"] as! String
+            let end = event["end"] as! String
+            dateTimeLabel.text = "\(start) - \(end)"
+        }
+    }
     
     
     override func awakeFromNib() {

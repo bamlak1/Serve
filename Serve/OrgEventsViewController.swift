@@ -58,44 +58,10 @@ class OrgEventsViewController: UIViewController, UITableViewDataSource, UITableV
         switch segmentedControl.selectedSegmentIndex {
         case 0:
             let event = upcomingEvents[indexPath.row]
-            let image = event["banner"] as! PFFile
-            let description = event["description"] as! String
-            let start = event["start"] as! String
-            let end = event["end"] as! String
-            let title = event["title"] as! String
-            
-            image.getDataInBackground { (data: Data?, error: Error?) in
-                if(error != nil) {
-                    print(error?.localizedDescription ?? "error")
-                } else {
-                    let finalImage = UIImage(data: data!)
-                    cell.bannerImageView.image = finalImage
-                }
-            }
-            
-            cell.eventNameLabel.text = title
-            cell.dateTimeLabel.text = "\(start) - \(end)"
-            cell.descriptionLabel.text = description
+            cell.event = event
         case 1:
             let event = pastEvents[indexPath.row]
-            let image = event["banner"] as! PFFile
-            let description = event["description"] as! String
-            let start = event["start"] as! String
-            let end = event["end"] as! String
-            let title = event["title"] as! String
-            
-            image.getDataInBackground { (data: Data?, error: Error?) in
-                if(error != nil) {
-                    print(error?.localizedDescription ?? "error")
-                } else {
-                    let finalImage = UIImage(data: data!)
-                    cell.bannerImageView.image = finalImage
-                }
-            }
-            
-            cell.eventNameLabel.text = title
-            cell.descriptionLabel.text = description
-            cell.dateTimeLabel.text = "\(start) - \(end)"
+            cell.event = event
         default:
             break
         }
