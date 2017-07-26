@@ -15,3 +15,7 @@ protocol CauseTVCellDelegate {
 protocol PendingCellDelegate {
     func didclickOnCellAtIndex(at index:IndexPath)
 }
+
+protocol NotifyEventDelegate {
+    func didPressSignUp()
+}

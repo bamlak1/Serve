@@ -101,6 +101,7 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
             let post = userPosts[indexPath.row]
             let user = post["user"] as! PFUser
             let event = post["event"] as! PFObject
+            cell.indexPath = indexPath
             cell.user = user
             cell.event = event
             cell.post = post
@@ -312,14 +313,24 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
     
 
 
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
+  
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
+        
+
+        if segue.identifier == "event"{
+            let button = sender as! UIButton
+            let indexPath = button.tag
+            let update = userPosts[indexPath]
+            let event = update["event"] as! PFObject
+            
+            let vc = segue.destination as! EventDetailViewController
+            vc.event = event
+        } else if segue.identifier == "eventCell" {
+            let cell = sender as! EventTableViewCell
+            let vc = segue.destination as! EventDetailViewController
+            vc.event = cell.event
+        }
      }
-     */
+    
     
 }

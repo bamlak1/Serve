@@ -9,9 +9,12 @@
 import UIKit
 import Parse
 
-class EventDetailViewController: UIViewController {
+class EventDetailViewController: UIViewController, NotifyEventDelegate{
     
     var event: PFObject?
+    var org : PFUser?
+    var accepts : [String] = []
+    var pendings : [String] = []
     
     @IBOutlet weak var bannerImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -24,16 +27,27 @@ class EventDetailViewController: UIViewController {
     @IBOutlet weak var expectedTasksLabel: UILabel!
     
 
+    @IBOutlet weak var signUpButton: UIButton!
+   
     
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        titleLabel.text = event?["title"] as? String
-        if let orgName = event?["org_name"] as? String{
-            orgLabel.text = orgName
+    
+        if let accepts = event?["accepted_ids"] as? [String] {
+            self.accepts = accepts
         }
+        if let pendings = event?["pending_ids"] as? [String] {
+            self.pendings = pendings
+            print(self.pendings)
+        }
+        if accepts.contains((PFUser.current()!.objectId)!) || pendings.contains((PFUser.current()!.objectId)!) {
+            signUpButton.isSelected = true
+        }
+        signUpButton.setTitle("Signed up", for: .selected)
+        titleLabel.text = event?["title"] as? String
+        orgLabel.text = (event?["org_name"] as! String)
         let start = event?["start"] as! String
         let end = event?["end"] as! String
         dateLabel.text = "\(start) - \(end)"
@@ -54,7 +68,11 @@ class EventDetailViewController: UIViewController {
             }
         }
         
-        // Do any additional setup after loading the view.
+    }
+    
+    func didPressSignUp() {
+        signUpButton.isSelected = true
+        signUpButton.setTitle("Signed up", for: .selected)
     }
     
     override func didReceiveMemoryWarning() {
@@ -73,9 +91,14 @@ class EventDetailViewController: UIViewController {
         } else if segue.identifier == "compose"{
             let vc = segue.destination as! ComposeUpdateViewController
             
+            vc.delegate = self
             vc.event = self.event
+        } else if segue.identifier == "org"{
+            let vc = segue.destination as! UserProfileViewController
+            vc.user = org
         }
      }
+    
     
     
 }
