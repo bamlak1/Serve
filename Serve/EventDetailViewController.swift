@@ -20,7 +20,6 @@ class EventDetailViewController: UIViewController {
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     
-    @IBOutlet weak var pendingLabel: UILabel!
     @IBOutlet weak var volunteerLabel: UILabel!
     @IBOutlet weak var expectedTasksLabel: UILabel!
     
@@ -32,14 +31,14 @@ class EventDetailViewController: UIViewController {
         super.viewDidLoad()
         
         titleLabel.text = event?["title"] as? String
-        orgLabel.text = event?["author"] as? String
+        if let orgName = event?["org_name"] as? String{
+            orgLabel.text = orgName
+        }
         let start = event?["start"] as! String
         let end = event?["end"] as! String
         dateLabel.text = "\(start) - \(end)"
         locationLabel.text = (event?["location"] as! String)
         descriptionLabel.text = (event?["description"] as! String)
-        let pendingCount = event?["pending_count"] as? Int ?? 0
-        pendingLabel.text = "\(pendingCount) pending requests"
         let volunteerCount = event?["volunteers"] as? Int ?? 0
         volunteerLabel.text = "\(volunteerCount) volunteers"
         expectedTasksLabel.text = (event?["expected_tasks"] as! String)
@@ -65,10 +64,17 @@ class EventDetailViewController: UIViewController {
     
     
    
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let vc = segue.destination as! ComposeUpdateViewController
-
-        vc.event = self.event
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "accepted" {
+            let vc = segue.destination as! AcceptedUsersViewController
+            vc.event = self.event
+            
+        } else if segue.identifier == "compose"{
+            let vc = segue.destination as! ComposeUpdateViewController
+            
+            vc.event = self.event
+        }
      }
     
     

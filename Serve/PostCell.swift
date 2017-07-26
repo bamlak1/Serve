@@ -44,14 +44,15 @@ class PostCell: UITableViewCell {
     @IBOutlet weak var nameButtonOutlet: UIButton!
     
 
-    @IBAction func namePressed(_ sender: Any) {
-        let user = self.user!
-        let type = user["type"] as! String
-        
-        if(self.delegate != nil ) {
-            self.delegate.callSegueFromCell(myData: user, type: type)
-        }
-    }
+//    @IBAction func namePressed(_ sender: Any) {
+//        let user = self.user!
+//        let type = user["type"] as! String
+//        print("functional")
+//        
+//        if(self.delegate != nil ) {
+//            self.delegate.callSegueFromCell(myData: user, type: type)
+//        }
+//    }
     
     var post : PFObject! {
         didSet{

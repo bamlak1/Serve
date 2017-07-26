@@ -270,7 +270,7 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
             editButton.isHidden = true
         }
         
-        if followButton.isEnabled{
+        if followButton.isEnabled && currentUser!["following"] != nil{
             followingArr = (currentUser!["following"] as! [String])
             //print(followingArr!)
             if (followingArr?.contains(user!.objectId!))! {

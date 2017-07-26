@@ -42,6 +42,15 @@ class PendingCell: UITableViewCell {
             }
         }
     }
+    @IBAction func namePressed(_ sender: Any) {
+       
+    }
+    
+    @IBAction func eventPressed(_ sender: Any) {
+        
+        
+    }
+    
     
     @IBAction func yesPressed(_ sender: Any) {
         event.remove(user, forKey: "pending_users")
