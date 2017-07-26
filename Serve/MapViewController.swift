@@ -12,7 +12,7 @@ import GooglePlaces
 import Parse
 import SwiftyJSON
 
-class MapViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, GMSMapViewDelegate, UISearchBarDelegate, LocateOnTheMap {
+class MapViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, GMSMapViewDelegate, UISearchBarDelegate, LocateOnTheMap, SettingsDelegate {
     
     var key = "AIzaSyBCmydPROEO4zxGSnoB02DjRwIpejPgZjA"
     var searchResultController: SearchResultsViewController!
@@ -22,10 +22,14 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
     var previousMarker: GMSMarker!
     var homeMarker: GMSMarker!
     var markerNum = 0
-    var previousIndexPath: IndexPath!
+    var drawnCircle: GMSCircle!
+    var otherLocationCircle: GMSCircle!
+    var userEvents: [Int] = []
+    var otherEvents: [Int] = []
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var myEventsSwitch: UISwitch!
+    @IBOutlet weak var otherEventsSwitch: UISwitch!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,16 +46,92 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
         searchResultController.delegate = self
     }
     
+    // Given a new marker that was searched using the search bar and a radius in miles, draws a circle around that marker
+    // If there was already a circle drawn, replace it with the new one
+    func drawOtherLocationCircle(marker: GMSMarker, miles: Int) {
+        if (otherLocationCircle != nil) {
+            otherLocationCircle.map = nil
+        }
+        let newCircle = GMSCircle(position: marker.position, radius: Double(miles) * 1609.34)
+        newCircle.fillColor = UIColor(red: 0.35, green: 0, blue: 0, alpha: 0.05)
+        newCircle.strokeColor = .red
+        newCircle.strokeWidth = 5
+        newCircle.map = mapView
+        otherLocationCircle = newCircle
+        let update = GMSCameraUpdate.fit(newCircle.bounds())
+        mapView.animate(with: update)
+    }
+    
+    // Given a radius in miles, draws a circle around the home base
+    // If there was already a circle drawn, replaces it with the new one
+    func drawHomeCircle(miles: Int) {
+        if (drawnCircle != nil) {
+            drawnCircle.map = nil
+        }
+        let newCircle = GMSCircle(position: homeMarker.position, radius: Double(miles) * 1609.34)
+        newCircle.fillColor = UIColor(red: 0.35, green: 0, blue: 0, alpha: 0.05)
+        newCircle.strokeColor = .red
+        newCircle.strokeWidth = 5
+        newCircle.map = mapView
+        drawnCircle = newCircle
+        let update = GMSCameraUpdate.fit(newCircle.bounds())
+        mapView.animate(with: update)
+    }
+
+    // Given a type of event (either user or other) and a boolean (true = display, false = hide),
+    // displays or hides all those events
+    func updateDisplayedEvents(eventType: String, display: Bool) {
+        var eventArr = [Int]()
+        if (eventType == "userEvents") {
+            eventArr = userEvents
+        } else {
+            eventArr = otherEvents
+        }
+        
+        if (display) {
+            for (index, marker) in self.markers.enumerated() {
+                if (eventArr.contains(index)) {
+                    marker.map = self.mapView
+                }
+            }
+        } else {
+            for (index, marker) in self.markers.enumerated() {
+                if (eventArr.contains(index)) {
+                    marker.map = nil
+                }
+            }
+        }
+    }
+    
+    @IBAction func myEventsDisplay(_ sender: Any) {
+        if myEventsSwitch.isOn {
+            updateDisplayedEvents(eventType: "userEvents", display: true)
+        } else {
+            updateDisplayedEvents(eventType: "userEvents", display: false)
+        }
+    }
+    
+    @IBAction func otherEventsDisplay(_ sender: Any) {
+        if otherEventsSwitch.isOn {
+            updateDisplayedEvents(eventType: "otherEvents", display: true)
+        } else {
+            updateDisplayedEvents(eventType: "otherEvents", display: false)
+        }
+    }
+    
+    
     // Displays the settings menu as a pop-up
     @IBAction func showSettings(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Map", bundle: nil)
         let popOverVC = storyboard.instantiateViewController(withIdentifier: "popUpStoryboard") as! MapSettingsViewController
+        popOverVC.delegate = self
         self.addChildViewController(popOverVC)
         popOverVC.view.frame = self.view.frame
         self.view.addSubview(popOverVC.view)
         popOverVC.didMove(toParentViewController: self)
     }
-
+    
+    // Displays the search bar
     @IBAction func showSearchController(_ sender: Any) {
         let searchController = UISearchController(searchResultsController: searchResultController)
         searchController.searchBar.delegate = self
@@ -62,6 +142,7 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
         return returnedEvents.count
     }
     
+    // Sets all of the cell information in the CollectionView
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MapEventCell", for: indexPath) as! MapEventCell
         let eventData = returnedEvents[indexPath.item]
@@ -82,28 +163,26 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
         cell.location.text = eventData["location"] as? String
         cell.backgroundColor = UIColor(red:1.00, green:1.00, blue:1.00, alpha:0.9)
         cell.layer.borderWidth = 3.0
-        if cell.isSelected {
-            cell.layer.borderColor = UIColor(red:0.34, green:0.71, blue:1.00, alpha:1.0).cgColor
-        } else {
-            cell.layer.borderColor = UIColor.black.cgColor
-        }
         cell.layer.cornerRadius = 15
         cell.layer.masksToBounds = true
         return cell
     }
     
-    // Uses each marker's associated number to scroll to that event cell in the CollectionView
+    // When an event marker is clicked on, uses that marker's associated number to scroll to that event cell in the CollectionView
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
-        let index: Int = (marker.userData as! Dictionary)["number"]!
-        print(index)
-        let currentIndexPath = IndexPath(item: index, section: 0)
-        print(currentIndexPath)
-        self.collectionView.scrollToItem(at: currentIndexPath, at: .right, animated: true)
-       // self.collectionView.selectItem(at: currentIndexPath, animated: true, scrollPosition: .right)
-        update(currentMarker: marker, indexPath: currentIndexPath)
+        let index: Int = ((marker.userData as! Dictionary)["number"])!
+        if index > 0 {
+            print(index)
+            let currentIndexPath = IndexPath(item: index, section: 0)
+            print(currentIndexPath)
+            self.collectionView.scrollToItem(at: currentIndexPath, at: .right, animated: true)
+            self.collectionView.selectItem(at: currentIndexPath, animated: true, scrollPosition: .right)
+            update(currentMarker: marker, indexPath: currentIndexPath)
+        }
         return true
     }
     
+    // When an event cell is clicked on, uses that cell's row number to highlight and shift to that marker on the map
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let marker = markers[indexPath.row]
         print(marker)
@@ -111,24 +190,25 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
         update(currentMarker: marker, indexPath: indexPath)
     }
     
+    // Given a marker and an IndexPath of the associated cell, updates the colors of the markers (previous and current) and the cell border (current)
     func update(currentMarker: GMSMarker, indexPath: IndexPath) {
         mapView.animate(toLocation: CLLocationCoordinate2D(latitude: currentMarker.position.latitude, longitude: currentMarker.position.longitude))
         currentMarker.icon = GMSMarker.markerImage(with: UIColor.green)
         if let cell = collectionView.cellForItem(at: indexPath) {
-            cell.layer.borderColor = UIColor(red:0.34, green:0.71, blue:1.00, alpha:1.0).cgColor
+            cell.isSelected = true
         }
-        
-        // FIX THIS !!!!!!!
-        // reason why the cells don't work is because celForItem doesn't work if the cell is off the screen!!!!!!!!!!!!
-        // !!!!!!!!!!!!
-        if (previousIndexPath != nil && previousMarker != nil && previousMarker != currentMarker) {
+    
+        if (previousMarker != nil && previousMarker != currentMarker) {
             previousMarker.icon = GMSMarker.markerImage(with: UIColor(red:0.34, green:0.71, blue:1.00, alpha:1.0))
-            let cell = collectionView.cellForItem(at: previousIndexPath) as! MapEventCell
-            cell.layer.borderColor = UIColor.black.cgColor
         }
         
         previousMarker = currentMarker
-        previousIndexPath = indexPath
+    }
+    
+    // When a different cell is selected, changes the previous cell's border color to black
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath)
+        cell?.layer.borderColor = UIColor.black.cgColor
     }
     
     // Using the user's manually inputed address, geocodes it, centers the map feed to that location, and then creates a marker for it
@@ -152,16 +232,25 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
     }
     
     // Using an event's manually inputed address, geocodes it, and adds a marker for it
+    // Splits up all the available events into two groups: events the user has signed up for and events the user has not signed up for
     func fetchEventLocations() {
         let query = PFQuery(className: "Event")
         query.order(byAscending: "start")
+        query.whereKey("accepted_user", equalTo:"7xAEAEMSxX")
         query.findObjectsInBackground { (events: [PFObject]?, error: Error?) in
             if let events = events {
                 self.returnedEvents = events
                 self.collectionView.reloadData()
-                for eventObject in events {
+                for (index, eventObject) in events.enumerated() {
                     self.addressToCoordinates(location: eventObject.value(forKey: "location") as! String, type: "event")
                     print("Location: \(eventObject.value(forKey: "location") as! String)")
+                    if let acceptedUsers = eventObject.value(forKey: "accepted_users") as? [String] {
+                        if acceptedUsers.contains("7xAEAEMSxX") {
+                            self.userEvents.append(index)
+                        } else {
+                            self.otherEvents.append(index)
+                        }
+                    }
                 }
             } else {
                 print(error?.localizedDescription as Any)
@@ -169,6 +258,7 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
         }
     }
     
+    // When the home button is clicked, returns the map to the home base
     @IBAction func returnHome(_ sender: Any) {
         mapView.animate(toLocation: CLLocationCoordinate2D(latitude: homeMarker.position.latitude, longitude: homeMarker.position.longitude))
     }
@@ -211,42 +301,31 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
     func placeMarker(lat: Double, long: Double, type: String) {
         let marker = GMSMarker()
         marker.position = CLLocationCoordinate2D(latitude: lat, longitude: long)
-        
+        var extraMarkerInfo = Dictionary<String, Int>()
         if (type == "home") {
-           // extraMarkerInfo["number"] = -1
             homeMarker = marker
-            self.mapView.camera = GMSCameraPosition.camera(withLatitude: lat, longitude: long, zoom: 14.0)
+            extraMarkerInfo["number"] = 0
+            self.mapView.camera = GMSCameraPosition.camera(withLatitude: lat, longitude: long, zoom: 13.0)
             marker.title = "Home base!"
             marker.snippet = "(You can change this in user settings)"
             marker.icon = UIImage(data: UIImagePNGRepresentation(UIImage(named: "home")!)!, scale: 3)!
-            let circle = GMSCircle(position: marker.position, radius: 1000)
-            circle.fillColor = UIColor(red: 0.35, green: 0, blue: 0, alpha: 0.05)
-            circle.strokeColor = .red
-            circle.strokeWidth = 5
-            circle.map = mapView
+            drawHomeCircle(miles: 1)
         } else {
-            print(markerNum)
-            var extraMarkerInfo = Dictionary<String, Any>()
-            extraMarkerInfo["number"] = markerNum
-            markerNum += 1
-            marker.userData = extraMarkerInfo
             if (type == "changeLocation") {
+                extraMarkerInfo["number"] = 0
                 marker.title = "Changed Location"
                 marker.icon = UIImage(data: UIImagePNGRepresentation(UIImage(named: "star")!)!, scale: 3)!
                 mapView.animate(toLocation: CLLocationCoordinate2D(latitude: marker.position.latitude, longitude: marker.position.longitude))
-                let circle = GMSCircle(position: marker.position, radius: 1000)
-                circle.fillColor = UIColor(red: 0.35, green: 0, blue: 0, alpha: 0.05)
-                circle.strokeColor = .red
-                circle.strokeWidth = 5
-                circle.map = mapView
+                drawOtherLocationCircle(marker: marker, miles: 1)
             } else {
                 marker.title = "Event"
                 marker.icon = GMSMarker.markerImage(with: UIColor(red:0.34, green:0.71, blue:1.00, alpha:1.0))
+                extraMarkerInfo["number"] = markerNum
+                markerNum += 1
+
             }
+            marker.userData = extraMarkerInfo
             markers.append(marker)
-            for marker in markers {
-                print(marker)
-            }
         }
         marker.map = self.mapView
     }

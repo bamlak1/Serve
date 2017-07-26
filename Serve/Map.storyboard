@@ -114,6 +114,20 @@
                                     <outlet property="delegate" destination="exp-UR-BEO" id="2v2-Y0-bij"/>
                                 </connections>
                             </collectionView>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mr0-Ut-Xnu">
+                                <rect key="frame" x="313" y="251" width="51" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="otherEventsDisplay:" destination="exp-UR-BEO" eventType="valueChanged" id="VvX-tc-FTo"/>
+                                </connections>
+                            </switch>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1k3-Aa-4Zl">
+                                <rect key="frame" x="313" y="197" width="51" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="myEventsDisplay:" destination="exp-UR-BEO" eventType="valueChanged" id="78f-GA-fPp"/>
+                                </connections>
+                            </switch>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -122,6 +136,8 @@
                     <connections>
                         <outlet property="collectionView" destination="8Jw-CJ-93Z" id="fRn-tP-pTv"/>
                         <outlet property="mapView" destination="0I3-BK-xqw" id="Oqb-Qd-bXf"/>
+                        <outlet property="myEventsSwitch" destination="1k3-Aa-4Zl" id="u2F-2o-mZt"/>
+                        <outlet property="otherEventsSwitch" destination="mr0-Ut-Xnu" id="nGP-iJ-1nR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3nr-Ba-i9C" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -155,7 +171,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XYr-Ku-jhp">
-                                        <rect key="frame" x="100" y="8" width="86" height="26"/>
+                                        <rect key="frame" x="106" y="16" width="86" height="26"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -189,10 +205,29 @@
                                             <action selector="switchOtherEvents:" destination="LPX-9O-MVN" eventType="valueChanged" id="owF-Fy-xbr"/>
                                         </connections>
                                     </switch>
-                                    <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="-0.5" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="KlL-sT-KAq">
+                                    <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="1" maxValue="20" translatesAutoresizingMaskIntoConstraints="NO" id="KlL-sT-KAq">
                                         <rect key="frame" x="57" y="80" width="184" height="31"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="minimumTrackTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <action selector="changedRadius:" destination="LPX-9O-MVN" eventType="touchUpOutside" id="1Lk-du-KLN"/>
+                                            <action selector="changedRadius:" destination="LPX-9O-MVN" eventType="valueChanged" id="Tuv-ud-0LK"/>
+                                        </connections>
                                     </slider>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZWV-Cs-vtI">
+                                        <rect key="frame" x="220" y="116" width="41" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Radius (in miles): " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3ig-0v-3fD">
+                                        <rect key="frame" x="54" y="114" width="158" height="24"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.46122420269999997" green="0.61935058929999998" blue="0.9924670458" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </view>
@@ -203,6 +238,14 @@
                             <outletCollection property="gestureRecognizers" destination="5pE-M3-Mk6" appends="YES" id="bsB-oP-Am2"/>
                         </connections>
                     </view>
+                    <connections>
+                        <outlet property="myEventSwitch" destination="4K0-sX-FvA" id="Uoj-Fs-U44"/>
+                        <outlet property="myEventsSwitch" destination="4K0-sX-FvA" id="veY-hV-P26"/>
+                        <outlet property="otherEventsSwitch" destination="38g-2N-SLm" id="M3P-UZ-9hO"/>
+                        <outlet property="radiusLabel" destination="ZWV-Cs-vtI" id="D2d-Xw-sem"/>
+                        <outlet property="radiusSlider" destination="KlL-sT-KAq" id="0O4-4W-DuX"/>
+                        <outlet property="settingsView" destination="uIE-MM-Kxh" id="fOI-X9-QGk"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rgw-5X-MDL" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="5pE-M3-Mk6">
