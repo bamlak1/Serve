@@ -10,7 +10,7 @@ import UIKit
 import SwiftyJSON
 
 protocol LocateOnTheMap{
-    func placeMarker(lat: Double, long: Double, type: String)
+    func placeMarker(lat: Double, long: Double, type: String, id: String)
 }
 
 class SearchResultsViewController: UITableViewController {
@@ -70,7 +70,7 @@ class SearchResultsViewController: UITableViewController {
                 let jsonResult = JSON(data: data)
                 let latitude = Double(jsonResult["results"][0]["geometry"]["location"]["lat"].stringValue)
                 let longitude = Double(jsonResult["results"][0]["geometry"]["location"]["lng"].stringValue)
-                self.delegate.placeMarker(lat: latitude!, long: longitude!, type: "changeLocation")
+                self.delegate.placeMarker(lat: latitude!, long: longitude!, type: "changeLocation", id: "newLocation")
             }
         });
         dataRetrieval.resume()

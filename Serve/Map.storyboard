@@ -230,6 +230,10 @@
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.46122420269999997" green="0.61935058929999998" blue="0.9924670458" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="mdb-8y-Pvg" appends="YES" id="URJ-rm-vAB"/>
+                                </connections>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -251,6 +255,11 @@
                 <tapGestureRecognizer id="5pE-M3-Mk6">
                     <connections>
                         <action selector="dismissSettings:" destination="LPX-9O-MVN" id="ncl-o4-Evx"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="mdb-8y-Pvg">
+                    <connections>
+                        <action selector="doNotCloseSettings:" destination="LPX-9O-MVN" id="B27-aM-6pW"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>

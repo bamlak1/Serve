@@ -13,9 +13,9 @@ extension GMSCircle {
     func bounds () -> GMSCoordinateBounds {
         func locationMinMax(positive : Bool) -> CLLocationCoordinate2D {
             let sign:Double = positive ? 1 : -1
-            let dx = sign * self.radius  / 6378000 * (180/M_PI)
+            let dx = sign * self.radius  / 6378000 * (180/Double.pi)
             let lat = position.latitude + dx
-            let lon = position.longitude + dx / cos(position.latitude * M_PI/180)
+            let lon = position.longitude + dx / cos(position.latitude * Double.pi/180)
             return CLLocationCoordinate2D(latitude: lat, longitude: lon)
         }
         
