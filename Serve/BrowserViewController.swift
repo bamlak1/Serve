@@ -17,7 +17,6 @@ class BrowserViewController: UIViewController, UICollectionViewDataSource, UICol
     var Orgs: [PFObject] = []
     var People: [PFObject] = []
     
-    var resultsController = UIViewController()
     var filteredEvents: [PFObject] = []
     var filteredOrgs: [PFObject] = []
     var filteredPeople: [PFObject] = []
@@ -34,7 +33,10 @@ class BrowserViewController: UIViewController, UICollectionViewDataSource, UICol
     
     @IBOutlet weak var collectionView3: UICollectionView!
     
-    
+    func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
+        self.searchBar.resignFirstResponder()
+        return true
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +46,7 @@ class BrowserViewController: UIViewController, UICollectionViewDataSource, UICol
 //        self.resultsController.collectionView.dataSource = self
 //        self.resultsController.collectionView.delegate = self
         
-        
+        searchBar.delegate = self
         
         fetchEvents()
 //        fetchUsers()
@@ -66,6 +68,10 @@ class BrowserViewController: UIViewController, UICollectionViewDataSource, UICol
 //        }
 //    }
     
+    @IBAction func didPressView(_ sender: Any) {
+        view.endEditing(true)
+    }
+  
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.isEmpty {
             filteredEvents = Events
@@ -73,7 +79,6 @@ class BrowserViewController: UIViewController, UICollectionViewDataSource, UICol
             filteredPeople = People
             
         } else {
-            print("search bar activated")
             filteredEvents = Events.filter { (event: PFObject) -> Bool in
                 let title = event["title"] as! String
                 return title.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
@@ -199,7 +204,7 @@ class BrowserViewController: UIViewController, UICollectionViewDataSource, UICol
         if let indexPath = collectionView3.indexPath(for: cell) {//get this to find the actual post
             let person = filteredPeople[indexPath.item] //get the current post
             let otherUserViewController = segue.destination as! OtherUserViewController //tell it its destination
-            otherUserViewController.user = person as! PFUser
+            otherUserViewController.user = person as? PFUser
         }
         
     }
