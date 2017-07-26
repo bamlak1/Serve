@@ -26,6 +26,7 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
     var otherLocationCircle: GMSCircle!
     var userEvents: [PFObject] = []
     var otherEvents: [PFObject] = []
+    var radius: Int!
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var myEventsSwitch: UISwitch!
@@ -106,26 +107,7 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
         }
     }
     
-    // Placeholder method and switch until I figure out why the settings view controller isn't popping up
-    @IBAction func myEventsDisplay(_ sender: Any) {
-        if myEventsSwitch.isOn {
-            updateDisplayedEvents(eventType: "userEvents", display: true)
-        } else {
-            updateDisplayedEvents(eventType: "userEvents", display: false)
-        }
-    }
-
-    // Placeholder method and switch until I figure out why the settings view controller isn't popping up
-    @IBAction func otherEventsDisplay(_ sender: Any) {
-        if otherEventsSwitch.isOn {
-            updateDisplayedEvents(eventType: "otherEvents", display: true)
-        } else {
-            updateDisplayedEvents(eventType: "otherEvents", display: false)
-        }
-    }
-    
-    // Displays the settings menu as a pop-up
-    @IBAction func showSettings(_ sender: Any) {
+    @IBAction func openSettings(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Map", bundle: nil)
         let popOverVC = storyboard.instantiateViewController(withIdentifier: "popUpStoryboard") as! MapSettingsViewController
         popOverVC.delegate = self
@@ -332,7 +314,7 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
             marker.title = "Home base!"
             marker.snippet = "(You can change this in user settings)"
             marker.icon = UIImage(data: UIImagePNGRepresentation(UIImage(named: "home")!)!, scale: 3)!
-            drawHomeCircle(miles: 1)
+            drawHomeCircle(miles: Int(UserDefaults.standard.float(forKey: "slider_value")))
         } else {
             if (type == "changeLocation") {
                 extraMarkerInfo["number"] = -1
