@@ -22,6 +22,9 @@ class Pending: NSObject {
         pendingRequest["user_name"] = user["username"]
         pendingRequest["completed"] = false
         
+        event.addUniqueObject(user, forKey: "pending_users")
+        event.addUniqueObject((user.objectId)!, forKey: "pending_ids")
+        
         Post.userInterestedPost(eventInterest: event, title: eventTitle, caption: caption) { (success: Bool, error: Error?) in
             if success {
                 print("interestPost created")
@@ -30,6 +33,7 @@ class Pending: NSObject {
             }
         }
         
+        event.saveInBackground()
         pendingRequest.saveInBackground(block: completion)
     }
     

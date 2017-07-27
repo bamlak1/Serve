@@ -18,6 +18,7 @@ class ComposeUpdateViewController: UIViewController, UITextViewDelegate {
     
     
     var event: PFObject?
+    var delegate: NotifyEventDelegate!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,14 +78,15 @@ class ComposeUpdateViewController: UIViewController, UITextViewDelegate {
     
     @IBAction func signUpPressed(_ sender: Any) {
         Pending.postPending(user: PFUser.current()!, event: event!, caption: textView.text, auto: false) { (success: Bool, error: Error?) in
-            if success {
+            if
+                success {
                 print("pending request made")
                 self.dismiss(animated: true, completion: nil)
             } else {
                 print(error?.localizedDescription ?? "error")
             }
         }
-        
+        self.delegate.didPressSignUp()
         
         
     }
