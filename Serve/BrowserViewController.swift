@@ -6,6 +6,12 @@
 //  Copyright © 2017 Bamlak Gessessew. All rights reserved.
 //
 
+
+
+//change tap gesture thing, find better way. 
+//get rid of collection view once nothing in that group applies
+
+
 import UIKit
 import Parse
 import SwiftyJSON

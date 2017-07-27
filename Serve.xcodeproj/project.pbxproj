@@ -23,6 +23,10 @@
 		A03D91531F26CC2A006CF35F /* CauseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03D91521F26CC2A006CF35F /* CauseTableViewCell.swift */; };
 		A03D91551F26CC3F006CF35F /* CauseTVCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03D91541F26CC3F006CF35F /* CauseTVCellDelegate.swift */; };
 		A03D91571F280422006CF35F /* ComposeUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03D91561F280422006CF35F /* ComposeUpdateViewController.swift */; };
+		A03D91591F2950BE006CF35F /* AcceptedUsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03D91581F2950BE006CF35F /* AcceptedUsersViewController.swift */; };
+		A03D915B1F2950C6006CF35F /* GMSCircle + FitBounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03D915A1F2950C6006CF35F /* GMSCircle + FitBounds.swift */; };
+		A03D915D1F2950D3006CF35F /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03D915C1F2950D3006CF35F /* UserCell.swift */; };
+		A03D915F1F296BA9006CF35F /* PostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03D915E1F296BA9006CF35F /* PostDetailViewController.swift */; };
 		A06309F21F215C2E002E886A /* BrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06309F11F215C2E002E886A /* BrowserViewController.swift */; };
 		A06309F41F215D2E002E886A /* EventBrowseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06309F31F215D2E002E886A /* EventBrowseCell.swift */; };
 		A06309F61F216833002E886A /* OrgBrowseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06309F51F216833002E886A /* OrgBrowseCell.swift */; };
@@ -102,6 +106,10 @@
 		A03D91521F26CC2A006CF35F /* CauseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CauseTableViewCell.swift; sourceTree = "<group>"; };
 		A03D91541F26CC3F006CF35F /* CauseTVCellDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CauseTVCellDelegate.swift; sourceTree = "<group>"; };
 		A03D91561F280422006CF35F /* ComposeUpdateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposeUpdateViewController.swift; sourceTree = "<group>"; };
+		A03D91581F2950BE006CF35F /* AcceptedUsersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AcceptedUsersViewController.swift; sourceTree = "<group>"; };
+		A03D915A1F2950C6006CF35F /* GMSCircle + FitBounds.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GMSCircle + FitBounds.swift"; sourceTree = "<group>"; };
+		A03D915C1F2950D3006CF35F /* UserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
+		A03D915E1F296BA9006CF35F /* PostDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostDetailViewController.swift; sourceTree = "<group>"; };
 		A06309F11F215C2E002E886A /* BrowserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowserViewController.swift; sourceTree = "<group>"; };
 		A06309F31F215D2E002E886A /* EventBrowseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventBrowseCell.swift; sourceTree = "<group>"; };
 		A06309F51F216833002E886A /* OrgBrowseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrgBrowseCell.swift; sourceTree = "<group>"; };
@@ -227,6 +235,9 @@
 		A07AD2111F13FAC500100D69 /* Serve */ = {
 			isa = PBXGroup;
 			children = (
+				A03D915C1F2950D3006CF35F /* UserCell.swift */,
+				A03D915A1F2950C6006CF35F /* GMSCircle + FitBounds.swift */,
+				A03D91581F2950BE006CF35F /* AcceptedUsersViewController.swift */,
 				A03D91561F280422006CF35F /* ComposeUpdateViewController.swift */,
 				CCD7557C1F158DFE0033FF7A /* Models */,
 				CCD7557B1F158DF30033FF7A /* ViewControllers */,
@@ -280,6 +291,7 @@
 				A07AD2441F156DC000100D69 /* FeedViewController.swift */,
 				A00FB59B1F1ED7380036340D /* BrowseViewController.swift */,
 				A06309F11F215C2E002E886A /* BrowserViewController.swift */,
+				A03D915E1F296BA9006CF35F /* PostDetailViewController.swift */,
 			);
 			name = Individual;
 			sourceTree = "<group>";
@@ -666,6 +678,7 @@
 				A00FB59C1F1ED7380036340D /* BrowseViewController.swift in Sources */,
 				CCED38881F1D926500A3DD2E /* PendingCell.swift in Sources */,
 				A0B95E861F185D7900EBD019 /* UserProfileViewController.swift in Sources */,
+				A03D915B1F2950C6006CF35F /* GMSCircle + FitBounds.swift in Sources */,
 				A00FB59A1F1ED47B0036340D /* IndCollectionViewCell.swift in Sources */,
 				CC2453731F2014E400D765E5 /* Update.swift in Sources */,
 				A06309F81F216873002E886A /* PeopleBrowseCell.swift in Sources */,
@@ -677,12 +690,14 @@
 				A06309FC1F2675B5002E886A /* MapSettingsViewController.swift in Sources */,
 				A0B95E841F185D6600EBD019 /* OrganizationProfileViewController.swift in Sources */,
 				CCED38871F1D926500A3DD2E /* PendingApprovalsViewController.swift in Sources */,
+				A03D915F1F296BA9006CF35F /* PostDetailViewController.swift in Sources */,
 				A0B95E7A1F16DB6C00EBD019 /* EventDetailViewController.swift in Sources */,
 				8614831A1F16A44A00C18917 /* IndividualLoginViewController.swift in Sources */,
 				A0B95E821F185D4900EBD019 /* IndividualProfileViewController.swift in Sources */,
 				A07AD2131F13FAC500100D69 /* AppDelegate.swift in Sources */,
 				8614832C1F17F2AE00C18917 /* CauseCell.swift in Sources */,
 				CCAF14F61F1835980097C7A3 /* OrgEventsViewController.swift in Sources */,
+				A03D915D1F2950D3006CF35F /* UserCell.swift in Sources */,
 				CC14168F1F16A42600BF2A81 /* CreateEventViewController.swift in Sources */,
 				A06309F21F215C2E002E886A /* BrowserViewController.swift in Sources */,
 				A06309FE1F2675C9002E886A /* SearchResultsViewController.swift in Sources */,
@@ -692,6 +707,7 @@
 				CCFB6C201F15DA1100E59D5C /* OrganizationViewController.swift in Sources */,
 				CC2453751F20151500D765E5 /* Cause.swift in Sources */,
 				861483321F18425D00C18917 /* MapViewController.swift in Sources */,
+				A03D91591F2950BE006CF35F /* AcceptedUsersViewController.swift in Sources */,
 				8614832A1F17EC2D00C18917 /* OrgLoginViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

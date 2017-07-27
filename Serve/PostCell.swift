@@ -43,6 +43,10 @@ class PostCell: UITableViewCell {
 
     @IBOutlet weak var nameButtonOutlet: UIButton!
     
+    @IBOutlet weak var fiveButton: UIButton!
+    
+    @IBOutlet weak var commentButton: UIButton!
+    
 
 //    @IBAction func namePressed(_ sender: Any) {
 //        let user = self.user!
