@@ -70,7 +70,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     
         
         let query = PFQuery(className: "Post")
-        //query.whereKey("user_id", containedIn: following)
+        query.whereKey("user_id", containedIn: following)
         query.includeKey("user")
         query.includeKey("event")
         query.order(byDescending: "createdAt")
