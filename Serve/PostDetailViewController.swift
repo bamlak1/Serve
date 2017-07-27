@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import Parse
 
-class PostDetailViewController: UIViewController {
+class PostDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var eventLabel: UILabel!
     
@@ -39,6 +40,9 @@ class PostDetailViewController: UIViewController {
     @IBOutlet weak var commentTableView: UITableView!
     
     
+    var comments: [PFObject]?
+    var update: PFObject?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -50,6 +54,44 @@ class PostDetailViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return comments?.count ?? 0
+    }
+    
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = commentTableView.dequeueReusableCell(withIdentifier: "PostCommentCell") as! PostCommentCell
+        let comment = comments![indexPath.row]
+        let text = comment["text"]
+        cell.commentLabel.text = text as! String
+        if let user = comment["user"] as? PFUser {
+            //user found, update username label w username
+            cell.nameLabel.text = user.username
+        } else {
+            //no user found
+            cell.nameLabel.text = "🤔🤔🤔🤔"
+        }
+        
+        return cell
+    }
+    
+    
+    @IBAction func didPressPost(_ sender: Any) {
+        let postComment = PFObject(className: "comments")
+        
+        //Store the text of the text field in a key called "text"
+        postComment["text"] = commentTextField.text ?? ""
+        postComment["user"] = PFUser.current()
+        
+        postComment.saveInBackground { (success, error) in
+            if success {
+                print("The message was saved!")
+                print(postComment["text"])
+                self.commentTextField.text = ""
+            } else if let error = error {
+                print("Problem saving message: \(error.localizedDescription)")
+            }
+        }
+    }
 
     /*
     // MARK: - Navigation
