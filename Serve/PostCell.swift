@@ -9,6 +9,7 @@
 import UIKit
 import TTTAttributedLabel
 import Parse
+import ParseUI
 
 
 class PostCell: UITableViewCell {
@@ -17,7 +18,7 @@ class PostCell: UITableViewCell {
     
     @IBOutlet weak var eventLabel: UILabel!
     
-    @IBOutlet weak var profilePicImageView: UIImageView!
+    @IBOutlet weak var profilePicImageView: PFImageView!
     
     @IBOutlet weak var dateLabel: UILabel!
     
@@ -65,6 +66,7 @@ class PostCell: UITableViewCell {
             actionLabel.text = (post["action"] as! String)
             userType = (user!["type"] as! String)
             pic = (user!["profile_image"] as! PFFile)
+            profilePicImageView.image = nil
             pic?.getDataInBackground { (data: Data?, error: Error?) in
                 if error != nil {
                     print(error?.localizedDescription ?? "error")

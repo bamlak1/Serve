@@ -150,6 +150,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
+
 //        let cell = sender as! UITableViewCell
 //        if let indexPath = feedTableView.indexPath(for: cell) {//get this to find the actual post
 //            let update = updates[indexPath.item] //get the current post
@@ -167,6 +168,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             let vc = segue.destination as! PostDetailViewController
             vc.update = post
         }
+
         if segue.identifier == "other" {
             let button = sender as! UIButton
             let indexPath = button.tag
