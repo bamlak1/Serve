@@ -131,89 +131,49 @@ class BrowserViewController: UIViewController, UICollectionViewDataSource, UICol
             
             
             let eventData = filteredEvents[indexPath.item]
-            
-            if let banner = eventData["banner"] as? PFFile {
-                banner.getDataInBackground(block: { (data: Data?, error: Error?) in
-                    if (error != nil) {
-                        print(error?.localizedDescription ?? "error")
-                    } else {
-                        let finalImage = UIImage(data: data!)
-                        cell.imageViewer.image = finalImage
-                    }
-                })
-            }
-            cell.nameLabel.text = eventData["title"] as? String
-            
+            cell.event = eventData
+            cell.indexPath = indexPath
             
             return cell
         } else if collectionView == self.collectionView2 {
             let cell2 = collectionView.dequeueReusableCell(withReuseIdentifier: "OrgBrowseCell", for: indexPath) as! OrgBrowseCell
-            
-            
-            
+
             let orgData = filteredOrgs[indexPath.item]
-            
-            if let profPic = orgData["profile_image"] as? PFFile {
-                profPic.getDataInBackground(block: { (data: Data?, error: Error?) in
-                    if (error != nil) {
-                        print(error?.localizedDescription ?? "error")
-                    } else {
-                        let finalImage = UIImage(data: data!)
-                        cell2.imageViewer.image = finalImage
-                    }
-                })
-            }
-            cell2.nameLabel.text = orgData["username"] as? String
-            
-            
+            cell2.user = orgData as! PFUser
+            cell2.indexPath = indexPath
+
             return cell2
         } else {
             let cell3 = collectionView.dequeueReusableCell(withReuseIdentifier: "PeopleBrowseCell", for: indexPath) as! PeopleBrowseCell
-            
-            
-            
-            let peopleData = filteredPeople[indexPath.item]
-            
-            if let profPic = peopleData["profile_image"] as? PFFile {
-                profPic.getDataInBackground(block: { (data: Data?, error: Error?) in
-                    if (error != nil) {
-                        print(error?.localizedDescription ?? "error")
-                    } else {
-                        let finalImage = UIImage(data: data!)
-                        cell3.imageViewer.layer.cornerRadius = cell3.imageViewer.frame.size.width / 2;
-                        cell3.imageViewer.clipsToBounds = true;
-                        cell3.imageViewer.image = finalImage
-                    }
-                })
-            }
-            cell3.nameLabel.text = peopleData["username"] as? String
-            
+            let peopleData = filteredPeople[indexPath.item] as! PFUser
+            cell3.user = peopleData
+            cell3.indexPath = indexPath
             
             return cell3
         }
             
     }
     
-    //====== SEGUE TO EVENT DETAIL VIEW =======
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let cell = sender as! UICollectionViewCell
-        if let indexPath = collectionView.indexPath(for: cell) {//get this to find the actual post
-            let event = filteredEvents[indexPath.item] //get the current post
-            let eventDetailViewController = segue.destination as! EventDetailViewController //tell it its destination
-            eventDetailViewController.event = event
-        }
-        if let indexPath = collectionView2.indexPath(for: cell) {//get this to find the actual post
-            let org = filteredOrgs[indexPath.item] //get the current post
-            let otherUserViewController = segue.destination as! OtherUserViewController //tell it its destination
-            otherUserViewController.user = org as? PFUser
-        }
-        if let indexPath = collectionView3.indexPath(for: cell) {//get this to find the actual post
-            let person = filteredPeople[indexPath.item] //get the current post
-            let otherUserViewController = segue.destination as! OtherUserViewController //tell it its destination
-            otherUserViewController.user = person as? PFUser
-        }
-        
-    }
+//    //====== SEGUE TO EVENT DETAIL VIEW =======
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        let cell = sender as! UICollectionViewCell
+//        if let indexPath = collectionView.indexPath(for: cell) {//get this to find the actual post
+//            let event = filteredEvents[indexPath.item] //get the current post
+//            let eventDetailViewController = segue.destination as! EventDetailViewController //tell it its destination
+//            eventDetailViewController.event = event
+//        }
+//        if let indexPath = collectionView2.indexPath(for: cell) {//get this to find the actual post
+//            let org = filteredOrgs[indexPath.item] //get the current post
+//            let otherUserViewController = segue.destination as! OtherUserViewController //tell it its destination
+//            otherUserViewController.user = org as? PFUser
+//        }
+//        if let indexPath = collectionView3.indexPath(for: cell) {//get this to find the actual post
+//            let person = filteredPeople[indexPath.item] //get the current post
+//            let otherUserViewController = segue.destination as! OtherUserViewController //tell it its destination
+//            otherUserViewController.user = person as? PFUser
+//        }
+//        
+//    }
     
     
     func fetchEvents() {
@@ -227,7 +187,7 @@ class BrowserViewController: UIViewController, UICollectionViewDataSource, UICol
             if let events = events {
                 self.Events = events
                 self.filteredEvents = events
-                print("Loaded events")
+                //print("Loaded events")
                 self.collectionView.reloadData()
                 
             }
@@ -250,7 +210,7 @@ class BrowserViewController: UIViewController, UICollectionViewDataSource, UICol
                     if (userType == "Organization") {
                         self.Orgs = orgs
                         self.filteredOrgs = orgs
-                        print("Loaded orgs")
+                        //print("Loaded orgs")
                         self.collectionView2.reloadData()
                         
                     }
@@ -277,7 +237,7 @@ class BrowserViewController: UIViewController, UICollectionViewDataSource, UICol
                     if (userType == "Individual") {
                         self.People = people
                         self.filteredPeople = people
-                        print("Loaded ppl")
+                        //print("Loaded ppl")
                         self.collectionView3.reloadData()
                         
                     }
@@ -318,14 +278,29 @@ class BrowserViewController: UIViewController, UICollectionViewDataSource, UICol
     
     
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
+   
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
+        if segue.identifier == "event" {
+            let button = sender as! UIButton
+            let event = filteredEvents[button.tag]
+            let vc = segue.destination as! EventDetailViewController
+            vc.event = event
+        }
+        
+        if segue.identifier == "ind" {
+            let button = sender as! UIButton
+            let user = filteredPeople[button.tag] as! PFUser
+            let vc = segue.destination as! UserProfileViewController
+            vc.user = user
+        }
+        
+        if segue.identifier == "org" {
+            let button = sender as! UIButton
+            let user = filteredOrgs[button.tag] as! PFUser
+            let vc = segue.destination as! UserProfileViewController
+            vc.user = user
+        }
      }
-     */
+    
     
 }
