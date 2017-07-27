@@ -23,7 +23,7 @@ class EventTableViewCell: UITableViewCell {
     var event : PFObject! {
         didSet{
             bannerImageView.image = nil
-            banner = event["banner"] as! PFFile
+            banner = (event["banner"] as! PFFile)
             banner?.getDataInBackground { (data: Data?, error: Error?) in
                 if(error != nil) {
                     print(error?.localizedDescription ?? "error")
@@ -33,12 +33,14 @@ class EventTableViewCell: UITableViewCell {
                 }
             }
             
-            descriptionLabel.text = event["description"] as! String
-            eventNameLabel.text = event["title"] as! String
+            descriptionLabel.text = (event["description"] as! String)
+            eventNameLabel.text = (event["title"] as! String)
             
             let start = event["start"] as! String
             let end = event["end"] as! String
             dateTimeLabel.text = "\(start) - \(end)"
+            let num = event["volunteers"] as! Int
+            numVolLabel.text = "\(num) volunteers"
         }
     }
     

@@ -259,6 +259,10 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
             })
         }
         
+        if let num = user!["following_count"] as? Int {
+            followingCountLabel.text = "\(num) following"
+        }
+        
         if user?.objectId == PFUser.current()?.objectId {
             print("on current user's page")
             editButton.isEnabled = true
