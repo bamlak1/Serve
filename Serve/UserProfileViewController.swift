@@ -8,12 +8,13 @@
 
 import UIKit
 import Parse
+import ParseUI
 
 
 class UserProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
     
-    @IBOutlet weak var bannerImageView: UIImageView!
-    @IBOutlet weak var profilePicImageView: UIImageView!
+    @IBOutlet weak var bannerImageView: PFImageView!
+    @IBOutlet weak var profilePicImageView: PFImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var interestsLabel: UILabel!
     @IBOutlet weak var bioLabel: UILabel!
@@ -48,8 +49,8 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
         
         setUser()
         fetchUserUpdates()
-        //retrievePastEvents()
-        //retrieveUpcomingEvents()
+        retrievePastEvents()
+        retrieveUpcomingEvents()
     }
     
     func didPullToRefresh(_ refreshControl: UIRefreshControl) {
@@ -150,7 +151,7 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
         
         let query = PFQuery(className: "Event")
         if userType == "Individual" {
-            query.whereKey("accepted_users" , equalTo: user!)
+            query.whereKey("accepted_ids" , equalTo: (user?.objectId)!)
         } else {
             query.whereKey("author", equalTo: user!)
         }
@@ -180,7 +181,7 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
         
         let query = PFQuery(className: "Event")
         if userType == "Individual" {
-            query.whereKey("accepted_users" , equalTo: user!)
+            query.whereKey("accepted_ids" , equalTo: (user?.objectId)!)
         } else {
             query.whereKey("author", equalTo: user!)
         }
@@ -194,7 +195,6 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
             if events != nil {
                 self.upcomingEvents = events!
                 self.profileTableView.reloadData()
-                //print("Loaded upcoming events")
             } else {
                 print(error?.localizedDescription ?? "error loading data")
             }
@@ -235,6 +235,7 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
             followingCountLabel.text = (followingCount as! String)
         }
         
+        bannerImageView.image = nil
         if let banner = user!["banner"] as? PFFile {
             banner.getDataInBackground(block: { (data: Data?, error: Error?) in
                 if (error != nil) {
@@ -246,6 +247,7 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
             })
         }
         
+        profilePicImageView.image = nil
         if let profileImage = user!["profile_image"] as? PFFile {
             profileImage.getDataInBackground(block: { (data: Data?, error: Error?) in
                 if (error != nil) {

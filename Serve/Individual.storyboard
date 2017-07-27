@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F2073" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -417,7 +417,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="xGF-ii-Ypk" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Map" id="snR-kh-0V3"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="6Uu-fA-9Hh">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="6Uu-fA-9Hh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -590,7 +590,6 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fsl-76-sZR">
                                                     <rect key="frame" x="118" y="73" width="19" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -616,7 +615,6 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kDg-T2-m2v">
                                                     <rect key="frame" x="208.5" y="4" width="30" height="30"/>
                                                     <connections>
@@ -634,7 +632,6 @@
                                                     <rect key="frame" x="74" y="4" width="30" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </button>
-
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="n8s-Gp-H4S" firstAttribute="leading" secondItem="cVU-iH-zNA" secondAttribute="trailing" constant="4" id="1QO-xJ-nIN"/>
@@ -741,7 +738,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="XOU-YT-dul" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Browse" image="moment-icon" id="BjS-r9-jQ5"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="0Wm-zS-3nZ">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="0Wm-zS-3nZ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1027,7 +1024,7 @@
                                     <outlet property="nameButtonOutlet" destination="qxz-5G-74u" id="fUE-4D-bo6"/>
                                     <outlet property="nameLabel" destination="KWY-xa-k3C" id="pvJ-H2-8qv"/>
                                     <outlet property="profilePicImageView" destination="vdy-34-PtA" id="U4a-WF-Nou"/>
-                                    <segue destination="nGB-OC-qZb" kind="show" id="Pp2-Le-oLf"/>
+                                    <segue destination="nGB-OC-qZb" kind="show" identifier="cell" id="Pp2-Le-oLf"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -1057,7 +1054,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="sQP-5c-97e" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Feed" id="bSN-co-MCs"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="fpw-wa-Fwg">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="fpw-wa-Fwg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1124,11 +1121,6 @@
                                 <color key="textColor" red="0.30227412269999998" green="0.69466095510000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UF8-KB-zt7">
-                                <rect key="frame" x="0.0" y="64" width="375" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Volunteer Expected Tasks..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RY6-zC-gfx">
                                 <rect key="frame" x="16" y="416" width="343" height="75"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1160,6 +1152,11 @@
                                     <segue destination="hCQ-Ki-PUo" kind="show" identifier="org" id="K5e-WU-JxS"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UF8-KB-zt7" customClass="PFImageView">
+                                <rect key="frame" x="0.0" y="64" width="375" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -1179,9 +1176,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EjR-up-Lt3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-
             <point key="canvasLocation" x="8774" y="-1364"/>
-
         </scene>
         <!--Compose Update View Controller-->
         <scene sceneID="uaK-lG-n6H">
@@ -1501,7 +1496,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="V3a-ho-KCe" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Profile" id="q2l-W8-7pd"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Om9-p4-NAh">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Om9-p4-NAh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1699,9 +1694,7 @@
         <image name="moment-icon" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-
-        <segue reference="e65-xk-NmY"/>
         <segue reference="Zeh-mh-t30"/>
-
+        <segue reference="K5e-WU-JxS"/>
     </inferredMetricsTieBreakers>
 </document>

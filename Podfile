@@ -8,6 +8,7 @@ target 'Serve' do
 
   # Pods for Serve
   pod 'Parse'
+  pod 'ParseUI'
 
   pod 'Alamofire', '~> 4.4'
   pod 'AlamofireImage', '~> 3.1'
