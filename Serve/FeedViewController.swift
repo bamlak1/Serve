@@ -63,13 +63,14 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     
     func fetchUpdates() {
+        //make case for when someone isn't following anyone
         var following = currentUser!["following"] as! [String]
         let id = (currentUser?.objectId)!
         following.append(id)
     
         
         let query = PFQuery(className: "Post")
-        query.whereKey("user_id", containedIn: following)
+        //query.whereKey("user_id", containedIn: following)
         query.includeKey("user")
         query.includeKey("event")
         query.order(byDescending: "createdAt")
@@ -149,14 +150,23 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        let cell = sender as! UITableViewCell
-        if let indexPath = feedTableView.indexPath(for: cell) {//get this to find the actual post
-            let update = updates[indexPath.item] //get the current post
-            let postDetailViewController = segue.destination as! PostDetailViewController //tell it its destination
-            //postDetailViewController.update = update
+//        let cell = sender as! UITableViewCell
+//        if let indexPath = feedTableView.indexPath(for: cell) {//get this to find the actual post
+//            let update = updates[indexPath.item] //get the current post
+//            let postDetailViewController = segue.destination as! PostDetailViewController //tell it its destination
+//            postDetailViewController.update = update
+//        }
+
+        
+        if segue.identifier == "comments"{
+            let button = sender as! UIButton
+            let indexPath = button.tag
+            let update = updates[indexPath]
+            let post = update["event"] as! PFObject
+            
+            let vc = segue.destination as! PostDetailViewController
+            vc.update = post
         }
-        
-        
         if segue.identifier == "other" {
             let button = sender as! UIButton
             let indexPath = button.tag

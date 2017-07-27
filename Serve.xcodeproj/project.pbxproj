@@ -27,6 +27,8 @@
 		A03D915B1F2950C6006CF35F /* GMSCircle + FitBounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03D915A1F2950C6006CF35F /* GMSCircle + FitBounds.swift */; };
 		A03D915D1F2950D3006CF35F /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03D915C1F2950D3006CF35F /* UserCell.swift */; };
 		A03D915F1F296BA9006CF35F /* PostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03D915E1F296BA9006CF35F /* PostDetailViewController.swift */; };
+		A03D91611F2A62B7006CF35F /* PostCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03D91601F2A62B7006CF35F /* PostCommentCell.swift */; };
+		A03D91631F2A79A4006CF35F /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03D91621F2A79A4006CF35F /* Comment.swift */; };
 		A06309F21F215C2E002E886A /* BrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06309F11F215C2E002E886A /* BrowserViewController.swift */; };
 		A06309F41F215D2E002E886A /* EventBrowseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06309F31F215D2E002E886A /* EventBrowseCell.swift */; };
 		A06309F61F216833002E886A /* OrgBrowseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06309F51F216833002E886A /* OrgBrowseCell.swift */; };
@@ -110,6 +112,8 @@
 		A03D915A1F2950C6006CF35F /* GMSCircle + FitBounds.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GMSCircle + FitBounds.swift"; sourceTree = "<group>"; };
 		A03D915C1F2950D3006CF35F /* UserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 		A03D915E1F296BA9006CF35F /* PostDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostDetailViewController.swift; sourceTree = "<group>"; };
+		A03D91601F2A62B7006CF35F /* PostCommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCommentCell.swift; sourceTree = "<group>"; };
+		A03D91621F2A79A4006CF35F /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		A06309F11F215C2E002E886A /* BrowserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowserViewController.swift; sourceTree = "<group>"; };
 		A06309F31F215D2E002E886A /* EventBrowseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventBrowseCell.swift; sourceTree = "<group>"; };
 		A06309F51F216833002E886A /* OrgBrowseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrgBrowseCell.swift; sourceTree = "<group>"; };
@@ -333,6 +337,7 @@
 				A06309F31F215D2E002E886A /* EventBrowseCell.swift */,
 				A06309F51F216833002E886A /* OrgBrowseCell.swift */,
 				A06309F71F216873002E886A /* PeopleBrowseCell.swift */,
+				A03D91601F2A62B7006CF35F /* PostCommentCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -372,6 +377,7 @@
 				CC2453781F20157500D765E5 /* Pending.swift */,
 				CC2453721F2014E400D765E5 /* Update.swift */,
 				A03D91541F26CC3F006CF35F /* CauseTVCellDelegate.swift */,
+				A03D91621F2A79A4006CF35F /* Comment.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -671,6 +677,7 @@
 				CC2453791F20157500D765E5 /* Pending.swift in Sources */,
 				A07AD2411F144AF800100D69 /* LoginViewController.swift in Sources */,
 				A00FB5961F1ED45A0036340D /* OrgCollectionViewCell.swift in Sources */,
+				A03D91611F2A62B7006CF35F /* PostCommentCell.swift in Sources */,
 				A03D91531F26CC2A006CF35F /* CauseTableViewCell.swift in Sources */,
 				A03D91511F26CC22006CF35F /* CausesPopUpViewController.swift in Sources */,
 				A06309F41F215D2E002E886A /* EventBrowseCell.swift in Sources */,
@@ -685,6 +692,7 @@
 				A07AD2451F156DC000100D69 /* FeedViewController.swift in Sources */,
 				A03D91551F26CC3F006CF35F /* CauseTVCellDelegate.swift in Sources */,
 				A00FB5981F1ED46C0036340D /* EventCollectionViewCell.swift in Sources */,
+				A03D91631F2A79A4006CF35F /* Comment.swift in Sources */,
 				A06309F61F216833002E886A /* OrgBrowseCell.swift in Sources */,
 				A0B95E8A1F1D94A200EBD019 /* EditProfileViewController.swift in Sources */,
 				A06309FC1F2675B5002E886A /* MapSettingsViewController.swift in Sources */,
