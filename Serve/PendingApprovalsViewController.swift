@@ -93,7 +93,6 @@ class PendingApprovalsViewController: UIViewController, UITableViewDelegate, UIT
         query.findObjectsInBackground { (pendingList: [PFObject]?, error: Error?) in
             if let pendingList = pendingList {
                 self.pending = pendingList
-                print(self.pending.count)
                 self.tableView.reloadData()
                 self.refreshControl.endRefreshing()
             }
