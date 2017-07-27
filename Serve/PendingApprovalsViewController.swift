@@ -10,19 +10,6 @@ import UIKit
 import Parse
 import DZNEmptyDataSet
 
-
-class EmptyView : UIView{
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("NONONO")
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.backgroundColor = UIColor.blue
-        print("made")
-    }
-}
-
 class PendingApprovalsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, PendingCellDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate{
     
     @IBOutlet var tableView: UITableView!
