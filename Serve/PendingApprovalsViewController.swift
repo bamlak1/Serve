@@ -8,8 +8,9 @@
 
 import UIKit
 import Parse
+import DZNEmptyDataSet
 
-class PendingApprovalsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, PendingCellDelegate {
+class PendingApprovalsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, PendingCellDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate{
     
     @IBOutlet var tableView: UITableView!
     
@@ -17,6 +18,9 @@ class PendingApprovalsViewController: UIViewController, UITableViewDelegate, UIT
     @IBOutlet weak var profileImageView: UIImageView!
     var importedArray : [String] = []
     var refreshControl = UIRefreshControl()
+    
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,10 +32,15 @@ class PendingApprovalsViewController: UIViewController, UITableViewDelegate, UIT
         tableView.delegate = self
         tableView.dataSource = self
         
+        tableView.emptyDataSetSource = self
+        tableView.emptyDataSetDelegate = self
+        tableView.tableFooterView = UIView()
+        
+
         retrievePendingRequests()
-        //retrievePendingUsers()
+
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -39,6 +48,16 @@ class PendingApprovalsViewController: UIViewController, UITableViewDelegate, UIT
     
     func didPullToRefresh(_ refreshControl: UIRefreshControl) {
         retrievePendingRequests()
+    }
+    
+    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        let str = "No pending requests."
+        let attrs = [NSFontAttributeName: UIFont.preferredFont(forTextStyle: UIFontTextStyle.headline)]
+        return NSAttributedString(string: str, attributes: attrs)
+    }
+    
+    func emptyDataSetShouldAllowScroll(_ scrollView: UIScrollView!) -> Bool {
+        return true
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -74,7 +93,7 @@ class PendingApprovalsViewController: UIViewController, UITableViewDelegate, UIT
         query.findObjectsInBackground { (pendingList: [PFObject]?, error: Error?) in
             if let pendingList = pendingList {
                 self.pending = pendingList
-                //print(self.pending)
+                print(self.pending.count)
                 self.tableView.reloadData()
                 self.refreshControl.endRefreshing()
             }
@@ -88,6 +107,7 @@ class PendingApprovalsViewController: UIViewController, UITableViewDelegate, UIT
         
         print("button tapped at index:\(index)")
     }
+    
     
     
     
@@ -163,4 +183,8 @@ class PendingApprovalsViewController: UIViewController, UITableViewDelegate, UIT
  
     
 }
+
+
+
+
 
