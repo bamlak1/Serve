@@ -104,6 +104,15 @@ class EditOrganizationViewController: UIViewController, UINavigationControllerDe
         vc.didMove(toParentViewController: self)
     }
     
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if(text == "\n") {
+            missionTextView.resignFirstResponder()
+            contactTextView.resignFirstResponder()
+            return false
+        }
+        return true
+    }
+    
     
     @IBAction func logOutPressed(_ sender: Any) {
         PFUser.logOutInBackground { (error: Error?) in
