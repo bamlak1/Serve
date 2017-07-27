@@ -7,11 +7,12 @@
 //
 import UIKit
 import Parse
+import ParseUI
 
 class EventTableViewCell: UITableViewCell {
     
     @IBOutlet weak var eventNameLabel: UILabel!
-    @IBOutlet weak var bannerImageView: UIImageView!
+    @IBOutlet weak var bannerImageView: PFImageView!
     @IBOutlet weak var numVolLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var dateTimeLabel: UILabel!
@@ -21,6 +22,7 @@ class EventTableViewCell: UITableViewCell {
     
     var event : PFObject! {
         didSet{
+            bannerImageView.image = nil
             banner = event["banner"] as! PFFile
             banner?.getDataInBackground { (data: Data?, error: Error?) in
                 if(error != nil) {

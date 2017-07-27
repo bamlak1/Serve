@@ -8,6 +8,7 @@
 
 import UIKit
 import Parse
+import ParseUI
 
 class EventDetailViewController: UIViewController, NotifyEventDelegate{
     
@@ -16,7 +17,7 @@ class EventDetailViewController: UIViewController, NotifyEventDelegate{
     var accepts : [String] = []
     var pendings : [String] = []
     
-    @IBOutlet weak var bannerImageView: UIImageView!
+    @IBOutlet weak var bannerImageView: PFImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var orgLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
@@ -61,6 +62,7 @@ class EventDetailViewController: UIViewController, NotifyEventDelegate{
         
         
         let image = event?["banner"] as! PFFile
+        bannerImageView.image = nil
         image.getDataInBackground { (data: Data?, error: Error?) in
             if(error != nil) {
                 print(error?.localizedDescription ?? "error")
