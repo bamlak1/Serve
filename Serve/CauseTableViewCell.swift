@@ -8,14 +8,30 @@
 
 import UIKit
 import Parse
+import ParseUI
 
 class CauseTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var causeImageView: UIImageView!
+    @IBOutlet weak var causeImageView: PFImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var addButton: UIButton!
+    var pic : PFFile?
     
-    var cause: PFObject?
+    var cause: PFObject! {
+        didSet{
+            nameLabel.text = (cause["name"] as! String)
+            pic = cause["image"] as! PFFile
+            causeImageView.image = nil
+            pic?.getDataInBackground { (data: Data?, error: Error?) in
+                if error != nil {
+                    print(error?.localizedDescription ?? "error")
+                } else {
+                    let finalImage = UIImage(data: data!)
+                    self.causeImageView.image = finalImage
+                }
+            }
+        }
+    }
     
     var delegate: CauseTVCellDelegate!
     var indexPath: IndexPath!
