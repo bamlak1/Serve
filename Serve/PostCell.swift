@@ -49,20 +49,13 @@ class PostCell: UITableViewCell {
     @IBOutlet weak var commentButton: UIButton!
     
 
-//    @IBAction func namePressed(_ sender: Any) {
-//        let user = self.user!
-//        let type = user["type"] as! String
-//        print("functional")
-//        
-//        if(self.delegate != nil ) {
-//            self.delegate.callSegueFromCell(myData: user, type: type)
-//        }
-//    }
     
     var post : PFObject! {
         didSet{
             nameLabel.text = (user!["username"] as! String)
-            eventLabel.text = (event!["title"] as! String)
+            if event != nil {
+                eventLabel.text = (event!["title"] as! String)
+            }
             actionLabel.text = (post["action"] as! String)
             userType = (user!["type"] as! String)
             pic = (user!["profile_image"] as! PFFile)
@@ -78,7 +71,13 @@ class PostCell: UITableViewCell {
             if post["caption"] != nil {
                 captionLabel.text = (post["caption"] as! String)
             }
+            
+            if event == nil {
+                eventButtonOutlet.isEnabled = false
+            }
         }
+        
+     
     }
    
         

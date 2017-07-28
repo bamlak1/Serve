@@ -68,6 +68,9 @@ class SignupViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         //Insert code to initialize individual properties
         case .Organization:
             newUser["type"] = "Organization"
+            newUser["following"] = []
+            newUser["following_count"] = 0
+            newUser["causes"] = []
             self.performSegue(withIdentifier: "loginOrgSegue", sender: nil)
             //Insert code to initialize organization properties
         }
@@ -75,10 +78,21 @@ class SignupViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         newUser.signUpInBackground { (success: Bool, error: Error?) in
             if success {
                 print("Yay, created a user!")
+                
+                PFUser.logInWithUsername(inBackground: self.usernameTextField.text!, password: self.passwordTextField.text!) { (user: PFUser?, error: Error?) in
+                    if let error = error {
+                        print("User log in failed: \(error.localizedDescription)")
+                    } else {
+                        print("User logged in successfully")
+                    }
+                }
+                
             } else {
                 print(error?.localizedDescription as Any)
             }
         }
+        
+     
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
