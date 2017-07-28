@@ -17,8 +17,6 @@
 		861483321F18425D00C18917 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 861483311F18425D00C18917 /* MapViewController.swift */; };
 		A00FB5961F1ED45A0036340D /* OrgCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00FB5951F1ED45A0036340D /* OrgCollectionViewCell.swift */; };
 		A00FB5981F1ED46C0036340D /* EventCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00FB5971F1ED46C0036340D /* EventCollectionViewCell.swift */; };
-		A00FB59A1F1ED47B0036340D /* IndCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00FB5991F1ED47B0036340D /* IndCollectionViewCell.swift */; };
-		A00FB59C1F1ED7380036340D /* BrowseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00FB59B1F1ED7380036340D /* BrowseViewController.swift */; };
 		A03D91511F26CC22006CF35F /* CausesPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03D91501F26CC22006CF35F /* CausesPopUpViewController.swift */; };
 		A03D91531F26CC2A006CF35F /* CauseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03D91521F26CC2A006CF35F /* CauseTableViewCell.swift */; };
 		A03D91551F26CC3F006CF35F /* CauseTVCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03D91541F26CC3F006CF35F /* CauseTVCellDelegate.swift */; };
@@ -102,8 +100,6 @@
 		861483311F18425D00C18917 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		A00FB5951F1ED45A0036340D /* OrgCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrgCollectionViewCell.swift; sourceTree = "<group>"; };
 		A00FB5971F1ED46C0036340D /* EventCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCollectionViewCell.swift; sourceTree = "<group>"; };
-		A00FB5991F1ED47B0036340D /* IndCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndCollectionViewCell.swift; sourceTree = "<group>"; };
-		A00FB59B1F1ED7380036340D /* BrowseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseViewController.swift; sourceTree = "<group>"; };
 		A03D91501F26CC22006CF35F /* CausesPopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CausesPopUpViewController.swift; sourceTree = "<group>"; };
 		A03D91521F26CC2A006CF35F /* CauseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CauseTableViewCell.swift; sourceTree = "<group>"; };
 		A03D91541F26CC3F006CF35F /* CauseTVCellDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CauseTVCellDelegate.swift; sourceTree = "<group>"; };
@@ -293,7 +289,6 @@
 				A0B95E891F1D94A200EBD019 /* EditProfileViewController.swift */,
 				A0B95E851F185D7900EBD019 /* UserProfileViewController.swift */,
 				A07AD2441F156DC000100D69 /* FeedViewController.swift */,
-				A00FB59B1F1ED7380036340D /* BrowseViewController.swift */,
 				A06309F11F215C2E002E886A /* BrowserViewController.swift */,
 				A03D915E1F296BA9006CF35F /* PostDetailViewController.swift */,
 			);
@@ -327,7 +322,6 @@
 			children = (
 				A03D91521F26CC2A006CF35F /* CauseTableViewCell.swift */,
 				A00FB5971F1ED46C0036340D /* EventCollectionViewCell.swift */,
-				A00FB5991F1ED47B0036340D /* IndCollectionViewCell.swift */,
 				A07AD2461F1573BA00100D69 /* PostCell.swift */,
 				A00FB5951F1ED45A0036340D /* OrgCollectionViewCell.swift */,
 				CCED38841F1D926500A3DD2E /* PendingCell.swift */,
@@ -459,7 +453,7 @@
 				TargetAttributes = {
 					A07AD20E1F13FAC500100D69 = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = DY98KN5R7D;
+						DevelopmentTeam = 257DRML7HA;
 						ProvisioningStyle = Automatic;
 					};
 					A07AD2221F13FAC500100D69 = {
@@ -682,11 +676,9 @@
 				A03D91511F26CC22006CF35F /* CausesPopUpViewController.swift in Sources */,
 				A06309F41F215D2E002E886A /* EventBrowseCell.swift in Sources */,
 				CCD8C2AF1F183A0E00B46AD7 /* EventTableViewCell.swift in Sources */,
-				A00FB59C1F1ED7380036340D /* BrowseViewController.swift in Sources */,
 				CCED38881F1D926500A3DD2E /* PendingCell.swift in Sources */,
 				A0B95E861F185D7900EBD019 /* UserProfileViewController.swift in Sources */,
 				A03D915B1F2950C6006CF35F /* GMSCircle + FitBounds.swift in Sources */,
-				A00FB59A1F1ED47B0036340D /* IndCollectionViewCell.swift in Sources */,
 				CC2453731F2014E400D765E5 /* Update.swift in Sources */,
 				A06309F81F216873002E886A /* PeopleBrowseCell.swift in Sources */,
 				A07AD2451F156DC000100D69 /* FeedViewController.swift in Sources */,
@@ -869,10 +861,10 @@
 			baseConfigurationReference = ED1C2CCCD0B7F017A061DDCF /* Pods-Serve.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = DY98KN5R7D;
+				DEVELOPMENT_TEAM = 257DRML7HA;
 				INFOPLIST_FILE = Serve/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Hamlett.Serve;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Bamlak.Serve;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -883,10 +875,10 @@
 			baseConfigurationReference = 0C684013576F56B69AF242C7 /* Pods-Serve.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = DY98KN5R7D;
+				DEVELOPMENT_TEAM = 257DRML7HA;
 				INFOPLIST_FILE = Serve/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Hamlett.Serve;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Bamlak.Serve;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
