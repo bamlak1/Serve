@@ -24,7 +24,7 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
     var markerNum = 0
     var userMarkerNum = 0
     var otherMarkerNum = 0
-    var drawnCircle: GMSCircle!
+    var homeCircle: GMSCircle!
     var otherLocationCircle: GMSCircle!
     var userEvents: [PFObject] = []
     var otherEvents: [PFObject] = []
@@ -38,7 +38,7 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchEventLocations(showUserEvents: true, showOtherEvents: true, call: 0)
+        fetchEventLocations(showUserEvents: true, showOtherEvents: true)
         userEventsShow = UserDefaults.standard.bool(forKey: "userSwitchState")
         otherEventsShow = UserDefaults.standard.bool(forKey: "otherSwitchState")
     }
@@ -67,22 +67,22 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
         newCircle.strokeWidth = 5
         newCircle.map = mapView
         otherLocationCircle = newCircle
-        let update = GMSCameraUpdate.fit(newCircle.bounds())
+        let update = GMSCameraUpdate.fit(otherLocationCircle.bounds())
         mapView.animate(with: update)
     }
     
     // Given a radius in miles, draws a circle around the home base
     // If there was already a circle drawn, replaces it with the new one
     func drawHomeCircle(miles: Int) {
-        if (drawnCircle != nil) {
-            drawnCircle.map = nil
+        if (homeCircle != nil) {
+            homeCircle.map = nil
         }
         let newCircle = GMSCircle(position: homeMarker.position, radius: Double(miles) * 1609.34)
         newCircle.fillColor = UIColor(red: 0.35, green: 0, blue: 0, alpha: 0.05)
         newCircle.strokeColor = .red
         newCircle.strokeWidth = 5
         newCircle.map = mapView
-        drawnCircle = newCircle
+        homeCircle = newCircle
         let update = GMSCameraUpdate.fit(newCircle.bounds())
         mapView.animate(with: update)
     }
@@ -92,7 +92,6 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
     func updateDisplayedEvents(eventType: String, display: Bool) {
         userEventsShow = UserDefaults.standard.bool(forKey: "userSwitchState")
         otherEventsShow = UserDefaults.standard.bool(forKey: "otherSwitchState")
-        returnedEvents.removeAll()
         if (eventType == "userEvents") {
             for marker in markers {
                 let id = (marker.userData as? PFObject)?.object(forKey: "id")
@@ -116,7 +115,7 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
                 }
             }
         }
-        fetchEventLocations(showUserEvents: userEventsShow, showOtherEvents: otherEventsShow, call: -1)
+        self.collectionView.reloadData()
     }
     
     @IBAction func openSettings(_ sender: Any) {
@@ -152,13 +151,10 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
         var eventData = PFObject(className: "Event")
         if (userEventsShow && otherEventsShow) {
             eventData = returnedEvents[indexPath.item]
-            print("all event cells")
         } else if userEventsShow {
             eventData = userEvents[indexPath.item]
-            print("only my event cells")
         } else {
             eventData = otherEvents[indexPath.item]
-            print("only other event cells")
         }
         
         if let banner = eventData["banner"] as? PFFile {
@@ -187,13 +183,10 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
         var index: Int!
         if (userEventsShow && otherEventsShow) {
             index = (marker.userData as! PFObject)["number"] as! Int
-            print("all event cells")
         } else if userEventsShow {
             index = (marker.userData as! PFObject)["userMarkerNum"] as! Int
-            print("only my event cells")
         } else {
             index = (marker.userData as! PFObject)["otherMarkerNum"] as! Int
-            print("only other event cells")
         }
         
         if (index >= 0) {
@@ -210,18 +203,13 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
     
     // When an event cell is clicked on, uses that cell's row number to highlight and shift to that marker on the map
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        var marker = GMSMarker()
-        if (userEventsShow && otherEventsShow) {
-            marker = markers[indexPath.row]
-            print("all markers")
-        } else if userEventsShow {
-            marker = userMarkers[indexPath.row]
-            print("only my markers")
-        } else {
-            marker = otherMarkers[indexPath.row]
-            print("only other markers")
+        let cell = collectionView.cellForItem(at: indexPath) as! MapEventCell
+        for marker in markers {
+            if (cell.location.text == (marker.userData as! PFObject)["location"] as! String) {
+                update(currentMarker: marker, indexPath: indexPath)
+            }
         }
-        update(currentMarker: marker, indexPath: indexPath)
+            
     }
     
     // Given a marker and an IndexPath of the associated cell, updates the colors of the markers (previous and current) and the cell border (current)
@@ -267,7 +255,7 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
     
     // Using an event's manually inputed address, geocodes it, and adds a marker for it
     // Splits up all the available events into two groups: events the user has signed up for and events the user has not signed up for
-    func fetchEventLocations(showUserEvents: Bool, showOtherEvents: Bool, call: Int) {
+    func fetchEventLocations(showUserEvents: Bool, showOtherEvents: Bool) {
         let query = PFQuery(className: "Event")
         query.order(byAscending: "start")
         query.cachePolicy = .cacheElseNetwork
@@ -276,28 +264,16 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
                 for eventObject in events {
                     if let acceptedUsers = eventObject.value(forKey: "accepted_users") as? [String] {
                         if (acceptedUsers.contains("7xAEAEMSxX")) {
-                            if (call == 0) {
-                                self.userEvents.append(eventObject)
-                                self.addressToCoordinates(location: eventObject.value(forKey: "location") as! String, type: "userEvent", id: "7xAEAEMSxX")
-                                print("making user marker")
-                            } else if (showUserEvents) {
-                                self.returnedEvents.append(eventObject)
-                                print("adding user event to collection view")
-                            }
+                            self.userEvents.append(eventObject)
+                            self.addressToCoordinates(location: eventObject.value(forKey: "location") as! String, type: "userEvent", id: "7xAEAEMSxX")
+                            self.returnedEvents.append(eventObject)
                         } else {
-                            if (call == 0) {
-                                self.otherEvents.append(eventObject)
-                                self.addressToCoordinates(location: eventObject.value(forKey: "location") as! String, type: "otherEvent", id: "other")
-                                print("making other event marker")
-                            } else if (showOtherEvents) {
-                                self.returnedEvents.append(eventObject)
-                                print("adding other event to collection view")
-                            }
+                            self.otherEvents.append(eventObject)
+                            self.addressToCoordinates(location: eventObject.value(forKey: "location") as! String, type: "otherEvent", id: "other")
+                            self.returnedEvents.append(eventObject)
                         }
                     }
                 }
-                self.collectionView.reloadData()
-                print("reloading collection view")
             } else {
                 print(error?.localizedDescription as Any)
             }
@@ -308,7 +284,8 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
     // When the home button is clicked, returns the map to the home base
     @IBAction func returnHome(_ sender: Any) {
         mapView.animate(toLocation: CLLocationCoordinate2D(latitude: homeMarker.position.latitude, longitude: homeMarker.position.longitude))
-        mapView.animate(toZoom: 13)
+        let update = GMSCameraUpdate.fit(homeCircle.bounds())
+        mapView.animate(with: update)
     }
     
     // Given an address, converts it into a latitude/longitude, and then maps it
@@ -332,9 +309,9 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
                     let latitude = Double(jsonResult["results"][0]["geometry"]["location"]["lat"].stringValue)
                     let longitude = Double(jsonResult["results"][0]["geometry"]["location"]["lng"].stringValue)
                     if (type == "home") {
-                        self.placeMarker(lat: latitude!, long: longitude!, type: "home", id: id)
+                        self.placeMarker(lat: latitude!, long: longitude!, type: "home", id: id, location: location)
                     } else {
-                        self.placeMarker(lat: latitude!, long: longitude!, type: type, id: id)
+                        self.placeMarker(lat: latitude!, long: longitude!, type: type, id: id, location: location)
                     }
                 }
             });
@@ -344,7 +321,7 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
     
     // Given the user's latitude and longitude, centers the map at that location and creates a pin for it
     // Gives each marker a number based on what order it was added to the map
-    func placeMarker(lat: Double, long: Double, type: String, id: String) {
+    func placeMarker(lat: Double, long: Double, type: String, id: String, location: String) {
         let marker = GMSMarker()
         marker.position = CLLocationCoordinate2D(latitude: lat, longitude: long)
         let extraMarkerInfo = PFObject(className: "Marker")
@@ -365,19 +342,17 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
             drawOtherLocationCircle(marker: marker, miles: Int(UserDefaults.standard.float(forKey: "slider_value")))
         } else {
             marker.icon = GMSMarker.markerImage(with: UIColor(red:0.34, green:0.71, blue:1.00, alpha:1.0))
+            extraMarkerInfo["location"] = location
             extraMarkerInfo["number"] = markerNum
-            marker.title = String(markerNum)
             markerNum += 1
             markers.append(marker)
             print(markers)
             if (type == "userEvent") {
                 extraMarkerInfo["userMarkerNum"] = userMarkerNum
-                marker.snippet = String(userMarkerNum)
                 userMarkerNum += 1
                 userMarkers.append(marker)
             } else if (type == "otherEvent") {
                 extraMarkerInfo["otherMarkerNum"] = otherMarkerNum
-                marker.snippet = String(otherMarkerNum)
                 otherMarkerNum += 1
                 otherMarkers.append(marker)
             }
