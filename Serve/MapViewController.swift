@@ -22,28 +22,37 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
     var previousMarker: GMSMarker!
     var homeMarker: GMSMarker!
     var markerNum = 0
+    var userMarkerNum = 0
+    var otherMarkerNum = 0
     var drawnCircle: GMSCircle!
     var otherLocationCircle: GMSCircle!
     var userEvents: [PFObject] = []
     var otherEvents: [PFObject] = []
+    var userMarkers: [GMSMarker] = []
+    var otherMarkers: [GMSMarker] = []
+    var userEventsShow: Bool!
+    var otherEventsShow: Bool!
+    var radius: Int!
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var myEventsSwitch: UISwitch!
-    @IBOutlet weak var otherEventsSwitch: UISwitch!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchEventLocations(showUserEvents: true, showOtherEvents: true, call: 0)
+        userEventsShow = UserDefaults.standard.bool(forKey: "userSwitchState")
+        otherEventsShow = UserDefaults.standard.bool(forKey: "otherSwitchState")
     }
     
     override func viewDidAppear(_ animated: Bool) {
         fetchUserLocation()
-        fetchEventLocations()
         mapView.delegate = self
         collectionView.allowsMultipleSelection = false
         collectionView.allowsSelection = true
         collectionView.backgroundColor = UIColor.clear
         searchResultController = SearchResultsViewController()
         searchResultController.delegate = self
+        updateDisplayedEvents(eventType: "userEvents", display: userEventsShow)
+        updateDisplayedEvents(eventType: "otherEvents", display: otherEventsShow)
     }
     
     // Given a new marker that was searched using the search bar and a radius in miles, draws a circle around that marker
@@ -81,6 +90,9 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
     // Given a type of event (either user or other) and a boolean (true = display, false = hide),
     // displays or hides all those events
     func updateDisplayedEvents(eventType: String, display: Bool) {
+        userEventsShow = UserDefaults.standard.bool(forKey: "userSwitchState")
+        otherEventsShow = UserDefaults.standard.bool(forKey: "otherSwitchState")
+        returnedEvents.removeAll()
         if (eventType == "userEvents") {
             for marker in markers {
                 let id = (marker.userData as? PFObject)?.object(forKey: "id")
@@ -104,28 +116,10 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
                 }
             }
         }
+        fetchEventLocations(showUserEvents: userEventsShow, showOtherEvents: otherEventsShow, call: -1)
     }
     
-    // Placeholder method and switch until I figure out why the settings view controller isn't popping up
-    @IBAction func myEventsDisplay(_ sender: Any) {
-        if myEventsSwitch.isOn {
-            updateDisplayedEvents(eventType: "userEvents", display: true)
-        } else {
-            updateDisplayedEvents(eventType: "userEvents", display: false)
-        }
-    }
-
-    // Placeholder method and switch until I figure out why the settings view controller isn't popping up
-    @IBAction func otherEventsDisplay(_ sender: Any) {
-        if otherEventsSwitch.isOn {
-            updateDisplayedEvents(eventType: "otherEvents", display: true)
-        } else {
-            updateDisplayedEvents(eventType: "otherEvents", display: false)
-        }
-    }
-    
-    // Displays the settings menu as a pop-up
-    @IBAction func showSettings(_ sender: Any) {
+    @IBAction func openSettings(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Map", bundle: nil)
         let popOverVC = storyboard.instantiateViewController(withIdentifier: "popUpStoryboard") as! MapSettingsViewController
         popOverVC.delegate = self
@@ -143,13 +137,29 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return returnedEvents.count
+        if (userEventsShow && otherEventsShow) {
+            return returnedEvents.count
+        } else if userEventsShow {
+            return userEvents.count
+        } else {
+            return otherEvents.count
+        }
     }
     
     // Sets all of the cell information in the CollectionView
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MapEventCell", for: indexPath) as! MapEventCell
-        let eventData = returnedEvents[indexPath.item]
+        var eventData = PFObject(className: "Event")
+        if (userEventsShow && otherEventsShow) {
+            eventData = returnedEvents[indexPath.item]
+            print("all event cells")
+        } else if userEventsShow {
+            eventData = userEvents[indexPath.item]
+            print("only my event cells")
+        } else {
+            eventData = otherEvents[indexPath.item]
+            print("only other event cells")
+        }
         
         if let banner = eventData["banner"] as? PFFile {
             banner.getDataInBackground(block: { (data: Data?, error: Error?) in
@@ -174,10 +184,20 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
     
     // When an event marker is clicked on, uses that marker's associated number to scroll to that event cell in the CollectionView
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
-        let index = (marker.userData as! PFObject)["number"] as! Int
+        var index: Int!
+        if (userEventsShow && otherEventsShow) {
+            index = (marker.userData as! PFObject)["number"] as! Int
+            print("all event cells")
+        } else if userEventsShow {
+            index = (marker.userData as! PFObject)["userMarkerNum"] as! Int
+            print("only my event cells")
+        } else {
+            index = (marker.userData as! PFObject)["otherMarkerNum"] as! Int
+            print("only other event cells")
+        }
+        
         if (index >= 0) {
             let currentIndexPath = IndexPath(item: index, section: 0)
-            print(currentIndexPath)
             self.collectionView.scrollToItem(at: currentIndexPath, at: .right, animated: true)
             self.collectionView.selectItem(at: currentIndexPath, animated: true, scrollPosition: .right)
             update(currentMarker: marker, indexPath: currentIndexPath)
@@ -190,7 +210,17 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
     
     // When an event cell is clicked on, uses that cell's row number to highlight and shift to that marker on the map
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let marker = markers[indexPath.row]
+        var marker = GMSMarker()
+        if (userEventsShow && otherEventsShow) {
+            marker = markers[indexPath.row]
+            print("all markers")
+        } else if userEventsShow {
+            marker = userMarkers[indexPath.row]
+            print("only my markers")
+        } else {
+            marker = otherMarkers[indexPath.row]
+            print("only other markers")
+        }
         update(currentMarker: marker, indexPath: indexPath)
     }
     
@@ -237,52 +267,48 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
     
     // Using an event's manually inputed address, geocodes it, and adds a marker for it
     // Splits up all the available events into two groups: events the user has signed up for and events the user has not signed up for
-    func fetchEventLocations() {
-        let eventQuery = PFQuery(className: "Event")
-        eventQuery.order(byAscending: "start")
-        
-        eventQuery.findObjectsInBackground { (events: [PFObject]?, error: Error?) in
+    func fetchEventLocations(showUserEvents: Bool, showOtherEvents: Bool, call: Int) {
+        let query = PFQuery(className: "Event")
+        query.order(byAscending: "start")
+        query.cachePolicy = .cacheElseNetwork
+        query.findObjectsInBackground() { (events: [PFObject]?, error: Error?) in
             if let events = events {
-                self.returnedEvents = events
+                for eventObject in events {
+                    if let acceptedUsers = eventObject.value(forKey: "accepted_users") as? [String] {
+                        if (acceptedUsers.contains("7xAEAEMSxX")) {
+                            if (call == 0) {
+                                self.userEvents.append(eventObject)
+                                self.addressToCoordinates(location: eventObject.value(forKey: "location") as! String, type: "userEvent", id: "7xAEAEMSxX")
+                                print("making user marker")
+                            } else if (showUserEvents) {
+                                self.returnedEvents.append(eventObject)
+                                print("adding user event to collection view")
+                            }
+                        } else {
+                            if (call == 0) {
+                                self.otherEvents.append(eventObject)
+                                self.addressToCoordinates(location: eventObject.value(forKey: "location") as! String, type: "otherEvent", id: "other")
+                                print("making other event marker")
+                            } else if (showOtherEvents) {
+                                self.returnedEvents.append(eventObject)
+                                print("adding other event to collection view")
+                            }
+                        }
+                    }
+                }
                 self.collectionView.reloadData()
-                
-                eventQuery.whereKey("accepted_user", equalTo:"7xAEAEMSxX")
-                eventQuery.findObjectsInBackground() { (events: [PFObject]?, error: Error?) in
-                    if let events = events {
-                        for eventObject in events {
-                            self.userEvents.append(eventObject)
-                            self.addressToCoordinates(location: eventObject.value(forKey: "location") as! String, type: "event", id: "7xAEAEMSxX")
-                            print("Location: \(eventObject.value(forKey: "location") as! String)")
-                        }
-                    } else {
-                        print(error?.localizedDescription as Any)
-                    }
-                }
-                
-                let otherEventQuery = PFQuery(className: "Event")
-                otherEventQuery.order(byAscending: "start")
-                otherEventQuery.whereKey("accepted_user", notEqualTo:"7xAEAEMSxX")
-
-                otherEventQuery.findObjectsInBackground() { (otherEvents: [PFObject]?, error: Error?) in
-                    if let otherEvents = otherEvents {
-                        for eventObject in otherEvents {
-                            self.otherEvents.append(eventObject)
-                            self.addressToCoordinates(location: eventObject.value(forKey: "location") as! String, type: "event", id: "other")
-                            print("Location: \(eventObject.value(forKey: "location") as! String)")
-                        }
-                    } else {
-                        print(error?.localizedDescription as Any)
-                    }
-                }
+                print("reloading collection view")
             } else {
                 print(error?.localizedDescription as Any)
             }
         }
     }
     
+    
     // When the home button is clicked, returns the map to the home base
     @IBAction func returnHome(_ sender: Any) {
         mapView.animate(toLocation: CLLocationCoordinate2D(latitude: homeMarker.position.latitude, longitude: homeMarker.position.longitude))
+        mapView.animate(toZoom: 13)
     }
     
     // Given an address, converts it into a latitude/longitude, and then maps it
@@ -308,13 +334,11 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
                     if (type == "home") {
                         self.placeMarker(lat: latitude!, long: longitude!, type: "home", id: id)
                     } else {
-                        self.placeMarker(lat: latitude!, long: longitude!, type: "event", id: id)
+                        self.placeMarker(lat: latitude!, long: longitude!, type: type, id: id)
                     }
                 }
             });
             dataRetrieval.resume()
-        } else {
-            print("User/organization address not added. Please add address to view map")
         }
     }
     
@@ -332,21 +356,31 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
             marker.title = "Home base!"
             marker.snippet = "(You can change this in user settings)"
             marker.icon = UIImage(data: UIImagePNGRepresentation(UIImage(named: "home")!)!, scale: 3)!
-            drawHomeCircle(miles: 1)
+            drawHomeCircle(miles: Int(UserDefaults.standard.float(forKey: "slider_value")))
+        } else if (type == "changeLocation") {
+            extraMarkerInfo["number"] = -1
+            marker.title = "Changed Location"
+            marker.icon = UIImage(data: UIImagePNGRepresentation(UIImage(named: "star")!)!, scale: 3)!
+            mapView.animate(toLocation: CLLocationCoordinate2D(latitude: marker.position.latitude, longitude: marker.position.longitude))
+            drawOtherLocationCircle(marker: marker, miles: Int(UserDefaults.standard.float(forKey: "slider_value")))
         } else {
-            if (type == "changeLocation") {
-                extraMarkerInfo["number"] = -1
-                marker.title = "Changed Location"
-                marker.icon = UIImage(data: UIImagePNGRepresentation(UIImage(named: "star")!)!, scale: 3)!
-                mapView.animate(toLocation: CLLocationCoordinate2D(latitude: marker.position.latitude, longitude: marker.position.longitude))
-                drawOtherLocationCircle(marker: marker, miles: 1)
-            } else {
-                marker.icon = GMSMarker.markerImage(with: UIColor(red:0.34, green:0.71, blue:1.00, alpha:1.0))
-                extraMarkerInfo["number"] = markerNum
-                markerNum += 1
-
-            }
+            marker.icon = GMSMarker.markerImage(with: UIColor(red:0.34, green:0.71, blue:1.00, alpha:1.0))
+            extraMarkerInfo["number"] = markerNum
+            marker.title = String(markerNum)
+            markerNum += 1
             markers.append(marker)
+            print(markers)
+            if (type == "userEvent") {
+                extraMarkerInfo["userMarkerNum"] = userMarkerNum
+                marker.snippet = String(userMarkerNum)
+                userMarkerNum += 1
+                userMarkers.append(marker)
+            } else if (type == "otherEvent") {
+                extraMarkerInfo["otherMarkerNum"] = otherMarkerNum
+                marker.snippet = String(otherMarkerNum)
+                otherMarkerNum += 1
+                otherMarkers.append(marker)
+            }
         }
         marker.userData = extraMarkerInfo
         marker.map = self.mapView
@@ -355,21 +389,6 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    // Queries all Event objects and reloads the Collection View with events that are ordered by time (sooner events show up first)
-    func fetchEvents() {
-        let query = PFQuery(className: "Events")
-        query.order(byAscending: "date")
-        query.addAscendingOrder("time")
-        query.findObjectsInBackground { (events: [PFObject]?, error: Error?) in
-            if let events = events {
-                self.returnedEvents = events
-                self.collectionView.reloadData()
-            } else {
-                print(error?.localizedDescription as Any)
-            }
-        }
     }
     
     // Based on what has been typed into the search bar, dynamically updates the results in the table view
