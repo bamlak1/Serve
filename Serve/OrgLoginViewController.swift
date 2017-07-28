@@ -8,26 +8,44 @@
 import UIKit
 import Parse
 
-class OrgLoginViewController: UIViewController, UITextFieldDelegate {
+class OrgLoginViewController: UIViewController, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate, CauseTVCellDelegate {
     
+    var user = PFUser.current() {
+        didSet{
+            self.id = (user?.objectId)!
+            print(self.id)
+        }
+    }
+  
     var causes : [PFObject] = []
+    var id : String?
     
     //@IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var organizationName: UITextField!
     @IBOutlet weak var organizationPhone: UITextField!
     @IBOutlet weak var organizationAddress: UITextField!
     @IBOutlet weak var causeInfoView: UIView!
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar!
+    
+    var addedCauses : [PFObject] = []
+    var filteredCauses: [PFObject] = []
+    var names : [String] = []
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         //collectionView.dataSource = self
         //self.collectionView.allowsMultipleSelection = true
         //fetchTopCauses()
+        tableView.dataSource = self
+        tableView.delegate = self
         organizationPhone.delegate = self
         organizationAddress.delegate = self
         organizationName.delegate = self
         causeInfoView.isHidden = true
-        // Do any additional setup after loading the view.
+        fetchCauses()
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -40,7 +58,15 @@ class OrgLoginViewController: UIViewController, UITextFieldDelegate {
         organization["name"] = organizationName.text
         organization["phone"] = organizationPhone.text
         organization["address"] = organizationAddress.text
+        user?.addUniqueObjects(from: addedCauses, forKey: "causes")
+        user?.addUniqueObjects(from: names, forKey: "cause_names")
         organization.saveInBackground()
+        
+        
+//        for cause in addedCauses{
+//            cause.addUniqueObject(user, forKey: "users")
+//            cause.saveInBackground()
+//        }
     }
     
     @IBAction func didPressView(_ sender: Any) {
@@ -51,13 +77,6 @@ class OrgLoginViewController: UIViewController, UITextFieldDelegate {
         causeInfoView.isHidden = !causeInfoView.isHidden
     }
     
-    @IBAction func causePressed(_ sender: Any) {
-        let vc = UIStoryboard(name: "Individual", bundle: nil).instantiateViewController(withIdentifier: "causePopUp") as! CausesPopUpViewController
-        self.addChildViewController(vc)
-        vc.view.frame = self.view.frame
-        self.view.addSubview(vc.view)
-        vc.didMove(toParentViewController: self)
-    }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         organizationName.resignFirstResponder()
@@ -66,6 +85,52 @@ class OrgLoginViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return filteredCauses.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "causeTVcell") as! CauseTableViewCell
+        cell.delegate = self
+        cell.indexPath = indexPath
+        
+        let cause = filteredCauses[indexPath.row]
+        cell.cause = cause
+        
+        return cell
+    }
+    
+    func didclickOnCellAtIndex(at index: IndexPath) {
+        let cell = tableView(tableView, cellForRowAt: index) as! CauseTableViewCell
+        addedCauses.append(cell.cause!)
+        let name = cell.nameLabel.text!
+        names.append(name)
+        
+        
+        print("button tapped at index:\(index)")
+        print(self.addedCauses)
+    }
+    
+    //SEARCH BAR FUNCTIONS
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        filteredCauses = searchText.isEmpty ? causes: causes.filter { (cause: PFObject) -> Bool in
+            return(cause["name"] as! String).range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+        }
+        tableView.reloadData()
+        
+    }
+    
+    func fetchCauses(){
+        let query = PFQuery(className: "Cause")
+        //query.whereKey("users", notEqualTo: (PFUser.current()?.objectId)!)
+        
+        query.findObjectsInBackground { (causes: [PFObject]?, error: Error?) in
+            self.causes = causes!
+            self.filteredCauses = causes!
+            self.tableView.reloadData()
+        }
+    }
 //    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 //        return causes.count
 //    }
