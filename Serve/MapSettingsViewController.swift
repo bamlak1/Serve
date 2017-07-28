@@ -6,10 +6,12 @@
 //  Copyright © 2017 Bamlak Gessessew. All rights reserved.
 //
 import UIKit
+import GoogleMaps
 
 protocol SettingsDelegate {
     func drawHomeCircle(miles: Int)
     func updateDisplayedEvents(eventType: String, display: Bool)
+    func fetchEventLocations(showUserEvents: Bool, showOtherEvents: Bool, call: Int)
 }
 
 class MapSettingsViewController: UIViewController {
@@ -27,11 +29,12 @@ class MapSettingsViewController: UIViewController {
         self.view.backgroundColor = UIColor.black.withAlphaComponent(0.8)
         self.showAnimate()
         sliderValue = Int(UserDefaults.standard.float(forKey: "slider_value"))
-        myEventsSwitch.isOn = UserDefaults.standard.bool(forKey: "mySwitchState")
+        myEventsSwitch.isOn = UserDefaults.standard.bool(forKey: "userSwitchState")
         otherEventsSwitch.isOn = UserDefaults.standard.bool(forKey: "otherSwitchState")
         radiusSlider.value = Float(sliderValue)
         radiusLabel.text = String(sliderValue)
     }
+
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -64,7 +67,7 @@ class MapSettingsViewController: UIViewController {
 
     // Depending on whether the switch is active or not, displays what events the user has signed up and been accepted to
     @IBAction func switchMyEvents(_ sender: UISwitch) {
-        UserDefaults.standard.set(sender.isOn, forKey: "mySwitchState")
+        UserDefaults.standard.set(sender.isOn, forKey: "userSwitchState")
         if myEventsSwitch.isOn {
             delegate?.updateDisplayedEvents(eventType: "userEvents", display: true)
         } else {
