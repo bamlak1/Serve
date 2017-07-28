@@ -149,32 +149,40 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MapEventCell", for: indexPath) as! MapEventCell
         var eventData = PFObject(className: "Event")
+        var showEvents = true
+        collectionView.isHidden = false
         if (userEventsShow && otherEventsShow) {
             eventData = returnedEvents[indexPath.item]
         } else if userEventsShow {
             eventData = userEvents[indexPath.item]
-        } else {
+        } else if otherEventsShow {
             eventData = otherEvents[indexPath.item]
+        } else {
+            showEvents = false
+            collectionView.isHidden = true
+            print("no events to show")
         }
         
-        if let banner = eventData["banner"] as? PFFile {
-            banner.getDataInBackground(block: { (data: Data?, error: Error?) in
-                if (error != nil) {
-                    print(error?.localizedDescription ?? "error")
-                } else {
-                    let finalImage = UIImage(data: data!)
-                    cell.eventImage.image = finalImage
-                }
-            })
+        if (showEvents) {
+            if let banner = eventData["banner"] as? PFFile {
+                banner.getDataInBackground(block: { (data: Data?, error: Error?) in
+                    if (error != nil) {
+                        print(error?.localizedDescription ?? "error")
+                    } else {
+                        let finalImage = UIImage(data: data!)
+                        cell.eventImage.image = finalImage
+                    }
+                })
+            }
+            cell.eventName.text = eventData["title"] as? String
+            cell.eventDate.text = (eventData["start"] as? String)! + " - " + (eventData["end"] as? String)!
+            cell.orgName.text = eventData["author"] as? String
+            cell.location.text = eventData["location"] as? String
+            cell.backgroundColor = UIColor(red:1.00, green:1.00, blue:1.00, alpha:0.9)
+            cell.layer.borderWidth = 3.0
+            cell.layer.cornerRadius = 15
+            cell.layer.masksToBounds = true
         }
-        cell.eventName.text = eventData["title"] as? String
-        cell.eventDate.text = (eventData["start"] as? String)! + " - " + (eventData["end"] as? String)!
-        cell.orgName.text = eventData["author"] as? String
-        cell.location.text = eventData["location"] as? String
-        cell.backgroundColor = UIColor(red:1.00, green:1.00, blue:1.00, alpha:0.9)
-        cell.layer.borderWidth = 3.0
-        cell.layer.cornerRadius = 15
-        cell.layer.masksToBounds = true
         return cell
     }
     
