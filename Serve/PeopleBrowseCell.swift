@@ -34,6 +34,8 @@ class PeopleBrowseCell: UICollectionViewCell {
                 } else {
                     let finalImage = UIImage(data: data!)
                     self.imageViewer.image = finalImage
+                    self.imageViewer.layer.cornerRadius = self.imageViewer.frame.size.width / 2;
+                    self.imageViewer.clipsToBounds = true;
                 }
             })
             
