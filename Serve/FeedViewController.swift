@@ -166,7 +166,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             let post = update["event"] as! PFObject
             
             let vc = segue.destination as! PostDetailViewController
-            vc.update = post
+            vc.post = post
         }
 
         if segue.identifier == "other" {

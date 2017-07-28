@@ -37,6 +37,7 @@ class PostCell: UITableViewCell {
         didSet{
             nameButtonOutlet.tag = indexPath.row
             eventButtonOutlet.tag = indexPath.row
+            //commentButton.tag = indexPath.row
         }
     }
 

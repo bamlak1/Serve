@@ -8,6 +8,7 @@
 
 import UIKit
 import Parse
+import ParseUI
 
 class PostDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -40,15 +41,49 @@ class PostDetailViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var commentTableView: UITableView!
     
     
+    var event : PFObject?
+    var user: PFUser?
+    var post : PFObject?
+    var userType: String?
+    var pic : PFFile?
+    
     var comments: [PFObject]?
-    var update: PFObject?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        commentTableView.delegate = self
+        commentTableView.dataSource = self
+        
+        nameLabel.text = (user!["username"] as! String)
+        eventLabel.text = (event!["title"] as! String)
+        actionLabel.text = (post?["action"] as! String)
+        userType = (user!["type"] as! String)
+        pic = (user!["profile_image"] as! PFFile)
+        profilePicImageView.image = nil
+        pic?.getDataInBackground { (data: Data?, error: Error?) in
+            if error != nil {
+                print(error?.localizedDescription ?? "error")
+            } else {
+                let finalImage = UIImage(data: data!)
+                self.profilePicImageView.image = finalImage
+            }
+        }
+        if post?["caption"] != nil {
+            captionLabel.text = (post?["caption"] as! String)
+        }
 
         // Do any additional setup after loading the view.
     }
 
+    
+    
+    @IBAction func didPressOut(_ sender: Any) {
+        view.endEditing(true)
+    }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -62,7 +97,7 @@ class PostDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         let cell = commentTableView.dequeueReusableCell(withIdentifier: "PostCommentCell") as! PostCommentCell
         let comment = comments![indexPath.row]
         let text = comment["text"]
-        cell.commentLabel.text = text as! String
+        cell.commentLabel.text = text as? String
         if let user = comment["user"] as? PFUser {
             //user found, update username label w username
             cell.nameLabel.text = user.username
@@ -91,6 +126,7 @@ class PostDetailViewController: UIViewController, UITableViewDelegate, UITableVi
                 print("Problem saving message: \(error.localizedDescription)")
             }
         }
+        self.commentTableView.reloadData()
     }
 
     /*
