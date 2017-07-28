@@ -101,7 +101,7 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
             let cell = profileTableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as! PostCell
             let post = userPosts[indexPath.row]
             let user = post["user"] as! PFUser
-            let event = post["event"] as! PFObject
+            let event = post["event"] as? PFObject
             cell.indexPath = indexPath
             cell.user = user
             cell.event = event

@@ -49,19 +49,6 @@ class CausesPopUpViewController: UIViewController, UITableViewDataSource, UITabl
         
         let cause = filteredCauses[indexPath.row]
         cell.cause = cause
-        let name = cause["name"] as! String
-        
-        if let image = cause["image"] as? PFFile {
-            image.getDataInBackground { (data: Data?, error: Error?) in
-                if error != nil {
-                    print(error?.localizedDescription ?? "error")
-                } else {
-                    let finalImage = UIImage(data: data!)
-                    cell.causeImageView.image = finalImage
-                }
-            }
-        }
-        cell.nameLabel.text = name
         
         return cell
     }
@@ -70,7 +57,7 @@ class CausesPopUpViewController: UIViewController, UITableViewDataSource, UITabl
     func didclickOnCellAtIndex(at index: IndexPath) {
         let cell = tableView(tableView, cellForRowAt: index) as! CauseTableViewCell
         addedCauses.append(cell.cause!)
-        let name = cell.nameLabel.text as! String
+        let name = cell.nameLabel.text!
         names.append(name)
         
         
@@ -85,7 +72,7 @@ class CausesPopUpViewController: UIViewController, UITableViewDataSource, UITabl
         user?.saveInBackground()
         
         for cause in addedCauses{
-            cause.addUniqueObject(user!, forKey: "users")
+            cause.addUniqueObject((user?.objectId)!, forKey: "users")
             cause.saveInBackground()
         }
         
@@ -94,6 +81,7 @@ class CausesPopUpViewController: UIViewController, UITableViewDataSource, UITabl
     
     func fetchCauses(){
         let query = PFQuery(className: "Cause")
+        query.whereKey("users", notEqualTo: (PFUser.current()?.objectId)!)
         
         query.findObjectsInBackground { (causes: [PFObject]?, error: Error?) in
             self.causes = causes!

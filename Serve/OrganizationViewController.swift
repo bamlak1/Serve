@@ -130,9 +130,11 @@ class OrganizationViewController: UIViewController, UITableViewDelegate, UITable
         
         let post = updates[indexPath.row]
         let user = post["user"] as! PFUser
-        let event = post["event"] as! PFObject
+        if let event = post["event"] as? PFObject {
+            cell.event = event
+        }
         cell.user = user
-        cell.event = event
+        
         cell.post = post
         
         

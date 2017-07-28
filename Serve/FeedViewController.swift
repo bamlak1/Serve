@@ -131,10 +131,12 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         let update = updates[indexPath.row]
         let user = update["user"] as? PFUser
-        let event = update["event"] as! PFObject
+        if let event = update["event"] as? PFObject {
+            cell.event = event
+        }
         cell.indexPath = indexPath
         cell.user = user
-        cell.event = event
+        
         cell.post = update
         
         
