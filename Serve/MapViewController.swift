@@ -160,6 +160,7 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
         } else {
             showEvents = false
             collectionView.isHidden = true
+            print("no events to show")
         }
         
         if (showEvents) {
