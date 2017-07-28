@@ -11,7 +11,7 @@ import GoogleMaps
 protocol SettingsDelegate {
     func drawHomeCircle(miles: Int)
     func updateDisplayedEvents(eventType: String, display: Bool)
-    func fetchEventLocations(showUserEvents: Bool, showOtherEvents: Bool, call: Int)
+    func fetchEventLocations(showUserEvents: Bool, showOtherEvents: Bool)
 }
 
 class MapSettingsViewController: UIViewController {
