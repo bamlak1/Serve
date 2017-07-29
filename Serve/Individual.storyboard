@@ -838,6 +838,9 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <state key="normal" image="iconmonstr-smiley-2-32"/>
                                             <state key="selected" image="iconmonstr-smiley-1-32"/>
+                                            <connections>
+                                                <action selector="ddiPressFive:" destination="nHs-Rs-1co" eventType="touchUpInside" id="SYz-uy-LyY"/>
+                                            </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hwn-cr-V2f">
                                             <rect key="frame" x="245" y="71" width="20" height="20"/>
@@ -884,6 +887,7 @@
                                     <outlet property="eventButtonOutlet" destination="oi0-wq-5Xk" id="9ui-mA-uLw"/>
                                     <outlet property="eventLabel" destination="khC-Lg-kHH" id="Cu3-Fn-PZG"/>
                                     <outlet property="fiveButton" destination="1P9-Qq-R1t" id="MnA-TU-iCi"/>
+                                    <outlet property="fiveCountLabel" destination="zG3-P6-yyg" id="jSB-Kz-MT3"/>
                                     <outlet property="nameButtonOutlet" destination="qxz-5G-74u" id="fUE-4D-bo6"/>
                                     <outlet property="nameLabel" destination="KWY-xa-k3C" id="pvJ-H2-8qv"/>
                                     <outlet property="profilePicImageView" destination="vdy-34-PtA" id="U4a-WF-Nou"/>
@@ -1556,7 +1560,7 @@
         <image name="moment-icon" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="2cn-9e-63n"/>
-        <segue reference="xBv-pn-jJh"/>
+        <segue reference="G6f-qI-nsY"/>
+        <segue reference="pAn-mp-cSG"/>
     </inferredMetricsTieBreakers>
 </document>

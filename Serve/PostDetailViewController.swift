@@ -42,9 +42,36 @@ class PostDetailViewController: UIViewController, UITableViewDelegate, UITableVi
     
     var comments: [PFObject]?
     var update: PFObject?
+    var post: PFObject?
+    var event : PFObject?
+    var user: PFUser?
+    var userType: String?
+    var pic : PFFile?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        nameLabel.text = (user?["username"] as! String)
+        if event != nil {
+            eventLabel.text = (event?["title"] as! String)
+        }
+        actionLabel.text = (post?["action"] as! String)
+        userType = (user!["type"] as! String)
+        pic = (user!["profile_image"] as! PFFile)
+        profilePicImageView.image = nil
+        pic?.getDataInBackground { (data: Data?, error: Error?) in
+            if error != nil {
+                print(error?.localizedDescription ?? "error")
+            } else {
+                let finalImage = UIImage(data: data!)
+                self.profilePicImageView.image = finalImage
+            }
+        }
+        if post?["caption"] != nil {
+            captionLabel.text = (post?["caption"] as! String)
+        }
+        if event == nil {
+            eventButtonOutlet.isEnabled = false
+        }
 
         // Do any additional setup after loading the view.
     }
@@ -53,6 +80,8 @@ class PostDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return comments?.count ?? 0

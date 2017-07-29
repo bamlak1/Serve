@@ -164,11 +164,14 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         if segue.identifier == "comments"{
             let button = sender as! UIButton
             let indexPath = button.tag
-            let update = updates[indexPath]
-            let post = update["event"] as! PFObject
+            let update = updates[indexPath] 
+            let user = update["user"] as! PFUser
+            
+             
             
             let vc = segue.destination as! PostDetailViewController
-            vc.update = post
+            vc.post = update
+            vc.user = user
         }
 
         if segue.identifier == "other" {

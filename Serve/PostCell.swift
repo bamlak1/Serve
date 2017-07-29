@@ -37,6 +37,7 @@ class PostCell: UITableViewCell {
         didSet{
             nameButtonOutlet.tag = indexPath.row
             eventButtonOutlet.tag = indexPath.row
+            commentButton.tag = indexPath.row
         }
     }
 
@@ -48,7 +49,9 @@ class PostCell: UITableViewCell {
     
     @IBOutlet weak var commentButton: UIButton!
     
+    @IBOutlet weak var fiveCountLabel: UILabel!
 
+    @IBOutlet weak var commentCountLabel: UILabel!
     
     var post : PFObject! {
         didSet{
@@ -71,7 +74,9 @@ class PostCell: UITableViewCell {
             if post["caption"] != nil {
                 captionLabel.text = (post["caption"] as! String)
             }
-            
+            if post["high-fives"] != nil {
+                fiveCountLabel.text = post["high-fives"] as? String
+            }
             if event == nil {
                 eventButtonOutlet.isEnabled = false
             }
@@ -80,7 +85,31 @@ class PostCell: UITableViewCell {
      
     }
    
+    
+    
+    @IBAction func ddiPressFive(_ sender: Any) {
+        //find way to reference high fives
+        if fiveButton.isSelected == false {
+            post["fived"] = true
+            fiveButton.isSelected = post["fived"]! as! Bool
+            self.post.incrementKey("high_fives")
+            fiveCountLabel.text = post["high_fives"] as? String
+            print(post["high_fives"] as? String! ?? nil)
+            
         
+        }
+            
+            
+        else if fiveButton.isSelected == true {
+            post["fived"] = false
+            fiveButton.isSelected = post["fived"]! as! Bool
+            self.post.incrementKey("high_fives")
+            fiveCountLabel.text = post["high_fives"] as? String
+            print(post["high_fives"] as? String! ?? nil)
+            
+        }
+    }
+    
 
     
     override func awakeFromNib() {
