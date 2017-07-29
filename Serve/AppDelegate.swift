@@ -10,6 +10,8 @@ import UIKit
 import Parse
 import GoogleMaps
 import GooglePlaces
+import FBSDKCoreKit
+import ParseFacebookUtilsV4
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -29,23 +31,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         GMSServices.provideAPIKey("AIzaSyBCmydPROEO4zxGSnoB02DjRwIpejPgZjA")
         GMSPlacesClient.provideAPIKey("AIzaSyBCmydPROEO4zxGSnoB02DjRwIpejPgZjA")
-
         
-        if let user = PFUser.current() {
-            if user["type"] as! String == "Individual" {
-                let mainStoryboard: UIStoryboard = UIStoryboard(name: "Individual", bundle: nil)
-                let vc = mainStoryboard.instantiateViewController(withIdentifier: "IndividualInitialViewController") as! UITabBarController
-                window?.rootViewController = vc
-            } else {
-                let mainStoryboard: UIStoryboard = UIStoryboard(name: "OrgStoryboard", bundle: nil)
-                let vc = mainStoryboard.instantiateViewController(withIdentifier: "OrgInitialViewController") as! UITabBarController
-                window?.rootViewController = vc
-            }
-        }
+        //FBSDKApplicationDelegate.sharedInstance().
+
+        PFFacebookUtils.initializeFacebook(applicationLaunchOptions: launchOptions)
+    
+        
+//        if let user = PFUser.current() {
+//            if user["type"] as! String == "Individual" {
+//                let mainStoryboard: UIStoryboard = UIStoryboard(name: "Individual", bundle: nil)
+//                let vc = mainStoryboard.instantiateViewController(withIdentifier: "IndividualInitialViewController") as! UITabBarController
+//                window?.rootViewController = vc
+//            } else {
+//                let mainStoryboard: UIStoryboard = UIStoryboard(name: "OrgStoryboard", bundle: nil)
+//                let vc = mainStoryboard.instantiateViewController(withIdentifier: "OrgInitialViewController") as! UITabBarController
+//                window?.rootViewController = vc
+//            }
+//        }
         
 
         
         return true
+    }
+    
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+        return FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
@@ -64,6 +74,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        FBSDKAppEvents.activateApp()
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
