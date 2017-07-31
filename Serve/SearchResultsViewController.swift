@@ -8,9 +8,10 @@
 
 import UIKit
 import SwiftyJSON
+import Parse
 
 protocol LocateOnTheMap{
-    func placeMarker(lat: Double, long: Double, type: String, id: String, location: String)
+    func placeMarker(lat: Double, long: Double, type: String, id: String, location: String, eventObject: PFObject)
 }
 
 class SearchResultsViewController: UITableViewController {
@@ -70,7 +71,8 @@ class SearchResultsViewController: UITableViewController {
                 let jsonResult = JSON(data: data)
                 let latitude = Double(jsonResult["results"][0]["geometry"]["location"]["lat"].stringValue)
                 let longitude = Double(jsonResult["results"][0]["geometry"]["location"]["lng"].stringValue)
-                self.delegate.placeMarker(lat: latitude!, long: longitude!, type: "changeLocation", id: "other", location: "newLocation")
+                let event = PFObject(className: "Event")
+                self.delegate.placeMarker(lat: latitude!, long: longitude!, type: "changeLocation", id: "newLocation", location: "newLocation", eventObject: event)
             }
         });
         dataRetrieval.resume()
