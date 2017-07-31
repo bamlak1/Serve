@@ -79,7 +79,7 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch segmentedControl.selectedSegmentIndex {
         case 0:
-            self.profileTableView.rowHeight = 73
+            self.profileTableView.rowHeight = 105
             return userPosts.count
         case 1:
             self.profileTableView.rowHeight = 291
