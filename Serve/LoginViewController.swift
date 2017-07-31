@@ -28,13 +28,18 @@ class LoginViewController: UIViewController, LoginButtonDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
-        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.frame = view.bounds
-        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        view.sendSubview(toBack: blurEffectView)
+//        let backView = UIImageView(frame: self.view.frame)
+//        backView.image = UIImage(named: "main_1200")!
+//        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
+//        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+//        blurEffectView.frame = backView.bounds
+//        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+//        backView.addSubview(blurEffectView)
+//        
+//        self.view.backgroundColor = UIColor(patternImage: backView.image!)
+//       
         
-        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "main_1200")!)
+        
         // Set up the emptyFieldAlert
         emptyFieldAlert = UIAlertController(title: "Empty Field", message: "Fill in all text fields!", preferredStyle: .alert)
         // create a cancel action
