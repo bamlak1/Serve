@@ -120,7 +120,7 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
     
     // Displays the MapSettingsViewController as a pop-up
     @IBAction func openSettings(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "Map", bundle: nil)
+        let storyboard = UIStoryboard(name: "Individual", bundle: nil)
         let popOverVC = storyboard.instantiateViewController(withIdentifier: "popUpStoryboard") as! MapSettingsViewController
         popOverVC.delegate = self
         self.addChildViewController(popOverVC)
