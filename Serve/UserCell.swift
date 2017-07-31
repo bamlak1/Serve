@@ -13,12 +13,13 @@ class UserCell: UITableViewCell {
 
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var aviImageView: UIImageView!
+    @IBOutlet weak var button: UIButton!
     
     var pic : PFFile?
     
     var indexPath : IndexPath!{
         didSet{
-            
+            button.tag = indexPath.row
         }
     }
     

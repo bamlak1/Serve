@@ -45,8 +45,17 @@ class CauseDetailViewController: UIViewController, UITableViewDelegate, UITableV
 
 
         fetchOrgs()
+        retrievePastEvents()
+        retrieveUpcomingEvents()
     }
 
+    @IBAction func indexChanged(_ sender: UISegmentedControl) {
+        fetchOrgs()
+        retrievePastEvents()
+        retrieveUpcomingEvents()
+        
+    }
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch segmentedControl.selectedSegmentIndex {
@@ -97,7 +106,7 @@ class CauseDetailViewController: UIViewController, UITableViewDelegate, UITableV
     
     func fetchOrgs(){
         let query = PFUser.query()
-        query?.whereKey("causes", equalTo: cause)
+        query?.whereKey("causes", equalTo: cause!)
         query?.whereKey("type", equalTo: "Organization")
         
         query?.findObjectsInBackground { (orgs: [PFObject]?, error: Error?) in
@@ -106,6 +115,51 @@ class CauseDetailViewController: UIViewController, UITableViewDelegate, UITableV
         }
     }
     
+    func retrievePastEvents() {
+        
+        let date = Date()
+        
+        let query = PFQuery(className: "Event")
+        query.whereKey("start_date", lessThan: date)
+        query.order(byDescending: "createdAt")
+        query.whereKey("causes", equalTo: cause!)
+        query.includeKey("author")
+        
+        query.limit = 10
+        
+        query.findObjectsInBackground { (events: [PFObject]?, error: Error?) in
+            if events != nil {
+                self.pastEvents = events!
+                self.tableView.reloadData()
+            } else {
+                print(error?.localizedDescription ?? "error loading data")
+            }
+        }
+        
+    }
+    
+    func retrieveUpcomingEvents() {
+        
+        let date = Date()
+        
+        let query = PFQuery(className: "Event")
+        query.whereKey("start_date", greaterThan: date)
+        query.order(byDescending: "createdAt")
+        query.whereKey("causes", equalTo: cause!)
+        query.includeKey("author")
+        
+        query.limit = 10
+        
+        query.findObjectsInBackground { (events: [PFObject]?, error: Error?) in
+            if events != nil {
+                self.upcomingEvents = events!
+                self.tableView.reloadData()
+            } else {
+                print(error?.localizedDescription ?? "error loading data")
+            }
+        }
+        
+    }
     
     
     
@@ -118,14 +172,22 @@ class CauseDetailViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
 
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        
+        if segue.identifier == "org" {
+            let button = sender as! UIButton
+            let indexPath = button.tag
+            let org = orgs[indexPath] as! PFUser
+            let vc = segue.destination as! UserProfileViewController
+            vc.user = org
+        } else if segue.identifier == "eventCell" {
+            let cell = sender as! EventTableViewCell
+            let vc = segue.destination as! EventDetailViewController
+            vc.event = cell.event
+        }
+
     }
-    */
+    
 
 }
