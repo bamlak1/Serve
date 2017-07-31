@@ -11,6 +11,10 @@ target 'Serve' do
   pod 'ParseUI'
   pod 'StatefulViewController', '~> 3.0'
   pod 'DZNEmptyDataSet'
+  pod 'FacebookCore'
+  pod 'FacebookLogin'
+  pod 'FacebookShare'
+  pod 'ParseFacebookUtilsV4'
 
   pod 'Alamofire', '~> 4.4'
   pod 'AlamofireImage', '~> 3.1'

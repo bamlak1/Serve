@@ -40,6 +40,7 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         profileTableView.dataSource = self
         profileTableView.delegate = self
         
