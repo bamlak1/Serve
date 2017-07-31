@@ -209,7 +209,6 @@ class BrowserViewController: UIViewController, UICollectionViewDataSource, UICol
     
     func fetchCauses(){
         let query = PFQuery(className: "Cause")
-        query.whereKey("users", notEqualTo: (PFUser.current()?.objectId)!)
         
         query.findObjectsInBackground { (causes: [PFObject]?, error: Error?) in
             self.causes = causes!
@@ -276,6 +275,14 @@ class BrowserViewController: UIViewController, UICollectionViewDataSource, UICol
             let user = filteredOrgs[button.tag] as! PFUser
             let vc = segue.destination as! UserProfileViewController
             vc.user = user
+        }
+        
+        if segue.identifier == "cause" {
+            let button = sender as! UIButton
+            let cause = filteredCauses[button.tag]
+            //let id = cause["objectId"] as! String
+            let vc = segue.destination as! CauseDetailViewController
+            vc.cause = cause
         }
      }
     
