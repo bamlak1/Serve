@@ -40,6 +40,7 @@ class Post: NSObject {
         post["action"] = "is interested in"
         post["event"] = eventInterest
         post["caption"] = caption
+        post["high-fives"] = 0
         
         
         post.saveInBackground(block: completion)
@@ -53,6 +54,7 @@ class Post: NSObject {
         post["user_id"] = (PFUser.current()?.objectId)!
         post["action"] = "created event"
         post["event"] = eventCreated
+        post["high-fives"] = 0
         
         
         post.saveInBackground(block: completion)

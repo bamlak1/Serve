@@ -74,8 +74,8 @@ class PostCell: UITableViewCell {
             if post["caption"] != nil {
                 captionLabel.text = (post["caption"] as! String)
             }
-            if post["high-fives"] != nil {
-                fiveCountLabel.text = post["high-fives"] as? String
+            if post["high-fives"] != nil{
+                fiveCountLabel.text = (post["high-fives"] as? String)
             }
             if event == nil {
                 eventButtonOutlet.isEnabled = false
