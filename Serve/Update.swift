@@ -23,7 +23,7 @@ class Post: NSObject {
         post["media"] = getPFFileFromImage(image: image) //PFFile column type
         post["user"] = PFUser.current()
         post["caption"] = caption
-        post["high-fives"] = 0
+        post["high_fives"] = 0
         post["date"] = date
         
         
@@ -40,7 +40,7 @@ class Post: NSObject {
         post["action"] = "is interested in"
         post["event"] = eventInterest
         post["caption"] = caption
-        post["high-fives"] = 0
+        post["high_fives"] = 0
         
         
         post.saveInBackground(block: completion)
