@@ -8,6 +8,7 @@
 
 import UIKit
 import Parse
+import ParseUI
 
 class PostDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -41,7 +42,6 @@ class PostDetailViewController: UIViewController, UITableViewDelegate, UITableVi
     
     
     var comments: [PFObject]?
-    var update: PFObject?
     var post: PFObject?
     var event : PFObject?
     var user: PFUser?
@@ -74,6 +74,7 @@ class PostDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         }
 
         // Do any additional setup after loading the view.
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -119,6 +120,29 @@ class PostDetailViewController: UIViewController, UITableViewDelegate, UITableVi
             } else if let error = error {
                 print("Problem saving message: \(error.localizedDescription)")
             }
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "users" {
+            let button = sender as! UIButton
+            let indexPath = button.tag
+            let user = post?["user"] as! PFUser
+            //let id = user.objectId!
+            
+            
+            let vc = segue.destination as! UserProfileViewController
+            vc.user = user
+        }
+        
+        if segue.identifier == "event"{
+            let button = sender as! UIButton
+            let indexPath = button.tag
+            let event = post?["event"] as! PFObject
+            
+            let vc = segue.destination as! EventDetailViewController
+            vc.event = event
         }
     }
 
