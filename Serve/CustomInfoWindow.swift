@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol RegisterButtonDelegate {
+    func didPressRegister()
+}
+
 class CustomInfoWindow: UIView {
 
     /*
@@ -20,4 +24,15 @@ class CustomInfoWindow: UIView {
     @IBOutlet weak var volunteerLabel: UILabel!
     @IBOutlet weak var register: UIButton!
     @IBOutlet weak var markerInfoBackground: UIImageView!
+    var delegate: RegisterButtonDelegate!
+    
+    override func awakeFromNib() {
+        register.isEnabled = true
+        self.isUserInteractionEnabled = true
+    }
+    
+    @IBAction func tapRegister(_ sender: Any) {
+        delegate.didPressRegister()
+        print("yes we tapped it!")
+    }
 }

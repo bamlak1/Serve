@@ -33,7 +33,10 @@
                     <color key="backgroundColor" red="0.46122420269999997" green="0.61935058929999998" blue="0.9924670458" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                     <state key="normal" title="Register"/>
-                    <state key="selected" title="Registered" backgroundImage="green box"/>
+                    <state key="selected" title="Registered"/>
+                    <connections>
+                        <action selector="tapRegister:" destination="iN0-l3-epB" eventType="touchUpInside" id="Vad-eW-Brl"/>
+                    </connections>
                 </button>
             </subviews>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -46,7 +49,6 @@
         </view>
     </objects>
     <resources>
-        <image name="green box" width="1641" height="1263"/>
         <image name="info window 4" width="958" height="958"/>
     </resources>
 </document>
