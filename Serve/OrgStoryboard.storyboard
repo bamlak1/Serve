@@ -455,6 +455,10 @@
                                     <action selector="publishPressed:" destination="RVO-ur-LCM" eventType="touchUpInside" id="C3V-rF-FqX"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" alpha="0.94999999999999996" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="iconmonstr-plus-6-240" translatesAutoresizingMaskIntoConstraints="NO" id="MS8-Uf-TPw">
+                                <rect key="frame" x="176" y="106" width="28" height="28"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -1029,6 +1033,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="iconmonstr-plus-6-240" width="240" height="240"/>
         <image name="iconmonstr-smiley-1-32" width="32" height="32"/>
         <image name="iconmonstr-smiley-2-32" width="32" height="32"/>
         <image name="iconmonstr-speech-bubble-2-32" width="32" height="32"/>
