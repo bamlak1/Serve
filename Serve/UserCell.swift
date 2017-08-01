@@ -13,14 +13,22 @@ class UserCell: UITableViewCell {
 
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var aviImageView: UIImageView!
+    @IBOutlet weak var button: UIButton!
     
     var pic : PFFile?
+    
+    var indexPath : IndexPath!{
+        didSet{
+            button.tag = indexPath.row
+        }
+    }
     
     var user: PFUser!{
         didSet{
             nameLabel.text = (user!["username"] as! String)
             if user!["profile_image"] != nil {
                 pic = (user!["profile_image"] as! PFFile)
+                aviImageView.image = nil
                 pic?.getDataInBackground(block: { (data: Data?, error: Error?) in
                     if error != nil {
                         print(error?.localizedDescription ?? "error")

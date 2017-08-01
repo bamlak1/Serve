@@ -12,8 +12,10 @@ import DateTimePicker
 import GooglePlaces
 import GoogleMaps
 import GooglePlacePicker
+import Parse
+import ParseUI
 
-class CreateEventViewController: UIViewController, UIImagePickerControllerDelegate,UINavigationControllerDelegate, UITextViewDelegate, GMSPlacePickerViewControllerDelegate{
+class CreateEventViewController: UIViewController, UIImagePickerControllerDelegate,UINavigationControllerDelegate, UITextViewDelegate, GMSPlacePickerViewControllerDelegate, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, CauseTVCellDelegate{
     
     @IBOutlet weak var bannerImageView: UIImageView!
     @IBOutlet weak var initiatePostOutlet: UIButton!
@@ -25,9 +27,15 @@ class CreateEventViewController: UIViewController, UIImagePickerControllerDelega
     @IBOutlet weak var locationButton: UIButton!
     @IBOutlet weak var locationLabel: UILabel!
     
+    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var tableView: UITableView!
+    
     var startDate: NSDate?
     var endDate: NSDate?
-    
+    var causes : [PFObject] = []
+    var filteredCauses : [PFObject] = []
+    var addedCauses : [PFObject] = []
+    var names : [String] = []
     
 //    let formatter = DateFormatter()
 //    formatter.dateFormat = "MM/dd/YYYY hh:mm aa"
@@ -40,6 +48,10 @@ class CreateEventViewController: UIViewController, UIImagePickerControllerDelega
         super.viewDidLoad()
         descriptionTextView.delegate = self
         expectedTasksTextView.delegate = self
+        
+        tableView.dataSource = self
+        searchBar.delegate = self
+        fetchCauses()
     }
 
     override func didReceiveMemoryWarning() {
@@ -119,7 +131,7 @@ class CreateEventViewController: UIViewController, UIImagePickerControllerDelega
     
     @IBAction func publishPressed(_ sender: Any) {
         print("publishEvent pressed")
-        Event.postEvent(image: bannerImageView.image, title: titletextField.text, description: descriptionTextView.text, location: locationLabel.text, startDate: startDate, start: startLabel.text, endDate: endDate, end: endLabel.text, jobs: expectedTasksTextView.text) { (success: Bool, error: Error?) in
+        Event.postEvent(image: bannerImageView.image, title: titletextField.text, description: descriptionTextView.text, location: locationLabel.text, startDate: startDate, start: startLabel.text, endDate: endDate, end: endLabel.text, jobs: expectedTasksTextView.text, causes: addedCauses, causeNames: names) { (success: Bool, error: Error?) in
             if success {
                 print("Event created")
             } else {
@@ -148,7 +160,64 @@ class CreateEventViewController: UIViewController, UIImagePickerControllerDelega
     @IBAction func cancelPressed(_ sender: Any) {
         dismiss(animated: true , completion: nil)
     }
+    
+    func fetchCauses(){
+        let query = PFQuery(className: "Cause")
+        
+        query.findObjectsInBackground { (causes: [PFObject]?, error: Error?) in
+            self.causes = causes!
+            self.filteredCauses = causes!
+            self.tableView.reloadData()
+        }
+    }
+    
+    //SEARCH BAR FUNCTIONS
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        filteredCauses = searchText.isEmpty ? causes: causes.filter { (cause: PFObject) -> Bool in
+            return(cause["name"] as! String).range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+        }
+        tableView.reloadData()
+        
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        self.searchBar.showsCancelButton = true
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.showsCancelButton = false
+        searchBar.text = ""
+        searchBar.resignFirstResponder()
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return filteredCauses.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "causeTVcell") as! CauseTableViewCell
+        cell.delegate = self
+        cell.indexPath = indexPath
+        
+        let cause = filteredCauses[indexPath.row]
+        cell.cause = cause
+        
+        return cell
+    }
+    
+    
+    func didclickOnCellAtIndex(at index: IndexPath) {
+        let cell = tableView(tableView, cellForRowAt: index) as! CauseTableViewCell
+        addedCauses.append(cell.cause!)
+        let name = cell.nameLabel.text!
+        names.append(name)
+        
+        
+        print("button tapped at index:\(index)")
+        print(self.addedCauses)
+    }
 
+    
 
     /*
     // MARK: - Navigation
