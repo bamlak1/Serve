@@ -24,6 +24,7 @@ class Post: NSObject {
         post["user"] = PFUser.current()
         post["caption"] = caption
         post["high_fives"] = 0
+        post["commentCount"] = 0
         post["date"] = date
         
         
@@ -32,8 +33,12 @@ class Post: NSObject {
         
     }
     
-    class func userInterestedPost(eventInterest: PFObject, title: String?,caption: String?,completion: PFBooleanResultBlock?) {
+    class func userInterestedPost(eventInterest: PFObject, title: String?, withDate date: Date?, caption: String?,completion: PFBooleanResultBlock?) {
         let post = PFObject(className: "Post")
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "DMMM d, yyyy"
+        let date = dateFormatter.string(from: date!)
         
         post["user"] = PFUser.current()
         post["user_id"] = (PFUser.current()?.objectId)!
@@ -41,20 +46,28 @@ class Post: NSObject {
         post["event"] = eventInterest
         post["caption"] = caption
         post["high_fives"] = 0
+        post["commentCount"] = 0
+        post["date"] = date
         
         
         post.saveInBackground(block: completion)
     }
     
-    class func orgCreatePost(eventCreated: PFObject, title: String?,completion: PFBooleanResultBlock?) {
+    class func orgCreatePost(eventCreated: PFObject, title: String?, withDate date: Date?, completion: PFBooleanResultBlock?) {
         
         let post = PFObject(className: "Post")
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "DMMM d, yyyy"
+        let date = dateFormatter.string(from: date!)
         
         post["user"] = PFUser.current()
         post["user_id"] = (PFUser.current()?.objectId)!
         post["action"] = "created event"
         post["event"] = eventCreated
-        post["high-fives"] = 0
+        post["high_fives"] = 0
+        post["commentCount"] = 0
+        post["date"] = date
         
         
         post.saveInBackground(block: completion)
