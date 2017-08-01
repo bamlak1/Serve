@@ -14,6 +14,9 @@ class CauseDetailViewController: UIViewController, UITableViewDelegate, UITableV
     
     var cause: PFObject? 
     var pic : PFFile?
+    var userList : [String] = []
+    
+    let user = PFUser.current()
 
     var orgs : [PFUser] = []
     var upcomingEvents : [PFObject] = []
@@ -24,6 +27,8 @@ class CauseDetailViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var mainImage: PFImageView!
     @IBOutlet weak var causeLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
+    
+    @IBOutlet weak var addButton: UIButton!
     
 
     override func viewDidLoad() {
@@ -42,6 +47,12 @@ class CauseDetailViewController: UIViewController, UITableViewDelegate, UITableV
                 self.mainImage.image = finalImage
             }
         })
+        
+        if let userList = cause?["users"] as? [String] {
+            if userList.contains((user!.objectId)!) {
+                addButton.isSelected = true
+            }
+        }
 
 
         fetchOrgs()
@@ -162,6 +173,31 @@ class CauseDetailViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     
+    
+    @IBAction func addPressed(_ sender: Any) {
+        if addButton.isSelected {
+            user?.remove((user!.objectId)!, forKey: "users")
+            if let index = userList.index(of: user!.objectId!){
+                userList.remove(at: index)
+            }
+            addButton.isSelected = false
+            user?.saveInBackground()
+            
+            cause?.remove((user?.objectId)!, forKey: "users")
+            cause?.saveInBackground()
+            print("removed")
+        } else {
+            user?.addUniqueObject(cause, forKey: "causes")
+            user?.addUniqueObject(causeLabel.text, forKey: "cause_names")
+            userList.append((user?.objectId)!)
+            addButton.isSelected = true
+            user?.saveInBackground()
+            
+            cause?.addUniqueObject((user?.objectId)!, forKey: "users")
+            cause?.saveInBackground()
+            print("added")
+        }
+    }
     
     
     
