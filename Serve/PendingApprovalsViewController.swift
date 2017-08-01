@@ -65,11 +65,13 @@ class PendingApprovalsViewController: UIViewController, UITableViewDelegate, UIT
         
         let request = pending[indexPath.row]
         let user = request["user"] as! PFUser
-        let event = request["event"] as! PFObject
+        if let event = request["event"] as? PFObject {
+            cell.event = event
+        }
         
         cell.delegate = self
         cell.indexPath = indexPath
-        cell.event = event
+        
         cell.user = user
         cell.request = request
 

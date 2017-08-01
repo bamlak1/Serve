@@ -323,6 +323,20 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
   
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
+        if segue.identifier == "comments2"{
+            let button = sender as! UIButton
+            let indexPath = button.tag
+            let update = userPosts[indexPath]
+            let user = update["user"] as! PFUser
+            let event = update["event"] as! PFObject
+            
+            
+            
+            let vc = segue.destination as! PostDetailViewController
+            vc.post = update
+            vc.user = user
+            vc.event = event
+        }
 
         if segue.identifier == "event"{
             let button = sender as! UIButton

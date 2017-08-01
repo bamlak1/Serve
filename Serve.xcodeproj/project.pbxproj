@@ -27,6 +27,8 @@
 		A03D915F1F296BA9006CF35F /* PostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03D915E1F296BA9006CF35F /* PostDetailViewController.swift */; };
 		A03D91611F2A62B7006CF35F /* PostCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03D91601F2A62B7006CF35F /* PostCommentCell.swift */; };
 		A03D91631F2A79A4006CF35F /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03D91621F2A79A4006CF35F /* Comment.swift */; };
+		A03D919F1F30EE75006CF35F /* CauseDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03D919E1F30EE75006CF35F /* CauseDetailViewController.swift */; };
+		A03D91A11F30EE80006CF35F /* CustomInfoWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03D91A01F30EE80006CF35F /* CustomInfoWindow.swift */; };
 		A06309F21F215C2E002E886A /* BrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06309F11F215C2E002E886A /* BrowserViewController.swift */; };
 		A06309F41F215D2E002E886A /* EventBrowseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06309F31F215D2E002E886A /* EventBrowseCell.swift */; };
 		A06309F61F216833002E886A /* OrgBrowseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06309F51F216833002E886A /* OrgBrowseCell.swift */; };
@@ -110,6 +112,8 @@
 		A03D915E1F296BA9006CF35F /* PostDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostDetailViewController.swift; sourceTree = "<group>"; };
 		A03D91601F2A62B7006CF35F /* PostCommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCommentCell.swift; sourceTree = "<group>"; };
 		A03D91621F2A79A4006CF35F /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		A03D919E1F30EE75006CF35F /* CauseDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CauseDetailViewController.swift; sourceTree = "<group>"; };
+		A03D91A01F30EE80006CF35F /* CustomInfoWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomInfoWindow.swift; sourceTree = "<group>"; };
 		A06309F11F215C2E002E886A /* BrowserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowserViewController.swift; sourceTree = "<group>"; };
 		A06309F31F215D2E002E886A /* EventBrowseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventBrowseCell.swift; sourceTree = "<group>"; };
 		A06309F51F216833002E886A /* OrgBrowseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrgBrowseCell.swift; sourceTree = "<group>"; };
@@ -235,6 +239,8 @@
 		A07AD2111F13FAC500100D69 /* Serve */ = {
 			isa = PBXGroup;
 			children = (
+				A03D91A01F30EE80006CF35F /* CustomInfoWindow.swift */,
+				A03D919E1F30EE75006CF35F /* CauseDetailViewController.swift */,
 				A03D915C1F2950D3006CF35F /* UserCell.swift */,
 				A03D915A1F2950C6006CF35F /* GMSCircle + FitBounds.swift */,
 				A03D91581F2950BE006CF35F /* AcceptedUsersViewController.swift */,
@@ -691,6 +697,7 @@
 				A0B95E841F185D6600EBD019 /* OrganizationProfileViewController.swift in Sources */,
 				CCED38871F1D926500A3DD2E /* PendingApprovalsViewController.swift in Sources */,
 				A03D915F1F296BA9006CF35F /* PostDetailViewController.swift in Sources */,
+				A03D919F1F30EE75006CF35F /* CauseDetailViewController.swift in Sources */,
 				A0B95E7A1F16DB6C00EBD019 /* EventDetailViewController.swift in Sources */,
 				8614831A1F16A44A00C18917 /* IndividualLoginViewController.swift in Sources */,
 				A0B95E821F185D4900EBD019 /* IndividualProfileViewController.swift in Sources */,
@@ -699,6 +706,7 @@
 				CCAF14F61F1835980097C7A3 /* OrgEventsViewController.swift in Sources */,
 				A03D915D1F2950D3006CF35F /* UserCell.swift in Sources */,
 				CC14168F1F16A42600BF2A81 /* CreateEventViewController.swift in Sources */,
+				A03D91A11F30EE80006CF35F /* CustomInfoWindow.swift in Sources */,
 				A06309F21F215C2E002E886A /* BrowserViewController.swift in Sources */,
 				A06309FE1F2675C9002E886A /* SearchResultsViewController.swift in Sources */,
 				A03D91571F280422006CF35F /* ComposeUpdateViewController.swift in Sources */,

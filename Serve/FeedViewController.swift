@@ -131,6 +131,8 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         let update = updates[indexPath.row]
         let user = update["user"] as? PFUser
+//        let fivesCount = (update["high-fives"] as! NSNumber)
+//        cell.fiveCountLabel.text = "\(fivesCount)"
         if let event = update["event"] as? PFObject {
             cell.event = event
         }
@@ -166,12 +168,14 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             let indexPath = button.tag
             let update = updates[indexPath] 
             let user = update["user"] as! PFUser
+            let event = update["event"] as! PFObject
             
              
             
             let vc = segue.destination as! PostDetailViewController
             vc.post = update
             vc.user = user
+            vc.event = event
         }
 
         if segue.identifier == "other" {
