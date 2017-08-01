@@ -233,7 +233,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="HEy-nK-8r2" kind="relationship" relationship="viewControllers" id="KIY-6d-lPx"/>
+                        <segue destination="HEy-nK-8r2" kind="relationship" relationship="viewControllers" id="zQD-pe-eGe"/>
                         <segue destination="XOU-YT-dul" kind="relationship" relationship="viewControllers" id="3rd-Wx-tad"/>
                         <segue destination="sQP-5c-97e" kind="relationship" relationship="viewControllers" id="dOs-bC-4Nh"/>
                         <segue destination="V3a-ho-KCe" kind="relationship" relationship="viewControllers" id="4cM-3A-Xw6"/>
@@ -534,7 +534,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="XOU-YT-dul" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Browse" image="moment-icon" id="BjS-r9-jQ5"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="0Wm-zS-3nZ">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="0Wm-zS-3nZ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -878,7 +878,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="sQP-5c-97e" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Feed" image="feed" id="bSN-co-MCs"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="fpw-wa-Fwg">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="fpw-wa-Fwg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -894,7 +894,7 @@
         <!--Event Detail View Controller-->
         <scene sceneID="Xwj-Fx-qfG">
             <objects>
-                <viewController id="w0j-Pb-tmg" customClass="EventDetailViewController" customModule="Serve" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EventDetailViewController" id="w0j-Pb-tmg" customClass="EventDetailViewController" customModule="Serve" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ZRc-sX-l6M"/>
                         <viewControllerLayoutGuide type="bottom" id="AMU-rO-7jc"/>
@@ -1320,7 +1320,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="V3a-ho-KCe" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Profile" image="profile-icon" id="q2l-W8-7pd"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Om9-p4-NAh">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Om9-p4-NAh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1619,6 +1619,7 @@
                     <connections>
                         <outlet property="collectionView" destination="zHU-dV-bCG" id="vV2-F0-uHF"/>
                         <outlet property="mapView" destination="zUh-7R-wzU" id="lcz-bc-zxJ"/>
+                        <segue destination="w0j-Pb-tmg" kind="show" identifier="MapToDetail" id="aNw-Yj-QL6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MTR-5X-Wuz" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1754,7 +1755,7 @@
         <image name="profile-icon" width="26" height="26"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="G6f-qI-nsY"/>
-        <segue reference="W1G-go-2G1"/>
+        <segue reference="aNw-Yj-QL6"/>
+        <segue reference="K5e-WU-JxS"/>
     </inferredMetricsTieBreakers>
 </document>

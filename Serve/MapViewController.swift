@@ -12,10 +12,11 @@ import GooglePlaces
 import Parse
 import SwiftyJSON
 
-class MapViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, GMSMapViewDelegate, UISearchBarDelegate, LocateOnTheMap, SettingsDelegate {
+class MapViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, GMSMapViewDelegate, UISearchBarDelegate, LocateOnTheMap, SettingsDelegate, RegisterButtonDelegate {
     
     var key = "AIzaSyBCmydPROEO4zxGSnoB02DjRwIpejPgZjA"
     var searchResultController: SearchResultsViewController!
+    var customInfoWindow: CustomInfoWindow!
     var resultsArray = [String]()
     var returnedEvents: [PFObject] = []
     var markers: [GMSMarker] = []
@@ -33,6 +34,7 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
     var userEventsShow: Bool!
     var otherEventsShow: Bool!
     var radius: Int!
+    var userID = PFUser.current()?.objectId
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -41,9 +43,6 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
         fetchEventLocations(showUserEvents: true, showOtherEvents: true)
         userEventsShow = UserDefaults.standard.bool(forKey: "userSwitchState")
         otherEventsShow = UserDefaults.standard.bool(forKey: "otherSwitchState")
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
         fetchUserLocation()
         mapView.delegate = self
         collectionView.allowsMultipleSelection = false
@@ -51,6 +50,9 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
         collectionView.backgroundColor = UIColor.clear
         searchResultController = SearchResultsViewController()
         searchResultController.delegate = self
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
         updateDisplayedEvents(eventType: "userEvents", display: userEventsShow)
         updateDisplayedEvents(eventType: "otherEvents", display: otherEventsShow)
     }
@@ -95,7 +97,7 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
         if (eventType == "userEvents") {
             for marker in markers {
                 let id = (marker.userData as? PFObject)?.object(forKey: "id")
-                if (id as! String == "7xAEAEMSxX") {
+                if ((id as! String) == userID) {
                     if (display) {
                         marker.map = self.mapView
                     } else {
@@ -106,7 +108,7 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
         } else {
             for marker in markers {
                 let id = (marker.userData as? PFObject)?.object(forKey: "id")
-                if (id as! String != "7xAEAEMSxX") {
+                if ((id as! String) != userID) {
                     if (display) {
                         marker.map = self.mapView
                     } else {
@@ -223,20 +225,31 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
             return (infoWindow as! UIView)
         } else if (marker.userData as! PFObject)["id"] as! String == "newLocation" {
             let infoWindow = Bundle.main.loadNibNamed("OtherWindow", owner: self, options: nil)?.first
-            return (infoWindow as! UIView)
+            return (infoWindow as! UIView) 
         } else {
-            let infoWindow = Bundle.main.loadNibNamed("InfoWindow", owner: self, options: nil)?.first as! CustomInfoWindow
+            customInfoWindow = CustomInfoWindow()
+            customInfoWindow.delegate = self
+            customInfoWindow = Bundle.main.loadNibNamed("InfoWindow", owner: self, options: nil)?.first as! CustomInfoWindow
             let volunteerNum = (marker.userData as! PFObject)["volunteers"] as! Int
             if (marker.userData as! PFObject)["userMarkerNum"] != nil {
-                infoWindow.register.isSelected = true
+                customInfoWindow.register.isSelected = true
+                customInfoWindow.register.backgroundColor = UIColor(red: 152/255, green: 219/255, blue: 64/255, alpha: 1.0)
             }
+
+            customInfoWindow.register.layer.cornerRadius = 10
+            customInfoWindow.clipsToBounds = true
             if (volunteerNum == 1) {
-                infoWindow.volunteerLabel.text = "\(volunteerNum) volunteer"
+                customInfoWindow.volunteerLabel.text = "\(volunteerNum) volunteer"
             } else {
-                infoWindow.volunteerLabel.text = "\(volunteerNum) volunteers"
+                customInfoWindow.volunteerLabel.text = "\(volunteerNum) volunteers"
             }
-            return infoWindow
+            return customInfoWindow
         }
+    }
+    
+    func didPressRegister() {
+        print("tapped the button")
+        self.performSegue(withIdentifier: "MapToDetail", sender: self)
     }
     
     // When an event cell is clicked on, uses that cell's row number to highlight and shift to that marker on the map
@@ -280,7 +293,7 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
         
         // Uses a hardcoded user's address
         let query = PFQuery(className:"_User")
-        query.getObjectInBackground(withId: "7xAEAEMSxX").continue({
+        query.getObjectInBackground(withId: userID!).continue({
             (task: BFTask!) -> AnyObject! in
             if task.error != nil {
                 // There was an error.
@@ -302,12 +315,14 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
         query.findObjectsInBackground() { (events: [PFObject]?, error: Error?) in
             if let events = events {
                 for eventObject in events {
-                    if let acceptedUsers = eventObject.value(forKey: "accepted_users") as? [String] {
-                        if (acceptedUsers.contains("7xAEAEMSxX")) {
+                    if let acceptedUsers = eventObject.value(forKey: "accepted_ids") as? [String] {
+                        if (acceptedUsers.contains(self.userID!)) {
                             self.userEvents.append(eventObject)
-                            self.addressToCoordinates(location: eventObject.value(forKey: "location") as! String, type: "userEvent", id: "7xAEAEMSxX", eventObject: eventObject)
+                            self.addressToCoordinates(location: eventObject.value(forKey: "location") as! String, type: "userEvent", id: self.userID!, eventObject: eventObject)
                             self.returnedEvents.append(eventObject)
+                            print("adding my markers")
                         } else {
+                            print("adding other markers")
                             self.otherEvents.append(eventObject)
                             self.addressToCoordinates(location: eventObject.value(forKey: "location") as! String, type: "otherEvent", id: "other", eventObject: eventObject)
                             self.returnedEvents.append(eventObject)
@@ -429,15 +444,17 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
             self.searchResultController.reloadDataWithArray(array: self.resultsArray)
         }
     }
-
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+         if segue.identifier == "MapToDetail" {
+             let destinationNavigationController = segue.destination as! UINavigationController
+             let vc = destinationNavigationController.topViewController as! EventDetailViewController
+             vc.event = ((previousMarker.userData as! PFObject)["event"] as! PFObject)
+        }
+     }
+
 
 }
