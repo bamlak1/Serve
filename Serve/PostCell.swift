@@ -73,6 +73,8 @@ class PostCell: UITableViewCell {
             }
             if post["caption"] != nil {
                 captionLabel.text = (post["caption"] as! String)
+            } else {
+                captionLabel.text = ""
             }
             if post["high-fives"] != nil{
                 fiveCountLabel.text = (post["high-fives"] as? String)
