@@ -15,6 +15,7 @@ target 'Serve' do
   pod 'FacebookLogin'
   pod 'FacebookShare'
   pod 'ParseFacebookUtilsV4'
+  pod 'NWPusher', '~> 0.7.0'
 
   pod 'Alamofire', '~> 4.4'
   pod 'AlamofireImage', '~> 3.1'
