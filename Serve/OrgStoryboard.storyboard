@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F2073" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -648,8 +648,8 @@
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gyw-Ms-Wmq">
                                                     <rect key="frame" x="120" y="70" width="19" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" image="iconmonstr-smiley-2-32"/>
-                                                    <state key="selected" image="iconmonstr-smiley-1-32"/>
+                                                    <state key="normal" image="hold"/>
+                                                    <state key="selected" image="hand2"/>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Id1-7y-AYj">
                                                     <rect key="frame" x="260" y="70" width="20" height="20"/>
@@ -702,9 +702,11 @@
                                             <outlet property="actionLabel" destination="h0N-0B-fiH" id="1Ug-ly-D3v"/>
                                             <outlet property="captionLabel" destination="jmK-lI-qoP" id="0za-jI-ydP"/>
                                             <outlet property="commentButton" destination="Id1-7y-AYj" id="7CN-fb-OhM"/>
+                                            <outlet property="commentCountLabel" destination="1ud-RM-LKa" id="anz-2N-wMh"/>
                                             <outlet property="eventButtonOutlet" destination="jtX-IF-MSU" id="jwA-aG-FV4"/>
                                             <outlet property="eventLabel" destination="Hpc-Ga-iLe" id="Cnw-je-muD"/>
                                             <outlet property="fiveButton" destination="Gyw-Ms-Wmq" id="tY0-Nt-2al"/>
+                                            <outlet property="fiveCountLabel" destination="72I-FO-bC1" id="ODa-3v-sZo"/>
                                             <outlet property="nameButtonOutlet" destination="CgJ-S0-ogG" id="y7U-ZS-AGv"/>
                                             <outlet property="nameLabel" destination="5nf-Ab-AZR" id="7Cw-Ze-Nd1"/>
                                             <outlet property="profilePicImageView" destination="X81-N0-AAa" id="Znj-5c-5hO"/>
@@ -993,7 +995,7 @@
                 <navigationController storyboardIdentifier="OrgNavControl" automaticallyAdjustsScrollViewInsets="NO" id="cRY-vI-r1X" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Organization" id="yOY-bq-n3u"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Jvn-KA-MQN">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Jvn-KA-MQN">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1032,7 +1034,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4gG-p4-mau" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Pending Approvals" id="BGW-vo-OwY"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="V3o-4U-cAV">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="V3o-4U-cAV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1051,7 +1053,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="g9u-XE-Wz5" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Events" id="b9c-Tq-N48"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="GEn-5V-RWa">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="GEn-5V-RWa">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1066,9 +1068,9 @@
         </scene>
     </scenes>
     <resources>
+        <image name="hand2" width="36" height="36"/>
+        <image name="hold" width="32" height="32"/>
         <image name="iconmonstr-plus-6-240" width="240" height="240"/>
-        <image name="iconmonstr-smiley-1-32" width="32" height="32"/>
-        <image name="iconmonstr-smiley-2-32" width="32" height="32"/>
         <image name="iconmonstr-speech-bubble-2-32" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
