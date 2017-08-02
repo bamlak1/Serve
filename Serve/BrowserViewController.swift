@@ -218,6 +218,7 @@ class BrowserViewController: UIViewController, UICollectionViewDataSource, UICol
             filteredEvents = Events
             filteredOrgs = Orgs
             filteredPeople = People
+            filteredCauses = causes
             
         } else {
             filteredEvents = Events.filter { (event: PFObject) -> Bool in
@@ -235,11 +236,18 @@ class BrowserViewController: UIViewController, UICollectionViewDataSource, UICol
                 return title.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
                 
             }
+            filteredCauses = causes.filter { (cause: PFObject) -> Bool in
+                let title = cause["name"] as! String
+                return title.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+                
+            }
         }
         
         collectionView.reloadData()
         collectionView2.reloadData()
         collectionView3.reloadData()
+        collectionView4.reloadData()
+        
         
     }
     

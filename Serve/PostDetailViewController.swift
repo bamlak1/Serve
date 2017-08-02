@@ -40,6 +40,10 @@ class PostDetailViewController: UIViewController, UITableViewDelegate, UITableVi
     
     @IBOutlet weak var commentTableView: UITableView!
     
+    @IBOutlet weak var fiveCountLabel: UILabel!
+    
+    
+    @IBOutlet weak var commentCountLabel: UILabel!
     
     var comments: [PFObject]?
     var post: PFObject?
@@ -69,11 +73,20 @@ class PostDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         if post?["caption"] != nil {
             captionLabel.text = (post?["caption"] as! String)
         }
+        let fivesCount = (post?["high_fives"] as! NSNumber)
+        fiveCountLabel.text = "\(fivesCount)"
         if event == nil {
             eventButtonOutlet.isEnabled = false
         }
 
         // Do any additional setup after loading the view.
+        
+        commentTableView.delegate = self
+        commentTableView.dataSource = self
+        
+        Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.onTimer), userInfo: nil, repeats: true)
+        
+        commentTableView.reloadData()
         
     }
 
@@ -96,6 +109,7 @@ class PostDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         if let user = comment["user"] as? PFUser {
             //user found, update username label w username
             cell.nameLabel.text = user.username
+            //cell.imageViewer.image = (user["profile_image"] as! UIImage)
         } else {
             //no user found
             cell.nameLabel.text = "🤔🤔🤔🤔"
@@ -104,6 +118,10 @@ class PostDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         return cell
     }
     
+    
+    @IBAction func didPressView(_ sender: Any) {
+        view.endEditing(true)
+    }
     
     @IBAction func didPressPost(_ sender: Any) {
         let postComment = PFObject(className: "comments")
@@ -126,8 +144,7 @@ class PostDetailViewController: UIViewController, UITableViewDelegate, UITableVi
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "users" {
-            let button = sender as! UIButton
-            let indexPath = button.tag
+            _ = sender as! UIButton
             let user = post?["user"] as! PFUser
             //let id = user.objectId!
             
@@ -137,12 +154,23 @@ class PostDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         }
         
         if segue.identifier == "event"{
-            let button = sender as! UIButton
-            let indexPath = button.tag
+            _ = sender as! UIButton
             let event = post?["event"] as! PFObject
             
             let vc = segue.destination as! EventDetailViewController
             vc.event = event
+        }
+    }
+    
+    func onTimer() {
+        // Add code to be run periodically
+        
+        var query = PFQuery(className: "comments")
+        query.addDescendingOrder("createdAt")
+        query.includeKey("user")
+        query.findObjectsInBackground { (retrievedComments: [PFObject]?, error: Error?) in
+            self.comments = retrievedComments
+            self.commentTableView.reloadData()
         }
     }
 

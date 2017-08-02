@@ -63,6 +63,10 @@ class PostCell: UITableViewCell {
             userType = (user!["type"] as! String)
             pic = (user!["profile_image"] as! PFFile)
             profilePicImageView.image = nil
+            if userType == "Individual" {
+                profilePicImageView.layer.cornerRadius = profilePicImageView.frame.size.width / 2;
+                profilePicImageView.clipsToBounds = true;
+            }
             pic?.getDataInBackground { (data: Data?, error: Error?) in
                 if error != nil {
                     print(error?.localizedDescription ?? "error")
@@ -76,8 +80,9 @@ class PostCell: UITableViewCell {
             } else {
                 captionLabel.text = ""
             }
-            if post["high-fives"] != nil{
-                fiveCountLabel.text = (post["high-fives"] as? String)
+            if post["high_fives"] != nil{
+                let fives = post["high_fives"]
+                fiveCountLabel.text = "\(fives ?? 3)"
             }
             if event == nil {
                 eventButtonOutlet.isEnabled = false
@@ -95,8 +100,13 @@ class PostCell: UITableViewCell {
             post["fived"] = true
             fiveButton.isSelected = post["fived"]! as! Bool
             self.post.incrementKey("high_fives")
-            fiveCountLabel.text = post["high_fives"] as? String
-            print(post["high_fives"] as? String! ?? nil)
+            let fives = post["high_fives"]
+            fiveCountLabel.text = "\(fives ?? 1)"
+            print(post["high_fives"])
+            
+            post?.saveInBackground(block: { (success: Bool, error: Error?) in
+                // TODO: add alerts
+            })
             
         
         }
@@ -105,9 +115,14 @@ class PostCell: UITableViewCell {
         else if fiveButton.isSelected == true {
             post["fived"] = false
             fiveButton.isSelected = post["fived"]! as! Bool
-            self.post.incrementKey("high_fives")
-            fiveCountLabel.text = post["high_fives"] as? String
-            print(post["high_fives"] as? String! ?? nil)
+            self.post.incrementKey("high_fives", byAmount: -1)
+            let fives = post["high_fives"]
+            fiveCountLabel.text = "\(fives ?? 0)"
+            print(post["high_fives"])
+            
+            post?.saveInBackground(block: { (success: Bool, error: Error?) in
+                // TODO: add alerts
+            })
             
         }
     }
