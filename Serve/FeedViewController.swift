@@ -131,8 +131,8 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         let update = updates[indexPath.row]
         let user = update["user"] as? PFUser
-//        let fivesCount = (update["high-fives"] as! NSNumber)
-//        cell.fiveCountLabel.text = "\(fivesCount)"
+        let fivesCount = (update["high_fives"] as! NSNumber)
+        cell.fiveCountLabel.text = "\(fivesCount)"
         if let event = update["event"] as? PFObject {
             cell.event = event
         }
