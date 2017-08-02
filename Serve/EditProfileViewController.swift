@@ -8,20 +8,29 @@
 
 import UIKit
 import Parse
+import GooglePlaces
+import GoogleMaps
+import GooglePlacePicker
 
-class EditProfileViewController: UIViewController, UINavigationControllerDelegate, UITextViewDelegate, UIImagePickerControllerDelegate {
+class EditProfileViewController: UIViewController, UINavigationControllerDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, GMSPlacePickerViewControllerDelegate {
     
     @IBOutlet weak var bannerView: UIImageView!
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var bioTextView: UITextView!
+    @IBOutlet weak var locationLabel: UILabel!
 
+    @IBOutlet weak var locationButton: UIButton!
     
+    @IBOutlet weak var editProfilePictureLabel: UILabel!
+    @IBOutlet weak var editBannerLabel: UILabel!
     //Variable that is used to determine which imageview to fill when an image is selected
     var bannerPressed = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         bioTextView.delegate = self
+        bioTextView.text = "Add a bio to your profile"
+        bioTextView.textColor = UIColor.lightGray
 //        missionTextView.delegate = self
         
     }
@@ -41,7 +50,9 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
         vc.sourceType = UIImagePickerControllerSourceType.photoLibrary
         vc.sourceType = .photoLibrary
         
+        
         self.present(vc, animated: true, completion: nil)
+        editBannerLabel.text = ""
     }
     
     @IBAction func updateProfileImagePressed(_ sender: Any) {
@@ -53,7 +64,9 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
         vc2.sourceType = UIImagePickerControllerSourceType.photoLibrary
         vc2.sourceType = .photoLibrary
         
+        
         self.present(vc2, animated: true, completion: nil)
+        editProfilePictureLabel.text = ""
     }
     
     
@@ -77,14 +90,16 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
                 user["profile_image"] = Event.getPFFileFromImage(image: image2)
             }
             
-            if bioTextView.text != "" {
+            if bioTextView.text != "Add a bio to your profile" {
                 user["bio"] = bioTextView.text
             }
-            
+            if locationLabel.text != ""{
+                user["address"] = locationLabel.text
+            }
 //            if contactTextView.text != "" {
 //                user["contact"] = contactTextView.text
 //            }
-//            
+//
             user.saveInBackground()
             print("Succesful update")
         }
@@ -128,8 +143,46 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
         }
         return true
     }
+
+    
     func textViewDidBeginEditing(_ textView: UITextView) {
-        textView.text = ""
+        if bioTextView.textColor == UIColor.lightGray {
+            bioTextView.text = nil
+            bioTextView.textColor = UIColor.black
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if bioTextView.text.isEmpty {
+            bioTextView.text = "Add a bio to your profile"
+            bioTextView.textColor = UIColor.lightGray
+        }
+    }
+    
+    @IBAction func selectLocation(_ sender: Any) {
+        let config = GMSPlacePickerConfig(viewport: nil)
+        let placePicker = GMSPlacePickerViewController(config: config)
+        placePicker.delegate = self
+        
+        present(placePicker, animated: true, completion: nil)
+    }
+    
+    func placePicker(_ viewController: GMSPlacePickerViewController, didPick place: GMSPlace) {
+        // Dismiss the place picker, as it cannot dismiss itself.
+        viewController.dismiss(animated: true, completion: nil)
+        
+        locationButton.titleLabel!.text = ""
+        locationLabel.text = place.formattedAddress
+        print("Place name \(place.name)")
+        print("Place address \(place.formattedAddress ?? "")")
+        print("Place attributions \(place.attributions)")
+    }
+    
+    func placePickerDidCancel(_ viewController: GMSPlacePickerViewController) {
+        // Dismiss the place picker, as it cannot dismiss itself.
+        viewController.dismiss(animated: true, completion: nil)
+        
+        print("No place selected")
     }
     
     /*

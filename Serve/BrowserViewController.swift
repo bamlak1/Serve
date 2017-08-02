@@ -162,18 +162,14 @@ class BrowserViewController: UIViewController, UICollectionViewDataSource, UICol
         
         
         query.findObjectsInBackground { (users: [PFObject]?, error: Error?) in
-            for user in users! {
-                let userType = user["type"] as! String
+            
+            if let orgs = users {
                 
-                if let orgs = users {
-                    if (userType == "Organization") {
-                        self.Orgs = orgs
-                        self.filteredOrgs = orgs
-                        //print("Loaded orgs")
-                        self.collectionView2.reloadData()
-                        
-                    }
-                }
+                self.Orgs = orgs
+                self.filteredOrgs = orgs
+                //print("Loaded orgs")
+                self.collectionView2.reloadData()
+                
                 
             }
             
@@ -189,22 +185,19 @@ class BrowserViewController: UIViewController, UICollectionViewDataSource, UICol
         
         
         query.findObjectsInBackground { (users: [PFObject]?, error: Error?) in
-            for user in users! {
-                let userType = user["type"] as! String
+            
+            
+            if let people = users {
                 
-                if let people = users {
-                    if (userType == "Individual") {
-                        self.People = people
-                        self.filteredPeople = people
-                        //print("Loaded ppl")
-                        self.collectionView3.reloadData()
-                        
-                    }
-                }
+                self.People = people
+                self.filteredPeople = people
+                //print("Loaded ppl")
+                self.collectionView3.reloadData()
                 
             }
-            
         }
+        
+        
     }
     
     func fetchCauses(){

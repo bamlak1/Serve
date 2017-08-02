@@ -37,17 +37,18 @@ class CreateEventViewController: UIViewController, UIImagePickerControllerDelega
     var addedCauses : [PFObject] = []
     var names : [String] = []
     
-//    let formatter = DateFormatter()
-//    formatter.dateFormat = "MM/dd/YYYY hh:mm aa"
-//    let date = Date()
-//    startLabel.text = formatter.string(from: date)
-//    endLabel.text = formatter.string(from: date)
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
         descriptionTextView.delegate = self
         expectedTasksTextView.delegate = self
+        
+        descriptionTextView.text = "Add a description"
+        descriptionTextView.textColor = UIColor.lightGray
+        
+        expectedTasksTextView.text = "What will volunteers do?"
+        expectedTasksTextView.textColor = UIColor.lightGray
         
         tableView.dataSource = self
         searchBar.delegate = self
@@ -141,14 +142,7 @@ class CreateEventViewController: UIViewController, UIImagePickerControllerDelega
         }
     }
     
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        if text == "\n" {
-            descriptionTextView.resignFirstResponder()
-            expectedTasksTextView.resignFirstResponder()
-            return false
-        }
-        return true
-    }
+
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let editedImage = info[UIImagePickerControllerEditedImage] as! UIImage
@@ -161,17 +155,48 @@ class CreateEventViewController: UIViewController, UIImagePickerControllerDelega
         dismiss(animated: true , completion: nil)
     }
     
-    func fetchCauses(){
-        let query = PFQuery(className: "Cause")
-        
-        query.findObjectsInBackground { (causes: [PFObject]?, error: Error?) in
-            self.causes = causes!
-            self.filteredCauses = causes!
-            self.tableView.reloadData()
+    
+    //======================================Text View functions===========================\\
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if text == "\n" {
+            descriptionTextView.resignFirstResponder()
+            expectedTasksTextView.resignFirstResponder()
+            return false
         }
+        return true
     }
     
-    //SEARCH BAR FUNCTIONS
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if descriptionTextView.textColor == UIColor.lightGray && textView == descriptionTextView{
+            descriptionTextView.text = nil
+            descriptionTextView.textColor = UIColor.black
+        }
+        if expectedTasksTextView.textColor == UIColor.lightGray && textView == expectedTasksTextView{
+            expectedTasksTextView.text = nil
+            expectedTasksTextView.textColor = UIColor.black
+        }
+        
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if descriptionTextView.text.isEmpty {
+            descriptionTextView.text = "Add a description"
+            descriptionTextView.textColor = UIColor.lightGray
+        }
+        
+        if expectedTasksTextView.text.isEmpty {
+            expectedTasksTextView.text = "What will volunteers do?"
+            expectedTasksTextView.textColor = UIColor.lightGray
+        }
+        
+        
+        
+    }
+    
+
+    
+    //=============================SEARCH BAR FUNCTIONS=================================\\
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         filteredCauses = searchText.isEmpty ? causes: causes.filter { (cause: PFObject) -> Bool in
             return(cause["name"] as! String).range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
@@ -190,6 +215,8 @@ class CreateEventViewController: UIViewController, UIImagePickerControllerDelega
         searchBar.resignFirstResponder()
     }
     
+    
+    //===========================Cause Table View Code===================================\\
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return filteredCauses.count
     }
@@ -216,8 +243,18 @@ class CreateEventViewController: UIViewController, UIImagePickerControllerDelega
         print("button tapped at index:\(index)")
         print(self.addedCauses)
     }
-
     
+    func fetchCauses(){
+        let query = PFQuery(className: "Cause")
+        
+        query.findObjectsInBackground { (causes: [PFObject]?, error: Error?) in
+            self.causes = causes!
+            self.filteredCauses = causes!
+            self.tableView.reloadData()
+        }
+    }
+
+    //==================================================================================\\
 
     /*
     // MARK: - Navigation
