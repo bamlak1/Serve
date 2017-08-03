@@ -50,7 +50,7 @@ class PostCell: UITableViewCell {
     @IBOutlet weak var commentButton: UIButton!
     
     @IBOutlet weak var fiveCountLabel: UILabel!
-
+    
     @IBOutlet weak var commentCountLabel: UILabel!
     
     var post : PFObject! {
