@@ -47,6 +47,7 @@ class Post: NSObject {
         post["event"] = eventInterest
         post["caption"] = caption
         post["high_fives"] = 0
+        post["fived"] = false
         post["commentCount"] = 0
         post["date"] = formattedDate
         
@@ -68,6 +69,7 @@ class Post: NSObject {
         post["action"] = "created event"
         post["event"] = eventCreated
         post["high_fives"] = 0
+        post["fived"] = false
         post["commentCount"] = 0
         post["date"] = formattedDate
         

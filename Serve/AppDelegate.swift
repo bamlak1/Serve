@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import UserNotifications
 import Parse
 import GoogleMaps
 import GooglePlaces
@@ -48,12 +49,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 window?.rootViewController = vc
             }
         }
+
         UserDefaults.standard.set(true, forKey: "userSwitchState")
         UserDefaults.standard.set(true, forKey: "otherSwitchState")
         UserDefaults.standard.set(1.0, forKey: "slider_value")
         
+        registerForPushNotifications()
+
+        if let notification = launchOptions?[.remoteNotification] as? [String: AnyObject] {
+            _ = notification["aps"] as! [String: AnyObject]
+            
+            //TODO: Segue to compose view
+            (window?.rootViewController as? UITabBarController)?.selectedIndex = 2
+//            let vc = ComposeUpdateViewController()
+//            window?.rootViewController?.present(vc, animated: true, completion: nil)
+
+            
+        }
+
+        
         return true
     }
+    
+//    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+//        
+//        let aps = userInfo["aps"] as! [String: AnyObject]
+//        _ = NewsItem.makeNewsItem(aps)
+//    }
+//    
     
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
         return FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
@@ -81,6 +104,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
+    
+    func registerForPushNotifications() {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) {
+            (granted, error) in
+            print("Permission granted: \(granted)")
+            
+            guard granted else { return }
+            self.getNotificationSettings()
+        }
+    }
+    
+    func getNotificationSettings() {
+        UNUserNotificationCenter.current().getNotificationSettings { (settings) in
+            print("Notification settings: \(settings)")
+            guard settings.authorizationStatus == .authorized else { return }
+            UIApplication.shared.registerForRemoteNotifications()
+        }
+    }
+    
+    
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        let tokenParts = deviceToken.map { data -> String in
+            return String(format: "%02.2hhx", data)
+        }
+        
+        let token = tokenParts.joined()
+        print("Device Token: \(token)")
+    }
+    
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print("Failed to register: \(error)")
+    }
+    
+    //Device Token: bcbdf010aad00583bbf16545a3f093b5cb9496c6db72dd68ae3d2178db08cf21
 }
 

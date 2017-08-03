@@ -39,6 +39,7 @@ class Event: NSObject {
         event["accepted_users"] = []
         event["causes"] = causes
         event["cause_names"] = causeNames
+        event["accepted_ids"] = []
         //event["goals"] = goals
         //TODO: event sponsors & other event properties
         

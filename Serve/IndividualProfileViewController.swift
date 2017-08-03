@@ -109,7 +109,7 @@ class IndividualProfileViewController: UIViewController, UITableViewDelegate, UI
             let image = post["media"] as! PFFile
             let caption = post["caption"] as! String
             let date = post["date"] as! String
-            let fives = post["high-fives"] as! String
+            let fives = post["high_fives"] as! String
             //let event = create event stuff
  
             

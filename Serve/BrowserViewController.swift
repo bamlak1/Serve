@@ -162,18 +162,14 @@ class BrowserViewController: UIViewController, UICollectionViewDataSource, UICol
         
         
         query.findObjectsInBackground { (users: [PFObject]?, error: Error?) in
-            for user in users! {
-                let userType = user["type"] as! String
+            
+            if let orgs = users {
                 
-                if let orgs = users {
-                    if (userType == "Organization") {
-                        self.Orgs = orgs
-                        self.filteredOrgs = orgs
-                        //print("Loaded orgs")
-                        self.collectionView2.reloadData()
-                        
-                    }
-                }
+                self.Orgs = orgs
+                self.filteredOrgs = orgs
+                //print("Loaded orgs")
+                self.collectionView2.reloadData()
+                
                 
             }
             
@@ -189,22 +185,19 @@ class BrowserViewController: UIViewController, UICollectionViewDataSource, UICol
         
         
         query.findObjectsInBackground { (users: [PFObject]?, error: Error?) in
-            for user in users! {
-                let userType = user["type"] as! String
+            
+            
+            if let people = users {
                 
-                if let people = users {
-                    if (userType == "Individual") {
-                        self.People = people
-                        self.filteredPeople = people
-                        //print("Loaded ppl")
-                        self.collectionView3.reloadData()
-                        
-                    }
-                }
+                self.People = people
+                self.filteredPeople = people
+                //print("Loaded ppl")
+                self.collectionView3.reloadData()
                 
             }
-            
         }
+        
+        
     }
     
     func fetchCauses(){
@@ -225,6 +218,7 @@ class BrowserViewController: UIViewController, UICollectionViewDataSource, UICol
             filteredEvents = Events
             filteredOrgs = Orgs
             filteredPeople = People
+            filteredCauses = causes
             
         } else {
             filteredEvents = Events.filter { (event: PFObject) -> Bool in
@@ -242,11 +236,18 @@ class BrowserViewController: UIViewController, UICollectionViewDataSource, UICol
                 return title.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
                 
             }
+            filteredCauses = causes.filter { (cause: PFObject) -> Bool in
+                let title = cause["name"] as! String
+                return title.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+                
+            }
         }
         
         collectionView.reloadData()
         collectionView2.reloadData()
         collectionView3.reloadData()
+        collectionView4.reloadData()
+        
         
     }
     
