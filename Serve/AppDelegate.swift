@@ -49,6 +49,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 window?.rootViewController = vc
             }
         }
+
+        UserDefaults.standard.set(true, forKey: "userSwitchState")
+        UserDefaults.standard.set(true, forKey: "otherSwitchState")
+        UserDefaults.standard.set(1.0, forKey: "slider_value")
         
         registerForPushNotifications()
 
@@ -62,6 +66,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
             
         }
+
         
         return true
     }
