@@ -39,7 +39,7 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchEventLocations(callNumber: 0, completion: nil)
+        fetchEventLocations()
         userEventsShow = UserDefaults.standard.bool(forKey: "userSwitchState")
         otherEventsShow = UserDefaults.standard.bool(forKey: "otherSwitchState")
         fetchUserLocation()
@@ -97,26 +97,20 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
     func updateDisplayedEvents(eventType: String) {
         userEventsShow = UserDefaults.standard.bool(forKey: "userSwitchState")
         otherEventsShow = UserDefaults.standard.bool(forKey: "otherSwitchState")
-        print("user events should show: \(self.userEventsShow)")
-        print("other events should show: \(self.otherEventsShow)")
         if (eventType == "userEvents") {
             for marker in userMarkers {
                 if (userEventsShow) {
                     marker.map = self.mapView
-                    print("adding user marker")
                 } else {
                     marker.map = nil
-                    print("removing user marker")
                 }
             }
         } else {
             for marker in otherMarkers {
                 if (otherEventsShow) {
                     marker.map = self.mapView
-                    print("adding other marker")
                 } else {
                     marker.map = nil
-                    print("removing other marker")
                 }
             }
         }
@@ -161,13 +155,10 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
         collectionView.isHidden = false
         if (userEventsShow && otherEventsShow) {
             eventData = returnedEvents[indexPath.item]
-            print("all events")
         } else if userEventsShow {
             eventData = userEvents[indexPath.item]
-            print("user events")
         } else if otherEventsShow {
             eventData = otherEvents[indexPath.item]
-            print("other events")
         } else {
             showEvents = false
             collectionView.isHidden = true
@@ -312,11 +303,8 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
         userEventsShow = UserDefaults.standard.bool(forKey: "userSwitchState")
         otherEventsShow = UserDefaults.standard.bool(forKey: "otherSwitchState")
         
-        
         let block = {
-            print("BLOCK fetching event locations")
-            self.fetchEventLocations(callNumber: 1, completion: nil)
-            
+            self.fetchEventLocations()
         }
         
         emptyEverything(completion: block)
@@ -339,17 +327,14 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
         if (previousMarker != nil) {
             previousMarker.icon = GMSMarker.markerImage(with: UIColor(red:0.34, green:0.71, blue:1.00, alpha:1.0))
         }
-        print("everything is clear")
-        print("returned events \(returnedEvents)")
         completion()
     }
     
     // Using an event's manually inputed address, geocodes it, and adds a marker for it
     // Splits up all the available events into two groups: events the user has signed up for and events the user has not signed up for
-    func fetchEventLocations(callNumber: Int, completion: (() -> ())?) {
+    func fetchEventLocations() {
         let query = PFQuery(className: "Event")
         query.order(byAscending: "start")
-        //query.cachePolicy = .cacheElseNetwork
         query.findObjectsInBackground() { (events: [PFObject]?, error: Error?) in
             if let events = events {
                 for eventObject in events {
@@ -368,9 +353,6 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
             } else {
                 print(error?.localizedDescription as Any)
             }
-        }
-        if callNumber > 0 {
-            
         }
     }
     
@@ -470,8 +452,7 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
             }
         }
         marker.userData = extraMarkerInfo
-        print(userMarkers)
-        print(otherMarkers)
+        self.collectionView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
