@@ -12,7 +12,7 @@ import Parse
 
 class Comment: NSObject {
     
-    class func userComment(caption: String?, withImage image: UIImage?, withDate date: Date?, withCompletion completion: PFBooleanResultBlock?) {
+    class func userComment(text: String?, withImage image: UIImage?, withDate date: Date?, withCompletion completion: PFBooleanResultBlock?) {
         
         let comment = PFObject(className: "comments")
         
@@ -21,8 +21,11 @@ class Comment: NSObject {
         let date = dateFormatter.string(from: date!)
         
 
-        comment["user"] = PFUser.current()
-        comment["caption"] = caption
+        let user = PFUser.current()
+        comment["user"] = user
+        comment["image"] = user?["profile_image"]
+        
+        comment["text"] = text
 
         comment["date"] = date
         
