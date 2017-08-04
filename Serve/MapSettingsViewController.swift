@@ -10,8 +10,8 @@ import GoogleMaps
 
 protocol SettingsDelegate {
     func drawHomeCircle(miles: Int)
-    func updateDisplayedEvents(eventType: String, display: Bool)
-    func fetchEventLocations(showUserEvents: Bool, showOtherEvents: Bool)
+    func updateDisplayedEvents(eventType: String)
+    func fetchEventLocations()
 }
 
 class MapSettingsViewController: UIViewController {
@@ -44,7 +44,6 @@ class MapSettingsViewController: UIViewController {
     // Redraws the circle using the appropriate radius
     @IBAction func closeSettings(_ sender: Any) {
         self.removeAnimate()
-        delegate?.drawHomeCircle(miles: sliderValue)
     }
     
     // Displays the settings menu such that the map view is shadowed, but can still be seen in the background
@@ -63,15 +62,16 @@ class MapSettingsViewController: UIViewController {
         sliderValue = Int(sender.value)
         let distanceString = String(sliderValue)
         radiusLabel.text = "\(distanceString)"
+        delegate?.drawHomeCircle(miles: sliderValue)
     }
 
     // Depending on whether the switch is active or not, displays what events the user has signed up and been accepted to
     @IBAction func switchMyEvents(_ sender: UISwitch) {
         UserDefaults.standard.set(sender.isOn, forKey: "userSwitchState")
         if myEventsSwitch.isOn {
-            delegate?.updateDisplayedEvents(eventType: "userEvents", display: true)
+            delegate?.updateDisplayedEvents(eventType: "userEvents")
         } else {
-            delegate?.updateDisplayedEvents(eventType: "userEvents", display: false)
+            delegate?.updateDisplayedEvents(eventType: "userEvents")
         }
     }
     
@@ -79,9 +79,9 @@ class MapSettingsViewController: UIViewController {
     @IBAction func switchOtherEvents(_ sender: UISwitch) {
         UserDefaults.standard.set(sender.isOn, forKey: "otherSwitchState")
         if otherEventsSwitch.isOn {
-            delegate?.updateDisplayedEvents(eventType: "otherEvents", display: true)
+            delegate?.updateDisplayedEvents(eventType: "otherEvents")
         } else {
-            delegate?.updateDisplayedEvents(eventType: "otherEvents", display: false)
+            delegate?.updateDisplayedEvents(eventType: "otherEvents")
         }
     }
     
@@ -89,7 +89,6 @@ class MapSettingsViewController: UIViewController {
     // Redraws the circle using the appropriate radius
     @IBAction func dismissSettings(_ sender: Any) {
         removeAnimate()
-        delegate?.drawHomeCircle(miles: sliderValue)
     }
     
     // Gets rid of the settings menu using a gradual animation
