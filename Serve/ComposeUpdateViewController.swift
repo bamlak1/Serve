@@ -88,6 +88,10 @@ class ComposeUpdateViewController: UIViewController, UITextViewDelegate {
         }
         self.delegate.didPressSignUp()
         
+        let currentInstallation = PFInstallation.current()
+        currentInstallation?.addUniqueObject((event?.objectId)!, forKey: "channels")
+        currentInstallation?.addUniqueObject( (PFUser.current()?.objectId)!, forKey: "usersObjectId")
+        currentInstallation?.saveInBackground()
         
     }
  

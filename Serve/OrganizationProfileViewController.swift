@@ -9,6 +9,7 @@
 import UIKit
 import Parse
 
+
 class OrganizationProfileViewController: UIViewController {
 
     var user: PFUser?
@@ -58,6 +59,8 @@ class OrganizationProfileViewController: UIViewController {
                 }
             })
         }
+     
+        
         
     }
 

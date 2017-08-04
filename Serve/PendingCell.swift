@@ -20,7 +20,12 @@ class PendingCell: UITableViewCell {
     var delegate : PendingCellDelegate!
     var indexPath: IndexPath!
     
-    var event : PFObject!
+    var eventId : String?
+    var event : PFObject! {
+        didSet{
+            eventId = event.objectId
+        }
+    }
     var user : PFUser!
     var request : PFObject! {
         didSet{
@@ -59,6 +64,7 @@ class PendingCell: UITableViewCell {
         event.addUniqueObject((user.objectId)!, forKey: "accepted_ids")
         event.incrementKey("volunteers")
         request["completed"] = true
+        
         
         event.saveInBackground()
         request.saveInBackground()
