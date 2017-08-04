@@ -73,8 +73,7 @@ class PostCell: UITableViewCell {
                     profilePicImageView.layer.cornerRadius = profilePicImageView.frame.size.width / 2;
                     profilePicImageView.clipsToBounds = true;
                 }
-                pic.getDataInBackground { (data: Data?, error: Error?) in
-                                        
+                
             if userType == "Organization" {
                 eventImageViewer.isHidden = false
                 if event != nil {
@@ -94,7 +93,7 @@ class PostCell: UITableViewCell {
                 //set constraint: topStackConstraint.constant = 12
             
             }
-            pic?.getDataInBackground { (data: Data?, error: Error?) in
+            pic.getDataInBackground { (data: Data?, error: Error?) in
                 if error != nil {
                     print(error?.localizedDescription ?? "error")
                 } else {
@@ -123,51 +122,53 @@ class PostCell: UITableViewCell {
     
    
     
+//    
+//    @IBAction func ddiPressFive(_ sender: Any) {
+//        //find way to reference high fives
+//        if fiveButton.isSelected == false {
+//            post["fived"] = true
+//            fiveButton.isSelected = post["fived"]! as! Bool
+//            self.post.incrementKey("high_fives")
+//            let fives = post["high_fives"]
+//            fiveCountLabel.text = "\(fives ?? 1)"
+//            print(post["high_fives"])
+//            
+//            post?.saveInBackground(block: { (success: Bool, error: Error?) in
+//                // TODO: add alerts
+//            })
+//            
+//        
+//        }
+//        
+//            
+//            
+//        else if fiveButton.isSelected == true {
+//            post["fived"] = false
+//            fiveButton.isSelected = post["fived"]! as! Bool
+//            self.post.incrementKey("high_fives", byAmount: -1)
+//            let fives = post["high_fives"]
+//            fiveCountLabel.text = "\(fives ?? 0)"
+//            print(post["high_fives"])
+//            
+//            post?.saveInBackground(block: { (success: Bool, error: Error?) in
+//                // TODO: add alerts
+//            })
+//            
+//        }
+//    }
     
-    @IBAction func ddiPressFive(_ sender: Any) {
-        //find way to reference high fives
-        if fiveButton.isSelected == false {
-            post["fived"] = true
-            fiveButton.isSelected = post["fived"]! as! Bool
-            self.post.incrementKey("high_fives")
-            let fives = post["high_fives"]
-            fiveCountLabel.text = "\(fives ?? 1)"
-            print(post["high_fives"])
-            
-            post?.saveInBackground(block: { (success: Bool, error: Error?) in
-                // TODO: add alerts
-            })
-            
-        
-        }
-            
-            
-        else if fiveButton.isSelected == true {
-            post["fived"] = false
-            fiveButton.isSelected = post["fived"]! as! Bool
-            self.post.incrementKey("high_fives", byAmount: -1)
-            let fives = post["high_fives"]
-            fiveCountLabel.text = "\(fives ?? 0)"
-            print(post["high_fives"])
-            
-            post?.saveInBackground(block: { (success: Bool, error: Error?) in
-                // TODO: add alerts
-            })
-            
-        }
-    }
-    
 
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
+//    override func awakeFromNib() {
+//        super.awakeFromNib()
+//        // Initialization code
+//    }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+//    override func setSelected(_ selected: Bool, animated: Bool) {
+//        super.setSelected(selected, animated: animated)
+//
+//        // Configure the view for the selected state
+//    }
 
-        // Configure the view for the selected state
-    }
-
+}
 }
