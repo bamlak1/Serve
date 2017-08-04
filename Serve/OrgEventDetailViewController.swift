@@ -24,7 +24,6 @@ class OrgEventDetailViewController: UIViewController {
     @IBOutlet weak var volunteerLabel: UILabel!
     @IBOutlet weak var expectedTasksLabel: UILabel!
     
-
     
     
     
@@ -59,6 +58,27 @@ class OrgEventDetailViewController: UIViewController {
         
         // Do any additional setup after loading the view.
     }
+    
+    
+    
+    
+    @IBAction func sendPostNotf(_ sender: Any) {
+        
+        let param = ["eventId" : event!.objectId]
+        PFCloud.callFunction(inBackground: "sendPost", withParameters: param) { (object: Any?, error: Error?) in
+            guard error == nil else {
+                print("error")
+                return
+            }
+        }
+        
+        
+        
+    }
+    
+    
+    
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
