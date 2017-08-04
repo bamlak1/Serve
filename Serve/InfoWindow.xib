@@ -34,9 +34,6 @@
                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                     <state key="normal" title="Register"/>
                     <state key="selected" title="Registered"/>
-                    <connections>
-                        <action selector="tapRegister:" destination="iN0-l3-epB" eventType="touchUpInside" id="Vad-eW-Brl"/>
-                    </connections>
                 </button>
             </subviews>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

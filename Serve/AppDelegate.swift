@@ -38,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         PFFacebookUtils.initializeFacebook(applicationLaunchOptions: launchOptions)
     
         
-        if let user = PFUser.current() {
+       if let user = PFUser.current() {
             if user["type"] as! String == "Individual" {
                 let mainStoryboard: UIStoryboard = UIStoryboard(name: "Individual", bundle: nil)
                 let vc = mainStoryboard.instantiateViewController(withIdentifier: "IndividualInitialViewController") as! UITabBarController

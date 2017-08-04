@@ -27,12 +27,9 @@ class EventDetailViewController: UIViewController, NotifyEventDelegate{
     @IBOutlet weak var volunteerLabel: UILabel!
     @IBOutlet weak var expectedTasksLabel: UILabel!
     
-
     @IBOutlet weak var signUpButton: UIButton!
+    @IBOutlet weak var dismissButton: UIButton!
    
-    
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
     
@@ -46,6 +43,14 @@ class EventDetailViewController: UIViewController, NotifyEventDelegate{
         if accepts.contains((PFUser.current()!.objectId)!) || pendings.contains((PFUser.current()!.objectId)!) {
             signUpButton.isSelected = true
         }
+        
+        if let navController = self.navigationController, navController.viewControllers.count >= 2 {
+            let viewController = navController.viewControllers[navController.viewControllers.count - 2]
+            if !(viewController is MapViewController) {
+                dismissButton.isHidden = true
+            }
+        }
+
         signUpButton.setTitle("Signed up", for: .selected)
         titleLabel.text = event?["title"] as? String
         if event?["org_name"] != nil {
@@ -84,6 +89,9 @@ class EventDetailViewController: UIViewController, NotifyEventDelegate{
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func dismissScreen(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
     
    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

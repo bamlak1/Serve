@@ -66,12 +66,15 @@ class PostCell: UITableViewCell {
             actionLabel.text = (post["action"] as! String)
             dateLabel.text = (post["date"] as! String)
             userType = (user!["type"] as! String)
-            pic = (user!["profile_image"] as! PFFile)
-            profilePicImageView.image = nil
-            if userType == "Individual" {
-                profilePicImageView.layer.cornerRadius = profilePicImageView.frame.size.width / 2;
-                profilePicImageView.clipsToBounds = true;
-            }
+            if let pic = (user!["profile_image"] as? PFFile) {
+                profilePicImageView.image = nil
+                
+                if userType == "Individual" {
+                    profilePicImageView.layer.cornerRadius = profilePicImageView.frame.size.width / 2;
+                    profilePicImageView.clipsToBounds = true;
+                }
+                pic.getDataInBackground { (data: Data?, error: Error?) in
+                                        
             if userType == "Organization" {
                 eventImageViewer.isHidden = false
                 if event != nil {
@@ -99,6 +102,7 @@ class PostCell: UITableViewCell {
                     self.profilePicImageView.image = finalImage
                 }
             }
+            
             if post["caption"] != nil {
                 captionLabel.text = (post["caption"] as! String)
             } else {
