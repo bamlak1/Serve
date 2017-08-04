@@ -143,6 +143,15 @@ class OrganizationViewController: UIViewController, UITableViewDelegate, UITable
         
     }
     
+    @IBAction func pushPrssed(_ sender: Any) {
+        PFCloud.callFunction(inBackground: "send", withParameters: ["alertDate" : "2017-08-03T17:30:00.000Z"]) { (object: Any?, error: Error?) in
+            guard error == nil else {
+                print("error")
+                return
+            }
+        }
+
+    }
 
     
     /*

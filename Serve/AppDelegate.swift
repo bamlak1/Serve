@@ -13,9 +13,10 @@ import GoogleMaps
 import GooglePlaces
 import FBSDKCoreKit
 import ParseFacebookUtilsV4
+import UserNotifications
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
     var window: UIWindow?
 
@@ -65,6 +66,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            window?.rootViewController?.present(vc, animated: true, completion: nil)
 
             
+        }
+        
+        
+        let userNotificationCenter = UNUserNotificationCenter.current()
+        userNotificationCenter.delegate = self
+        
+        userNotificationCenter.requestAuthorization(options: [.alert, .badge, .sound]) { (accepted: Bool, error: Error?) in
+            guard accepted == true else {
+                print("User declined remote notifications")
+                return
+            }
+            application.registerForRemoteNotifications()
         }
 
         
@@ -125,17 +138,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        let tokenParts = deviceToken.map { data -> String in
-            return String(format: "%02.2hhx", data)
-        }
+//        let tokenParts = deviceToken.map { data -> String in
+//            return String(format: "%02.2hhx", data)
+//        }
+//        
+//        let token = tokenParts.joined()
+//        print("Device Token: \(token)")
+//        
         
-        let token = tokenParts.joined()
-        print("Device Token: \(token)")
+        let installation = PFInstallation.current()
+        installation?.setDeviceTokenFrom(deviceToken)
+        installation?.saveInBackground()
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         print("Failed to register: \(error)")
     }
+    
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        PFPush.handle(notification.request.content.userInfo)
+        completionHandler(.alert)
+    }
+    
+    
     
     //Device Token: bcbdf010aad00583bbf16545a3f093b5cb9496c6db72dd68ae3d2178db08cf21
 }
