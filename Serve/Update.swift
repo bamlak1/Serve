@@ -7,6 +7,7 @@
 //
 import Foundation
 import Parse
+//import NSDateTimeAgo
 
 
 class Post: NSObject {
@@ -38,7 +39,7 @@ class Post: NSObject {
         
         let date = Date()
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "DMMM d, yyyy"
+        dateFormatter.dateFormat = "MM/dd/YY"
         let formattedDate = dateFormatter.string(from: date)
         
         post["user"] = PFUser.current()
@@ -61,7 +62,7 @@ class Post: NSObject {
         
         let date = Date()
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "DMMM d, yyyy"
+        dateFormatter.dateFormat = "MM/dd/YY"
         let formattedDate = dateFormatter.string(from: date)
         
         post["user"] = PFUser.current()

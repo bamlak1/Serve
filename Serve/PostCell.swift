@@ -28,11 +28,14 @@ class PostCell: UITableViewCell {
     
     @IBOutlet weak var captionLabel: UILabel!
     
+    @IBOutlet weak var mainBackground: UIView!
+    
     var delegate : PostCellDelegate!
     var event : PFObject?
     var user: PFUser?
     var userType: String?
     var pic : PFFile?
+    var bannerPic: PFFile?
     var indexPath : IndexPath!{
         didSet{
             nameButtonOutlet.tag = indexPath.row
@@ -40,6 +43,7 @@ class PostCell: UITableViewCell {
             commentButton.tag = indexPath.row
         }
     }
+    @IBOutlet weak var eventImageViewer: UIImageView!
 
     @IBOutlet weak var eventButtonOutlet: UIButton!
 
@@ -60,6 +64,7 @@ class PostCell: UITableViewCell {
                 eventLabel.text = (event!["title"] as! String)
             }
             actionLabel.text = (post["action"] as! String)
+            dateLabel.text = (post["date"] as! String)
             userType = (user!["type"] as! String)
             if let pic = (user!["profile_image"] as? PFFile) {
                 profilePicImageView.image = nil
@@ -69,12 +74,32 @@ class PostCell: UITableViewCell {
                     profilePicImageView.clipsToBounds = true;
                 }
                 pic.getDataInBackground { (data: Data?, error: Error?) in
+                                        
+            if userType == "Organization" {
+                eventImageViewer.isHidden = false
+                if event != nil {
+                    bannerPic = (event?["banner"] as! PFFile)
+                }
+                eventImageViewer.image = nil
+                bannerPic?.getDataInBackground { (data: Data?, error: Error?) in
                     if error != nil {
                         print(error?.localizedDescription ?? "error")
                     } else {
                         let finalImage = UIImage(data: data!)
-                        self.profilePicImageView.image = finalImage
+                        self.eventImageViewer.image = finalImage
                     }
+                }
+            } else {
+                eventImageViewer.isHidden = true
+                //set constraint: topStackConstraint.constant = 12
+            
+            }
+            pic?.getDataInBackground { (data: Data?, error: Error?) in
+                if error != nil {
+                    print(error?.localizedDescription ?? "error")
+                } else {
+                    let finalImage = UIImage(data: data!)
+                    self.profilePicImageView.image = finalImage
                 }
             }
             
@@ -94,6 +119,8 @@ class PostCell: UITableViewCell {
         
      
     }
+    
+    
    
     
     
