@@ -42,21 +42,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         
     }
     
-//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        if (!isMoreDataLoading) {
-//            let scrollViewContentHeight = tableView.contentSize.height
-//            let scrollOffsetThreshold = scrollViewContentHeight - tableView.bounds.size.height
-//            
-//            // When the user has scrolled past the threshold, start requesting
-//            if(scrollView.contentOffset.y > scrollOffsetThreshold && tableView.isDragging) {
-//                isMoreDataLoading = true
-//                
-//              //  loadMoreData()
-//            
-//            }
-//        }
-//    }
-    
+
     func refreshControlAction(_ refreshControl: UIRefreshControl) {
         fetchUpdates()
     }
@@ -86,35 +72,6 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
         }
     }
-
-//    func loadMoreData() {
-//        
-//        // ... Create the NSURLRequest (myRequest) ...
-//        
-//        // Configure session so that completion handler is executed on main UI thread
-//        let session = URLSession(configuration: URLSessionConfiguration.default,
-//                                 delegate:nil,
-//                                 delegateQueue:OperationQueue.main
-//        )
-//        let task : URLSessionDataTask = session.dataTask(with: myRequest, completionHandler: { (data, response, error) in
-//            
-//            // Update flag
-//            self.isMoreDataLoading = false
-//            
-//            // ... Use the new data to update the data source ...
-//            
-//            // Reload the tableView now that there is new data
-//            self.myTableView.reloadData()
-//        })
-//        task.resume()
-//    }
-
-    
-    
-//    override func viewWillAppear(_ animated: Bool) {
-//        fetchData()
-//        tableView.contentOffset = CGPoint(x: 0, y: 0) //jumps tableView back up to the top
-//    }
     
     
     
@@ -141,8 +98,17 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         cell.post = update
         
+        cell.mainBackground.layer.cornerRadius = 20
+        cell.mainBackground.layer.masksToBounds = true
+        
+        
+        
         
         return cell
+    }
+    
+    public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 20
     }
     
 
@@ -155,12 +121,6 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
 
-//        let cell = sender as! UITableViewCell
-//        if let indexPath = feedTableView.indexPath(for: cell) {//get this to find the actual post
-//            let update = updates[indexPath.item] //get the current post
-//            let postDetailViewController = segue.destination as! PostDetailViewController //tell it its destination
-//            postDetailViewController.update = update
-//        }
 
         
         if segue.identifier == "comments"{

@@ -78,13 +78,17 @@ class PostDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         if event == nil {
             eventButtonOutlet.isEnabled = false
         }
+        if userType == "Individual" {
+            profilePicImageView.layer.cornerRadius = profilePicImageView.frame.size.width / 2;
+            profilePicImageView.clipsToBounds = true;
+        }
 
         // Do any additional setup after loading the view.
         
         commentTableView.delegate = self
         commentTableView.dataSource = self
         
-        Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(self.onTimer), userInfo: nil, repeats: true)
+        Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.onTimer), userInfo: nil, repeats: true)
         
         commentTableView.reloadData()
         
@@ -104,17 +108,10 @@ class PostDetailViewController: UIViewController, UITableViewDelegate, UITableVi
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = commentTableView.dequeueReusableCell(withIdentifier: "PostCommentCell") as! PostCommentCell
         let comment = comments![indexPath.row]
-        let text = comment["text"]
-        cell.commentLabel.text = text as! String
-        if let user = comment["user"] as? PFUser {
-            //user found, update username label w username
-            cell.nameLabel.text = user.username
-            //cell.imageViewer.image = (user["profile_image"] as! PFFile)
-        } else {
-            //no user found
-            cell.nameLabel.text = "🤔🤔🤔🤔"
-        }
-        //cell.user = PFUser.current()
+        let user = comment["user"] as? PFUser
+        cell.user = user
+        cell.comment = comment
+        
         
         
         

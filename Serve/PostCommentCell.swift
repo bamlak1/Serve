@@ -24,33 +24,33 @@ class PostCommentCell: UITableViewCell {
     var userType: String?
     var pic: PFFile?
     
-//    var comment: PFObject! {
-//        didSet{
-//            nameLabel.text = (user!["username"] as! String)
-//            //associatedPost = post
-//            userType = (user!["type"] as! String)
-//            pic = (user!["profile_image"] as! PFFile)
-//            imageViewer.image = nil
-//            if userType == "Individual" {
-//                imageViewer.layer.cornerRadius = imageViewer.frame.size.width / 2;
-//                imageViewer.clipsToBounds = true;
-//            }
-//            pic?.getDataInBackground { (data: Data?, error: Error?) in
-//                if error != nil {
-//                    print(error?.localizedDescription ?? "error")
-//                } else {
-//                    let finalImage = UIImage(data: data!)
-//                    self.imageViewer.image = finalImage
-//                }
-//            }
-//            if comment["caption"] != nil {
-//                commentLabel.text = (comment["caption"] as! String)
-//            } else {
-//                commentLabel.text = ""
-//            }
-//        }
-//    
-//    }
+    var comment: PFObject! {
+        didSet{
+            nameLabel.text = (user!["username"] as! String)
+            //associatedPost = post
+            userType = (user!["type"] as! String)
+            pic = (user!["profile_image"] as! PFFile)
+            imageViewer.image = nil
+            if userType == "Individual" {
+                imageViewer.layer.cornerRadius = imageViewer.frame.size.width / 2;
+                imageViewer.clipsToBounds = true;
+            }
+            pic?.getDataInBackground { (data: Data?, error: Error?) in
+                if error != nil {
+                    print(error?.localizedDescription ?? "error")
+                } else {
+                    let finalImage = UIImage(data: data!)
+                    self.imageViewer.image = finalImage
+                }
+            }
+            if comment["text"] != nil {
+                commentLabel.text = (comment["text"] as! String)
+            } else {
+                commentLabel.text = "nuffin"
+            }
+        }
+    
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
