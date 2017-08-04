@@ -49,6 +49,7 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
+        locationManager.distanceFilter = 1000
         mapView.delegate = self
         collectionView.allowsMultipleSelection = false
         collectionView.allowsSelection = true
@@ -78,11 +79,16 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
         let marker = GMSMarker()
         let lat = userLocation.coordinate.latitude
         let long = userLocation.coordinate.longitude
+        let extraMarkerInfo = PFObject(className: "Marker")
+        extraMarkerInfo["number"] = -1
+        extraMarkerInfo["id"] = "currentLocation"
         marker.position = CLLocationCoordinate2D(latitude: lat, longitude: long)
-        self.mapView.camera = GMSCameraPosition.camera(withLatitude: lat, longitude: long, zoom: 13.0)
+        mapView.animate(toLocation: CLLocationCoordinate2D(latitude: marker.position.latitude, longitude: marker.position.longitude))
         marker.icon = UIImage(data: UIImagePNGRepresentation(UIImage(named: "navigation")!)!, scale: 3)!
         marker.zIndex = 1
         marker.map = self.mapView
+        marker.userData = extraMarkerInfo
+        manager.stopUpdatingLocation()
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
@@ -273,7 +279,10 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
             return (infoWindow as! UIView)
         } else if (marker.userData as! PFObject)["id"] as! String == "newLocation" {
             let infoWindow = Bundle.main.loadNibNamed("OtherWindow", owner: self, options: nil)?.first
-            return (infoWindow as! UIView) 
+            return (infoWindow as! UIView)
+        } else if (marker.userData as! PFObject)["id"] as! String == "currentLocation" {
+            let infoWindow = Bundle.main.loadNibNamed("CurrentLocationWindow", owner: self, options: nil)?.first
+            return (infoWindow as! UIView)
         } else {
             let customInfoWindow = Bundle.main.loadNibNamed("InfoWindow", owner: self, options: nil)?.first as! CustomInfoWindow
             let volunteerNum = (marker.userData as! PFObject)["volunteers"] as! Int
