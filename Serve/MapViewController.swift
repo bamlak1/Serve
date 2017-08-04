@@ -11,8 +11,9 @@ import GoogleMaps
 import GooglePlaces
 import Parse
 import SwiftyJSON
+import CoreLocation
 
-class MapViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, GMSMapViewDelegate, UISearchBarDelegate, LocateOnTheMap, SettingsDelegate, RegisterButtonDelegate {
+class MapViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, GMSMapViewDelegate, UISearchBarDelegate, LocateOnTheMap, SettingsDelegate, CLLocationManagerDelegate {
     
     var key = "AIzaSyBCmydPROEO4zxGSnoB02DjRwIpejPgZjA"
     var searchResultController: SearchResultsViewController!
@@ -21,6 +22,7 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
     var markers: [GMSMarker] = []
     var previousMarker: GMSMarker!
     var homeMarker: GMSMarker!
+    var newLocationMarker: GMSMarker!
     var markerNum = 0
     var userMarkerNum = 0
     var otherMarkerNum = 0
@@ -34,6 +36,7 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
     var otherEventsShow: Bool!
     var radius: Int!
     var userID = PFUser.current()?.objectId
+    var locationManager = CLLocationManager()
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -43,12 +46,16 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
         userEventsShow = UserDefaults.standard.bool(forKey: "userSwitchState")
         otherEventsShow = UserDefaults.standard.bool(forKey: "otherSwitchState")
         fetchUserLocation()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
         mapView.delegate = self
         collectionView.allowsMultipleSelection = false
         collectionView.allowsSelection = true
         collectionView.backgroundColor = UIColor.clear
         searchResultController = SearchResultsViewController()
         searchResultController.delegate = self
+//        mapView.isMyLocationEnabled = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -58,6 +65,49 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
             previousMarker.icon = GMSMarker.markerImage(with: UIColor(red:0.34, green:0.71, blue:1.00, alpha:1.0))
         }
         mapView.selectedMarker = nil
+    }
+    
+    @IBAction func fetchCurrentLocation(_ sender: Any) {
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.startUpdatingLocation()
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let userLocation:CLLocation = locations[0] as CLLocation
+        let marker = GMSMarker()
+        let lat = userLocation.coordinate.latitude
+        let long = userLocation.coordinate.longitude
+        marker.position = CLLocationCoordinate2D(latitude: lat, longitude: long)
+        self.mapView.camera = GMSCameraPosition.camera(withLatitude: lat, longitude: long, zoom: 13.0)
+        marker.icon = UIImage(data: UIImagePNGRepresentation(UIImage(named: "navigation")!)!, scale: 3)!
+        marker.zIndex = 1
+        marker.map = self.mapView
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error)
+    }
+    
+    func determineCircleChanges(miles: Int) {
+        if (newLocationMarker != nil) {
+            let otherPosition = newLocationMarker.position
+            let isOtherVisible = self.mapView.projection.contains(otherPosition)
+            
+            if (isOtherVisible) {
+                drawHomeCircle(miles: miles)
+                drawOtherLocationCircle(marker: newLocationMarker, miles: miles)
+                let update = GMSCameraUpdate.fit(otherLocationCircle.bounds())
+                mapView.animate(with: update)
+            } else {
+                drawOtherLocationCircle(marker: newLocationMarker, miles: miles)
+                drawHomeCircle(miles: miles)
+                let update = GMSCameraUpdate.fit(homeCircle.bounds())
+                mapView.animate(with: update)
+            }
+        } else {
+            drawHomeCircle(miles: miles)
+        }
     }
     
     // Given a new marker that was searched using the search bar and a radius in miles, draws a circle around that marker
@@ -72,8 +122,6 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
         newCircle.strokeWidth = 5
         newCircle.map = mapView
         otherLocationCircle = newCircle
-        let update = GMSCameraUpdate.fit(otherLocationCircle.bounds())
-        mapView.animate(with: update)
     }
     
     // Given a radius in miles, draws a circle around the home base
@@ -82,13 +130,15 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
         if (homeCircle != nil) {
             homeCircle.map = nil
         }
+        
         let newCircle = GMSCircle(position: homeMarker.position, radius: Double(miles) * 1609.34)
         newCircle.fillColor = UIColor(red: 0.35, green: 0, blue: 0, alpha: 0.05)
         newCircle.strokeColor = .red
         newCircle.strokeWidth = 5
         newCircle.map = mapView
         homeCircle = newCircle
-        let update = GMSCameraUpdate.fit(newCircle.bounds())
+        
+        let update = GMSCameraUpdate.fit(homeCircle.bounds())
         mapView.animate(with: update)
     }
     
@@ -226,7 +276,6 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
             return (infoWindow as! UIView) 
         } else {
             let customInfoWindow = Bundle.main.loadNibNamed("InfoWindow", owner: self, options: nil)?.first as! CustomInfoWindow
-            customInfoWindow.delegate = self
             let volunteerNum = (marker.userData as! PFObject)["volunteers"] as! Int
             if (marker.userData as! PFObject)["userMarkerNum"] != nil {
                 customInfoWindow.register.isSelected = true
@@ -244,9 +293,10 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
         }
     }
     
-    func didPressRegister() {
-        print("tapped the button")
-        self.performSegue(withIdentifier: "MapToDetail", sender: self)
+    func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
+        if ((marker.userData as! PFObject)["id"] as! String != "home" && (marker.userData as! PFObject)["id"] as! String != "newLocation") {
+            self.performSegue(withIdentifier: "MapToDetail", sender: self)
+        }
     }
     
     // When an event cell is clicked on, uses that cell's row number to highlight and shift to that marker on the map
@@ -293,6 +343,7 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
                 print("User retrieval failed")
             } else {
                 let user = task.result as! PFUser
+                print(self.userID)
                 self.addressToCoordinates(location: user.value(forKey: "address") as! String, type: "home", id: "home", eventObject: user)
             }
             return task
@@ -302,6 +353,8 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
     @IBAction func refreshEvents(_ sender: Any) {
         userEventsShow = UserDefaults.standard.bool(forKey: "userSwitchState")
         otherEventsShow = UserDefaults.standard.bool(forKey: "otherSwitchState")
+        homeMarker.map = nil
+        fetchUserLocation()
         
         let block = {
             self.fetchEventLocations()
@@ -406,6 +459,7 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
         marker.position = CLLocationCoordinate2D(latitude: lat, longitude: long)
         let extraMarkerInfo = PFObject(className: "Marker")
         extraMarkerInfo["id"] = id
+        extraMarkerInfo["event"] = eventObject
         if (type == "home") {
             homeMarker = marker
             extraMarkerInfo["number"] = -1
@@ -415,8 +469,9 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
             marker.icon = UIImage(data: UIImagePNGRepresentation(UIImage(named: "home")!)!, scale: 3)!
             marker.zIndex = 1
             drawHomeCircle(miles: Int(UserDefaults.standard.float(forKey: "slider_value")))
-             marker.map = self.mapView
+            marker.map = self.mapView
         } else if (type == "changeLocation") {
+            newLocationMarker = marker
             extraMarkerInfo["number"] = -1
             marker.title = "Changed Location"
             marker.icon = UIImage(data: UIImagePNGRepresentation(UIImage(named: "star")!)!, scale: 3)!
@@ -483,8 +538,7 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
     // In a storyboard-based application, you will often want to do a little preparation before navigation
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
          if segue.identifier == "MapToDetail" {
-             let destinationNavigationController = segue.destination as! UINavigationController
-             let vc = destinationNavigationController.topViewController as! EventDetailViewController
+             let vc = segue.destination as! EventDetailViewController
              vc.event = ((previousMarker.userData as! PFObject)["event"] as! PFObject)
         }
      }

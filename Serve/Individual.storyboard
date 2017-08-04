@@ -10,34 +10,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="dkH-xs-PVp">
-            <objects>
-                <viewController id="z5j-qk-DEh" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="f63-IC-lKp"/>
-                        <viewControllerLayoutGuide type="bottom" id="Hxz-EE-lfb"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Hp2-pF-Qyq">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="User" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u8l-MT-yGz">
-                                <rect key="frame" x="166" y="467" width="37" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="Eax-So-BQj"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="JHE-5i-xDn" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4070" y="-1281"/>
-        </scene>
         <!--Explore-->
         <scene sceneID="OEs-rm-ght">
             <objects>
@@ -508,25 +480,6 @@
             </objects>
             <point key="canvasLocation" x="8880.7999999999993" y="-529.38530734632684"/>
         </scene>
-        <!--Map-->
-        <scene sceneID="chf-zW-fhC">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="xGF-ii-Ypk" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Map" id="snR-kh-0V3"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="6Uu-fA-9Hh">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="z5j-qk-DEh" kind="relationship" relationship="rootViewController" id="0S1-oE-APq"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="GTN-PG-O7n" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3010" y="-1235"/>
-        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="gJE-cP-TcK">
             <objects>
@@ -859,7 +812,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="XOU-YT-dul" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Browse" image="iconmonstr-magnifier-1-32 (1)" id="BjS-r9-jQ5"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="0Wm-zS-3nZ">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="0Wm-zS-3nZ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1210,7 +1163,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="sQP-5c-97e" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Feed" image="feed" id="bSN-co-MCs"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="fpw-wa-Fwg">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="fpw-wa-Fwg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1286,6 +1239,7 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Yy-GD-Crf">
                                 <rect key="frame" x="132" y="525" width="110" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
                                 <state key="normal" title="Sign up!"/>
                                 <connections>
@@ -1312,6 +1266,14 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ea6-By-Kpw">
+                                <rect key="frame" x="288" y="578" width="64" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Dismiss"/>
+                                <connections>
+                                    <action selector="dismissScreen:" destination="w0j-Pb-tmg" eventType="touchUpInside" id="edu-Uf-Fhl"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -1321,6 +1283,7 @@
                         <outlet property="bannerImageView" destination="UF8-KB-zt7" id="Su9-Of-CFY"/>
                         <outlet property="dateLabel" destination="Ty1-xE-tfG" id="4ce-tl-YBv"/>
                         <outlet property="descriptionLabel" destination="uJs-0v-2TK" id="uGr-DA-TId"/>
+                        <outlet property="dismissButton" destination="ea6-By-Kpw" id="5Xq-Cd-hrj"/>
                         <outlet property="expectedTasksLabel" destination="RY6-zC-gfx" id="gVx-o9-Wda"/>
                         <outlet property="locationLabel" destination="zT6-8G-eeA" id="UpE-9l-lCc"/>
                         <outlet property="orgLabel" destination="OMC-Qq-lzP" id="n4u-fb-BIA"/>
@@ -1725,7 +1688,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="V3a-ho-KCe" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Profile" image="profile-icon" id="q2l-W8-7pd"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Om9-p4-NAh">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Om9-p4-NAh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -2024,6 +1987,14 @@
                                     <outlet property="delegate" destination="HEy-nK-8r2" id="RAM-Dc-mHK"/>
                                 </connections>
                             </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ny6-2M-5Sf">
+                                <rect key="frame" x="327" y="228" width="35" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button" image="navigation"/>
+                                <connections>
+                                    <action selector="fetchCurrentLocation:" destination="HEy-nK-8r2" eventType="touchUpInside" id="8aO-xk-kKg"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -2165,14 +2136,13 @@
         <image name="iconmonstr-user-6-240" width="240" height="240"/>
         <image name="magnifying" width="36" height="36"/>
         <image name="map" width="24" height="24"/>
+        <image name="navigation" width="36" height="36"/>
         <image name="profile-icon" width="26" height="26"/>
         <image name="refresh" width="36" height="36"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="YgU-vw-OKV"/>
-
         <segue reference="aNw-Yj-QL6"/>
         <segue reference="K5e-WU-JxS"/>
-
     </inferredMetricsTieBreakers>
 </document>

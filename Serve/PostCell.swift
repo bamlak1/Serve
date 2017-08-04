@@ -61,20 +61,23 @@ class PostCell: UITableViewCell {
             }
             actionLabel.text = (post["action"] as! String)
             userType = (user!["type"] as! String)
-            pic = (user!["profile_image"] as! PFFile)
-            profilePicImageView.image = nil
-            if userType == "Individual" {
-                profilePicImageView.layer.cornerRadius = profilePicImageView.frame.size.width / 2;
-                profilePicImageView.clipsToBounds = true;
-            }
-            pic?.getDataInBackground { (data: Data?, error: Error?) in
-                if error != nil {
-                    print(error?.localizedDescription ?? "error")
-                } else {
-                    let finalImage = UIImage(data: data!)
-                    self.profilePicImageView.image = finalImage
+            if let pic = (user!["profile_image"] as? PFFile) {
+                profilePicImageView.image = nil
+                
+                if userType == "Individual" {
+                    profilePicImageView.layer.cornerRadius = profilePicImageView.frame.size.width / 2;
+                    profilePicImageView.clipsToBounds = true;
+                }
+                pic.getDataInBackground { (data: Data?, error: Error?) in
+                    if error != nil {
+                        print(error?.localizedDescription ?? "error")
+                    } else {
+                        let finalImage = UIImage(data: data!)
+                        self.profilePicImageView.image = finalImage
+                    }
                 }
             }
+            
             if post["caption"] != nil {
                 captionLabel.text = (post["caption"] as! String)
             } else {

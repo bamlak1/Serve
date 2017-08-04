@@ -9,7 +9,7 @@ import UIKit
 import GoogleMaps
 
 protocol SettingsDelegate {
-    func drawHomeCircle(miles: Int)
+    func determineCircleChanges(miles: Int)
     func updateDisplayedEvents(eventType: String)
     func fetchEventLocations()
 }
@@ -62,7 +62,7 @@ class MapSettingsViewController: UIViewController {
         sliderValue = Int(sender.value)
         let distanceString = String(sliderValue)
         radiusLabel.text = "\(distanceString)"
-        delegate?.drawHomeCircle(miles: sliderValue)
+        delegate?.determineCircleChanges(miles: sliderValue)
     }
 
     // Depending on whether the switch is active or not, displays what events the user has signed up and been accepted to
