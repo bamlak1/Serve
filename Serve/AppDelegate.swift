@@ -29,6 +29,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             })
         )
         
+        UINavigationBar.appearance().setBackgroundImage(UIImage.init(named: "green gradient.png"), for: UIBarMetrics.default)
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
+        UIApplication.shared.statusBarStyle = .lightContent
+        UINavigationBar.appearance().tintColor = UIColor.white;
+        UITabBar.appearance().tintColor = UIColor(red:0.05, green:0.69, blue:0.35, alpha:1.0)
 
         GMSServices.provideAPIKey("AIzaSyBCmydPROEO4zxGSnoB02DjRwIpejPgZjA")
         GMSPlacesClient.provideAPIKey("AIzaSyBCmydPROEO4zxGSnoB02DjRwIpejPgZjA")

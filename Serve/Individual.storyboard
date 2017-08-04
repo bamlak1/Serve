@@ -360,6 +360,7 @@
                                                 <segment title="Upcoming Events"/>
                                                 <segment title="Past Events"/>
                                             </segments>
+                                            <color key="tintColor" red="0.40784313729999999" green="0.80000000000000004" blue="0.41176470590000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <connections>
                                                 <action selector="indexChanged:" destination="jhj-Ek-D7q" eventType="valueChanged" id="KOK-6Y-IMH"/>
                                                 <action selector="indexChanged:" destination="hCQ-Ki-PUo" eventType="valueChanged" id="YtZ-tk-oCG"/>
@@ -368,7 +369,9 @@
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o69-gs-3rT">
                                             <rect key="frame" x="274" y="73" width="53" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <state key="normal" title="Add"/>
+                                            <state key="normal" title="Add">
+                                                <color key="titleColor" red="0.40784313729999999" green="0.80000000000000004" blue="0.41176470590000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </state>
                                             <state key="selected" title="Added"/>
                                             <connections>
                                                 <action selector="addPressed:" destination="jhj-Ek-D7q" eventType="touchUpInside" id="ACI-oY-kMn"/>
@@ -489,6 +492,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="tintColor" red="0.40784313729999999" green="0.80000000000000004" blue="0.41176470590000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="selectedImageTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
                         <segue destination="HEy-nK-8r2" kind="relationship" relationship="viewControllers" id="zQD-pe-eGe"/>
@@ -542,7 +547,9 @@
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zwu-55-Jiw">
                                             <rect key="frame" x="330" y="161" width="30" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <state key="normal" title="Edit"/>
+                                            <state key="normal" title="Edit">
+                                                <color key="titleColor" red="0.40784313729999999" green="0.80000000000000004" blue="0.41176470590000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </state>
                                             <connections>
                                                 <segue destination="WnP-k5-CiQ" kind="presentation" id="Qia-NP-cAe"/>
                                             </connections>
@@ -591,6 +598,7 @@
                                                 <segment title="Upcoming Events"/>
                                                 <segment title="Past Events"/>
                                             </segments>
+                                            <color key="tintColor" red="0.40784313729999999" green="0.80000000000000004" blue="0.41176470590000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <connections>
                                                 <action selector="indexChanged:" destination="hCQ-Ki-PUo" eventType="valueChanged" id="MaV-Zx-BN7"/>
                                             </connections>
@@ -605,7 +613,9 @@
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NSD-53-yq3">
                                             <rect key="frame" x="300" y="161" width="75" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <state key="normal" title="Follow"/>
+                                            <state key="normal" title="Follow">
+                                                <color key="titleColor" red="0.40784313729999999" green="0.80000000000000004" blue="0.41176470590000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </state>
                                             <state key="selected" title="Following"/>
                                             <connections>
                                                 <action selector="followPressed:" destination="hCQ-Ki-PUo" eventType="touchUpInside" id="fQY-1J-YbI"/>
@@ -816,9 +826,15 @@
         <scene sceneID="eHO-TV-gUS">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="XOU-YT-dul" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Browse" image="iconmonstr-magnifier-1-32 (1)" id="BjS-r9-jQ5"/>
+                    <tabBarItem key="tabBarItem" title="Browse" image="iconmonstr-magnifier-1-32 (1)" id="BjS-r9-jQ5">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
+                                <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="0Wm-zS-3nZ">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="0Wm-zS-3nZ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -840,7 +856,7 @@
                         <viewControllerLayoutGuide type="bottom" id="AjP-1G-blU"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="mkf-RS-4x8">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="900"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jn8-g9-JXW">
@@ -961,7 +977,9 @@
                                 <rect key="frame" x="161" y="290" width="53" height="28"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <state key="normal" title="Post"/>
+                                <state key="normal" title="Post">
+                                    <color key="titleColor" red="0.40784313729999999" green="0.80000000000000004" blue="0.41176470590000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="didPressPost:" destination="nGB-OC-qZb" eventType="touchUpInside" id="0Ip-D9-BuH"/>
                                 </connections>
@@ -1118,7 +1136,7 @@
                                             <color key="backgroundColor" red="0.20862795540000001" green="0.34019763390000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         </imageView>
                                     </subviews>
-                                    <color key="backgroundColor" red="0.14059415166206338" green="0.80047765544041449" blue="0.46465727108699367" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <color key="backgroundColor" red="0.99447199245379125" green="1" blue="0.99310906480664907" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstItem="1Po-kM-TGi" firstAttribute="top" secondItem="KWY-xa-k3C" secondAttribute="top" id="1Sc-de-7a4"/>
                                         <constraint firstItem="khC-Lg-kHH" firstAttribute="leading" secondItem="1Po-kM-TGi" secondAttribute="trailing" constant="4" id="1hV-h6-W1g"/>
@@ -1168,9 +1186,15 @@
         <scene sceneID="Fhw-fB-48W">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="sQP-5c-97e" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Feed" image="feed" id="bSN-co-MCs"/>
+                    <tabBarItem key="tabBarItem" title="Feed" image="feed" id="bSN-co-MCs">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
+                                <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="fpw-wa-Fwg">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="fpw-wa-Fwg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1234,7 +1258,7 @@
                                 <rect key="frame" x="16" y="364" width="343" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.30227412269999998" green="0.69466095510000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" red="0.40784313729999999" green="0.80000000000000004" blue="0.41176470590000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Volunteer Expected Tasks..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RY6-zC-gfx">
@@ -1248,17 +1272,11 @@
                                 <rect key="frame" x="132" y="525" width="110" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
-                                <state key="normal" title="Sign up!"/>
+                                <state key="normal" title="Sign up!">
+                                    <color key="titleColor" red="0.35106015899999998" green="0.68190831220000003" blue="0.34563077170000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
                                 <connections>
                                     <segue destination="ht3-vq-D1d" kind="presentation" identifier="compose" id="gBw-7Y-AIA"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eNg-dC-dQa" userLabel="Volunteer button">
-                                <rect key="frame" x="16" y="359" width="343" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <connections>
-                                    <segue destination="mkf-PU-1Wz" kind="show" identifier="accepted" id="6Ex-SA-bnt"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="02D-zj-Gcw" userLabel="Org">
@@ -1276,13 +1294,28 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ea6-By-Kpw">
                                 <rect key="frame" x="288" y="578" width="64" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Dismiss"/>
+                                <state key="normal" title="Dismiss">
+                                    <color key="titleColor" red="0.35106015897243287" green="0.68190831218274117" blue="0.34563077174812429" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="dismissScreen:" destination="w0j-Pb-tmg" eventType="touchUpInside" id="edu-Uf-Fhl"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eNg-dC-dQa" userLabel="Volunteer button">
+                                <rect key="frame" x="16" y="366" width="343" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="tintColor" red="0.40784313729999999" green="0.80000000000000004" blue="0.41176470590000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal">
+                                    <color key="titleColor" red="0.40784313729999999" green="0.80000000000000004" blue="0.41176470590000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <segue destination="mkf-PU-1Wz" kind="show" identifier="accepted" id="6Ex-SA-bnt"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="tintColor" red="0.40784313729999999" green="0.80000000000000004" blue="0.41176470590000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="675"/>
@@ -1301,7 +1334,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EjR-up-Lt3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="9712.7999999999993" y="-1364.1679160419792"/>
+            <point key="canvasLocation" x="10263" y="-1206"/>
         </scene>
         <!--Compose Update View Controller-->
         <scene sceneID="uaK-lG-n6H">
@@ -1321,11 +1354,13 @@
                                 <items>
                                     <navigationItem title="Update" id="JYg-p1-Wen">
                                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="aLD-b2-HEf">
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <connections>
                                                 <action selector="cancelPressed:" destination="ht3-vq-D1d" id="iaP-mw-ifI"/>
                                             </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" title="Sign Up" id="dP0-bP-SMG">
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <connections>
                                                 <action selector="signUpPressed:" destination="ht3-vq-D1d" id="2Og-vJ-ZC5"/>
                                             </connections>
@@ -1423,13 +1458,13 @@
                                 <items>
                                     <navigationItem title="Edit Profile" id="lKf-IV-REz">
                                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="9kG-Q3-e4X">
-                                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <connections>
                                                 <action selector="cancelPressed:" destination="WnP-k5-CiQ" id="vnQ-5c-Ju7"/>
                                             </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" title="Done" id="v0n-XX-T5E">
-                                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <connections>
                                                 <action selector="updateButtonPressed:" destination="WnP-k5-CiQ" id="iEm-2X-uD5"/>
                                             </connections>
@@ -1489,7 +1524,9 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gKx-tc-WTO">
                                 <rect key="frame" x="304" y="629" width="55" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Log Out"/>
+                                <state key="normal" title="Log Out">
+                                    <color key="titleColor" red="0.35106015899999998" green="0.68190831220000003" blue="0.34563077170000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="logOutPressed:" destination="WnP-k5-CiQ" eventType="touchUpInside" id="Y6Q-aL-z88"/>
                                 </connections>
@@ -1619,7 +1656,9 @@
                                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iod-GM-Occ">
                                                             <rect key="frame" x="186" y="10" width="56" height="30"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <state key="normal" title="Add"/>
+                                                            <state key="normal" title="Add">
+                                                                <color key="titleColor" red="0.35106015899999998" green="0.68190831220000003" blue="0.34563077170000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            </state>
                                                             <state key="selected" title="Added"/>
                                                             <connections>
                                                                 <action selector="addPressed:" destination="tpb-z4-wEN" eventType="touchUpInside" id="Q0a-8f-ADR"/>
@@ -1638,7 +1677,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ORQ-q5-MRO">
                                         <rect key="frame" x="205" y="360" width="37" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Done"/>
+                                        <state key="normal" title="Done">
+                                            <color key="titleColor" red="0.35106015899999998" green="0.68190831220000003" blue="0.34563077170000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
                                         <connections>
                                             <action selector="donePressed:" destination="jpH-vP-Sak" eventType="touchUpInside" id="AUs-Lv-yo8"/>
                                         </connections>
@@ -1646,7 +1687,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T5A-M9-TzP">
                                         <rect key="frame" x="8" y="360" width="48" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Cancel"/>
+                                        <state key="normal" title="Cancel">
+                                            <color key="titleColor" red="0.35106015899999998" green="0.68190831220000003" blue="0.34563077170000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
                                         <connections>
                                             <action selector="cancelPressed:" destination="jpH-vP-Sak" eventType="touchUpInside" id="BhB-oW-Dfd"/>
                                         </connections>
@@ -1693,9 +1736,15 @@
         <scene sceneID="Lpy-mo-tjS">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="V3a-ho-KCe" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Profile" image="profile-icon" id="q2l-W8-7pd"/>
+                    <tabBarItem key="tabBarItem" title="Profile" image="profile-icon" id="q2l-W8-7pd">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
+                                <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Om9-p4-NAh">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Om9-p4-NAh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1764,6 +1813,7 @@
                                                 <segment title="Upcoming Events"/>
                                                 <segment title="Past Events"/>
                                             </segments>
+                                            <color key="tintColor" red="0.40784313725490196" green="0.80000000000000004" blue="0.41176470588235292" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </segmentedControl>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Interests: " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AcJ-Ui-9Tk">
                                             <rect key="frame" x="8" y="213" width="359" height="21"/>
@@ -1784,7 +1834,9 @@
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d6Q-q5-lae">
                                             <rect key="frame" x="284" y="165" width="75" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <state key="normal" title="Follow"/>
+                                            <state key="normal" title="Follow">
+                                                <color key="titleColor" red="0.40784313725490196" green="0.80000000000000004" blue="0.41176470588235292" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </state>
                                             <state key="selected" title="Following"/>
                                             <connections>
                                                 <action selector="followPressed:" destination="oyj-n5-BxC" eventType="touchUpInside" id="d3e-qD-ah2"/>
@@ -2005,7 +2057,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Map" image="map" id="7xl-t8-e37"/>
+                    <tabBarItem key="tabBarItem" title="Map" image="map" id="7xl-t8-e37">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
+                                <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </tabBarItem>
                     <navigationItem key="navigationItem" id="G1G-Ui-4sb"/>
                     <connections>
                         <outlet property="collectionView" destination="zHU-dV-bCG" id="vV2-F0-uHF"/>
@@ -2060,6 +2118,7 @@
                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xVq-Hl-hu6">
                                         <rect key="frame" x="178" y="176" width="51" height="31"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="onTintColor" red="0.28782394912894077" green="0.57310834392588839" blue="0.29792776402911425" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
                                             <action selector="switchMyEvents:" destination="f0U-Yu-LfE" eventType="valueChanged" id="L13-RN-o3C"/>
                                         </connections>
@@ -2074,6 +2133,7 @@
                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wTo-3Y-ges">
                                         <rect key="frame" x="178" y="222" width="51" height="31"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="onTintColor" red="0.28782394909999998" green="0.57310834389999998" blue="0.29792776399999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
                                             <action selector="switchOtherEvents:" destination="f0U-Yu-LfE" eventType="valueChanged" id="Qap-Zp-QfU"/>
                                         </connections>
@@ -2101,7 +2161,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.46122420269999997" green="0.61935058929999998" blue="0.9924670458" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" red="0.40784313729999999" green="0.80000000000000004" blue="0.41176470590000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <gestureRecognizers/>
                             </view>
                         </subviews>
@@ -2147,10 +2207,8 @@
         <image name="refresh" width="36" height="36"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="G6f-qI-nsY"/>
-        <segue reference="pAn-mp-cSG"/>
-        <segue reference="YgU-vw-OKV"/>
+        <segue reference="W1G-go-2G1"/>
         <segue reference="aNw-Yj-QL6"/>
-        <segue reference="K5e-WU-JxS"/>
+        <segue reference="0Yg-qH-xfi"/>
     </inferredMetricsTieBreakers>
 </document>
