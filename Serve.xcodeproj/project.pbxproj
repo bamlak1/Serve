@@ -29,6 +29,9 @@
 		A03D91631F2A79A4006CF35F /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03D91621F2A79A4006CF35F /* Comment.swift */; };
 		A03D919F1F30EE75006CF35F /* CauseDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03D919E1F30EE75006CF35F /* CauseDetailViewController.swift */; };
 		A03D91A11F30EE80006CF35F /* CustomInfoWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03D91A01F30EE80006CF35F /* CustomInfoWindow.swift */; };
+		A03D91AD1F34FCD8006CF35F /* HomeWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = A03D91A91F34FCD8006CF35F /* HomeWindow.xib */; };
+		A03D91AE1F34FCD8006CF35F /* InfoWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = A03D91AA1F34FCD8006CF35F /* InfoWindow.xib */; };
+		A03D91AF1F34FCD8006CF35F /* OtherWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = A03D91AB1F34FCD8006CF35F /* OtherWindow.xib */; };
 		A06309F21F215C2E002E886A /* BrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06309F11F215C2E002E886A /* BrowserViewController.swift */; };
 		A06309F41F215D2E002E886A /* EventBrowseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06309F31F215D2E002E886A /* EventBrowseCell.swift */; };
 		A06309F61F216833002E886A /* OrgBrowseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06309F51F216833002E886A /* OrgBrowseCell.swift */; };
@@ -114,6 +117,10 @@
 		A03D91621F2A79A4006CF35F /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		A03D919E1F30EE75006CF35F /* CauseDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CauseDetailViewController.swift; sourceTree = "<group>"; };
 		A03D91A01F30EE80006CF35F /* CustomInfoWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomInfoWindow.swift; sourceTree = "<group>"; };
+		A03D91A91F34FCD8006CF35F /* HomeWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeWindow.xib; sourceTree = "<group>"; };
+		A03D91AA1F34FCD8006CF35F /* InfoWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InfoWindow.xib; sourceTree = "<group>"; };
+		A03D91AB1F34FCD8006CF35F /* OtherWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OtherWindow.xib; sourceTree = "<group>"; };
+		A03D91AC1F34FCD8006CF35F /* Serve.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = Serve.entitlements; sourceTree = "<group>"; };
 		A06309F11F215C2E002E886A /* BrowserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowserViewController.swift; sourceTree = "<group>"; };
 		A06309F31F215D2E002E886A /* EventBrowseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventBrowseCell.swift; sourceTree = "<group>"; };
 		A06309F51F216833002E886A /* OrgBrowseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrgBrowseCell.swift; sourceTree = "<group>"; };
@@ -239,6 +246,10 @@
 		A07AD2111F13FAC500100D69 /* Serve */ = {
 			isa = PBXGroup;
 			children = (
+				A03D91A91F34FCD8006CF35F /* HomeWindow.xib */,
+				A03D91AA1F34FCD8006CF35F /* InfoWindow.xib */,
+				A03D91AB1F34FCD8006CF35F /* OtherWindow.xib */,
+				A03D91AC1F34FCD8006CF35F /* Serve.entitlements */,
 				A03D91A01F30EE80006CF35F /* CustomInfoWindow.swift */,
 				A03D919E1F30EE75006CF35F /* CauseDetailViewController.swift */,
 				A03D915C1F2950D3006CF35F /* UserCell.swift */,
@@ -499,10 +510,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A03D91AD1F34FCD8006CF35F /* HomeWindow.xib in Resources */,
 				CCD755791F157F7D0033FF7A /* OrgStoryboard.storyboard in Resources */,
+				A03D91AF1F34FCD8006CF35F /* OtherWindow.xib in Resources */,
 				8614832E1F18305000C18917 /* Map.storyboard in Resources */,
 				A07AD21D1F13FAC500100D69 /* LaunchScreen.storyboard in Resources */,
 				861483161F1691A300C18917 /* Feed.storyboard in Resources */,
+				A03D91AE1F34FCD8006CF35F /* InfoWindow.xib in Resources */,
 				A07AD21A1F13FAC500100D69 /* Assets.xcassets in Resources */,
 				CCFB6C1C1F15A9F700E59D5C /* Individual.storyboard in Resources */,
 				A07AD2181F13FAC500100D69 /* Main.storyboard in Resources */,
@@ -872,7 +886,7 @@
 				DEVELOPMENT_TEAM = 257DRML7HA;
 				INFOPLIST_FILE = Serve/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Bamlak.Serve;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Gessessew.Serve;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -886,7 +900,7 @@
 				DEVELOPMENT_TEAM = 257DRML7HA;
 				INFOPLIST_FILE = Serve/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Bamlak.Serve;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Gessessew.Serve;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};

@@ -98,7 +98,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         cell.post = update
         
-        cell.mainBackground.layer.cornerRadius = 20
+        cell.mainBackground.layer.cornerRadius = 50
         cell.mainBackground.layer.masksToBounds = true
         
         
@@ -107,9 +107,9 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         return cell
     }
     
-    public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 20
-    }
+    
+    
+    
     
 
     override func didReceiveMemoryWarning() {
