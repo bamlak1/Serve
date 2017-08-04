@@ -116,6 +116,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -155,9 +156,12 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             let indexPath = button.tag
             let update = updates[indexPath]
             let event = update["event"] as! PFObject
+            let eventId = (event.objectId)!
+            
             
             let vc = segue.destination as! EventDetailViewController
-            vc.event = event
+            vc.eventId = eventId
+            //vc.org = org
         }
     }
 }

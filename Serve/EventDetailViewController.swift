@@ -13,6 +13,7 @@ import ParseUI
 class EventDetailViewController: UIViewController, NotifyEventDelegate{
     
     var event: PFObject?
+    var eventId: String?
     var org : PFUser?
     var accepts : [String] = []
     var pendings : [String] = []
@@ -33,51 +34,66 @@ class EventDetailViewController: UIViewController, NotifyEventDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        if let accepts = event?["accepted_ids"] as? [String] {
-            self.accepts = accepts
-        }
-        if let pendings = event?["pending_ids"] as? [String] {
-            self.pendings = pendings
-            print(self.pendings)
-        }
-        if accepts.contains((PFUser.current()!.objectId)!) || pendings.contains((PFUser.current()!.objectId)!) {
-            signUpButton.isSelected = true
-        }
-        
-        if let navController = self.navigationController, navController.viewControllers.count >= 2 {
-            let viewController = navController.viewControllers[navController.viewControllers.count - 2]
-            if !(viewController is MapViewController) {
-                dismissButton.isHidden = true
+        let query = PFQuery(className: "Event")
+        query.whereKey("objectId", equalTo: eventId!)
+        query.includeKey("author")
+        query.findObjectsInBackground { (events: [PFObject]?, error: Error?) in
+            if let event = events?.first {
+                self.event = event
+                self.org = event["author"] as! PFUser
+                if let accepts = event["accepted_ids"] as? [String] {
+                    self.accepts = accepts
+                }
+                if let pendings = event["pending_ids"] as? [String] {
+                    self.pendings = pendings
+                    print(self.pendings)
+                }
+                if self.accepts.contains((PFUser.current()!.objectId)!) || self.pendings.contains((PFUser.current()!.objectId)!) {
+                    self.signUpButton.isSelected = true
+                }
+                
+                if let navController = self.navigationController, navController.viewControllers.count >= 2 {
+                    let viewController = navController.viewControllers[navController.viewControllers.count - 2]
+                    if !(viewController is MapViewController) {
+                        self.dismissButton.isHidden = true
+                    }
+                }
+                
+                self.signUpButton.setTitle("Signed up", for: .selected)
+                self.titleLabel.text = event["title"] as? String
+                if event["org_name"] != nil {
+                    self.orgLabel.text = (event["org_name"] as! String)
+                }
+                let start = event["start"] as! String
+                let end = event["end"] as! String
+                self.dateLabel.text = "\(start) - \(end)"
+                self.locationLabel.text = (event["location"] as! String)
+                self.descriptionLabel.text = (event["description"] as! String)
+                let volunteerCount = event["volunteers"] as? Int ?? 0
+                self.volunteerLabel.text = "\(volunteerCount) volunteers"
+                self.expectedTasksLabel.text = (event["expected_tasks"] as! String)
+                
+                
+                let image = event["banner"] as! PFFile
+                self.bannerImageView.image = nil
+                image.getDataInBackground { (data: Data?, error: Error?) in
+                    if(error != nil) {
+                        print(error?.localizedDescription ?? "error")
+                    } else {
+                        let finalImage = UIImage(data: data!)
+                        self.bannerImageView.image = finalImage
+                    }
+                }
             }
         }
 
-        signUpButton.setTitle("Signed up", for: .selected)
-        titleLabel.text = event?["title"] as? String
-        if event?["org_name"] != nil {
-            orgLabel.text = (event?["org_name"] as! String)
-        }
-        let start = event?["start"] as! String
-        let end = event?["end"] as! String
-        dateLabel.text = "\(start) - \(end)"
-        locationLabel.text = (event?["location"] as! String)
-        descriptionLabel.text = (event?["description"] as! String)
-        let volunteerCount = event?["volunteers"] as? Int ?? 0
-        volunteerLabel.text = "\(volunteerCount) volunteers"
-        expectedTasksLabel.text = (event?["expected_tasks"] as! String)
         
-        
-        let image = event?["banner"] as! PFFile
-        bannerImageView.image = nil
-        image.getDataInBackground { (data: Data?, error: Error?) in
-            if(error != nil) {
-                print(error?.localizedDescription ?? "error")
-            } else {
-                let finalImage = UIImage(data: data!)
-                self.bannerImageView.image = finalImage
-            }
-        }
+
         
     }
+    
+    
+    
     
     func didPressSignUp() {
         signUpButton.isSelected = true

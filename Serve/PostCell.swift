@@ -64,7 +64,9 @@ class PostCell: UITableViewCell {
                 eventLabel.text = (event!["title"] as! String)
             }
             actionLabel.text = (post["action"] as! String)
-            dateLabel.text = (post["date"] as! String)
+            if let date = (post["date"] as? String) {
+                dateLabel.text = date
+            }
             userType = (user!["type"] as! String)
             if let pic = (user!["profile_image"] as? PFFile) {
                 profilePicImageView.image = nil
