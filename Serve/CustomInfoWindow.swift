@@ -20,4 +20,5 @@ class CustomInfoWindow: UIView {
     @IBOutlet weak var volunteerLabel: UILabel!
     @IBOutlet weak var register: UIButton!
     @IBOutlet weak var markerInfoBackground: UIImageView!
+    @IBOutlet weak var registered: UIButton!
 }

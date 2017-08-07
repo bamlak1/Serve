@@ -16,7 +16,7 @@ class MapEventCell: UICollectionViewCell {
     
     override var isSelected: Bool {
         didSet {
-            self.layer.borderColor = self.isSelected ? UIColor(red:0.34, green:0.71, blue:1.00, alpha:1.0).cgColor : UIColor.black.cgColor
+            self.layer.borderColor = self.isSelected ? UIColor(red:0.47, green:0.83, blue:0.48, alpha:1.0).cgColor : UIColor.black.cgColor
         }
     }
 }

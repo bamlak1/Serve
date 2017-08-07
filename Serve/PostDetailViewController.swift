@@ -42,6 +42,7 @@ class PostDetailViewController: UIViewController, UITableViewDelegate, UITableVi
     
     @IBOutlet weak var fiveCountLabel: UILabel!
     
+    @IBOutlet weak var eventImageViewer: UIImageView!
     
     @IBOutlet weak var commentCountLabel: UILabel!
     
@@ -50,6 +51,7 @@ class PostDetailViewController: UIViewController, UITableViewDelegate, UITableVi
     var event : PFObject?
     var user: PFUser?
     var userType: String?
+    var bannerPic: PFFile?
     var pic : PFFile?
     
     override func viewDidLoad() {
@@ -81,6 +83,27 @@ class PostDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         if userType == "Individual" {
             profilePicImageView.layer.cornerRadius = profilePicImageView.frame.size.width / 2;
             profilePicImageView.clipsToBounds = true;
+        }
+        if userType == "Organization" {
+            eventImageViewer.isHidden = false
+            //topStackConstraint.constant = 124
+            if event != nil {
+                bannerPic = (event?["banner"] as! PFFile)
+            }
+            eventImageViewer.image = nil
+            bannerPic?.getDataInBackground { (data: Data?, error: Error?) in
+                if error != nil {
+                    print(error?.localizedDescription ?? "error")
+                } else {
+                    let finalImage = UIImage(data: data!)
+                    self.eventImageViewer.image = finalImage
+                }
+            }
+        } else {
+            eventImageViewer.isHidden = true
+            //topStackConstraint.constant = 12
+            
+            
         }
 
         // Do any additional setup after loading the view.
