@@ -82,7 +82,7 @@ class PostCell: UITableViewCell {
                 
             if userType == "Organization" {
                 eventImageViewer.isHidden = false
-                topStackConstraint.constant = 124
+                topStackConstraint.constant = 148
                 if event != nil {
                     bannerPic = (event?["banner"] as! PFFile)
                 }
