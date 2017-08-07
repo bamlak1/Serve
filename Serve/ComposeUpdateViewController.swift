@@ -8,6 +8,7 @@
 
 import UIKit
 import Parse
+import MBProgressHUD
 
 class ComposeUpdateViewController: UIViewController, UITextViewDelegate {
 
@@ -19,6 +20,7 @@ class ComposeUpdateViewController: UIViewController, UITextViewDelegate {
     
     var event: PFObject?
     var delegate: NotifyEventDelegate!
+    var reflection : Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,10 +82,12 @@ class ComposeUpdateViewController: UIViewController, UITextViewDelegate {
     
     
     @IBAction func signUpPressed(_ sender: Any) {
+        MBProgressHUD.showAdded(to: self.view, animated: true)
         Pending.postPending(user: PFUser.current()!, event: event!, caption: textView.text, auto: false) { (success: Bool, error: Error?) in
             if
                 success {
                 print("pending request made")
+                MBProgressHUD.hide(for: self.view, animated: true)
                 self.dismiss(animated: true, completion: nil)
             } else {
                 print(error?.localizedDescription ?? "error")

@@ -57,6 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 window?.rootViewController = vc
             }
         }
+        
 
         UserDefaults.standard.set(true, forKey: "userSwitchState")
         UserDefaults.standard.set(true, forKey: "otherSwitchState")
@@ -65,13 +66,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         registerForPushNotifications()
 
         if let notification = launchOptions?[.remoteNotification] as? [String: AnyObject] {
-            _ = notification["aps"] as! [String: AnyObject]
+            let aps = notification["aps"] as! [String: AnyObject]
+            //print(aps)
+            let eventID = notification["eventId"] as! String
             
             //TODO: Segue to compose view
-            (window?.rootViewController as? UITabBarController)?.selectedIndex = 2
-//            let vc = ComposeUpdateViewController()
-//            window?.rootViewController?.present(vc, animated: true, completion: nil)
-
+            let storyBoard = UIStoryboard(name: "Individual", bundle: nil)
+            let vc = storyBoard.instantiateViewController(withIdentifier: "EventDetailViewController") as! EventDetailViewController
+            vc.eventId = eventID
+            vc.past = true
+            
+            let rootView = self.window?.rootViewController as? UITabBarController
+            rootView?.selectedIndex = 2
+            switch((rootView?.selectedIndex)!) {
+            case 2:
+                print("here")
+                let navVC = rootView?.viewControllers?[2] as! UINavigationController
+                navVC.pushViewController(vc, animated: true)
+                break
+            default:
+                print("error presenting vc")
+                break
+            }
             
         }
         
@@ -91,12 +107,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         return true
     }
     
-//    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-//        
-//        let aps = userInfo["aps"] as! [String: AnyObject]
-//        _ = NewsItem.makeNewsItem(aps)
-//    }
-//    
+    func application(_ application: UIApplication, didReceiveRemoteNotification notification: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        
+        
+        let aps = notification["aps"] as! [String: AnyObject]
+        let eventID = notification["eventId"] as! String
+        
+        //TODO: Segue to compose view
+        let storyBoard = UIStoryboard(name: "Individual", bundle: nil)
+        let vc = storyBoard.instantiateViewController(withIdentifier: "EventDetailViewController") as! EventDetailViewController
+        vc.eventId = eventID
+        vc.past = true
+        
+        let rootView = self.window?.rootViewController as? UITabBarController
+        rootView?.selectedIndex = 2
+        switch((rootView?.selectedIndex)!) {
+        case 2:
+            print("here")
+            let navVC = rootView?.viewControllers?[2] as! UINavigationController
+            navVC.pushViewController(vc, animated: true)
+            break
+        default:
+            print("error presenting vc")
+            break
+        }
+    }
+    
     
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
         return FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
@@ -167,6 +203,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         PFPush.handle(notification.request.content.userInfo)
         completionHandler(.alert)
     }
+    
+    
     
     
     

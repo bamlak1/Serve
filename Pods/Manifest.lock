@@ -40,7 +40,9 @@ PODS:
     - GooglePlaces (= 2.3.1)
   - GooglePlaces (2.3.1):
     - GoogleMaps/Base (= 2.3.1)
+  - ImagePicker (2.1.1)
   - KeychainAccess (3.0.2)
+  - MBProgressHUD (1.0.0)
   - NSDate-Time-Ago (1.0.1)
   - NWPusher (0.7.5)
   - OAuthSwift (1.1.2)
@@ -82,7 +84,9 @@ DEPENDENCIES:
   - GoogleMaps
   - GooglePlacePicker
   - GooglePlaces
+  - ImagePicker
   - KeychainAccess
+  - MBProgressHUD (~> 1.0.0)
   - NSDate-Time-Ago
   - NWPusher (~> 0.7.0)
   - OAuthSwift (~> 1.1.0)
@@ -113,7 +117,9 @@ SPEC CHECKSUMS:
   GoogleMaps: c66a71058b9b1294bcdd5463a68e357fa50c079f
   GooglePlacePicker: fc3564ac7a2ce314e78e42bfc1e16822ad1e5488
   GooglePlaces: 4a7b22debfa1af65017b82943431822607e45201
+  ImagePicker: fe4c699abb56ff03994fa98d8b02e3883ee118be
   KeychainAccess: a986406022dfc7c634c691ad3bec670cc6a32002
+  MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   NSDate-Time-Ago: e9de167d0659ebe465c273e833e7b582f061fc41
   NWPusher: 9b29a44754d88cb02c28a1e9bc8750845506123e
   OAuthSwift: 5aa5659984d3ca3206ba636a9e7a9c6626b2e8bd
@@ -128,6 +134,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
 
-PODFILE CHECKSUM: ba8b0778aaef76ae83fa7ac9a794060c483e7203
+PODFILE CHECKSUM: 74ad4d61258f20c7cbceec0065e4e043f1c73594
 
 COCOAPODS: 1.2.1

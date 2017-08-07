@@ -1371,7 +1371,7 @@
         <!--Compose Update View Controller-->
         <scene sceneID="uaK-lG-n6H">
             <objects>
-                <viewController id="ht3-vq-D1d" customClass="ComposeUpdateViewController" customModule="Serve" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="composeController" id="ht3-vq-D1d" customClass="ComposeUpdateViewController" customModule="Serve" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="eUW-dt-s2e"/>
                         <viewControllerLayoutGuide type="bottom" id="qox-sc-VbR"/>

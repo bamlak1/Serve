@@ -14,8 +14,10 @@ import GoogleMaps
 import GooglePlacePicker
 import Parse
 import ParseUI
+import MBProgressHUD
+import ImagePicker
 
-class CreateEventViewController: UIViewController, UIImagePickerControllerDelegate,UINavigationControllerDelegate, UITextViewDelegate, GMSPlacePickerViewControllerDelegate, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, CauseTVCellDelegate{
+class CreateEventViewController: UIViewController, UIImagePickerControllerDelegate,UINavigationControllerDelegate, UITextViewDelegate, GMSPlacePickerViewControllerDelegate, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, CauseTVCellDelegate, ImagePickerDelegate{
     
     @IBOutlet weak var bannerImageView: UIImageView!
     @IBOutlet weak var initiatePostOutlet: UIButton!
@@ -36,6 +38,7 @@ class CreateEventViewController: UIViewController, UIImagePickerControllerDelega
     var filteredCauses : [PFObject] = []
     var addedCauses : [PFObject] = []
     var names : [String] = []
+
     
     
 
@@ -118,38 +121,47 @@ class CreateEventViewController: UIViewController, UIImagePickerControllerDelega
         return picker
     }
     
+
+    
+    @IBAction func publishPressed(_ sender: Any) {
+        print("publishEvent pressed")
+        MBProgressHUD.showAdded(to: self.view , animated: true)
+        Event.postEvent(image: bannerImageView.image, title: titletextField.text, description: descriptionTextView.text, location: locationLabel.text, startDate: startDate, start: startLabel.text, endDate: endDate, end: endLabel.text, jobs: expectedTasksTextView.text, causes: addedCauses, causeNames: names) { (success: Bool, error: Error?) in
+            if success {
+                print("Event created")
+                MBProgressHUD.hide(for: self.view, animated: true)
+                self.dismiss(animated: true, completion: nil)
+            } else {
+                print(error?.localizedDescription ?? "error")
+            }
+            
+        }
+    }
+    
     @IBAction func initiateImageUpload(_ sender: Any) {
-        let vc = UIImagePickerController()
+        let vc = ImagePickerController()
+        vc.imageLimit = 1
         vc.delegate = self
-        vc.allowsEditing = true
-        
-        vc.sourceType = UIImagePickerControllerSourceType.photoLibrary
-        vc.sourceType = .photoLibrary
         
         self.present(vc, animated: true, completion: nil)
         
     }
     
-    @IBAction func publishPressed(_ sender: Any) {
-        print("publishEvent pressed")
-        Event.postEvent(image: bannerImageView.image, title: titletextField.text, description: descriptionTextView.text, location: locationLabel.text, startDate: startDate, start: startLabel.text, endDate: endDate, end: endLabel.text, jobs: expectedTasksTextView.text, causes: addedCauses, causeNames: names) { (success: Bool, error: Error?) in
-            if success {
-                print("Event created")
-            } else {
-                print(error?.localizedDescription ?? "error")
-            }
-            self.dismiss(animated: true, completion: nil)
-        }
-    }
-    
-
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        let editedImage = info[UIImagePickerControllerEditedImage] as! UIImage
-        bannerImageView.image = editedImage
+    func doneButtonDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
+        bannerImageView.image = images.first
         initiatePostOutlet.setTitle("", for: .normal)
-        dismiss(animated: true , completion: nil)
+        imagePicker.dismiss(animated: true , completion: nil)
     }
+    
+    func wrapperDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
+        guard images.count > 0 else { return }
+    }
+    
+    func cancelButtonDidPress(_ imagePicker: ImagePickerController) {
+        imagePicker.dismiss(animated: true, completion: nil)
+    }
+    
+    
     
     @IBAction func cancelPressed(_ sender: Any) {
         dismiss(animated: true , completion: nil)

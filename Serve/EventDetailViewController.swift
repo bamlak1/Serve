@@ -17,6 +17,7 @@ class EventDetailViewController: UIViewController, NotifyEventDelegate{
     var org : PFUser?
     var accepts : [String] = []
     var pendings : [String] = []
+    var past : Bool = false
     
     @IBOutlet weak var bannerImageView: PFImageView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -87,6 +88,9 @@ class EventDetailViewController: UIViewController, NotifyEventDelegate{
             }
         }
 
+        if past {
+            performSegue(withIdentifier: "compose", sender: self)
+        }
         
 
         
