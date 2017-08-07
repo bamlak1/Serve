@@ -82,6 +82,7 @@ class PostCell: UITableViewCell {
                 
             if userType == "Organization" {
                 eventImageViewer.isHidden = false
+                topStackConstraint.constant = 124
                 if event != nil {
                     bannerPic = (event?["banner"] as! PFFile)
                 }
@@ -97,6 +98,7 @@ class PostCell: UITableViewCell {
             } else {
                 eventImageViewer.isHidden = true
                 topStackConstraint.constant = 12
+                
             
             }
             pic.getDataInBackground { (data: Data?, error: Error?) in
@@ -137,7 +139,6 @@ class PostCell: UITableViewCell {
             print(post["high_fives"])
             
             post?.saveInBackground(block: { (success: Bool, error: Error?) in
-                // TODO: add alerts
             })
             
         
