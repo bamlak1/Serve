@@ -29,8 +29,11 @@ class ComposeUpdateViewController: UIViewController, UITextViewDelegate {
         textView.text = "What are your thoughts on this event?"
         textView.textColor = UIColor.lightGray
         setData()
-
         // Do any additional setup after loading the view.
+    }
+    
+    override var prefersStatusBarHidden : Bool {
+        return true
     }
 
     override func didReceiveMemoryWarning() {

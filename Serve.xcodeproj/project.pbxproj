@@ -15,6 +15,7 @@
 		8614832C1F17F2AE00C18917 /* CauseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8614832B1F17F2AE00C18917 /* CauseCell.swift */; };
 		8614832E1F18305000C18917 /* Map.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8614832D1F18305000C18917 /* Map.storyboard */; };
 		861483321F18425D00C18917 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 861483311F18425D00C18917 /* MapViewController.swift */; };
+		862B70B61F38F8A5009DB3C1 /* CurrentLocationWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 862B70B51F38F8A5009DB3C1 /* CurrentLocationWindow.xib */; };
 		A00FB5961F1ED45A0036340D /* OrgCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00FB5951F1ED45A0036340D /* OrgCollectionViewCell.swift */; };
 		A00FB5981F1ED46C0036340D /* EventCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00FB5971F1ED46C0036340D /* EventCollectionViewCell.swift */; };
 		A03D91511F26CC22006CF35F /* CausesPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03D91501F26CC22006CF35F /* CausesPopUpViewController.swift */; };
@@ -103,6 +104,7 @@
 		8614832B1F17F2AE00C18917 /* CauseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CauseCell.swift; sourceTree = "<group>"; };
 		8614832D1F18305000C18917 /* Map.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Map.storyboard; sourceTree = "<group>"; };
 		861483311F18425D00C18917 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		862B70B51F38F8A5009DB3C1 /* CurrentLocationWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CurrentLocationWindow.xib; sourceTree = "<group>"; };
 		A00FB5951F1ED45A0036340D /* OrgCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrgCollectionViewCell.swift; sourceTree = "<group>"; };
 		A00FB5971F1ED46C0036340D /* EventCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCollectionViewCell.swift; sourceTree = "<group>"; };
 		A03D91501F26CC22006CF35F /* CausesPopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CausesPopUpViewController.swift; sourceTree = "<group>"; };
@@ -246,9 +248,6 @@
 		A07AD2111F13FAC500100D69 /* Serve */ = {
 			isa = PBXGroup;
 			children = (
-				A03D91A91F34FCD8006CF35F /* HomeWindow.xib */,
-				A03D91AA1F34FCD8006CF35F /* InfoWindow.xib */,
-				A03D91AB1F34FCD8006CF35F /* OtherWindow.xib */,
 				A03D91AC1F34FCD8006CF35F /* Serve.entitlements */,
 				A03D91A01F30EE80006CF35F /* CustomInfoWindow.swift */,
 				A03D919E1F30EE75006CF35F /* CauseDetailViewController.swift */,
@@ -300,6 +299,10 @@
 		CC24537F1F2016CF00D765E5 /* Individual */ = {
 			isa = PBXGroup;
 			children = (
+				A03D91AA1F34FCD8006CF35F /* InfoWindow.xib */,
+				A03D91A91F34FCD8006CF35F /* HomeWindow.xib */,
+				862B70B51F38F8A5009DB3C1 /* CurrentLocationWindow.xib */,
+				A03D91AB1F34FCD8006CF35F /* OtherWindow.xib */,
 				A0B95E791F16DB6C00EBD019 /* EventDetailViewController.swift */,
 				A0B95E811F185D4900EBD019 /* IndividualProfileViewController.swift */,
 				861483311F18425D00C18917 /* MapViewController.swift */,
@@ -470,7 +473,7 @@
 				TargetAttributes = {
 					A07AD20E1F13FAC500100D69 = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = DY98KN5R7D;
+						DevelopmentTeam = 2RV3P7RPT3;
 						ProvisioningStyle = Automatic;
 					};
 					A07AD2221F13FAC500100D69 = {
@@ -520,6 +523,7 @@
 				A07AD21A1F13FAC500100D69 /* Assets.xcassets in Resources */,
 				CCFB6C1C1F15A9F700E59D5C /* Individual.storyboard in Resources */,
 				A07AD2181F13FAC500100D69 /* Main.storyboard in Resources */,
+				862B70B61F38F8A5009DB3C1 /* CurrentLocationWindow.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -883,10 +887,10 @@
 			baseConfigurationReference = ED1C2CCCD0B7F017A061DDCF /* Pods-Serve.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = DY98KN5R7D;
+				DEVELOPMENT_TEAM = 2RV3P7RPT3;
 				INFOPLIST_FILE = Serve/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Hamlett.Serve;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Olga.Serve;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -897,10 +901,10 @@
 			baseConfigurationReference = 0C684013576F56B69AF242C7 /* Pods-Serve.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = DY98KN5R7D;
+				DEVELOPMENT_TEAM = 2RV3P7RPT3;
 				INFOPLIST_FILE = Serve/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Hamlett.Serve;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Olga.Serve;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
