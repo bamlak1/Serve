@@ -260,8 +260,10 @@ class BrowserViewController: UIViewController, UICollectionViewDataSource, UICol
         if segue.identifier == "event" {
             let button = sender as! UIButton
             let event = filteredEvents[button.tag]
+            print(event)
+            let id = (event.objectId)!
             let vc = segue.destination as! EventDetailViewController
-            vc.event = event
+            vc.eventId = id
         }
         
         if segue.identifier == "ind" {
