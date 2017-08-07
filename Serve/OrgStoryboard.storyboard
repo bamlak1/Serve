@@ -973,13 +973,6 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9n2-x6-viZ" userLabel="Name Button">
-                                            <rect key="frame" x="149.5" y="-4" width="30" height="30"/>
-                                            <connections>
-                                                <action selector="namePressed:" destination="KmU-WT-hCg" eventType="touchUpInside" id="aVT-wv-iiv"/>
-                                                <segue destination="yeL-za-73u" kind="show" identifier="other" id="d2X-aE-jqy"/>
-                                            </connections>
-                                        </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HNL-Rh-6wg" userLabel="Event Button">
                                             <rect key="frame" x="115.5" y="25" width="30" height="30"/>
                                             <connections>
@@ -987,18 +980,24 @@
                                                 <segue destination="tZa-Zn-N20" kind="show" identifier="event" id="FWT-hz-HBm"/>
                                             </connections>
                                         </button>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9n2-x6-viZ" userLabel="Name Button">
+                                            <rect key="frame" x="8" y="0.0" width="68" height="68"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <connections>
+                                                <action selector="namePressed:" destination="KmU-WT-hCg" eventType="touchUpInside" id="aVT-wv-iiv"/>
+                                                <segue destination="yeL-za-73u" kind="show" identifier="other" id="d2X-aE-jqy"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="9Vm-Tp-mw6" firstAttribute="centerX" secondItem="HNL-Rh-6wg" secondAttribute="centerX" id="1og-xt-OFe"/>
                                         <constraint firstItem="bMI-8t-kIT" firstAttribute="top" secondItem="p7w-kg-4fl" secondAttribute="top" id="G8W-8v-9R7"/>
                                         <constraint firstItem="9Vm-Tp-mw6" firstAttribute="centerY" secondItem="HNL-Rh-6wg" secondAttribute="centerY" id="Kz8-B4-NFS"/>
-                                        <constraint firstItem="9n2-x6-viZ" firstAttribute="centerY" secondItem="r6L-Md-HxV" secondAttribute="centerY" id="Tif-E2-ugk"/>
+                                        <constraint firstItem="9Vm-Tp-mw6" firstAttribute="top" secondItem="r6L-Md-HxV" secondAttribute="bottom" constant="8" id="PNi-Yz-5c9"/>
                                         <constraint firstItem="r6L-Md-HxV" firstAttribute="leading" secondItem="bMI-8t-kIT" secondAttribute="trailing" constant="8" id="XEV-Yp-gT6"/>
                                         <constraint firstItem="bMI-8t-kIT" firstAttribute="leading" secondItem="p7w-kg-4fl" secondAttribute="leading" constant="8" id="cKy-jJ-rw3"/>
                                         <constraint firstItem="9Vm-Tp-mw6" firstAttribute="leading" secondItem="bMI-8t-kIT" secondAttribute="trailing" constant="8" id="gS4-bZ-YXk"/>
                                         <constraint firstItem="r6L-Md-HxV" firstAttribute="top" secondItem="p7w-kg-4fl" secondAttribute="top" id="ioU-xm-lbX"/>
-                                        <constraint firstItem="9n2-x6-viZ" firstAttribute="centerX" secondItem="r6L-Md-HxV" secondAttribute="centerX" id="rPi-Ua-hlN"/>
-                                        <constraint firstItem="9Vm-Tp-mw6" firstAttribute="top" secondItem="9n2-x6-viZ" secondAttribute="bottom" constant="3" id="sOk-4f-rZ0"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
@@ -1032,7 +1031,7 @@
                 <navigationController storyboardIdentifier="OrgNavControl" automaticallyAdjustsScrollViewInsets="NO" id="cRY-vI-r1X" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Organization" selectedImage="iconmonstr-user-29-32" id="yOY-bq-n3u"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Jvn-KA-MQN">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Jvn-KA-MQN">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1114,7 +1113,7 @@
         <image name="iconmonstr-user-29-32" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Fhb-U7-V8A"/>
-        <segue reference="xVX-xl-8ii"/>
+        <segue reference="FWT-hz-HBm"/>
+        <segue reference="d2X-aE-jqy"/>
     </inferredMetricsTieBreakers>
 </document>
