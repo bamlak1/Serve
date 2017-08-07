@@ -16,6 +16,8 @@ target 'Serve' do
   pod 'FacebookShare'
   pod 'ParseFacebookUtilsV4'
   pod 'NWPusher', '~> 0.7.0'
+  pod 'MBProgressHUD', '~> 1.0.0'
+  pod 'ImagePicker'
 
   pod 'Alamofire', '~> 4.4'
   pod 'AlamofireImage', '~> 3.1'
