@@ -85,12 +85,14 @@ class EventDetailViewController: UIViewController, NotifyEventDelegate{
                         self.bannerImageView.image = finalImage
                     }
                 }
+                
+                if self.past {
+                    self.performSegue(withIdentifier: "compose", sender: self)
+                }
             }
         }
 
-        if past {
-            performSegue(withIdentifier: "compose", sender: self)
-        }
+       
         
 
         
@@ -122,9 +124,14 @@ class EventDetailViewController: UIViewController, NotifyEventDelegate{
             
         } else if segue.identifier == "compose"{
             let vc = segue.destination as! ComposeUpdateViewController
-            
             vc.delegate = self
             vc.event = self.event
+            if past{
+                vc.reflection = true
+            }else {
+                vc.reflection = false
+            }
+            
         } else if segue.identifier == "org"{
             let vc = segue.destination as! UserProfileViewController
             vc.user = org

@@ -16,8 +16,10 @@ class ComposeUpdateViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var eventLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var actionLabel: UILabel!
     
     
+    @IBOutlet weak var signUpButton: UIBarButtonItem!
     var event: PFObject?
     var delegate: NotifyEventDelegate!
     var reflection : Bool = false
@@ -26,8 +28,14 @@ class ComposeUpdateViewController: UIViewController, UITextViewDelegate {
         super.viewDidLoad()
         
         textView.delegate = self
-        textView.text = "What are your thoughts on this event?"
         textView.textColor = UIColor.lightGray
+        if reflection{
+            textView.text = "What did you think about this event?"
+        }else {
+            textView.text = "What are your thoughts on this event?"
+        }
+        
+        
         setData()
         // Do any additional setup after loading the view.
     }
@@ -49,9 +57,14 @@ class ComposeUpdateViewController: UIViewController, UITextViewDelegate {
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
+        textView.textColor = UIColor.lightGray
         if textView.text.isEmpty {
-            textView.text = "What are your thoughts on this event?"
-            textView.textColor = UIColor.lightGray
+            if reflection{
+                textView.text = "What did you think about this event?"
+            }else {
+                textView.text = "What are your thoughts on this event?"
+            }
+            
         }
     }
     
@@ -59,7 +72,7 @@ class ComposeUpdateViewController: UIViewController, UITextViewDelegate {
     
     func setData() {
         let user = PFUser.current()!
-        
+        print(event)
         if let profileImage = user["profile_image"] as? PFFile {
             profileImage.getDataInBackground(block: { (data: Data?, error: Error?) in
                 if (error != nil) {
@@ -77,29 +90,51 @@ class ComposeUpdateViewController: UIViewController, UITextViewDelegate {
         if let eventName = event?["title"] {
             eventLabel.text = (eventName as! String)
         }
+        if reflection{
+            actionLabel.text = "went to"
+            signUpButton.title = "Done"
+            
+        }else {
+            actionLabel.text = "is interested in"
+        }
 
     }
     
     
     @IBAction func signUpPressed(_ sender: Any) {
-        MBProgressHUD.showAdded(to: self.view, animated: true)
-        Pending.postPending(user: PFUser.current()!, event: event!, caption: textView.text, auto: false) { (success: Bool, error: Error?) in
-            if
-                success {
-                print("pending request made")
-                MBProgressHUD.hide(for: self.view, animated: true)
-                self.dismiss(animated: true, completion: nil)
-            } else {
-                print(error?.localizedDescription ?? "error")
+        switch reflection{
+        case false:
+            MBProgressHUD.showAdded(to: self.view, animated: true)
+            Pending.postPending(user: PFUser.current()!, event: event!, caption: textView.text, auto: false) { (success: Bool, error: Error?) in
+                if
+                    success {
+                    print("pending request made")
+                    MBProgressHUD.hide(for: self.view, animated: true)
+                    self.dismiss(animated: true, completion: nil)
+                } else {
+                    print(error?.localizedDescription ?? "error")
+                }
             }
+            self.delegate.didPressSignUp()
+            
+            let currentInstallation = PFInstallation.current()
+            currentInstallation?.addUniqueObject((event?.objectId)!, forKey: "channels")
+            currentInstallation?.addUniqueObject( (PFUser.current()?.objectId)!, forKey: "usersObjectId")
+            currentInstallation?.saveInBackground()
+        case true:
+            MBProgressHUD.showAdded(to: self.view, animated: true)
+            Post.userReflectionPost(eventInterest: event!, caption: textView.text) { (success: Bool, error: Error?) in
+                if
+                    success {
+                    print("reflection post made")
+                    MBProgressHUD.hide(for: self.view, animated: true)
+                    self.dismiss(animated: true, completion: nil)
+                } else {
+                    print(error?.localizedDescription ?? "error")
+                }
+            }
+            
         }
-        self.delegate.didPressSignUp()
-        
-        let currentInstallation = PFInstallation.current()
-        currentInstallation?.addUniqueObject((event?.objectId)!, forKey: "channels")
-        currentInstallation?.addUniqueObject( (PFUser.current()?.objectId)!, forKey: "usersObjectId")
-        currentInstallation?.saveInBackground()
-        
     }
  
     @IBAction func cancelPressed(_ sender: Any) {
