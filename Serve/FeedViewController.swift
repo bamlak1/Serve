@@ -30,19 +30,20 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
 
         feedTableView.dataSource = self
         feedTableView.delegate = self
+        feedTableView.estimatedRowHeight = 120
+        feedTableView.rowHeight = UITableViewAutomaticDimension
         
-        
-        // Initialize a UIRefreshControl
+
         refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refreshControlAction(_:)), for: UIControlEvents.valueChanged)
-        // add refresh control to table view
         feedTableView.insertSubview(refreshControl, at: 0)
         
         fetchUpdates()
         
     }
     
-
+    
+    
     func refreshControlAction(_ refreshControl: UIRefreshControl) {
         fetchUpdates()
     }
@@ -79,6 +80,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return updates.count
     }
+    
     
     
     
