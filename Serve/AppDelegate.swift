@@ -46,18 +46,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         PFFacebookUtils.initializeFacebook(applicationLaunchOptions: launchOptions)
     
         
-       if let user = PFUser.current() {
-            if user["type"] as! String == "Individual" {
-                let mainStoryboard: UIStoryboard = UIStoryboard(name: "Individual", bundle: nil)
-                let vc = mainStoryboard.instantiateViewController(withIdentifier: "IndividualInitialViewController") as! UITabBarController
-                window?.rootViewController = vc
-            } else {
-                let mainStoryboard: UIStoryboard = UIStoryboard(name: "OrgStoryboard", bundle: nil)
-                let vc = mainStoryboard.instantiateViewController(withIdentifier: "OrgInitialViewController") as! UITabBarController
-                window?.rootViewController = vc
-            }
-        }
-        
+//       if let user = PFUser.current() {
+//            if user["type"] as! String == "Individual" {
+//                let mainStoryboard: UIStoryboard = UIStoryboard(name: "Individual", bundle: nil)
+//                let vc = mainStoryboard.instantiateViewController(withIdentifier: "IndividualInitialViewController") as! UITabBarController
+//                window?.rootViewController = vc
+//            } else {
+//                let mainStoryboard: UIStoryboard = UIStoryboard(name: "OrgStoryboard", bundle: nil)
+//                let vc = mainStoryboard.instantiateViewController(withIdentifier: "OrgInitialViewController") as! UITabBarController
+//                window?.rootViewController = vc
+//            }
+//        }
+//        
 
         UserDefaults.standard.set(true, forKey: "userSwitchState")
         UserDefaults.standard.set(true, forKey: "otherSwitchState")
