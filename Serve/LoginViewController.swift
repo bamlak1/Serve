@@ -54,6 +54,7 @@ class LoginViewController: UIViewController, LoginButtonDelegate {
         loginButton.center = view.center
         
         view.addSubview(loginButton)
+        //animateBackground()
 
     }
 
@@ -61,6 +62,39 @@ class LoginViewController: UIViewController, LoginButtonDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func animateBackground() {
+        let backgroundImage = UIImage(named:"people.png")!
+        let amountToKeepImageSquare = backgroundImage.size.height - self.view.frame.size.height
+        
+        // UIImageView 1
+        let backgroundImageView1 = UIImageView(image: backgroundImage)
+        backgroundImageView1.frame = CGRect(x: self.view.frame.origin.x, y: self.view.frame.origin.y, width: backgroundImage.size.width - amountToKeepImageSquare, height: self.view.frame.size.height)
+        self.view.addSubview(backgroundImageView1)
+        
+        // UIImageView 2
+        let backgroundImageView2 = UIImageView(image: backgroundImage)
+        backgroundImageView2.frame = CGRect(x: backgroundImageView1.frame.size.width, y: self.view.frame.origin.y, width: backgroundImage.size.width - amountToKeepImageSquare, height: self.view.frame.height)
+        self.view.addSubview(backgroundImageView2)
+        
+        // Animate background
+        UIView.animate(withDuration: 6.0, delay: 0.0, options: [.repeat, .curveLinear], animations: {
+            backgroundImageView1.frame = backgroundImageView1.frame.offsetBy(dx: -1 * backgroundImageView1.frame.size.width, dy: 0.0)
+            backgroundImageView2.frame = backgroundImageView2.frame.offsetBy(dx: -1 * backgroundImageView2.frame.size.width, dy: 0.0)
+        }, completion: nil)
+        
+        // Have something in the foreground look like its moving
+        let square = UIView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+        square.frame.origin = CGPoint(x: self.view.frame.origin.x + 25, y: self.view.frame.size.height - 75)
+        square.backgroundColor = UIColor.darkGray
+        self.view.addSubview(square)
+        
+        // Animate foreground
+        UIView.animate(withDuration: 0.5, delay: 0, options: [.repeat, .curveLinear], animations: {
+            square.transform = CGAffineTransform(rotationAngle: 33)
+        }, completion: nil)
+    }
+
     
     @IBAction func didPressView(_ sender: Any) {
         view.endEditing(true)
