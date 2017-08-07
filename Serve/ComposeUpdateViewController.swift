@@ -20,6 +20,7 @@ class ComposeUpdateViewController: UIViewController, UITextViewDelegate {
     
     var event: PFObject?
     var delegate: NotifyEventDelegate!
+    var reflection : Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
