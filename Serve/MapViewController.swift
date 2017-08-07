@@ -56,14 +56,15 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
         collectionView.backgroundColor = UIColor.clear
         searchResultController = SearchResultsViewController()
         searchResultController.delegate = self
-//        mapView.isMyLocationEnabled = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
         updateDisplayedEvents(eventType: "userEvents")
         updateDisplayedEvents(eventType: "otherEvents")
         if (previousMarker != nil) {
-            previousMarker.icon = GMSMarker.markerImage(with: UIColor(red:0.34, green:0.71, blue:1.00, alpha:1.0))
+            previousMarker.icon = GMSMarker.markerImage(with: UIColor(red:0.34, green:0.71, blue:1.00, alpha:1.0)
+
+)
         }
         mapView.selectedMarker = nil
     }
@@ -250,7 +251,9 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
         if (index == -1) {
              mapView.animate(toLocation: CLLocationCoordinate2D(latitude: marker.position.latitude, longitude: marker.position.longitude))
             if (previousMarker != nil) {
-                previousMarker.icon = GMSMarker.markerImage(with: UIColor(red:0.34, green:0.71, blue:1.00, alpha:1.0))
+                previousMarker.icon = GMSMarker.markerImage(with: UIColor(red:0.34, green:0.71, blue:1.00, alpha:1.0)
+
+)
             }
         } else {
             if (userEventsShow && otherEventsShow) {
@@ -272,7 +275,7 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
     }
     
     // Creates a custom info window for each marker
-    // Information includes how many people have already registered to volunteer and a button that is linked to the event page
+    // Information includes how many people ha ve already registered to volunteer and a button that is linked to the event page
     func mapView(_ mapView: GMSMapView, markerInfoWindow marker: GMSMarker) -> UIView? {
         if (marker.userData as! PFObject)["id"] as! String == "home" {
             let infoWindow = Bundle.main.loadNibNamed("HomeWindow", owner: self, options: nil)?.first
@@ -285,10 +288,12 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
             return (infoWindow as! UIView)
         } else {
             let customInfoWindow = Bundle.main.loadNibNamed("InfoWindow", owner: self, options: nil)?.first as! CustomInfoWindow
+            customInfoWindow.registered.isHidden = true
             let volunteerNum = (marker.userData as! PFObject)["volunteers"] as! Int
             if (marker.userData as! PFObject)["userMarkerNum"] != nil {
-                customInfoWindow.register.isSelected = true
-                customInfoWindow.register.backgroundColor = UIColor(red: 152/255, green: 219/255, blue: 64/255, alpha: 1.0)
+                customInfoWindow.registered.isHidden = false
+                customInfoWindow.register.isHidden = true
+                customInfoWindow.registered.layer.cornerRadius = 10
             }
 
             customInfoWindow.register.layer.cornerRadius = 10
@@ -324,7 +329,7 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
     // Given a marker and an IndexPath of the associated cell, updates the colors of the markers (previous and current) and the cell border (current)
     func update(currentMarker: GMSMarker, indexPath: IndexPath) {
         mapView.animate(toLocation: CLLocationCoordinate2D(latitude: currentMarker.position.latitude, longitude: currentMarker.position.longitude))
-        currentMarker.icon = GMSMarker.markerImage(with: UIColor.green)
+        currentMarker.icon = GMSMarker.markerImage(with: UIColor(red:0.47, green:0.83, blue:0.48, alpha:1.0))
         if let cell = collectionView.cellForItem(at: indexPath) {
             cell.isSelected = true
         }
@@ -387,7 +392,9 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
         self.otherMarkerNum = 0
         mapView.selectedMarker = nil
         if (previousMarker != nil) {
-            previousMarker.icon = GMSMarker.markerImage(with: UIColor(red:0.34, green:0.71, blue:1.00, alpha:1.0))
+            previousMarker.icon = GMSMarker.markerImage(with: UIColor(red:0.34, green:0.71, blue:1.00, alpha:1.0)
+
+)
         }
         completion()
     }
@@ -426,7 +433,9 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
         mapView.animate(with: update)
         mapView.selectedMarker = homeMarker
         if (previousMarker != nil) {
-            previousMarker.icon = GMSMarker.markerImage(with: UIColor(red:0.34, green:0.71, blue:1.00, alpha:1.0))
+            previousMarker.icon = GMSMarker.markerImage(with: UIColor(red:0.34, green:0.71, blue:1.00, alpha:1.0)
+
+)
         }
     }
     
@@ -488,7 +497,9 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
             drawOtherLocationCircle(marker: marker, miles: Int(UserDefaults.standard.float(forKey: "slider_value")))
              marker.map = self.mapView
         } else {
-            marker.icon = GMSMarker.markerImage(with: UIColor(red:0.34, green:0.71, blue:1.00, alpha:1.0))
+            marker.icon = GMSMarker.markerImage(with: UIColor(red:0.34, green:0.71, blue:1.00, alpha:1.0)
+
+)
             extraMarkerInfo["location"] = location
             extraMarkerInfo["number"] = markerNum
             extraMarkerInfo["volunteers"] = eventObject["volunteers"]
@@ -548,7 +559,8 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
          if segue.identifier == "MapToDetail" {
              let vc = segue.destination as! EventDetailViewController
-             vc.event = ((previousMarker.userData as! PFObject)["event"] as! PFObject)
+            let event = (previousMarker.userData as! PFObject)["event"] as! PFObject
+             vc.eventId = event.objectId
         }
      }
 

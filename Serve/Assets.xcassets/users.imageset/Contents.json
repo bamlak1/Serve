@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "iconmonstr-magnifier-1-32.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "users.png",
       "scale" : "2x"
     },
     {
