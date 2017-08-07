@@ -215,17 +215,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="o5d-DS-LVA">
-                                <rect key="frame" x="0.0" y="68" width="375" height="29"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <segments>
-                                    <segment title="Upcoming"/>
-                                    <segment title="Past "/>
-                                </segments>
-                                <connections>
-                                    <action selector="segmentChanged:" destination="CMH-gf-fxD" eventType="valueChanged" id="UTn-mY-uYc"/>
-                                </connections>
-                            </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="293" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0Mp-Te-J1w">
                                 <rect key="frame" x="0.0" y="100" width="375" height="567"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -307,7 +296,6 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="segmentedControl" destination="o5d-DS-LVA" id="d64-yB-f5T"/>
                         <outlet property="tableView" destination="0Mp-Te-J1w" id="55O-By-4or"/>
                     </connections>
                 </viewController>
