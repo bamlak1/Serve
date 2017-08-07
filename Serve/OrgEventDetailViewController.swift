@@ -64,7 +64,7 @@ class OrgEventDetailViewController: UIViewController {
     
     @IBAction func sendPostNotf(_ sender: Any) {
         
-        let param = ["eventId" : event!.objectId]
+        let param = ["eventId" : (event!.objectId)!, "title" : (titleLabel.text)!] as [String : Any]
         PFCloud.callFunction(inBackground: "sendPost", withParameters: param) { (object: Any?, error: Error?) in
             guard error == nil else {
                 print("error")
