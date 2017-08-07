@@ -43,6 +43,10 @@ class PostCell: UITableViewCell {
             commentButton.tag = indexPath.row
         }
     }
+    
+    @IBOutlet weak var topStackConstraint: NSLayoutConstraint!
+    
+    
     @IBOutlet weak var eventImageViewer: UIImageView!
 
     @IBOutlet weak var eventButtonOutlet: UIButton!
@@ -92,7 +96,7 @@ class PostCell: UITableViewCell {
                 }
             } else {
                 eventImageViewer.isHidden = true
-                //set constraint: topStackConstraint.constant = 12
+                topStackConstraint.constant = 12
             
             }
             pic.getDataInBackground { (data: Data?, error: Error?) in
