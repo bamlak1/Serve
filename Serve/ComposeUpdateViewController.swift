@@ -88,6 +88,7 @@ class ComposeUpdateViewController: UIViewController, UITextViewDelegate {
                 success {
                 print("pending request made")
                 MBProgressHUD.hide(for: self.view, animated: true)
+                UIApplication.shared.setStatusBarHidden(false, with: UIStatusBarAnimation.none)
                 self.dismiss(animated: true, completion: nil)
             } else {
                 print(error?.localizedDescription ?? "error")
@@ -103,6 +104,7 @@ class ComposeUpdateViewController: UIViewController, UITextViewDelegate {
     }
  
     @IBAction func cancelPressed(_ sender: Any) {
+        UIApplication.shared.setStatusBarHidden(false, with: UIStatusBarAnimation.none)
         dismiss(animated: true, completion: nil)
     }
 

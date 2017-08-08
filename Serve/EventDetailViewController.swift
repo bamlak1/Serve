@@ -67,7 +67,14 @@ class EventDetailViewController: UIViewController, NotifyEventDelegate{
                 }
                 let start = event["start"] as! String
                 let end = event["end"] as! String
-                self.dateLabel.text = "\(start) - \(end)"
+                let prefix = String(start.characters.prefix(10))
+                if end.hasPrefix(prefix) {
+                    let suffixIndex = end.index(end.endIndex, offsetBy: -9)
+                    let newEnd = end.substring(from: suffixIndex)
+                    self.dateLabel.text = "\(start) - \(newEnd)"
+                } else {
+                    self.dateLabel.text = "\(start) - \(end)"
+                }
                 self.locationLabel.text = (event["location"] as! String)
                 self.descriptionLabel.text = (event["description"] as! String)
                 let volunteerCount = event["volunteers"] as? Int ?? 0
@@ -123,6 +130,7 @@ class EventDetailViewController: UIViewController, NotifyEventDelegate{
         } else if segue.identifier == "compose"{
             let vc = segue.destination as! ComposeUpdateViewController
             
+            UIApplication.shared.setStatusBarHidden(true, with: UIStatusBarAnimation.none)
             vc.delegate = self
             vc.event = self.event
         } else if segue.identifier == "org"{
