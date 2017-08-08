@@ -38,7 +38,15 @@ class EventTableViewCell: UITableViewCell {
             
             let start = event["start"] as! String
             let end = event["end"] as! String
-            dateTimeLabel.text = "\(start) - \(end)"
+            let prefix = String(start.characters.prefix(10))
+            if end.hasPrefix(prefix) {
+                let suffixIndex = end.index(end.endIndex, offsetBy: -9)
+                let newEnd = end.substring(from: suffixIndex)
+                dateTimeLabel.text = "\(start) - \(newEnd)"
+            } else {
+                dateTimeLabel.text = "\(start) - \(end)"
+            }
+
             let num = event["volunteers"] as! Int
             numVolLabel.text = "\(num) volunteers"
         }

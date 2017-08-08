@@ -64,10 +64,11 @@ class SignupViewController: UIViewController, UIPickerViewDelegate, UIPickerView
             newUser["following"] = []
             newUser["following_count"] = 0
             newUser["causes"] = []
+            newUser["address"] = "777 Hamilton Ave. Menlo Park, CA 94025"
             
 
 
-            self.performSegue(withIdentifier: "loginIndivSegue", sender: nil)
+            //self.performSegue(withIdentifier: "loginIndivSegue", sender: nil)
         //Insert code to initialize individual properties
         case .Organization:
             newUser["type"] = "Organization"
@@ -75,8 +76,8 @@ class SignupViewController: UIViewController, UIPickerViewDelegate, UIPickerView
             newUser["following_count"] = 0
             newUser["causes"] = []
 
-
-            self.performSegue(withIdentifier: "loginOrgSegue", sender: nil)
+            self.dismiss(animated: false, completion: nil)
+            //self.performSegue(withIdentifier: "loginOrgSegue", sender: nil)
             //Insert code to initialize organization properties
         }
         
@@ -92,13 +93,13 @@ class SignupViewController: UIViewController, UIPickerViewDelegate, UIPickerView
                     }
                 }
                 
-                PFUser.logInWithUsername(inBackground: self.usernameTextField.text!, password: self.passwordTextField.text!) { (user: PFUser?, error: Error?) in
-                    if let error = error {
-                        print("User log in failed: \(error.localizedDescription)")
-                    } else {
-                        print("User logged in successfully")
-                    }
-                }
+//                PFUser.logInWithUsername(inBackground: self.usernameTextField.text!, password: self.passwordTextField.text!) { (user: PFUser?, error: Error?) in
+//                    if let error = error {
+//                        print("User log in failed: \(error.localizedDescription)")
+//                    } else {
+//                        print("User logged in successfully")
+//                    }
+//                }
                 
             } else {
                 print(error?.localizedDescription as Any)

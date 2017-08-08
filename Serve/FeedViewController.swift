@@ -98,6 +98,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         if let event = update["event"] as? PFObject {
             cell.event = event
         }
+        cell.section = true
         cell.indexPath = indexPath
         cell.user = user
         cell.post = update
@@ -145,6 +146,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             let button = sender as! UIButton
             let indexPath = button.tag
             let update = updates[indexPath]
+            print(update)
             let user = update["user"] as! PFUser
             //let id = user.objectId!
             

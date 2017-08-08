@@ -13,6 +13,7 @@ class OrganizationViewController: UIViewController, UITableViewDelegate, UITable
     
     var user = PFUser.current()
     var updates : [PFObject] = []
+    var follows : PFObject?
     var refreshControl = UIRefreshControl()
     
     
@@ -20,8 +21,8 @@ class OrganizationViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var bannerImageView: UIImageView!
     @IBOutlet weak var orgNameLabel: UILabel!
     @IBOutlet weak var missionLabel: UILabel!
-    @IBOutlet weak var numHelpedLabel: UILabel!
-    @IBOutlet weak var numVolLabel: UILabel!
+
+    @IBOutlet weak var followerCountLabel: UILabel!
     @IBOutlet weak var contactLabel: UILabel!
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var causesLabel: UILabel!
@@ -64,7 +65,9 @@ class OrganizationViewController: UIViewController, UITableViewDelegate, UITable
         if let contact = user!["contact"] {
             contactLabel.text = (contact as! String)
         }
+
         
+        causesLabel.text = ""
         if let causes = user!["cause_names"] as? [String] {
             for index in 0...1{
                 let name = causes[index]
@@ -117,6 +120,18 @@ class OrganizationViewController: UIViewController, UITableViewDelegate, UITable
                 self.tableView.reloadData()
                 self.refreshControl.endRefreshing()
                 
+            }
+        }
+        
+        let query2 = PFQuery(className: "Follow")
+        query2.whereKey("owner", equalTo: (user!.objectId)!)
+        query2.findObjectsInBackground { (follows: [PFObject]?, error: Error?) in
+            if follows != nil {
+                self.follows = follows?.first
+                let count = self.follows?["count"] as! Int
+                self.followerCountLabel.text = "\(count) followers"
+            } else {
+                print(error?.localizedDescription ?? "error loading data")
             }
         }
     }
