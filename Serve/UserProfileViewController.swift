@@ -238,9 +238,6 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
             user = PFUser.current()!
         }
         
-        let type = user!["type"] as! String
-        userType = type
-        
         interestsLabel.text = ""
         if let causes = user?["cause_names"] as? [String] {
             for index in 0...1{
@@ -288,6 +285,12 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
                     self.profilePicImageView.image = finalImage
                 }
             })
+        }
+        
+        let type = user!["type"] as! String
+        userType = type
+        if userType == "Organization" {
+            followingCountLabel.text = ""
         }
         
         if let num = user!["following_count"] as? Int {
