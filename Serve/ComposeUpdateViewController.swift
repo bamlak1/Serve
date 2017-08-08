@@ -5,19 +5,20 @@
 //  Created by Michael Hamlett on 7/25/17.
 //  Copyright © 2017 Bamlak Gessessew. All rights reserved.
 //
-
 import UIKit
 import Parse
 import MBProgressHUD
 
 class ComposeUpdateViewController: UIViewController, UITextViewDelegate {
-
+    
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var eventLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var actionLabel: UILabel!
     
     
+    @IBOutlet weak var signUpButton: UIBarButtonItem!
     var event: PFObject?
     var delegate: NotifyEventDelegate!
     var reflection : Bool = false
@@ -26,8 +27,14 @@ class ComposeUpdateViewController: UIViewController, UITextViewDelegate {
         super.viewDidLoad()
         
         textView.delegate = self
-        textView.text = "What are your thoughts on this event?"
         textView.textColor = UIColor.lightGray
+        if reflection{
+            textView.text = "What did you think about this event?"
+        }else {
+            textView.text = "What are your thoughts on this event?"
+        }
+        
+        
         setData()
         // Do any additional setup after loading the view.
     }
@@ -35,7 +42,7 @@ class ComposeUpdateViewController: UIViewController, UITextViewDelegate {
     override var prefersStatusBarHidden : Bool {
         return true
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -49,9 +56,14 @@ class ComposeUpdateViewController: UIViewController, UITextViewDelegate {
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
+        textView.textColor = UIColor.lightGray
         if textView.text.isEmpty {
-            textView.text = "What are your thoughts on this event?"
-            textView.textColor = UIColor.lightGray
+            if reflection{
+                textView.text = "What did you think about this event?"
+            }else {
+                textView.text = "What are your thoughts on this event?"
+            }
+            
         }
     }
     
@@ -59,7 +71,7 @@ class ComposeUpdateViewController: UIViewController, UITextViewDelegate {
     
     func setData() {
         let user = PFUser.current()!
-        
+        print(event)
         if let profileImage = user["profile_image"] as? PFFile {
             profileImage.getDataInBackground(block: { (data: Data?, error: Error?) in
                 if (error != nil) {
@@ -77,7 +89,14 @@ class ComposeUpdateViewController: UIViewController, UITextViewDelegate {
         if let eventName = event?["title"] {
             eventLabel.text = (eventName as! String)
         }
-
+        if reflection{
+            actionLabel.text = "went to"
+            signUpButton.title = "Done"
+            
+        }else {
+            actionLabel.text = "is interested in"
+        }
+        
     }
     
     
@@ -90,6 +109,7 @@ class ComposeUpdateViewController: UIViewController, UITextViewDelegate {
                     success {
                     print("pending request made")
                     MBProgressHUD.hide(for: self.view, animated: true)
+                    UIApplication.shared.setStatusBarHidden(false, with: UIStatusBarAnimation.none)
                     self.dismiss(animated: true, completion: nil)
                 } else {
                     print(error?.localizedDescription ?? "error")
@@ -108,6 +128,7 @@ class ComposeUpdateViewController: UIViewController, UITextViewDelegate {
                     success {
                     print("reflection post made")
                     MBProgressHUD.hide(for: self.view, animated: true)
+                    UIApplication.shared.setStatusBarHidden(false, with: UIStatusBarAnimation.none)
                     self.dismiss(animated: true, completion: nil)
                 } else {
                     print(error?.localizedDescription ?? "error")
@@ -116,20 +137,19 @@ class ComposeUpdateViewController: UIViewController, UITextViewDelegate {
             
         }
     }
- 
+    
     @IBAction func cancelPressed(_ sender: Any) {
         UIApplication.shared.setStatusBarHidden(false, with: UIStatusBarAnimation.none)
         dismiss(animated: true, completion: nil)
     }
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
