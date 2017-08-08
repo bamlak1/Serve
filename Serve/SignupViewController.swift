@@ -64,6 +64,7 @@ class SignupViewController: UIViewController, UIPickerViewDelegate, UIPickerView
             newUser["following"] = []
             newUser["following_count"] = 0
             newUser["causes"] = []
+            newUser["address"] = "777 Hamilton Ave. Menlo Park, CA 94025"
             
 
 
