@@ -36,7 +36,8 @@ class CauseDetailViewController: UIViewController, UITableViewDelegate, UITableV
         
         tableView.dataSource = self
         tableView.delegate = self
-        causeLabel.text = cause?["name"] as? String
+        let name = cause?["name"] as? String
+        causeLabel.text = name
         pic = cause?["image"] as? PFFile
         mainImage.image = nil
         pic?.getDataInBackground(block: { (data: Data?, error: Error?) in
@@ -52,6 +53,14 @@ class CauseDetailViewController: UIViewController, UITableViewDelegate, UITableV
             if userList.contains((user!.objectId)!) {
                 addButton.isSelected = true
             }
+        }
+        
+        let causesList = user!["causes"] as! [PFObject]
+        print(causesList)
+        print(name!)
+        if causesList.contains(cause!) {
+            print("tru")
+            addButton.isSelected = true
         }
 
 
@@ -220,7 +229,7 @@ class CauseDetailViewController: UIViewController, UITableViewDelegate, UITableV
         } else if segue.identifier == "eventCell" {
             let cell = sender as! EventTableViewCell
             let vc = segue.destination as! EventDetailViewController
-            vc.event = cell.event
+            vc.eventId = (cell.event.objectId)!
         }
 
     }
