@@ -374,13 +374,14 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
             let indexPath = button.tag
             let update = userPosts[indexPath]
             let event = update["event"] as! PFObject
+            let id = (event.objectId)!
             
             let vc = segue.destination as! EventDetailViewController
-            vc.event = event
+            vc.eventId = id
         } else if segue.identifier == "eventCell" {
             let cell = sender as! EventTableViewCell
             let vc = segue.destination as! EventDetailViewController
-            vc.event = cell.event
+            vc.eventId = (cell.event.objectId)!
         }
      }
     
