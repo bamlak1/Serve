@@ -72,6 +72,7 @@ PODS:
   - SwiftGifOrigin (1.6.1)
   - SwiftyJSON (3.1.4)
   - TTTAttributedLabel (2.0.0)
+  - WDImagePicker (0.2.2)
 
 DEPENDENCIES:
   - AFNetworking (= 0.9)
@@ -102,6 +103,17 @@ DEPENDENCIES:
   - SwiftGifOrigin (~> 1.6.1)
   - SwiftyJSON
   - TTTAttributedLabel
+  - WDImagePicker (from `https://github.com/justwudi/WDImagePicker.git`, tag `0.2.2`)
+
+EXTERNAL SOURCES:
+  WDImagePicker:
+    :git: https://github.com/justwudi/WDImagePicker.git
+    :tag: 0.2.2
+
+CHECKOUT OPTIONS:
+  WDImagePicker:
+    :git: https://github.com/justwudi/WDImagePicker.git
+    :tag: 0.2.2
 
 SPEC CHECKSUMS:
   AFNetworking: 4eca970d4c3ee62d7efe4240da2a9352df31d1e2
@@ -136,7 +148,8 @@ SPEC CHECKSUMS:
   SwiftGifOrigin: d6679d3ebe9df2e049a84bc52582635107b581f6
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
+  WDImagePicker: 0014e231d67a63db9a97db74332a8a16723809bc
 
-PODFILE CHECKSUM: 95072d7a4b7f4ae9a627d0093dd0cbee711d34fd
+PODFILE CHECKSUM: d754eeb728718b4b1dc5b119fd6ceb19a0e61b49
 
 COCOAPODS: 1.2.1
