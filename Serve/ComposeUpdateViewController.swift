@@ -82,25 +82,39 @@ class ComposeUpdateViewController: UIViewController, UITextViewDelegate {
     
     
     @IBAction func signUpPressed(_ sender: Any) {
-        MBProgressHUD.showAdded(to: self.view, animated: true)
-        Pending.postPending(user: PFUser.current()!, event: event!, caption: textView.text, auto: false) { (success: Bool, error: Error?) in
-            if
-                success {
-                print("pending request made")
-                MBProgressHUD.hide(for: self.view, animated: true)
-                UIApplication.shared.setStatusBarHidden(false, with: UIStatusBarAnimation.none)
-                self.dismiss(animated: true, completion: nil)
-            } else {
-                print(error?.localizedDescription ?? "error")
+        switch reflection{
+        case false:
+            MBProgressHUD.showAdded(to: self.view, animated: true)
+            Pending.postPending(user: PFUser.current()!, event: event!, caption: textView.text, auto: false) { (success: Bool, error: Error?) in
+                if
+                    success {
+                    print("pending request made")
+                    MBProgressHUD.hide(for: self.view, animated: true)
+                    self.dismiss(animated: true, completion: nil)
+                } else {
+                    print(error?.localizedDescription ?? "error")
+                }
             }
+            self.delegate.didPressSignUp()
+            
+            let currentInstallation = PFInstallation.current()
+            currentInstallation?.addUniqueObject((event?.objectId)!, forKey: "channels")
+            currentInstallation?.addUniqueObject( (PFUser.current()?.objectId)!, forKey: "usersObjectId")
+            currentInstallation?.saveInBackground()
+        case true:
+            MBProgressHUD.showAdded(to: self.view, animated: true)
+            Post.userReflectionPost(eventInterest: event!, caption: textView.text) { (success: Bool, error: Error?) in
+                if
+                    success {
+                    print("reflection post made")
+                    MBProgressHUD.hide(for: self.view, animated: true)
+                    self.dismiss(animated: true, completion: nil)
+                } else {
+                    print(error?.localizedDescription ?? "error")
+                }
+            }
+            
         }
-        self.delegate.didPressSignUp()
-        
-        let currentInstallation = PFInstallation.current()
-        currentInstallation?.addUniqueObject((event?.objectId)!, forKey: "channels")
-        currentInstallation?.addUniqueObject( (PFUser.current()?.objectId)!, forKey: "usersObjectId")
-        currentInstallation?.saveInBackground()
-        
     }
  
     @IBAction func cancelPressed(_ sender: Any) {

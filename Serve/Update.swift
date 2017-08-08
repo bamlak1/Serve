@@ -56,6 +56,29 @@ class Post: NSObject {
         post.saveInBackground(block: completion)
     }
     
+    
+    class func userReflectionPost(eventInterest: PFObject, caption: String?,completion: PFBooleanResultBlock?) {
+        let post = PFObject(className: "Post")
+        
+        let date = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/dd/YY"
+        let formattedDate = dateFormatter.string(from: date)
+        
+        post["user"] = PFUser.current()
+        post["user_id"] = (PFUser.current()?.objectId)!
+        post["action"] = "went to"
+        post["event"] = eventInterest
+        post["caption"] = caption
+        post["high_fives"] = 0
+        post["fived"] = false
+        post["commentCount"] = 0
+        post["date"] = formattedDate
+        
+        
+        post.saveInBackground(block: completion)
+    }
+
     class func orgCreatePost(eventCreated: PFObject, title: String?, completion: PFBooleanResultBlock?) {
         
         let post = PFObject(className: "Post")
