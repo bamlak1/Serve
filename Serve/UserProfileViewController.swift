@@ -99,6 +99,7 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
             }
         case 1:
             self.profileTableView.rowHeight = 250
+
             return upcomingEvents.count
         case 2:
             self.profileTableView.rowHeight = 250
@@ -138,7 +139,7 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
         default:
             break
         }
-        
+        returnCell?.selectionStyle = .none
         return returnCell!
     }
     
