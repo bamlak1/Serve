@@ -37,6 +37,7 @@ class PostDetailViewController: UIViewController, UITableViewDelegate, UITableVi
     
     @IBOutlet weak var commentTextField: UITextField!
     
+    @IBOutlet weak var topStackConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var commentTableView: UITableView!
     
@@ -45,6 +46,8 @@ class PostDetailViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var eventImageViewer: UIImageView!
     
     @IBOutlet weak var commentCountLabel: UILabel!
+    
+    
     
     var comments: [PFObject]?
     var post: PFObject?
@@ -86,7 +89,7 @@ class PostDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         }
         if userType == "Organization" {
             eventImageViewer.isHidden = false
-            //topStackConstraint.constant = 124
+            topStackConstraint.constant = 148
             if event != nil {
                 bannerPic = (event?["banner"] as! PFFile)
             }
@@ -101,7 +104,7 @@ class PostDetailViewController: UIViewController, UITableViewDelegate, UITableVi
             }
         } else {
             eventImageViewer.isHidden = true
-            //topStackConstraint.constant = 12
+            topStackConstraint.constant = 8
             
             
         }
