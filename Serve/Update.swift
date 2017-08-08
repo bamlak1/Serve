@@ -56,7 +56,6 @@ class Post: NSObject {
         post.saveInBackground(block: completion)
     }
     
-    
     class func userReflectionPost(eventInterest: PFObject, caption: String?,completion: PFBooleanResultBlock?) {
         let post = PFObject(className: "Post")
         

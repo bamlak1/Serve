@@ -66,7 +66,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         registerForPushNotifications()
 
         if let notification = launchOptions?[.remoteNotification] as? [String: AnyObject] {
-            let aps = notification["aps"] as! [String: AnyObject]
+            //let aps = notification["aps"] as! [String: AnyObject]
             //print(aps)
             let eventID = notification["eventId"] as! String
             
@@ -110,7 +110,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func application(_ application: UIApplication, didReceiveRemoteNotification notification: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         
         
-        let aps = notification["aps"] as! [String: AnyObject]
+        //let aps = notification["aps"] as! [String: AnyObject]
         let eventID = notification["eventId"] as! String
         
         //TODO: Segue to compose view

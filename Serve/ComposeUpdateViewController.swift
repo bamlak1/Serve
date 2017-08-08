@@ -96,7 +96,6 @@ class ComposeUpdateViewController: UIViewController, UITextViewDelegate {
         }else {
             actionLabel.text = "is interested in"
         }
-        
     }
     
     
@@ -133,8 +132,7 @@ class ComposeUpdateViewController: UIViewController, UITextViewDelegate {
                 } else {
                     print(error?.localizedDescription ?? "error")
                 }
-            }
-            
+            } 
         }
     }
     
