@@ -34,6 +34,7 @@ target 'Serve' do
   pod 'SwiftDate', '~> 4.0'
   pod 'DateTimePicker'
   pod 'AFNetworking', '0.9'
+  pod 'SwiftGifOrigin', '~> 1.6.1'
 pod 'NSDate-Time-Ago'
   
   target 'ServeTests' do
