@@ -77,7 +77,7 @@ class Post: NSObject {
         
         post.saveInBackground(block: completion)
     }
-    
+
     class func orgCreatePost(eventCreated: PFObject, title: String?, completion: PFBooleanResultBlock?) {
         
         let post = PFObject(className: "Post")
