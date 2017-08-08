@@ -33,6 +33,7 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
     var userPosts: [PFObject] = []
     var upcomingEvents : [PFObject] = []
     var pastEvents: [PFObject] = []
+    var follows: PFObject?
     var followingArr : [String]?
     var refreshControl = UIRefreshControl()
     
@@ -149,6 +150,18 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
                 print(error?.localizedDescription ?? "error loading data")
             }
         }
+        
+        let query2 = PFQuery(className: "Follow")
+        query2.whereKey("owner", equalTo: (user!.objectId)!)
+        query2.findObjectsInBackground { (follows: [PFObject]?, error: Error?) in
+            if follows != nil {
+                self.follows = follows?.first
+                let count = self.follows?["count"] as! Int
+                self.followerCountLabel.text = "\(count) followers"
+            } else {
+                print(error?.localizedDescription ?? "error loading data")
+            }
+        }
     }
     
     func retrievePastEvents() {
@@ -217,6 +230,7 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
         let type = user!["type"] as! String
         userType = type
         
+        interestsLabel.text = ""
         if let causes = user?["cause_names"] as? [String] {
             for index in 0...1{
                 let name = causes[index]
@@ -307,7 +321,12 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
                 followingArr!.remove(at: index)
             }
             
+            self.follows?.incrementKey("count", byAmount: -1)
+            self.follows?.remove((currentUser?.objectId)!, forKey: "others")
+            
+            
             followButton.isSelected = false
+            follows!.saveInBackground()
             currentUser!.saveInBackground()
             print("Unfollowed")
         } else {
@@ -315,8 +334,15 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
             self.currentUser?.incrementKey("following_count")
             followingArr?.append(user!.objectId!)
             
+            self.follows?.incrementKey("count", byAmount: 1)
+            self.follows?.addUniqueObject((currentUser?.objectId)!, forKey: "others")
+            
             followButton.isSelected = true
             currentUser!.saveInBackground()
+            follows!.saveInBackground()
+            
+            
+            
             print("followed")
         }
     }

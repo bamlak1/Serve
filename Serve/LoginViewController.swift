@@ -210,6 +210,16 @@ class LoginViewController: UIViewController, LoginButtonDelegate {
             if let user = user {
                 if user.isNew {
                     print("new User")
+                    
+                    Following.createFollow( owner: (user.objectId)!) { (success: Bool, error: Error?) in
+                        if success {
+                            print("follow created")
+                        } else {
+                            print(error?.localizedDescription ?? "error")
+                        }
+                    }
+
+                    
                     user["type"] = "Individual"
                     user["following"] = []
                     user["following_count"] = 0

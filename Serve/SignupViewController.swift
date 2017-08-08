@@ -64,6 +64,9 @@ class SignupViewController: UIViewController, UIPickerViewDelegate, UIPickerView
             newUser["following"] = []
             newUser["following_count"] = 0
             newUser["causes"] = []
+            
+
+
             self.performSegue(withIdentifier: "loginIndivSegue", sender: nil)
         //Insert code to initialize individual properties
         case .Organization:
@@ -71,6 +74,8 @@ class SignupViewController: UIViewController, UIPickerViewDelegate, UIPickerView
             newUser["following"] = []
             newUser["following_count"] = 0
             newUser["causes"] = []
+
+
             self.performSegue(withIdentifier: "loginOrgSegue", sender: nil)
             //Insert code to initialize organization properties
         }
@@ -78,6 +83,14 @@ class SignupViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         newUser.signUpInBackground { (success: Bool, error: Error?) in
             if success {
                 print("Yay, created a user!")
+                
+                Following.createFollow( owner: (self.newUser.objectId)!) { (success: Bool, error: Error?) in
+                    if success {
+                        print("follow created")
+                    } else {
+                        print(error?.localizedDescription ?? "error")
+                    }
+                }
                 
                 PFUser.logInWithUsername(inBackground: self.usernameTextField.text!, password: self.passwordTextField.text!) { (user: PFUser?, error: Error?) in
                     if let error = error {
