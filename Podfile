@@ -19,6 +19,8 @@ target 'Serve' do
   pod 'MBProgressHUD', '~> 1.0.0'
   pod 'ImagePicker'
 
+pod 'WDImagePicker', :git => 'https://github.com/justwudi/WDImagePicker.git', :tag => '0.2.2'
+
   pod 'Alamofire', '~> 4.4'
   pod 'AlamofireImage', '~> 3.1'
   pod 'OAuthSwift', '~> 1.1.0'

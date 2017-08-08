@@ -53,6 +53,7 @@ class CreateEventViewController: UIViewController, UIImagePickerControllerDelega
         expectedTasksTextView.text = "What will volunteers do?"
         expectedTasksTextView.textColor = UIColor.lightGray
         
+        
         tableView.dataSource = self
         searchBar.delegate = self
         fetchCauses()
@@ -144,6 +145,11 @@ class CreateEventViewController: UIViewController, UIImagePickerControllerDelega
         vc.delegate = self
         
         self.present(vc, animated: true, completion: nil)
+//        self.imagePicker = WDImagePicker()
+//        self.imagePicker.cropSize = CGSizeMake(280, 90)
+//        self.imagePicker.delegate = self
+//        
+//        self.presentViewController(self.imagePicker.imagePickerController, animated: true, completion: nil)
         
     }
     
@@ -152,6 +158,7 @@ class CreateEventViewController: UIViewController, UIImagePickerControllerDelega
         initiatePostOutlet.setTitle("", for: .normal)
         imagePicker.dismiss(animated: true , completion: nil)
     }
+    
     
     func wrapperDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
         guard images.count > 0 else { return }

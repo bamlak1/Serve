@@ -94,7 +94,7 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
                 self.profileTableView.rowHeight =  105
                 return userPosts.count
             } else {
-                self.profileTableView.rowHeight =  215
+                self.profileTableView.rowHeight =  230
                 return userPosts.count
             }
         case 1:
