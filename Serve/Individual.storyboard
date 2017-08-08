@@ -1617,6 +1617,7 @@
                         <outlet property="eventLabel" destination="2Vo-Y3-GH5" id="zql-ug-diE"/>
                         <outlet property="nameLabel" destination="8Kk-TU-JXy" id="SiE-9N-DK1"/>
                         <outlet property="profileImageView" destination="Emk-U7-qnH" id="5th-1e-5ca"/>
+                        <outlet property="signUpButton" destination="ZeW-A1-ig7" id="FO1-C1-3Da"/>
                         <outlet property="textView" destination="X7k-Mg-eh8" id="CJP-hJ-vEE"/>
                     </connections>
                 </viewController>
