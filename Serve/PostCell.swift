@@ -97,7 +97,7 @@ class PostCell: UITableViewCell {
                 }
             } else {
                 eventImageViewer.isHidden = true
-                topStackConstraint.constant = 12
+                topStackConstraint.constant = 8
                 
             
             }
