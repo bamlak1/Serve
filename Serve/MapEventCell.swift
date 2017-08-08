@@ -9,10 +9,10 @@ import UIKit
 
 class MapEventCell: UICollectionViewCell {
     @IBOutlet weak var eventImage: UIImageView!
-    @IBOutlet weak var orgName: UILabel!
     @IBOutlet weak var eventName: UILabel!
     @IBOutlet weak var eventDate: UILabel!
     @IBOutlet weak var location: UILabel!
+    @IBOutlet weak var eventTime: UILabel!
     
     override var isSelected: Bool {
         didSet {
