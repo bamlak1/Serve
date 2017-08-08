@@ -30,6 +30,7 @@ class PostCell: UITableViewCell {
     
     @IBOutlet weak var mainBackground: UIView!
     
+    var section : Bool = false
     var delegate : PostCellDelegate!
     var event : PFObject?
     var user: PFUser?
@@ -38,9 +39,15 @@ class PostCell: UITableViewCell {
     var bannerPic: PFFile?
     var indexPath : IndexPath!{
         didSet{
-            nameButtonOutlet.tag = indexPath.row
-            eventButtonOutlet.tag = indexPath.row
-            commentButton.tag = indexPath.row
+            if section{
+                nameButtonOutlet.tag = indexPath.section
+                eventButtonOutlet.tag = indexPath.section
+                commentButton.tag = indexPath.section
+            } else {
+                nameButtonOutlet.tag = indexPath.row
+                eventButtonOutlet.tag = indexPath.row
+                commentButton.tag = indexPath.row
+            }
         }
     }
     
