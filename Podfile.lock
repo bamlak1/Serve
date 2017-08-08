@@ -69,6 +69,7 @@ PODS:
   - RSKPlaceholderTextView (2.0.0)
   - StatefulViewController (3.0)
   - SwiftDate (4.1.2)
+  - SwiftGifOrigin (1.6.1)
   - SwiftyJSON (3.1.4)
   - TTTAttributedLabel (2.0.0)
 
@@ -98,6 +99,7 @@ DEPENDENCIES:
   - RSKPlaceholderTextView
   - StatefulViewController (~> 3.0)
   - SwiftDate (~> 4.0)
+  - SwiftGifOrigin (~> 1.6.1)
   - SwiftyJSON
   - TTTAttributedLabel
 
@@ -131,9 +133,10 @@ SPEC CHECKSUMS:
   RSKPlaceholderTextView: 301f0f30e70e7c42fe4e941e3a08365ab0d890d5
   StatefulViewController: 4803bf900d44de26074344998e10e041113b5931
   SwiftDate: 2dfdebd4f67ae71c9c3e2413ee3c56947f302858
+  SwiftGifOrigin: d6679d3ebe9df2e049a84bc52582635107b581f6
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
 
-PODFILE CHECKSUM: 74ad4d61258f20c7cbceec0065e4e043f1c73594
+PODFILE CHECKSUM: 95072d7a4b7f4ae9a627d0093dd0cbee711d34fd
 
 COCOAPODS: 1.2.1

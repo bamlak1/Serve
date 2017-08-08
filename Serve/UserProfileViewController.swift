@@ -11,7 +11,7 @@ import Parse
 import ParseUI
 
 
-class UserProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
+class UserProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, AchievementsDelegate {
     
     @IBOutlet weak var bannerImageView: PFImageView!
     @IBOutlet weak var profilePicImageView: PFImageView!
@@ -59,6 +59,16 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
         fetchUserUpdates()
         retrieveUpcomingEvents()
         retrievePastEvents()
+    }
+    
+    @IBAction func didPressAchievements(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Individual", bundle: nil)
+        let popOverVC = storyboard.instantiateViewController(withIdentifier: "achievementsPopUp") as! AchievementsViewController
+        popOverVC.delegate = self
+        self.addChildViewController(popOverVC)
+        popOverVC.view.frame = self.view.bounds
+        self.view.addSubview(popOverVC.view)
+        popOverVC.didMove(toParentViewController: self)
     }
 
     override func didReceiveMemoryWarning() {

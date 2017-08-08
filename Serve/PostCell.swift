@@ -97,7 +97,7 @@ class PostCell: UITableViewCell {
                 }
             } else {
                 eventImageViewer.isHidden = true
-                topStackConstraint.constant = 12
+               // topStackConstraint.constant = 12
                 
             
             }
@@ -128,7 +128,7 @@ class PostCell: UITableViewCell {
     }
   
     
-    @IBAction func ddiPressFive(_ sender: Any) {
+    @IBAction func didPressFive(_ sender: Any) {
         //find way to reference high fives
         if fiveButton.isSelected == false {
             post["fived"] = true
@@ -141,12 +141,7 @@ class PostCell: UITableViewCell {
             post?.saveInBackground(block: { (success: Bool, error: Error?) in
             })
             
-        
-        }
-        
-            
-            
-        else if fiveButton.isSelected == true {
+        } else if fiveButton.isSelected == true {
             post["fived"] = false
             fiveButton.isSelected = post["fived"]! as! Bool
             self.post.incrementKey("high_fives", byAmount: -1)
