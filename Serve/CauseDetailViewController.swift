@@ -55,10 +55,10 @@ class CauseDetailViewController: UIViewController, UITableViewDelegate, UITableV
             }
         }
         
-        let causesList = user!["causes"] as! [PFObject]
+        let causesList = user!["causes"] as! [String]
         print(causesList)
-        print(name!)
-        if causesList.contains(cause!) {
+        print((cause!.objectId)!)
+        if causesList.contains((cause!.objectId)!) {
             print("tru")
             addButton.isSelected = true
         }

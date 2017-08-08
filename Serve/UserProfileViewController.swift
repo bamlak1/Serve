@@ -98,10 +98,10 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
                 return userPosts.count
             }
         case 1:
-            self.profileTableView.rowHeight = 291
+            self.profileTableView.rowHeight = 250
             return upcomingEvents.count
         case 2:
-            self.profileTableView.rowHeight = 291
+            self.profileTableView.rowHeight = 250
             return pastEvents.count
         default:
             return 0
@@ -234,11 +234,9 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
     func setUser() {
 
         if user == nil {
+            print("set")
             user = PFUser.current()!
         }
-        
-        let type = user!["type"] as! String
-        userType = type
         
         interestsLabel.text = ""
         if let causes = user?["cause_names"] as? [String] {
@@ -287,6 +285,12 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
                     self.profilePicImageView.image = finalImage
                 }
             })
+        }
+        
+        let type = user!["type"] as! String
+        userType = type
+        if userType == "Organization" {
+            followingCountLabel.text = ""
         }
         
         if let num = user!["following_count"] as? Int {

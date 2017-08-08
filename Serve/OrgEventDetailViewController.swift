@@ -15,6 +15,7 @@ class OrgEventDetailViewController: UIViewController {
     
     @IBOutlet weak var bannerImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
+
     @IBOutlet weak var orgLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
@@ -33,10 +34,19 @@ class OrgEventDetailViewController: UIViewController {
     
         
         titleLabel.text = event?["title"] as? String
-        orgLabel.text = event?["author"] as? String
+        let name = event?["org_name"] as! String
+        orgLabel.text = name
         let start = event?["start"] as! String
         let end = event?["end"] as! String
-        dateLabel.text = "\(start) - \(end)"
+        let prefix = String(start.characters.prefix(10))
+        if end.hasPrefix(prefix) {
+            let suffixIndex = end.index(end.endIndex, offsetBy: -9)
+            let newEnd = end.substring(from: suffixIndex)
+            dateLabel.text = "\(start) - \(newEnd)"
+        } else {
+            dateLabel.text = "\(start) - \(end)"
+        }
+
         locationLabel.text = (event?["location"] as! String)
         descriptionLabel.text = (event?["description"] as! String)
         let pendingCount = event?["pending_count"] as? Int ?? 0
