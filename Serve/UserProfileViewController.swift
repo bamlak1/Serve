@@ -234,6 +234,7 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
     func setUser() {
 
         if user == nil {
+            print("set")
             user = PFUser.current()!
         }
         
