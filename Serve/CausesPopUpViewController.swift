@@ -15,6 +15,7 @@ class CausesPopUpViewController: UIViewController, UITableViewDataSource, UITabl
     var names : [String] = []
     var filteredCauses: [PFObject] = []
     var addedCauses: [PFObject] = []
+    var addedIds : [String] = []
     
     
     
@@ -56,6 +57,7 @@ class CausesPopUpViewController: UIViewController, UITableViewDataSource, UITabl
     
     func didclickOnCellAtIndex(at index: IndexPath) {
         let cell = tableView(tableView, cellForRowAt: index) as! CauseTableViewCell
+        addedIds.append((cell.cause!.objectId)!)
         addedCauses.append(cell.cause!)
         let name = cell.nameLabel.text!
         names.append(name)
@@ -67,7 +69,7 @@ class CausesPopUpViewController: UIViewController, UITableViewDataSource, UITabl
     
     @IBAction func donePressed(_ sender: Any) {
         let user = PFUser.current()
-        user?.addUniqueObjects(from: addedCauses, forKey: "causes")
+        user?.addUniqueObjects(from: addedIds, forKey: "causes")
         user?.addUniqueObjects(from: names, forKey: "cause_names")
         user?.saveInBackground()
         
