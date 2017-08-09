@@ -25,6 +25,7 @@ class OrganizationProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         retrieveOrgData()
+        self.navigationController?.navigationBar.tintColor = UIColor.white;
         
         // Do any additional setup after loading the view.
     }

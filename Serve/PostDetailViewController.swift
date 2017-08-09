@@ -60,7 +60,10 @@ class PostDetailViewController: UIViewController, UITableViewDelegate, UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        self.navigationController?.navigationBar.tintColor = UIColor.white;
         //nameLabel.text = (user?["username"] as! String)
+
         if event != nil {
             topBar.text = "\(user!["username"] as! String) \(post?["action"] as! String) \(event!["title"] as! String)"
             topBar.adjustsFontSizeToFitWidth = true

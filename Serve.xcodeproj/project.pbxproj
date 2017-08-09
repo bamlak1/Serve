@@ -16,6 +16,10 @@
 		8614832E1F18305000C18917 /* Map.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8614832D1F18305000C18917 /* Map.storyboard */; };
 		861483321F18425D00C18917 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 861483311F18425D00C18917 /* MapViewController.swift */; };
 		862B70B61F38F8A5009DB3C1 /* CurrentLocationWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 862B70B51F38F8A5009DB3C1 /* CurrentLocationWindow.xib */; };
+		86B66C111F3A8AE300A4E7C7 /* hands.gif in Resources */ = {isa = PBXBuildFile; fileRef = 86B66C101F3A8AE300A4E7C7 /* hands.gif */; };
+		86B66C171F3A904D00A4E7C7 /* HighFiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B66C161F3A904D00A4E7C7 /* HighFiveViewController.swift */; };
+		86B66C191F3A907900A4E7C7 /* AchievementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B66C181F3A907900A4E7C7 /* AchievementViewController.swift */; };
+		86B66C1D1F3A90D200A4E7C7 /* Following.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B66C1C1F3A90D200A4E7C7 /* Following.swift */; };
 		A00FB5961F1ED45A0036340D /* OrgCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00FB5951F1ED45A0036340D /* OrgCollectionViewCell.swift */; };
 		A00FB5981F1ED46C0036340D /* EventCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00FB5971F1ED46C0036340D /* EventCollectionViewCell.swift */; };
 		A03D91511F26CC22006CF35F /* CausesPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03D91501F26CC22006CF35F /* CausesPopUpViewController.swift */; };
@@ -56,9 +60,6 @@
 		A0B95E841F185D6600EBD019 /* OrganizationProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B95E831F185D6600EBD019 /* OrganizationProfileViewController.swift */; };
 		A0B95E861F185D7900EBD019 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B95E851F185D7900EBD019 /* UserProfileViewController.swift */; };
 		A0B95E8A1F1D94A200EBD019 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B95E891F1D94A200EBD019 /* EditProfileViewController.swift */; };
-		A0BE644C1F3A286300CA9595 /* Following.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BE644A1F3A286300CA9595 /* Following.swift */; };
-		A0BE644D1F3A286300CA9595 /* HighFiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BE644B1F3A286300CA9595 /* HighFiveViewController.swift */; };
-		A0BE644F1F3A288900CA9595 /* AchievementsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BE644E1F3A288900CA9595 /* AchievementsViewController.swift */; };
 		CC14168D1F16A06800BF2A81 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC14168C1F16A06800BF2A81 /* Event.swift */; };
 		CC14168F1F16A42600BF2A81 /* CreateEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC14168E1F16A42600BF2A81 /* CreateEventViewController.swift */; };
 		CC2453711F20146600D765E5 /* OrgEventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2453701F20146600D765E5 /* OrgEventDetailViewController.swift */; };
@@ -108,6 +109,10 @@
 		8614832D1F18305000C18917 /* Map.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Map.storyboard; sourceTree = "<group>"; };
 		861483311F18425D00C18917 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		862B70B51F38F8A5009DB3C1 /* CurrentLocationWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CurrentLocationWindow.xib; sourceTree = "<group>"; };
+		86B66C101F3A8AE300A4E7C7 /* hands.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = hands.gif; path = ../../../../Documents/hands.gif; sourceTree = "<group>"; };
+		86B66C161F3A904D00A4E7C7 /* HighFiveViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HighFiveViewController.swift; sourceTree = "<group>"; };
+		86B66C181F3A907900A4E7C7 /* AchievementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementViewController.swift; sourceTree = "<group>"; };
+		86B66C1C1F3A90D200A4E7C7 /* Following.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Following.swift; sourceTree = "<group>"; };
 		A00FB5951F1ED45A0036340D /* OrgCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrgCollectionViewCell.swift; sourceTree = "<group>"; };
 		A00FB5971F1ED46C0036340D /* EventCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCollectionViewCell.swift; sourceTree = "<group>"; };
 		A03D91501F26CC22006CF35F /* CausesPopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CausesPopUpViewController.swift; sourceTree = "<group>"; };
@@ -155,9 +160,6 @@
 		A0B95E831F185D6600EBD019 /* OrganizationProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrganizationProfileViewController.swift; sourceTree = "<group>"; };
 		A0B95E851F185D7900EBD019 /* UserProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		A0B95E891F1D94A200EBD019 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
-		A0BE644A1F3A286300CA9595 /* Following.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Following.swift; path = Serve/Following.swift; sourceTree = "<group>"; };
-		A0BE644B1F3A286300CA9595 /* HighFiveViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HighFiveViewController.swift; path = Serve/HighFiveViewController.swift; sourceTree = "<group>"; };
-		A0BE644E1F3A288900CA9595 /* AchievementsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AchievementsViewController.swift; path = Serve/AchievementsViewController.swift; sourceTree = "<group>"; };
 		CC14168C1F16A06800BF2A81 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		CC14168E1F16A42600BF2A81 /* CreateEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventViewController.swift; sourceTree = "<group>"; };
 		CC2453701F20146600D765E5 /* OrgEventDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrgEventDetailViewController.swift; sourceTree = "<group>"; };
@@ -232,9 +234,6 @@
 		A07AD2061F13FAC500100D69 = {
 			isa = PBXGroup;
 			children = (
-				A0BE644E1F3A288900CA9595 /* AchievementsViewController.swift */,
-				A0BE644A1F3A286300CA9595 /* Following.swift */,
-				A0BE644B1F3A286300CA9595 /* HighFiveViewController.swift */,
 				A07AD2111F13FAC500100D69 /* Serve */,
 				A07AD2261F13FAC500100D69 /* ServeTests */,
 				A07AD2311F13FAC500100D69 /* ServeUITests */,
@@ -308,6 +307,7 @@
 		CC24537F1F2016CF00D765E5 /* Individual */ = {
 			isa = PBXGroup;
 			children = (
+				86B66C181F3A907900A4E7C7 /* AchievementViewController.swift */,
 				A03D91AA1F34FCD8006CF35F /* InfoWindow.xib */,
 				A03D91A91F34FCD8006CF35F /* HomeWindow.xib */,
 				862B70B51F38F8A5009DB3C1 /* CurrentLocationWindow.xib */,
@@ -320,6 +320,8 @@
 				A07AD2441F156DC000100D69 /* FeedViewController.swift */,
 				A06309F11F215C2E002E886A /* BrowserViewController.swift */,
 				A03D915E1F296BA9006CF35F /* PostDetailViewController.swift */,
+				86B66C161F3A904D00A4E7C7 /* HighFiveViewController.swift */,
+				86B66C1C1F3A90D200A4E7C7 /* Following.swift */,
 			);
 			name = Individual;
 			sourceTree = "<group>";
@@ -339,6 +341,7 @@
 			isa = PBXGroup;
 			children = (
 				A07AD2121F13FAC500100D69 /* AppDelegate.swift */,
+				86B66C101F3A8AE300A4E7C7 /* hands.gif */,
 				A07AD2191F13FAC500100D69 /* Assets.xcassets */,
 				A07AD21E1F13FAC500100D69 /* Info.plist */,
 				A07AD21B1F13FAC500100D69 /* LaunchScreen.storyboard */,
@@ -482,7 +485,7 @@
 				TargetAttributes = {
 					A07AD20E1F13FAC500100D69 = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = 257DRML7HA;
+						DevelopmentTeam = 2RV3P7RPT3;
 						ProvisioningStyle = Automatic;
 					};
 					A07AD2221F13FAC500100D69 = {
@@ -533,6 +536,7 @@
 				CCFB6C1C1F15A9F700E59D5C /* Individual.storyboard in Resources */,
 				A07AD2181F13FAC500100D69 /* Main.storyboard in Resources */,
 				862B70B61F38F8A5009DB3C1 /* CurrentLocationWindow.xib in Resources */,
+				86B66C111F3A8AE300A4E7C7 /* hands.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -712,7 +716,6 @@
 				CCED38881F1D926500A3DD2E /* PendingCell.swift in Sources */,
 				A0B95E861F185D7900EBD019 /* UserProfileViewController.swift in Sources */,
 				A03D915B1F2950C6006CF35F /* GMSCircle + FitBounds.swift in Sources */,
-				A0BE644C1F3A286300CA9595 /* Following.swift in Sources */,
 				CC2453731F2014E400D765E5 /* Update.swift in Sources */,
 				A06309F81F216873002E886A /* PeopleBrowseCell.swift in Sources */,
 				A07AD2451F156DC000100D69 /* FeedViewController.swift in Sources */,
@@ -725,20 +728,21 @@
 				A0B95E841F185D6600EBD019 /* OrganizationProfileViewController.swift in Sources */,
 				CCED38871F1D926500A3DD2E /* PendingApprovalsViewController.swift in Sources */,
 				A03D915F1F296BA9006CF35F /* PostDetailViewController.swift in Sources */,
-				A0BE644D1F3A286300CA9595 /* HighFiveViewController.swift in Sources */,
 				A03D919F1F30EE75006CF35F /* CauseDetailViewController.swift in Sources */,
-				A0BE644F1F3A288900CA9595 /* AchievementsViewController.swift in Sources */,
 				A0B95E7A1F16DB6C00EBD019 /* EventDetailViewController.swift in Sources */,
 				8614831A1F16A44A00C18917 /* IndividualLoginViewController.swift in Sources */,
 				A0B95E821F185D4900EBD019 /* IndividualProfileViewController.swift in Sources */,
+				86B66C191F3A907900A4E7C7 /* AchievementViewController.swift in Sources */,
 				A07AD2131F13FAC500100D69 /* AppDelegate.swift in Sources */,
 				8614832C1F17F2AE00C18917 /* CauseCell.swift in Sources */,
 				CCAF14F61F1835980097C7A3 /* OrgEventsViewController.swift in Sources */,
 				A03D915D1F2950D3006CF35F /* UserCell.swift in Sources */,
 				CC14168F1F16A42600BF2A81 /* CreateEventViewController.swift in Sources */,
 				A03D91A11F30EE80006CF35F /* CustomInfoWindow.swift in Sources */,
+				86B66C171F3A904D00A4E7C7 /* HighFiveViewController.swift in Sources */,
 				A06309F21F215C2E002E886A /* BrowserViewController.swift in Sources */,
 				A06309FE1F2675C9002E886A /* SearchResultsViewController.swift in Sources */,
+				86B66C1D1F3A90D200A4E7C7 /* Following.swift in Sources */,
 				A03D91571F280422006CF35F /* ComposeUpdateViewController.swift in Sources */,
 				A07AD2471F1573BA00100D69 /* PostCell.swift in Sources */,
 				CC2453711F20146600D765E5 /* OrgEventDetailViewController.swift in Sources */,
@@ -899,10 +903,10 @@
 			baseConfigurationReference = ED1C2CCCD0B7F017A061DDCF /* Pods-Serve.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 257DRML7HA;
+				DEVELOPMENT_TEAM = 2RV3P7RPT3;
 				INFOPLIST_FILE = Serve/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Gessessew.Serve;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Olga.Serve;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -913,10 +917,10 @@
 			baseConfigurationReference = 0C684013576F56B69AF242C7 /* Pods-Serve.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 257DRML7HA;
+				DEVELOPMENT_TEAM = 2RV3P7RPT3;
 				INFOPLIST_FILE = Serve/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Gessessew.Serve;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Olga.Serve;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};

@@ -43,7 +43,7 @@ class BrowserViewController: UIViewController, UICollectionViewDataSource, UICol
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.navigationController?.navigationBar.tintColor = UIColor.white;
         searchBar.delegate = self
         collectionView.delegate = self
         collectionView.dataSource = self

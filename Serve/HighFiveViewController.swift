@@ -5,7 +5,6 @@
 //  Created by Olga Andreeva on 8/7/17.
 //  Copyright © 2017 Bamlak Gessessew. All rights reserved.
 //
-
 import UIKit
 import SwiftGifOrigin
 
@@ -14,7 +13,7 @@ protocol HighFiveDelegate {
 }
 
 class HighFiveViewController: UIViewController {
-
+    
     @IBOutlet weak var gifView: UIImageView!
     var delegate: HighFiveDelegate?
     
@@ -28,7 +27,7 @@ class HighFiveViewController: UIViewController {
             self.removeAnimate()
         }
     }
-
+    
     func showAnimate() {
         self.view.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
         self.view.alpha = 0.0;
@@ -55,15 +54,14 @@ class HighFiveViewController: UIViewController {
             }
         });
     }
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }

@@ -252,7 +252,7 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
                 let suffixIndex = end.index(end.endIndex, offsetBy: -9)
                 cell.eventDate.text = "\(startDateString)"
             } else {
-                cell.eventDate.text = "\(startDateString) - \(endDateString)"
+                cell.eventDate.text = "\(startDateString)"
             }
             
             cell.eventTime.text = "\(startTimeString) - \(endTimeString)"

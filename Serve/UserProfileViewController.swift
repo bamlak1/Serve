@@ -40,7 +40,7 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.navigationController?.navigationBar.tintColor = UIColor.white;
         
         profileTableView.dataSource = self
         profileTableView.delegate = self
@@ -241,21 +241,18 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
         
         interestsLabel.text = ""
         if let causes = user?["cause_names"] as? [String] {
+
             if causes.count > 1 {
                 for index in 0...1{
                     let name = causes[index]
                     interestsLabel.text?.append("\(name), " )
-                    
                 }
             }
-            if causes.count > 2{
-                let name2 = causes[2]
-                interestsLabel.text?.append(name2)
-            
+            if causes.count > 2 {
+                let name = causes[2]
+                interestsLabel.text?.append(name)
             }
-            
         }
-
         
         if let username = user!["username"] {
             nameLabel.text = (username as! String)

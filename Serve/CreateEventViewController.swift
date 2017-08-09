@@ -44,6 +44,7 @@ class CreateEventViewController: UIViewController, UIImagePickerControllerDelega
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBar.tintColor = UIColor.white;
         descriptionTextView.delegate = self
         expectedTasksTextView.delegate = self
         
@@ -114,7 +115,7 @@ class CreateEventViewController: UIViewController, UIImagePickerControllerDelega
     func showDatePicker() -> DateTimePicker{
         let min = Date()
         let picker = DateTimePicker.show(minimumDate: min)
-        picker.highlightColor = UIColor(red: 120.0/255.0, green: 255.0/255.0, blue: 138.0/255.0, alpha: 1)
+        picker.highlightColor = UIColor(red: 104.0/255.0, green: 204.0/255.0, blue: 105.0/255.0, alpha: 1)
         picker.isDatePickerOnly = false
         picker.is12HourFormat = true
         picker.dateFormat = "MM/dd/YYYY hh:mm aa"
@@ -254,8 +255,11 @@ class CreateEventViewController: UIViewController, UIImagePickerControllerDelega
     
     func didclickOnCellAtIndex(at index: IndexPath) {
         let cell = tableView(tableView, cellForRowAt: index) as! CauseTableViewCell
-        addedCauses.append(cell.cause!)
-        let name = cell.nameLabel.text!
+        print(index)
+        let row = cell.indexPath.row
+        let cause = filteredCauses[row] 
+        let name = cause["name"] as! String
+        addedCauses.append(cause)
         names.append(name)
         
         

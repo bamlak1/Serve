@@ -31,6 +31,7 @@ class OrganizationViewController: UIViewController, UITableViewDelegate, UITable
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBar.tintColor = UIColor.white;
         
         refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(OrganizationViewController.didPullToRefresh(_:)), for: .valueChanged)
@@ -68,20 +69,19 @@ class OrganizationViewController: UIViewController, UITableViewDelegate, UITable
 
         
         causesLabel.text = ""
-        if let causes = user?["cause_names"] as? [String] {
+
+        if let causes = user!["cause_names"] as? [String] {
             if causes.count > 1 {
-                for index in 0...1{
-                    let name = causes[index]
-                    causesLabel.text?.append("\(name), " )
-                    
-                }
+            for index in 0...1{
+                let name = causes[index]
+                causesLabel.text?.append("\(name), " )
             }
-            if causes.count > 2{
-                let name2 = causes[2]
-                causesLabel.text?.append(name2)
-                
+        }
+            if causes.count > 2 {
+                let name = causes[2]
+                causesLabel.text?.append(name)
             }
-            
+
         }
         
         if user!["banner"] != nil {
