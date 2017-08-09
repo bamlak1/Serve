@@ -485,8 +485,13 @@
 				TargetAttributes = {
 					A07AD20E1F13FAC500100D69 = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = 257DRML7HA;
+						DevelopmentTeam = DY98KN5R7D;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					A07AD2221F13FAC500100D69 = {
 						CreatedOnToolsVersion = 8.3.2;
@@ -903,10 +908,11 @@
 			baseConfigurationReference = ED1C2CCCD0B7F017A061DDCF /* Pods-Serve.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 257DRML7HA;
+				CODE_SIGN_ENTITLEMENTS = Serve/Serve.entitlements;
+				DEVELOPMENT_TEAM = DY98KN5R7D;
 				INFOPLIST_FILE = Serve/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Gessessew.Serve;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Hamlett.Serve;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -917,10 +923,11 @@
 			baseConfigurationReference = 0C684013576F56B69AF242C7 /* Pods-Serve.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 257DRML7HA;
+				CODE_SIGN_ENTITLEMENTS = Serve/Serve.entitlements;
+				DEVELOPMENT_TEAM = DY98KN5R7D;
 				INFOPLIST_FILE = Serve/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Gessessew.Serve;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Hamlett.Serve;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};

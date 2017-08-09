@@ -1037,7 +1037,7 @@
                         </userDefinedRuntimeAttributes>
                     </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="0Wm-zS-3nZ">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="0Wm-zS-3nZ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1561,7 +1561,7 @@
                         </userDefinedRuntimeAttributes>
                     </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="fpw-wa-Fwg">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="fpw-wa-Fwg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1790,13 +1790,13 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" keyboardType="twitter"/>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Kk-TU-JXy">
-                                <rect key="frame" x="66" y="52" width="55" height="24"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                <rect key="frame" x="66" y="52" width="50" height="22"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="is going to" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vrD-hO-35y">
-                                <rect key="frame" x="66" y="78" width="94" height="24"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="is interested in" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vrD-hO-35y">
+                                <rect key="frame" x="66" y="80" width="118" height="22"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gxz-Ut-9BM">
@@ -1822,8 +1822,8 @@
                                 </items>
                             </navigationBar>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Vo-Y3-GH5">
-                                <rect key="frame" x="181" y="78" width="53" height="24"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                <rect key="frame" x="192" y="79" width="48" height="24"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -1832,18 +1832,16 @@
                             <constraint firstItem="X7k-Mg-eh8" firstAttribute="top" secondItem="Emk-U7-qnH" secondAttribute="bottom" constant="8" id="41d-Fg-f3k"/>
                             <constraint firstItem="X7k-Mg-eh8" firstAttribute="leading" secondItem="P4X-Dx-cBU" secondAttribute="leading" id="4oq-pD-CJr"/>
                             <constraint firstItem="Gxz-Ut-9BM" firstAttribute="leading" secondItem="P4X-Dx-cBU" secondAttribute="leading" id="7an-g0-3af"/>
-                            <constraint firstItem="2Vo-Y3-GH5" firstAttribute="top" secondItem="Gxz-Ut-9BM" secondAttribute="bottom" constant="34" id="A8a-gm-liB"/>
+                            <constraint firstItem="2Vo-Y3-GH5" firstAttribute="leading" secondItem="vrD-hO-35y" secondAttribute="trailing" constant="8" id="9Je-Uc-Ywn"/>
+                            <constraint firstItem="2Vo-Y3-GH5" firstAttribute="centerY" secondItem="vrD-hO-35y" secondAttribute="centerY" id="CgV-Gh-XRh"/>
                             <constraint firstItem="Emk-U7-qnH" firstAttribute="leading" secondItem="P4X-Dx-cBU" secondAttribute="leading" constant="8" id="Igb-vn-rxX"/>
                             <constraint firstItem="8Kk-TU-JXy" firstAttribute="top" secondItem="Emk-U7-qnH" secondAttribute="top" id="Nga-Kr-VKA"/>
                             <constraint firstItem="8Kk-TU-JXy" firstAttribute="leading" secondItem="vrD-hO-35y" secondAttribute="leading" id="VNh-z2-pyq"/>
-                            <constraint firstItem="vrD-hO-35y" firstAttribute="leading" secondItem="Emk-U7-qnH" secondAttribute="trailing" constant="8" id="YWP-qs-ckb"/>
-                            <constraint firstItem="2Vo-Y3-GH5" firstAttribute="baseline" secondItem="vrD-hO-35y" secondAttribute="baseline" id="ar1-vK-Nwg"/>
                             <constraint firstItem="Emk-U7-qnH" firstAttribute="top" secondItem="Gxz-Ut-9BM" secondAttribute="bottom" constant="8" id="brX-SJ-Qbh"/>
+                            <constraint firstItem="X7k-Mg-eh8" firstAttribute="top" secondItem="2Vo-Y3-GH5" secondAttribute="bottom" constant="7" id="byh-mr-cjS"/>
+                            <constraint firstItem="2Vo-Y3-GH5" firstAttribute="top" secondItem="Gxz-Ut-9BM" secondAttribute="bottom" constant="35" id="dqS-bs-vda"/>
                             <constraint firstItem="Gxz-Ut-9BM" firstAttribute="top" secondItem="P4X-Dx-cBU" secondAttribute="top" id="fnZ-yT-d9k"/>
-                            <constraint firstItem="X7k-Mg-eh8" firstAttribute="top" secondItem="2Vo-Y3-GH5" secondAttribute="bottom" constant="8" symbolic="YES" id="gAk-UB-aQP"/>
-                            <constraint firstItem="2Vo-Y3-GH5" firstAttribute="leading" secondItem="vrD-hO-35y" secondAttribute="trailing" constant="21" id="mf5-uh-qOT"/>
                             <constraint firstItem="8Kk-TU-JXy" firstAttribute="leading" secondItem="Emk-U7-qnH" secondAttribute="trailing" constant="8" id="ut7-Pn-d3h"/>
-                            <constraint firstItem="2Vo-Y3-GH5" firstAttribute="leading" secondItem="P4X-Dx-cBU" secondAttribute="leading" constant="181" id="wEK-Sr-ghY"/>
                         </constraints>
                     </view>
                     <connections>
@@ -2175,7 +2173,7 @@
                         </userDefinedRuntimeAttributes>
                     </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Om9-p4-NAh">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Om9-p4-NAh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
