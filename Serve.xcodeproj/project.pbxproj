@@ -16,7 +16,6 @@
 		8614832E1F18305000C18917 /* Map.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8614832D1F18305000C18917 /* Map.storyboard */; };
 		861483321F18425D00C18917 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 861483311F18425D00C18917 /* MapViewController.swift */; };
 		862B70B61F38F8A5009DB3C1 /* CurrentLocationWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 862B70B51F38F8A5009DB3C1 /* CurrentLocationWindow.xib */; };
-		86B66C111F3A8AE300A4E7C7 /* hands.gif in Resources */ = {isa = PBXBuildFile; fileRef = 86B66C101F3A8AE300A4E7C7 /* hands.gif */; };
 		86B66C171F3A904D00A4E7C7 /* HighFiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B66C161F3A904D00A4E7C7 /* HighFiveViewController.swift */; };
 		86B66C191F3A907900A4E7C7 /* AchievementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B66C181F3A907900A4E7C7 /* AchievementViewController.swift */; };
 		86B66C1D1F3A90D200A4E7C7 /* Following.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B66C1C1F3A90D200A4E7C7 /* Following.swift */; };
@@ -60,6 +59,7 @@
 		A0B95E841F185D6600EBD019 /* OrganizationProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B95E831F185D6600EBD019 /* OrganizationProfileViewController.swift */; };
 		A0B95E861F185D7900EBD019 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B95E851F185D7900EBD019 /* UserProfileViewController.swift */; };
 		A0B95E8A1F1D94A200EBD019 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B95E891F1D94A200EBD019 /* EditProfileViewController.swift */; };
+		A0BE64511F3ABCCF00CA9595 /* hands.gif in Resources */ = {isa = PBXBuildFile; fileRef = A0BE64501F3ABCCF00CA9595 /* hands.gif */; };
 		CC14168D1F16A06800BF2A81 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC14168C1F16A06800BF2A81 /* Event.swift */; };
 		CC14168F1F16A42600BF2A81 /* CreateEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC14168E1F16A42600BF2A81 /* CreateEventViewController.swift */; };
 		CC2453711F20146600D765E5 /* OrgEventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2453701F20146600D765E5 /* OrgEventDetailViewController.swift */; };
@@ -109,7 +109,6 @@
 		8614832D1F18305000C18917 /* Map.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Map.storyboard; sourceTree = "<group>"; };
 		861483311F18425D00C18917 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		862B70B51F38F8A5009DB3C1 /* CurrentLocationWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CurrentLocationWindow.xib; sourceTree = "<group>"; };
-		86B66C101F3A8AE300A4E7C7 /* hands.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = hands.gif; path = ../../../../Documents/hands.gif; sourceTree = "<group>"; };
 		86B66C161F3A904D00A4E7C7 /* HighFiveViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HighFiveViewController.swift; sourceTree = "<group>"; };
 		86B66C181F3A907900A4E7C7 /* AchievementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementViewController.swift; sourceTree = "<group>"; };
 		86B66C1C1F3A90D200A4E7C7 /* Following.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Following.swift; sourceTree = "<group>"; };
@@ -160,6 +159,7 @@
 		A0B95E831F185D6600EBD019 /* OrganizationProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrganizationProfileViewController.swift; sourceTree = "<group>"; };
 		A0B95E851F185D7900EBD019 /* UserProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		A0B95E891F1D94A200EBD019 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
+		A0BE64501F3ABCCF00CA9595 /* hands.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = hands.gif; path = ../../../Downloads/hands.gif; sourceTree = "<group>"; };
 		CC14168C1F16A06800BF2A81 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		CC14168E1F16A42600BF2A81 /* CreateEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventViewController.swift; sourceTree = "<group>"; };
 		CC2453701F20146600D765E5 /* OrgEventDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrgEventDetailViewController.swift; sourceTree = "<group>"; };
@@ -340,8 +340,8 @@
 		CC2453811F20172D00D765E5 /* Support */ = {
 			isa = PBXGroup;
 			children = (
+				A0BE64501F3ABCCF00CA9595 /* hands.gif */,
 				A07AD2121F13FAC500100D69 /* AppDelegate.swift */,
-				86B66C101F3A8AE300A4E7C7 /* hands.gif */,
 				A07AD2191F13FAC500100D69 /* Assets.xcassets */,
 				A07AD21E1F13FAC500100D69 /* Info.plist */,
 				A07AD21B1F13FAC500100D69 /* LaunchScreen.storyboard */,
@@ -485,7 +485,7 @@
 				TargetAttributes = {
 					A07AD20E1F13FAC500100D69 = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = 2RV3P7RPT3;
+						DevelopmentTeam = 257DRML7HA;
 						ProvisioningStyle = Automatic;
 					};
 					A07AD2221F13FAC500100D69 = {
@@ -526,6 +526,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A03D91AD1F34FCD8006CF35F /* HomeWindow.xib in Resources */,
+				A0BE64511F3ABCCF00CA9595 /* hands.gif in Resources */,
 				CCD755791F157F7D0033FF7A /* OrgStoryboard.storyboard in Resources */,
 				A03D91AF1F34FCD8006CF35F /* OtherWindow.xib in Resources */,
 				8614832E1F18305000C18917 /* Map.storyboard in Resources */,
@@ -536,7 +537,6 @@
 				CCFB6C1C1F15A9F700E59D5C /* Individual.storyboard in Resources */,
 				A07AD2181F13FAC500100D69 /* Main.storyboard in Resources */,
 				862B70B61F38F8A5009DB3C1 /* CurrentLocationWindow.xib in Resources */,
-				86B66C111F3A8AE300A4E7C7 /* hands.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -903,10 +903,10 @@
 			baseConfigurationReference = ED1C2CCCD0B7F017A061DDCF /* Pods-Serve.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 2RV3P7RPT3;
+				DEVELOPMENT_TEAM = 257DRML7HA;
 				INFOPLIST_FILE = Serve/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Olga.Serve;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Gessessew.Serve;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -917,10 +917,10 @@
 			baseConfigurationReference = 0C684013576F56B69AF242C7 /* Pods-Serve.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 2RV3P7RPT3;
+				DEVELOPMENT_TEAM = 257DRML7HA;
 				INFOPLIST_FILE = Serve/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Olga.Serve;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Gessessew.Serve;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
