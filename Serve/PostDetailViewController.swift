@@ -59,6 +59,7 @@ class PostDetailViewController: UIViewController, UITableViewDelegate, UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBar.tintColor = UIColor.white;
         nameLabel.text = (user?["username"] as! String)
         if event != nil {
             eventLabel.text = (event?["title"] as! String)

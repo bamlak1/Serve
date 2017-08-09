@@ -34,7 +34,7 @@ class EventDetailViewController: UIViewController, NotifyEventDelegate{
    
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        self.navigationController?.navigationBar.tintColor = UIColor.white;
         let query = PFQuery(className: "Event")
         query.whereKey("objectId", equalTo: eventId!)
         query.includeKey("author")

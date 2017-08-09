@@ -5,7 +5,6 @@
 //  Created by Michael Hamlett on 8/7/17.
 //  Copyright © 2017 Bamlak Gessessew. All rights reserved.
 //
-
 import Foundation
 import Parse
 
@@ -25,5 +24,5 @@ class Following {
     }
     
     
-
+    
 }

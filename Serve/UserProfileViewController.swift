@@ -40,7 +40,7 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.navigationController?.navigationBar.tintColor = UIColor.white;
         
         profileTableView.dataSource = self
         profileTableView.delegate = self

@@ -23,6 +23,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet var feedTableView: UITableView!
     
     override func viewDidLoad() {
+        self.navigationController?.navigationBar.tintColor = UIColor.white;
         super.viewDidLoad()
         feedTableView.delegate = self
         feedTableView.dataSource = self
