@@ -69,13 +69,16 @@ class OrganizationViewController: UIViewController, UITableViewDelegate, UITable
         
         causesLabel.text = ""
         if let causes = user!["cause_names"] as? [String] {
+            if causes.count > 1 {
             for index in 0...1{
                 let name = causes[index]
                 causesLabel.text?.append("\(name), " )
-                
             }
-            let name = causes[2]
-            causesLabel.text?.append(name)
+        }
+            if causes.count > 2 {
+                let name = causes[2]
+                causesLabel.text?.append(name)
+            }
         }
         
         if user!["banner"] != nil {
