@@ -114,7 +114,7 @@ class CreateEventViewController: UIViewController, UIImagePickerControllerDelega
     func showDatePicker() -> DateTimePicker{
         let min = Date()
         let picker = DateTimePicker.show(minimumDate: min)
-        picker.highlightColor = UIColor(red: 120.0/255.0, green: 255.0/255.0, blue: 138.0/255.0, alpha: 1)
+        picker.highlightColor = UIColor(red: 104.0/255.0, green: 204.0/255.0, blue: 105.0/255.0, alpha: 1)
         picker.isDatePickerOnly = false
         picker.is12HourFormat = true
         picker.dateFormat = "MM/dd/YYYY hh:mm aa"
