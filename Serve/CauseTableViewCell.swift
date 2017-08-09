@@ -38,8 +38,9 @@ class CauseTableViewCell: UITableViewCell {
     
     
     @IBAction func addPressed(_ sender: Any) {
-        addButton.isSelected = true
-        self.delegate?.didclickOnCellAtIndex(at: indexPath)
+        //addButton.isSelected = true
+        print("cell \(indexPath)")
+        self.delegate?.didclickOnCellAtIndex(at: self.indexPath)
     }
     
     

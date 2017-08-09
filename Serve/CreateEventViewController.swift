@@ -254,8 +254,11 @@ class CreateEventViewController: UIViewController, UIImagePickerControllerDelega
     
     func didclickOnCellAtIndex(at index: IndexPath) {
         let cell = tableView(tableView, cellForRowAt: index) as! CauseTableViewCell
-        addedCauses.append(cell.cause!)
-        let name = cell.nameLabel.text!
+        print(index)
+        let row = cell.indexPath.row
+        let cause = filteredCauses[row] 
+        let name = cause["name"] as! String
+        addedCauses.append(cause)
         names.append(name)
         
         

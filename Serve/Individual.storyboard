@@ -2070,20 +2070,20 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iod-GM-Occ">
-                                                            <rect key="frame" x="186" y="10" width="56" height="30"/>
+                                                            <rect key="frame" x="212" y="10" width="30" height="30"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <state key="normal" title="Add">
                                                                 <color key="titleColor" red="0.35106015899999998" green="0.68190831220000003" blue="0.34563077170000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </state>
                                                             <state key="selected" title="Added"/>
                                                             <connections>
-                                                                <action selector="addPressed:" destination="tpb-z4-wEN" eventType="touchUpInside" id="Q0a-8f-ADR"/>
+                                                                <action selector="addPressed:" destination="tpb-z4-wEN" eventType="touchUpInside" id="Oq4-LU-zge"/>
                                                             </connections>
                                                         </button>
                                                     </subviews>
                                                 </tableViewCellContentView>
                                                 <connections>
-                                                    <outlet property="addButton" destination="Iod-GM-Occ" id="Yjy-gB-tOQ"/>
+                                                    <outlet property="addButton" destination="Iod-GM-Occ" id="q0c-rp-vqd"/>
                                                     <outlet property="causeImageView" destination="l4t-kX-o94" id="5hR-am-v1i"/>
                                                     <outlet property="nameLabel" destination="Da1-6v-1Ub" id="LHj-Xm-xhI"/>
                                                 </connections>
@@ -2484,8 +2484,8 @@
         <image name="search" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="YgU-vw-OKV"/>
-        <segue reference="aNw-Yj-QL6"/>
-        <segue reference="pAn-mp-cSG"/>
+        <segue reference="REK-rK-x4e"/>
+        <segue reference="b0D-sp-TT8"/>
+        <segue reference="xBv-pn-jJh"/>
     </inferredMetricsTieBreakers>
 </document>
