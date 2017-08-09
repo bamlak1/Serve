@@ -23,6 +23,7 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var followerCountLabel: UILabel!
     @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var followButton: UIButton!
+    @IBOutlet weak var donateButton: UIButton!
     
     
     @IBOutlet weak var segmentedControl: UISegmentedControl!
@@ -307,12 +308,21 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
             editButton.isHidden = false
             followButton.isEnabled = false
             followButton.isHidden = true
+            donateButton.isEnabled = false
+            donateButton.isHidden = true
         } else if user?.objectId != PFUser.current()?.objectId {
             print("on other user's page")
             followButton.isEnabled = true
             followButton.isHidden = false
             editButton.isEnabled = false
             editButton.isHidden = true
+            if userType == "Individual" {
+                donateButton.isEnabled = false
+                donateButton.isHidden = true
+            } else {
+                donateButton.isEnabled = true
+                donateButton.isHidden = false
+            }
         }
         
         if followButton.isEnabled && currentUser!["following"] != nil{
