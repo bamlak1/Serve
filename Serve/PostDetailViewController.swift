@@ -28,6 +28,7 @@ class PostDetailViewController: UIViewController, UITableViewDelegate, UITableVi
     
     @IBOutlet weak var nameButtonOutlet: UIButton!
     
+    @IBOutlet weak var topBar: UILabel!
     
     @IBOutlet weak var fiveButton: UIButton!
     
@@ -59,12 +60,19 @@ class PostDetailViewController: UIViewController, UITableViewDelegate, UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         self.navigationController?.navigationBar.tintColor = UIColor.white;
-        nameLabel.text = (user?["username"] as! String)
+        //nameLabel.text = (user?["username"] as! String)
+
         if event != nil {
-            eventLabel.text = (event?["title"] as! String)
+            topBar.text = "\(user!["username"] as! String) \(post?["action"] as! String) \(event!["title"] as! String)"
+            topBar.adjustsFontSizeToFitWidth = true
+            //eventLabel.text = (event?["title"] as! String)
         }
-        actionLabel.text = (post?["action"] as! String)
+        //actionLabel.text = (post?["action"] as! String)
+        if let date = (post?["date"] as? String) {
+            dateLabel.text = date
+        }
         userType = (user!["type"] as! String)
         pic = (user!["profile_image"] as! PFFile)
         profilePicImageView.image = nil

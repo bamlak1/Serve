@@ -240,7 +240,8 @@ class UserProfileViewController: UIViewController, UITableViewDelegate, UITableV
         }
         
         interestsLabel.text = ""
-        if let causes = user!["cause_names"] as? [String] {
+        if let causes = user?["cause_names"] as? [String] {
+
             if causes.count > 1 {
                 for index in 0...1{
                     let name = causes[index]

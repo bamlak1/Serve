@@ -89,7 +89,7 @@ class Post: NSObject {
         
         post["user"] = PFUser.current()
         post["user_id"] = (PFUser.current()?.objectId)!
-        post["action"] = "created event"
+        post["action"] = "created"
         post["event"] = eventCreated
         post["high_fives"] = 0
         post["fived"] = false
