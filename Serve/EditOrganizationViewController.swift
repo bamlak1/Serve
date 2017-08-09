@@ -20,6 +20,7 @@ class EditOrganizationViewController: UIViewController, UINavigationControllerDe
     var bannerPressed = false
     
     override func viewDidLoad() {
+        self.navigationController?.navigationBar.tintColor = UIColor.white;
         super.viewDidLoad()
         contactTextView.delegate = self
         missionTextView.delegate = self

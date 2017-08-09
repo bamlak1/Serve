@@ -28,6 +28,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBar.tintColor = UIColor.white;
         bioTextView.delegate = self
         bioTextView.text = "Add a bio to your profile"
         bioTextView.textColor = UIColor.lightGray

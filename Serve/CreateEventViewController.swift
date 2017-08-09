@@ -44,6 +44,7 @@ class CreateEventViewController: UIViewController, UIImagePickerControllerDelega
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBar.tintColor = UIColor.white;
         descriptionTextView.delegate = self
         expectedTasksTextView.delegate = self
         

@@ -30,7 +30,7 @@ class OrgEventDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.navigationController?.navigationBar.tintColor = UIColor.white;
     
         
         titleLabel.text = event?["title"] as? String
