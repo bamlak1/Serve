@@ -60,6 +60,9 @@
 		A0B95E841F185D6600EBD019 /* OrganizationProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B95E831F185D6600EBD019 /* OrganizationProfileViewController.swift */; };
 		A0B95E861F185D7900EBD019 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B95E851F185D7900EBD019 /* UserProfileViewController.swift */; };
 		A0B95E8A1F1D94A200EBD019 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B95E891F1D94A200EBD019 /* EditProfileViewController.swift */; };
+		A0BE644C1F3A286300CA9595 /* Following.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BE644A1F3A286300CA9595 /* Following.swift */; };
+		A0BE644D1F3A286300CA9595 /* HighFiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BE644B1F3A286300CA9595 /* HighFiveViewController.swift */; };
+		A0BE644F1F3A288900CA9595 /* AchievementsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BE644E1F3A288900CA9595 /* AchievementsViewController.swift */; };
 		CC14168D1F16A06800BF2A81 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC14168C1F16A06800BF2A81 /* Event.swift */; };
 		CC14168F1F16A42600BF2A81 /* CreateEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC14168E1F16A42600BF2A81 /* CreateEventViewController.swift */; };
 		CC2453711F20146600D765E5 /* OrgEventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2453701F20146600D765E5 /* OrgEventDetailViewController.swift */; };
@@ -160,6 +163,9 @@
 		A0B95E831F185D6600EBD019 /* OrganizationProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrganizationProfileViewController.swift; sourceTree = "<group>"; };
 		A0B95E851F185D7900EBD019 /* UserProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		A0B95E891F1D94A200EBD019 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
+		A0BE644A1F3A286300CA9595 /* Following.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Following.swift; path = Serve/Following.swift; sourceTree = "<group>"; };
+		A0BE644B1F3A286300CA9595 /* HighFiveViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HighFiveViewController.swift; path = Serve/HighFiveViewController.swift; sourceTree = "<group>"; };
+		A0BE644E1F3A288900CA9595 /* AchievementsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AchievementsViewController.swift; path = Serve/AchievementsViewController.swift; sourceTree = "<group>"; };
 		CC14168C1F16A06800BF2A81 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		CC14168E1F16A42600BF2A81 /* CreateEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventViewController.swift; sourceTree = "<group>"; };
 		CC2453701F20146600D765E5 /* OrgEventDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrgEventDetailViewController.swift; sourceTree = "<group>"; };
@@ -234,6 +240,9 @@
 		A07AD2061F13FAC500100D69 = {
 			isa = PBXGroup;
 			children = (
+				A0BE644E1F3A288900CA9595 /* AchievementsViewController.swift */,
+				A0BE644A1F3A286300CA9595 /* Following.swift */,
+				A0BE644B1F3A286300CA9595 /* HighFiveViewController.swift */,
 				A07AD2111F13FAC500100D69 /* Serve */,
 				A07AD2261F13FAC500100D69 /* ServeTests */,
 				A07AD2311F13FAC500100D69 /* ServeUITests */,
@@ -718,6 +727,7 @@
 				CCED38881F1D926500A3DD2E /* PendingCell.swift in Sources */,
 				A0B95E861F185D7900EBD019 /* UserProfileViewController.swift in Sources */,
 				A03D915B1F2950C6006CF35F /* GMSCircle + FitBounds.swift in Sources */,
+				A0BE644C1F3A286300CA9595 /* Following.swift in Sources */,
 				CC2453731F2014E400D765E5 /* Update.swift in Sources */,
 				A06309F81F216873002E886A /* PeopleBrowseCell.swift in Sources */,
 				A07AD2451F156DC000100D69 /* FeedViewController.swift in Sources */,
@@ -730,7 +740,9 @@
 				A0B95E841F185D6600EBD019 /* OrganizationProfileViewController.swift in Sources */,
 				CCED38871F1D926500A3DD2E /* PendingApprovalsViewController.swift in Sources */,
 				A03D915F1F296BA9006CF35F /* PostDetailViewController.swift in Sources */,
+				A0BE644D1F3A286300CA9595 /* HighFiveViewController.swift in Sources */,
 				A03D919F1F30EE75006CF35F /* CauseDetailViewController.swift in Sources */,
+				A0BE644F1F3A288900CA9595 /* AchievementsViewController.swift in Sources */,
 				A0B95E7A1F16DB6C00EBD019 /* EventDetailViewController.swift in Sources */,
 				8614831A1F16A44A00C18917 /* IndividualLoginViewController.swift in Sources */,
 				A0B95E821F185D4900EBD019 /* IndividualProfileViewController.swift in Sources */,

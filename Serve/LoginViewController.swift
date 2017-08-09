@@ -226,8 +226,9 @@ class LoginViewController: UIViewController, LoginButtonDelegate {
                     user["causes"] = []
                     user["username"] = self.name
                     user["profile_image"] = self.avi
+                    user["address"] = "777 Hamilton Ave. Menlo Park, CA 94025"
                     user.saveInBackground()
-                    self.performSegue(withIdentifier: "userLogin", sender: nil)
+                    //self.performSegue(withIdentifier: "userLogin", sender: nil)
                 } else {
                     print("logged in through fb")
                     self.performSegue(withIdentifier: "userLogin", sender: nil)

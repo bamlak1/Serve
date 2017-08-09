@@ -232,9 +232,37 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
                     }
                 })
             }
+            let start = eventData["start"] as! String
+            let end = eventData["end"] as! String
+            let startDate = eventData["start_date"] as! Date
+            print(startDate)
+            let endDate = eventData["end_date"] as! Date
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "MMMM d"
+            let startDateString = dateFormatter.string(from:startDate as Date)
+            let endDateString = dateFormatter.string(from:endDate as Date)
+            
+            let timeFormatter = DateFormatter()
+            timeFormatter.dateFormat = "h:mm a"
+            let startTimeString = timeFormatter.string(from:startDate as Date)
+            let endTimeString = timeFormatter.string(from:endDate as Date)
+            
+            let prefix = String(start.characters.prefix(10))
+            if end.hasPrefix(prefix) {
+                let suffixIndex = end.index(end.endIndex, offsetBy: -9)
+                cell.eventDate.text = "\(startDateString)"
+            } else {
+                cell.eventDate.text = "\(startDateString) - \(endDateString)"
+            }
+            
+            cell.eventTime.text = "\(startTimeString) - \(endTimeString)"
+            
+            let fullLocation = eventData["location"] as! String
+            let delimiter = ","
+            var token = fullLocation.components(separatedBy: delimiter)
+            cell.location.text = "\(token[0]),\(token[1])"
             cell.eventName.text = eventData["title"] as? String
-            cell.eventDate.text = (eventData["start"] as? String)! + " - " + (eventData["end"] as? String)!
-            cell.orgName.text = eventData["author"] as? String
+//            cell.eventDate.text = (eventData["start"] as? String)! + " - " + (eventData["end"] as? String)!
             cell.location.text = eventData["location"] as? String
             cell.backgroundColor = UIColor(red:1.00, green:1.00, blue:1.00, alpha:0.9)
             cell.layer.borderWidth = 3.0
