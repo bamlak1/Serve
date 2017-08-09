@@ -51,6 +51,8 @@ class PostCell: UITableViewCell {
         }
     }
     
+    @IBOutlet weak var topBar: UILabel!
+    
     @IBOutlet weak var topStackConstraint: NSLayoutConstraint!
     
     
@@ -73,6 +75,9 @@ class PostCell: UITableViewCell {
             nameLabel.text = (user!["username"] as! String)
             if event != nil {
                 eventLabel.text = (event!["title"] as! String)
+                topBar.text = "\(user!["username"] as! String) \(post["action"] as! String) \(event!["title"] as! String)"
+                topBar.adjustsFontSizeToFitWidth = true
+
             }
             actionLabel.text = (post["action"] as! String)
             if let date = (post["date"] as? String) {
