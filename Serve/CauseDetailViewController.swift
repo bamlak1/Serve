@@ -126,7 +126,7 @@ class CauseDetailViewController: UIViewController, UITableViewDelegate, UITableV
     
     func fetchOrgs(){
         let query = PFUser.query()
-        query?.whereKey("causes", equalTo: cause!)
+        query?.whereKey("causes", equalTo: (cause!.objectId)!)
         query?.whereKey("type", equalTo: "Organization")
         
         query?.findObjectsInBackground { (orgs: [PFObject]?, error: Error?) in
