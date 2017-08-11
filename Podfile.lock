@@ -68,6 +68,9 @@ PODS:
     - Prephirences/Core
   - RSKPlaceholderTextView (2.0.0)
   - StatefulViewController (3.0)
+  - Stripe/ApplePay (7.0.1):
+    - Stripe/Core
+  - Stripe/Core (7.0.1)
   - SwiftDate (4.1.2)
   - SwiftGifOrigin (1.6.1)
   - SwiftyJSON (3.1.4)
@@ -99,6 +102,7 @@ DEPENDENCIES:
   - Prephirences
   - RSKPlaceholderTextView
   - StatefulViewController (~> 3.0)
+  - Stripe/ApplePay
   - SwiftDate (~> 4.0)
   - SwiftGifOrigin (~> 1.6.1)
   - SwiftyJSON
@@ -144,12 +148,13 @@ SPEC CHECKSUMS:
   Prephirences: d0ec0bd6047edb3370364345857a769aaf3db312
   RSKPlaceholderTextView: 301f0f30e70e7c42fe4e941e3a08365ab0d890d5
   StatefulViewController: 4803bf900d44de26074344998e10e041113b5931
+  Stripe: b92298b31cf156fb23a029361b57e2fcb6583d57
   SwiftDate: 2dfdebd4f67ae71c9c3e2413ee3c56947f302858
   SwiftGifOrigin: d6679d3ebe9df2e049a84bc52582635107b581f6
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
   WDImagePicker: 0014e231d67a63db9a97db74332a8a16723809bc
 
-PODFILE CHECKSUM: d754eeb728718b4b1dc5b119fd6ceb19a0e61b49
+PODFILE CHECKSUM: e49fd80cf8c180d3af0cc2cbb9b2d9eed6258e5d
 
 COCOAPODS: 1.2.1

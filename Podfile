@@ -18,6 +18,7 @@ target 'Serve' do
   pod 'NWPusher', '~> 0.7.0'
   pod 'MBProgressHUD', '~> 1.0.0'
   pod 'ImagePicker'
+  pod 'Stripe/ApplePay'
 
 pod 'WDImagePicker', :git => 'https://github.com/justwudi/WDImagePicker.git', :tag => '0.2.2'
 
